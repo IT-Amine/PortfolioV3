@@ -5,42 +5,42 @@ const openclassroomsCerts = [
     title: 'TCP/IP',
     description:
       'Maîtrise des protocoles TCP/IP et des bases des réseaux informatiques.',
-    image: '/public/TCP:IP.png',
+    image: '/TCP:IP.png',
     tags: ['Réseaux', 'TCP/IP', 'Protocoles'],
   },
   {
     title: 'Windows Server',
     description:
       'Administration et gestion de serveurs Windows Server en environnement professionnel.',
-    image: '/public/Windows Server.png',
+    image: '/Windows Server.png',
     tags: ['Windows Server', 'Administration', 'Serveurs'],
   },
   {
     title: 'Gérer Git & GitHub',
     description:
       'Contrôle de version et collaboration avec Git et GitHub sur des projets informatiques.',
-    image: '/public/Gérer Git & GitHub.png',
+    image: '/Gérer Git & GitHub.png',
     tags: ['Git', 'GitHub', 'Version Control'],
   },
   {
     title: 'Déployez Windows 10',
     description:
       'Déploiement et configuration de Windows 10 en contexte entreprise.',
-    image: '/public/déployez Win10.png',
+    image: '/déployez Win10.png',
     tags: ['Windows 10', 'Déploiement', 'Entreprise'],
   },
   {
     title: 'Montez un PC',
     description:
       "Assemblage et configuration complète d'un ordinateur personnel.",
-    image: '/public/Montez un PC.png',
+    image: '/Montez un PC.png',
     tags: ['Hardware', 'Assemblage', 'PC'],
   },
   {
     title: 'Utiliser ChatGPT',
     description:
       "Utilisation de l'IA conversationnelle pour la productivité et l'assistance technique.",
-    image: '/public/utiliser ChatGPT.png',
+    image: '/utiliser ChatGPT.png',
     tags: ['IA', 'ChatGPT', 'Productivité'],
   },
 ]

@@ -153,7 +153,7 @@ const Projects = () => {
             </p>
             <div className="w-full h-80 overflow-hidden rounded-2xl border border-white/10 bg-black/60">
               <iframe
-                src="/ap1-bts-sio-plc-ap1-sp0.pdf"
+                src="public/ap1-bts-sio-plc-ap1-sp0.pdf"
                 title="AP1 - Architecture de prototypage BTS SIO"
                 className="w-full h-full"
               />

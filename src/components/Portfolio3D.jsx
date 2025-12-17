@@ -1,5 +1,8 @@
-// Portfolio3D.jsx (VERSION FINALE CORRIGÉE)
+// src/components/Portfolio3D.jsx
+
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async'; // 1. Importez Helmet
+
 import ParticleBackground from './ParticleBackground'
 import Navigation from './Navigation'
 import Hero from './Hero'
@@ -9,79 +12,112 @@ import Contact from './Contact'
 import Education from './Education'
 import OpenClassrooms from './OpenClassrooms'
 
+// 2. Créez un objet pour stocker les informations SEO de chaque section
+const seoData = {
+  accueil: {
+    title: "Amine IT - Portfolio BTS SIO SISR | Administrateur Réseaux & Systèmes",
+    description: "Portfolio d'Amine, étudiant en BTS SIO option SISR. Découvrez mes projets, compétences et formations en administration de réseaux, systèmes et cybersécurité."
+  },
+  projets: {
+    title: "Projets SISR - Portfolio Amine IT",
+    description: "Explorez mes projets techniques en infrastructure, virtualisation, réseau et sécurité réalisés dans le cadre de ma formation BTS SIO SISR."
+  },
+  formations: {
+    title: "Mon Parcours - Portfolio Amine IT",
+    description: "Mon parcours de formation, du Bac Pro Systèmes Numériques au BTS SIO SISR, en passant par des certifications OpenClassrooms et des MOOCs en cybersécurité."
+  },
+  compétences: {
+    title: "Compétences Techniques - Portfolio Amine IT",
+    description: "Mes compétences en administration système (Windows Server, Debian), virtualisation (Proxmox, Docker), réseau (OPNsense, VLAN) et automatisation."
+  },
+  contact: {
+    title: "Me Contacter - Portfolio Amine IT",
+    description: "Contactez-moi pour toute proposition de stage, de projet ou pour discuter d'opportunités en lien avec l'administration de systèmes et réseaux."
+  },
+  openclassrooms: {
+    title: "Certifications OpenClassrooms - Portfolio Amine IT",
+    description: "Mes certifications et parcours de formation sur OpenClassrooms, validant mes compétences en TCP/IP, Windows Server, Git et plus encore."
+  }
+};
+
 const defaultSection = () => {
-  const hash = window.location.hash.slice(1); // slice(1) est plus propre
+  const hash = window.location.hash.slice(1);
   const SECTIONS = [
     'accueil', 'projets', 'formations', 'compétences', 'contact', 'openclassrooms'
   ];
-  // On décode le hash au cas où l'URL serait partagée avec des caractères encodés
   const decodedHash = decodeURIComponent(hash);
   return SECTIONS.includes(decodedHash) ? decodedHash : 'accueil';
 }
 
 const Portfolio3D = () => {
   const [activeSection, setActiveSection] = useState(defaultSection());
-  // Ce flag nous permettra de savoir si le changement de hash vient de notre code ou de l'utilisateur
   const [isInternalHashChange, setIsInternalHashChange] = useState(false);
 
-  // === SOLUTION DE DÉFILEMENT ROBUSTE ===
+  // 3. Utilisez un useEffect pour mettre à jour les balises meta
   useEffect(() => {
     const timer = setTimeout(() => {
       const element = document.getElementById(activeSection);
       if (element) {
-        // On remonte en haut de la page, car les sections se remplacent
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     }, 100);
     return () => clearTimeout(timer);
   }, [activeSection]);
 
-  // === SOLUTION DE SYNCHRONISATION URL SANS CONFLIT ===
   useEffect(() => {
-    // On indique que le changement de hash qui va suivre est déclenché par notre code
     setIsInternalHashChange(true);
     window.location.hash = '#' + activeSection;
   }, [activeSection]);
 
-  // === GESTION DU CHANGEMENT D'URL PAR L'UTILISATEUR (boutons retour/avant) ===
   useEffect(() => {
     const onHashChange = () => {
-      // Si le changement vient de notre propre code, on l'ignore pour éviter une boucle
       if (isInternalHashChange) {
-        setIsInternalHashChange(false); // On réinitialise le flag pour la prochaine fois
+        setIsInternalHashChange(false);
         return;
       }
-
-      // Sinon, c'est une action utilisateur (bouton retour/avant, ou modification manuelle de l'URL)
       const hash = window.location.hash.slice(1);
-      // On décode l'URL pour retrouver 'compétences' à partir de 'comp%C3%A9tences'
       const decodedHash = decodeURIComponent(hash);
       setActiveSection(decodedHash || 'accueil');
     };
-
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
-  }, [isInternalHashChange]); // On dépend du flag pour savoir quand réagir
+  }, [isInternalHashChange]);
+
+  // 4. Récupérez les données SEO pour la section active
+  const currentSeo = seoData[activeSection];
 
   return (
-    <div className="relative w-full min-h-screen bg-black text-white">
-      <ParticleBackground />
-      <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
-      
-      {activeSection === 'accueil' && (
-        <Hero
-          onGoProjects={() => setActiveSection('projets')}
-          onGoSkills={() => setActiveSection('compétences')}
-        />
-      )}
-      {activeSection === 'compétences' && <Skills />}
-      {activeSection === 'formations' && (
-        <Education setActiveSection={setActiveSection} />
-      )}
-      {activeSection === 'openclassrooms' && <OpenClassrooms />}
-      {activeSection === 'projets' && <Projects />}
-      {activeSection === 'contact' && <Contact />}
-    </div>
+    <>
+      {/* 5. Ajoutez le composant Helmet avec les données dynamiques */}
+      <Helmet>
+        <title>{currentSeo.title}</title>
+        <meta name="description" content={currentSeo.description} />
+        <meta property="og:title" content={currentSeo.title} />
+        <meta property="og:description" content={currentSeo.description} />
+        <meta property="og:type" content="website" />
+        {/* Vous pouvez ajouter d'autres balises ici, comme og:image */}
+      </Helmet>
+
+      <div className="relative w-full min-h-screen bg-black text-white">
+        <ParticleBackground />
+        <Navigation activeSection={activeSection} setActiveSection={setActiveSection} />
+        
+        {/* Le reste de votre code reste inchangé... */}
+        {activeSection === 'accueil' && (
+          <Hero
+            onGoProjects={() => setActiveSection('projets')}
+            onGoSkills={() => setActiveSection('compétences')}
+          />
+        )}
+        {activeSection === 'compétences' && <Skills />}
+        {activeSection === 'formations' && (
+          <Education setActiveSection={setActiveSection} />
+        )}
+        {activeSection === 'openclassrooms' && <OpenClassrooms />}
+        {activeSection === 'projets' && <Projects />}
+        {activeSection === 'contact' && <Contact />}
+      </div>
+    </>
   )
 }
 

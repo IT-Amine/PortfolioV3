@@ -11,6 +11,11 @@ const Projects = () => {
     project.title.startsWith('AP1')
   )
 
+  // URL de base du visualiseur PDF de Mozilla
+  const pdfViewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=";
+  // URL de votre fichier PDF, encodée pour être passée en paramètre
+  const pdfFileUrl = encodeURIComponent("/ap1-bts-sio-plc-ap1-sp0.pdf");
+
   return (
     <section
       id="projets"
@@ -109,7 +114,7 @@ const Projects = () => {
                   >
                     <path d="M1.5 12s3.5-6.5 10.5-6.5S22.5 12 22.5 12 19 18.5 12 18.5 1.5 12 1.5 12Z" />
                     <circle cx="12" cy="12" r="3" />
-                  </svg>
+                      </svg>
                 </button>
               </div>
               <p className="text-xs text-gray-200 mb-4">{ap1Project.desc}</p>
@@ -132,31 +137,39 @@ const Projects = () => {
           </article>
         )}
 
-        {/* Prévisualisation du PDF AP1 en petit écran (affichée uniquement quand on clique sur l'œil) */}
+        {/* Fenêtre modale pour afficher le PDF */}
         {showPdf && (
-          <div className="mt-10 max-w-3xl mx-auto animate-fade-in">
-            <div className="mb-3 flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-gray-100">
-                Détail du projet AP1 (PDF officiel)
-              </h3>
-              <button
-                type="button"
-                onClick={() => setShowPdf(false)}
-                className="text-xs px-2 py-1 rounded-full border border-white/20 text-gray-200 bg-white/5 hover:bg-white/15 transition"
-              >
-                Fermer
-              </button>
-            </div>
-            <p className="mb-4 text-xs text-gray-300">
-              Visualisation en lecture seule du sujet&nbsp;: «&nbsp;2025 BTS SIO PLC - AP1 - SP0 - Architecture
-              de prototypage pour le site du BTS réalisé par les SLAM&nbsp;».
-            </p>
-            <div className="w-full h-80 overflow-hidden rounded-2xl border border-white/10 bg-black/60">
-              <iframe
-                src="/ap1-bts-sio-plc-ap1-sp0.pdf"
-                title="AP1 - Architecture de prototypage BTS SIO"
-                className="w-full h-full"
-              />
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
+            <div className="relative w-full max-w-5xl mx-auto animate-fade-in">
+              <div className="mb-3 flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-gray-100">
+                  Détail du projet AP1 (PDF officiel)
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setShowPdf(false)}
+                  className="text-xs px-2 py-1 rounded-full border border-white/20 text-gray-200 bg-white/5 hover:bg-white/15 transition"
+                >
+                  Fermer
+                </button>
+              </div>
+              <p className="mb-4 text-xs text-gray-300">
+                Visualisation en lecture seule du sujet&nbsp;: «&nbsp;2025 BTS SIO PLC - AP1 - SP0 - Architecture
+                de prototypage pour le site du BTS réalisé par les SLAM&nbsp;».
+              </p>
+              {/* 
+                MODIFICATIONS ICI :
+                1. On utilise le visualiseur de Mozilla pour contourner le blocage de Vercel.
+                2. On agrandit la fenêtre avec h-[80vh] (80% de la hauteur de l'écran).
+              */}
+              <div className="w-full h-[80vh] overflow-hidden rounded-2xl border border-white/10 bg-black/60">
+                <iframe
+                  src={`${pdfViewerUrl}${pdfFileUrl}`}
+                  title="AP1 - Architecture de prototypage BTS SIO"
+                  className="w-full h-full"
+                  allowFullScreen
+                />
+              </div>
             </div>
           </div>
         )}

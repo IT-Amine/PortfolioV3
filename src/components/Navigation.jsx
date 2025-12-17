@@ -5,7 +5,7 @@ const Navigation = ({ activeSection, setActiveSection }) => {
     { id: 'accueil', label: 'Accueil' },
     { id: 'projets', label: 'Projets' },
     { id: 'formations', label: 'Formations' },
-    { id: 'compétences', label: 'skills' },
+    { id: 'compétences', label: 'Skills' },
     { id: 'contact', label: 'Contact' },
   ]
 

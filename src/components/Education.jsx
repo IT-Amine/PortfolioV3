@@ -1,8 +1,11 @@
+// Education.jsx
+
 import React from 'react'
 
 const Education = ({ setActiveSection }) => {
   return (
-    <section className="relative min-h-screen px-4 pt-28 pb-16 flex items-center">
+    // J'ai ajouté l'ID ici
+    <section id="formations" className="relative min-h-screen px-4 pt-28 pb-16 flex items-center">
       <div className="mx-auto max-w-6xl w-full">
         <div className="mb-8 text-center animate-slide-in">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-400 mb-2">
@@ -114,5 +117,3 @@ const Education = ({ setActiveSection }) => {
 }
 
 export default Education
-
-

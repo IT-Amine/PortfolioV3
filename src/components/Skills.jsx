@@ -1,10 +1,12 @@
+// Skills.jsx (CORRIGÉ)
 import React from 'react'
 import { skillsData } from '../data/skills'
 
 const Skills = () => {
   return (
+    // L'ID A ÉTÉ CORRIGÉ ICI
     <section
-      id="section-competences"
+      id="compétences"
       className="relative min-h-screen px-4 pt-28 pb-16 flex items-center"
     >
       <div className="mx-auto max-w-6xl w-full">

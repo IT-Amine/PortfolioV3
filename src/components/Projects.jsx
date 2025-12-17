@@ -13,7 +13,7 @@ const Projects = () => {
 
   return (
     <section
-      id="section-projets"
+      id="projets"
       className="relative min-h-screen px-4 pt-28 pb-16 flex items-center"
     >
       <div className="mx-auto max-w-6xl w-full">
@@ -153,7 +153,7 @@ const Projects = () => {
             </p>
             <div className="w-full h-80 overflow-hidden rounded-2xl border border-white/10 bg-black/60">
               <iframe
-                src="/ap1BTS.pdf"
+                src="/ap1-bts-sio-plc-ap1-sp0.pdf"
                 title="AP1 - Architecture de prototypage BTS SIO"
                 className="w-full h-full"
               />

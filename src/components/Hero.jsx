@@ -1,8 +1,11 @@
+// Hero.jsx
+
 import React from 'react'
 
 const Hero = ({ onGoProjects, onGoSkills }) => {
   return (
-    <section className="relative flex min-h-screen items-center justify-center px-4 pt-28 pb-16">
+    // J'ai ajouté l'ID ici
+    <section id="accueil" className="relative flex min-h-screen items-center justify-center px-4 pt-28 pb-16">
       <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[3fr,2fr] items-center">
         {/* Bloc texte principal */}
         <div className="space-y-6 animate-slide-in">

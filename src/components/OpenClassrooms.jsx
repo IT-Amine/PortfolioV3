@@ -1,3 +1,5 @@
+// OpenClassrooms.jsx
+
 import React, { useState } from 'react'
 
 const openclassroomsCerts = [
@@ -49,7 +51,8 @@ const OpenClassrooms = () => {
   const [activeCert, setActiveCert] = useState(null)
 
   return (
-    <section className="relative min-h-screen px-4 pt-28 pb-16 flex items-center">
+    // J'ai ajouté l'ID ici
+    <section id="openclassrooms" className="relative min-h-screen px-4 pt-28 pb-16 flex items-center">
       <div className="mx-auto max-w-6xl w-full">
         <div className="mb-8 text-center animate-slide-in">
           <p className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-400 mb-2">
@@ -184,5 +187,3 @@ const OpenClassrooms = () => {
 }
 
 export default OpenClassrooms
-
-

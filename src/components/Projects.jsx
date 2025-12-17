@@ -11,11 +11,6 @@ const Projects = () => {
     project.title.startsWith('AP1')
   )
 
-  // URL de base du visualiseur PDF de Mozilla
-  const pdfViewerUrl = "https://mozilla.github.io/pdf.js/web/viewer.html?file=";
-  // URL de votre fichier PDF, encodée pour être passée en paramètre
-  const pdfFileUrl = encodeURIComponent("/ap1-bts-sio-plc-ap1-sp0.pdf");
-
   return (
     <section
       id="projets"
@@ -88,7 +83,7 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* Carte AP1 en pleine largeur pour éviter une ligne trop haute pour les autres projets */}
+        {/* Carte AP1 en pleine largeur */}
         {ap1Project && (
           <article
             className={`mt-6 group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br ${ap1Project.color} p-[1px] shadow-xl shadow-blue-900/40`}
@@ -137,7 +132,7 @@ const Projects = () => {
           </article>
         )}
 
-        {/* Fenêtre modale pour afficher le PDF */}
+        {/* Fenêtre modale pour afficher le PDF avec la balise <object> */}
         {showPdf && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
             <div className="relative w-full max-w-5xl mx-auto animate-fade-in">
@@ -157,18 +152,31 @@ const Projects = () => {
                 Visualisation en lecture seule du sujet&nbsp;: «&nbsp;2025 BTS SIO PLC - AP1 - SP0 - Architecture
                 de prototypage pour le site du BTS réalisé par les SLAM&nbsp;».
               </p>
-              {/* 
-                MODIFICATIONS ICI :
-                1. On utilise le visualiseur de Mozilla pour contourner le blocage de Vercel.
-                2. On agrandit la fenêtre avec h-[80vh] (80% de la hauteur de l'écran).
-              */}
               <div className="w-full h-[80vh] overflow-hidden rounded-2xl border border-white/10 bg-black/60">
-                <iframe
-                  src={`${pdfViewerUrl}${pdfFileUrl}`}
-                  title="AP1 - Architecture de prototypage BTS SIO"
-                  className="w-full h-full"
-                  allowFullScreen
-                />
+                {/* 
+                  MODIFICATION CLÉ : On utilise <object> au lieu de <iframe>.
+                  C'est plus fiable pour afficher des PDF directement.
+                */}
+                <object
+                  data="/ap1-bts-sio-plc-ap1-sp0.pdf"
+                  type="application/pdf"
+                  width="100%"
+                  height="100%"
+                  className="rounded-2xl"
+                >
+                  <p className="p-4 text-center text-gray-300">
+                    Votre navigateur ne peut pas afficher ce PDF.
+                    Vous pouvez le télécharger en cliquant sur ce lien :
+                    <a
+                      href="/ap1-bts-sio-plc-ap1-sp0.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ml-2 text-blue-400 hover:underline"
+                    >
+                      Télécharger le PDF
+                    </a>
+                  </p>
+                </object>
               </div>
             </div>
           </div>

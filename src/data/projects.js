@@ -28,6 +28,20 @@ export const projectsData = [
     color: 'from-amber-500 to-orange-600',
   },
 
+  {
+    title: 'Windows Server 2019',
+    desc: 'Déploiement et configuration complète d\'un environnement Windows Server 2019 incluant la gestion centralisée des services réseau (DNS, DHCP) et l\'administration des utilisateurs via Active Directory Domain Services',
+    tech: ['Active Directory', 'Windows Server 2019', 'DNS', 'DHCP', 'AD DS', 'GPO'],
+    color: 'from-red-500 to-indigo-600',
+  },
+
+  {
+    title: 'Proxmox VE',
+    desc: 'Mise en œuvre d\'une infrastructure de virtualisation hautement disponible avec Proxmox VE pour l\'hébergement et la gestion de machines virtuelles et conteneurs LXC en environnement de production',
+    tech: ['Proxmox', 'Virtualisation', 'KVM', 'LXC', 'ZFS', 'Clustering'],
+    color: 'from-orange-500 to-red-600',
+  },
+
   // --- Projet global BTS SIO – AP1 (synthèse de tous les TP) ---
   {
     title: 'AP1 – Architecture de prototypage BTS SIO (Infra & Tickets)',

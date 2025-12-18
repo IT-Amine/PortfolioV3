@@ -60,3 +60,13 @@ body {
 .perspective-1000 {
   perspective: 1000px;
 }
+
+/* Masquage ciblé du lien Spline DANS le robot uniquement */
+#spline-robot-container a[href*="spline.design"] {
+  display: none !important;
+}
+
+/* Masquage global des liens "Built with Spline" (fond compris) */
+a[href*="spline.design"] {
+  display: none !important;
+}

@@ -1,10 +1,9 @@
-// Skills.jsx (CORRIGÉ)
+// Skills.jsx (MISE À JOUR DES POURCENTAGES)
 import React from 'react'
 import { skillsData } from '../data/skills'
 
 const Skills = () => {
   return (
-    // L'ID A ÉTÉ CORRIGÉ ICI
     <section
       id="compétences"
       className="relative min-h-screen px-4 pt-28 pb-16 flex items-center"
@@ -42,13 +41,13 @@ const Skills = () => {
                       {skill.name}
                     </h3>
                     <p className="text-xs text-gray-300">
-                      Niveau : {skill.level}%
+                      {skill.level}%
                     </p>
                   </div>
                 </div>
                 <div className="mt-2">
                   <div className="mb-1 flex justify-between text-[11px] text-gray-300">
-                    <span>Progression</span>
+                    <span>Maîtrise</span>
                     <span>{skill.level}%</span>
                   </div>
                   <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">

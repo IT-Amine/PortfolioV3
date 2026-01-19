@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio d'Amine, étudiant en BTS SIO option SISR. Découvrez mes projets, compétences et formations en administration de réseaux, systèmes et cybersécurité.">
+  <title>Portfolio SISR - Amine Kada</title>
+  <link rel="icon" type="image/x-icon" href="public/icon.ico">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <header class="nav-header">
+    <div class="nav-container">
+      <div class="nav-brand">Étudiant BTS SIO SISR</div>
+      <nav class="nav-menu">
+        <button class="nav-btn" data-section="accueil">Accueil</button>
+        <button class="nav-btn" data-section="projets">Projets</button>
+        <button class="nav-btn" data-section="formations">Formations</button>
+        <button class="nav-btn" data-section="compétences">Skills</button>
+        <button class="nav-btn" data-section="contact">Contact</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Arrière-plan animé -->
+  <div class="animated-background"></div>
+
+  <!-- Section Accueil -->
+  <section id="accueil" class="section active">
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-label">BTS SIO • Option SISR</p>
+        <h1 class="hero-title">
+          Étudiant en <span class="gradient-text">Administration Réseaux & Systèmes</span>
+        </h1>
+        <p class="hero-description">
+          En formation pour devenir administrateur réseau et systèmes. Mise en place
+          d'infrastructures sécurisées, virtualisation, segmentation réseau et
+          automatisation des tâches d'exploitation.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn-primary" onclick="goToSection('projets')">Voir mes projets</button>
+          <button class="btn-secondary" onclick="goToSection('compétences')">Compétences techniques</button>
+          <a href="https://cvdesignr.com/p/6808a706550eb?hl=fr_FR" target="_blank" rel="noopener noreferrer" class="btn-outline">Mon CV</a>
+        </div>
+        <div class="hero-stack">
+          <span class="stack-label">STACK</span>
+          <span>Proxmox • OPNsense • Debian • Windows Server • Docker</span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-glow"></div>
+        <div class="hero-card-content">
+          <h2 class="hero-card-title">Aperçu de mes tâches SISR</h2>
+          <div class="hero-card-items">
+            <div class="hero-card-item">
+              <p class="hero-card-item-title">Virtualisation & Infrastructure</p>
+              <p class="hero-card-item-desc">Proxmox VE, VMs, LXC, stockage ZFS, accès distant sécurisé via VPN.</p>
+            </div>
+            <div class="hero-card-item">
+              <p class="hero-card-item-title">Réseaux & Sécurité</p>
+              <p class="hero-card-item-desc">OPNsense, VLANs, DMZ, filtrage DNS (AdGuard), règles firewall avancées.</p>
+            </div>
+            <div class="hero-card-item">
+              <p class="hero-card-item-title">Services & Conteneurs</p>
+              <p class="hero-card-item-desc">Docker, Portainer, Nginx, certificats SSL/TLS, services web sécurisés.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Projets -->
+  <section id="projets" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Projets</p>
+        <h2 class="section-title">
+          Projets techniques <span class="gradient-text">SISR</span>
+        </h2>
+      </div>
+
+      <div class="projects-grid" id="projectsGrid"></div>
+
+      <article class="project-card-full" id="ap1Project"></article>
+    </div>
+
+    <!-- Modal PDF -->
+    <div id="pdfModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Détail du projet AP1 (PDF officiel)</h3>
+          <button class="modal-close" onclick="closePdfModal()">Fermer</button>
+        </div>
+        <p class="modal-description">
+          Visualisation en lecture seule du sujet : « 2025 BTS SIO PLC - AP1 - SP0 - Architecture
+          de prototypage pour le site du BTS réalisé par les SLAM ».
+        </p>
+        <div class="modal-pdf-container">
+          <object data="public/ap1-bts-sio-plc-ap1-sp0.pdf" type="application/pdf" width="100%" height="100%">
+            <p class="modal-fallback">
+              Votre navigateur ne peut pas afficher ce PDF.
+              <a href="public/ap1-bts-sio-plc-ap1-sp0.pdf" target="_blank" rel="noopener noreferrer">Télécharger le PDF</a>
+            </p>
+          </object>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Compétences -->
+  <section id="compétences" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Compétences techniques</p>
+        <h2 class="section-title">
+          Ce que je sais faire en <span class="gradient-text">SISR</span>
+        </h2>
+        <p class="section-description">
+          Administration de serveurs, réseaux, sécurité et automatisation pour des
+          infrastructures fiables et sécurisées.
+        </p>
+      </div>
+      <div class="skills-grid" id="skillsGrid"></div>
+    </div>
+  </section>
+
+  <!-- Section Formations -->
+  <section id="formations" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Mes Formations</p>
+        <h2 class="section-title">Parcours de formation</h2>
+        <p class="section-description">
+          Un parcours orienté réseaux, systèmes et cybersécurité, avec des formations complémentaires.
+        </p>
+      </div>
+      <div class="formations-grid" id="formationsGrid"></div>
+    </div>
+
+    <!-- Modal Certificat -->
+    <div id="certModal" class="modal" onclick="if(event.target===this) closeCertModal();">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <div>
+            <h3 id="certModalTitle"></h3>
+            <p id="certModalSubtitle" class="modal-subtitle"></p>
+          </div>
+          <button class="modal-close" onclick="closeCertModal()">Fermer</button>
+        </div>
+        <p class="modal-description" id="certModalDescription"></p>
+        <div class="modal-cert-container" id="certModalContent"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section OpenClassrooms -->
+  <section id="openclassrooms" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Certifications OpenClassrooms</p>
+        <h2 class="section-title">
+          Parcours en ligne orienté <span class="gradient-text">infrastructure</span>
+        </h2>
+        <p class="section-description">
+          Sélection de formations OpenClassrooms validées autour des réseaux,
+          systèmes, automatisation et outils modernes.
+        </p>
+      </div>
+      <div class="openclassrooms-grid" id="openclassroomsGrid"></div>
+      <p class="openclassrooms-footer">
+        Ces certifications complètent ma formation BTS SIO SISR en renforçant ma
+        pratique des réseaux, des systèmes Microsoft et des outils de
+        productivité modernes.
+      </p>
+    </div>
+
+    <!-- Modal OpenClassrooms -->
+    <div id="ocModal" class="modal">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="modal-close-absolute" onclick="closeOcModal()">Fermer</button>
+        <div class="modal-oc-image-container">
+          <img id="ocModalImage" src="" alt="" class="modal-oc-image">
+        </div>
+        <h3 id="ocModalTitle" class="modal-oc-title"></h3>
+        <p id="ocModalDescription" class="modal-oc-description"></p>
+        <div id="ocModalTags" class="modal-oc-tags"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Contact -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Contact</p>
+        <h2 class="section-title">
+          Discutons ensemble sur le thème <span class="gradient-text">SISR</span>
+        </h2>
+        <p class="section-description">
+          Disponible pour des stages ou projets orientés réseaux, systèmes et sécurité.
+          N'hésitez pas à me contacter pour échanger sur vos besoins.
+        </p>
+      </div>
+
+      <div class="contact-missions">
+        <h3 class="contact-section-title">🎯 Missions recherchées</h3>
+        <div class="missions-grid">
+          <div class="mission-card">
+            <div class="mission-icon">🖥️</div>
+            <h4>Stage BTS SISR</h4>
+            <p>6 semaines</p>
+          </div>
+          <div class="mission-card">
+            <div class="mission-icon">🌐</div>
+            <h4>Projets infrastructure réseau</h4>
+            <p>Configuration & optimisation</p>
+          </div>
+          <div class="mission-card">
+            <div class="mission-icon">🛡️</div>
+            <h4>Administration systèmes</h4>
+            <p>Linux/Windows</p>
+          </div>
+          <div class="mission-card">
+            <div class="mission-icon">🔍</div>
+            <h4>Missions cybersécurité</h4>
+            <p>Audit & sécurisation</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-competences">
+        <h3 class="contact-section-title">🔧 Ce que je peux apporter</h3>
+        <div class="competences-grid">
+          <div class="competence-card">
+            <div class="competence-icon">🖥️</div>
+            <div>
+              <h4>Configuration serveurs & virtualisation</h4>
+              <p>Proxmox, VMware, Windows Server</p>
+            </div>
+          </div>
+          <div class="competence-card">
+            <div class="competence-icon">🌐</div>
+            <div>
+              <h4>Mise en place solutions réseau</h4>
+              <p>VLAN, Routage, Firewall</p>
+            </div>
+          </div>
+          <div class="competence-card">
+            <div class="competence-icon">🛡️</div>
+            <div>
+              <h4>Audit sécurité</h4>
+              <p>Analyse vulnérabilités & hardening</p>
+            </div>
+          </div>
+          <div class="competence-card">
+            <div class="competence-icon">📄</div>
+            <div>
+              <h4>Documentation technique</h4>
+              <p>Procédures & rapports détaillés</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-buttons">
+        <a href="mailto:kadaamine37@hotmail.com" class="btn-primary">📧 Me contacter par mail</a>
+        <a href="https://github.com/IT-Amine" target="_blank" rel="noopener noreferrer" class="btn-secondary">💻 Voir mon GitHub</a>
+        <a href="https://www.linkedin.com/in/kada-amine" target="_blank" rel="noopener noreferrer" class="btn-outline">💼 Profil LinkedIn</a>
+      </div>
+
+      <p class="contact-footer">
+        © <span id="currentYear"></span> Étudiant BTS SIO SISR — Portfolio 3D.
+      </p>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

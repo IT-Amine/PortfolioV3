@@ -143,7 +143,7 @@ const formationsData = [
     subtitle: 'Lycée Paul-Louis Courier, Tours — 2025–2026',
     gradient: 'from-blue-600 to-cyan-600',
     shadow: 'shadow-blue-900/40',
-    cta: { type: 'link', label: 'En savoir plus sur le BTS SIO', href: 'https://nizar-it.github.io/formation/', color: 'blue' },
+    cta: { type: 'link', label: 'En savoir plus sur le BTS SIO', href: 'https://lycee-paul-louis-courier.fr/2022/06/22/bts-sio-services-informatiques-aux-organisations/', color: 'blue' },
   },
   {
     title: 'Bac Pro Systèmes Numériques',

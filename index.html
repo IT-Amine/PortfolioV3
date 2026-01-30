@@ -2,7 +2,10 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0c0f14">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="description" content="Portfolio d'Amine, étudiant en BTS SIO option SISR. Découvrez mes projets, compétences et formations en administration de réseaux, systèmes et cybersécurité.">
   <title>Portfolio SISR - Amine Kada</title>
   <link rel="icon" type="image/x-icon" href="public/icon.ico">
@@ -16,12 +19,17 @@
   <header class="nav-header">
     <div class="nav-container">
       <div class="nav-brand">Étudiant BTS SIO SISR</div>
-      <nav class="nav-menu">
-        <button class="nav-btn" data-section="accueil">Accueil</button>
-        <button class="nav-btn" data-section="projets">Projets</button>
-        <button class="nav-btn" data-section="formations">Formations</button>
-        <button class="nav-btn" data-section="compétences">Skills</button>
-        <button class="nav-btn" data-section="contact">Contact</button>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <nav class="nav-menu" id="nav-menu" role="navigation" aria-label="Menu principal">
+        <button type="button" class="nav-btn active" data-section="accueil">Accueil</button>
+        <button type="button" class="nav-btn" data-section="projets">Projets</button>
+        <button type="button" class="nav-btn" data-section="formations">Formations</button>
+        <button type="button" class="nav-btn" data-section="compétences">Skills</button>
+        <button type="button" class="nav-btn" data-section="contact">Contact</button>
       </nav>
     </div>
   </header>
@@ -50,7 +58,7 @@
         </div>
         <div class="hero-stack">
           <span class="stack-label">STACK</span>
-          <span>Proxmox • OPNsense • Debian • Windows Server • Docker</span>
+          <span>Proxmox • OPNsense • Debian • Windows Server • Docker • Firewall • NAS</span>
         </div>
       </div>
 
@@ -90,9 +98,11 @@
       <div class="projects-grid" id="projectsGrid"></div>
 
       <article class="project-card-full" id="ap1Project"></article>
+      <article class="project-card-full" id="sp1Project"></article>
+      <article class="project-card-full" id="bloc2Project"></article>
     </div>
 
-    <!-- Modal PDF -->
+    <!-- Modal PDF AP1 -->
     <div id="pdfModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
@@ -104,10 +114,73 @@
           de prototypage pour le site du BTS réalisé par les SLAM ».
         </p>
         <div class="modal-pdf-container">
-          <object data="public/ap1-bts-sio-plc-ap1-sp0.pdf" type="application/pdf" width="100%" height="100%">
+          <object data="public/Projet/ap1.pdf" type="application/pdf" width="100%" height="100%">
             <p class="modal-fallback">
               Votre navigateur ne peut pas afficher ce PDF.
-              <a href="public/ap1-bts-sio-plc-ap1-sp0.pdf" target="_blank" rel="noopener noreferrer">Télécharger le PDF</a>
+              <a href="public/Projet/ap1.pdf" target="_blank" rel="noopener noreferrer">Télécharger le PDF</a>
+            </p>
+          </object>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal PDF SP1 -->
+    <div id="sp1PdfModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Situation SP1 – Gestion de l'infrastructure réseau</h3>
+          <button class="modal-close" onclick="closeSp1PdfModal()">Fermer</button>
+        </div>
+        <p class="modal-description">
+          Document de la situation professionnelle SP1 du BTS SIO : gestion de l'infrastructure réseau.
+        </p>
+        <div class="modal-pdf-container">
+          <object data="public/Projet/sp1.pdf" type="application/pdf" width="100%" height="100%">
+            <p class="modal-fallback">
+              Votre navigateur ne peut pas afficher ce PDF.
+              <a href="public/Projet/sp1.pdf" target="_blank" rel="noopener noreferrer">Télécharger le PDF</a>
+            </p>
+          </object>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Bloc 2 – Contexte (Architecture logique IMDEO) -->
+    <div id="bloc2ContextModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Bloc 2 – Contexte : Architecture logique de l'implantation IMDEO</h3>
+          <button class="modal-close" onclick="closeBloc2ContextModal()">Fermer</button>
+        </div>
+        <p class="modal-description">
+          Document 1 : ce qui est attendu (contexte et architecture logique).
+        </p>
+        <div class="modal-pdf-container">
+          <object data="public/Projet/imdeo.pdf" type="application/pdf" width="100%" height="100%">
+            <p class="modal-fallback">
+              Votre navigateur ne peut pas afficher ce PDF.
+              <a href="public/Projet/imdeo.pdf" target="_blank" rel="noopener noreferrer">Télécharger le PDF</a>
+            </p>
+          </object>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Bloc 2 – Travail rendu (Réseau avancé Cisco) -->
+    <div id="bloc2WorkModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Bloc 2 – Travail rendu : Réseau avancé Cisco IMDEO</h3>
+          <button class="modal-close" onclick="closeBloc2WorkModal()">Fermer</button>
+        </div>
+        <p class="modal-description">
+          Travail réalisé : réseau avancé Cisco (IMDEO).
+        </p>
+        <div class="modal-pdf-container">
+          <object data="public/Projet/rendu-imdeo.pdf" type="application/pdf" width="100%" height="100%">
+            <p class="modal-fallback">
+              Votre navigateur ne peut pas afficher ce PDF.
+              <a href="public/Projet/rendu-imdeo.pdf" target="_blank" rel="noopener noreferrer">Télécharger le PDF</a>
             </p>
           </object>
         </div>
@@ -211,25 +284,28 @@
       </div>
 
       <div class="contact-missions">
-        <h3 class="contact-section-title">🎯 Missions recherchées</h3>
+        <h3 class="contact-section-title">
+          <span class="contact-title-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+          Missions recherchées
+        </h3>
         <div class="missions-grid">
           <div class="mission-card">
-            <div class="mission-icon">🖥️</div>
+            <div class="mission-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/><line x1="10" y1="6" x2="10" y2="6.01"/><line x1="10" y1="18" x2="10" y2="18.01"/><line x1="14" y1="6" x2="14" y2="6.01"/><line x1="14" y1="18" x2="14" y2="18.01"/><line x1="18" y1="6" x2="18.01" y2="6"/><line x1="18" y1="18" x2="18.01" y2="18"/></svg></div>
             <h4>Stage BTS SISR</h4>
             <p>6 semaines</p>
           </div>
           <div class="mission-card">
-            <div class="mission-icon">🌐</div>
+            <div class="mission-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
             <h4>Projets infrastructure réseau</h4>
             <p>Configuration & optimisation</p>
           </div>
           <div class="mission-card">
-            <div class="mission-icon">🛡️</div>
+            <div class="mission-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
             <h4>Administration systèmes</h4>
             <p>Linux/Windows</p>
           </div>
           <div class="mission-card">
-            <div class="mission-icon">🔍</div>
+            <div class="mission-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></div>
             <h4>Missions cybersécurité</h4>
             <p>Audit & sécurisation</p>
           </div>
@@ -237,31 +313,34 @@
       </div>
 
       <div class="contact-competences">
-        <h3 class="contact-section-title">🔧 Ce que je peux apporter</h3>
+        <h3 class="contact-section-title">
+          <span class="contact-title-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+          Ce que je peux apporter
+        </h3>
         <div class="competences-grid">
           <div class="competence-card">
-            <div class="competence-icon">🖥️</div>
+            <div class="competence-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/><line x1="10" y1="6" x2="10" y2="6.01"/><line x1="10" y1="18" x2="10" y2="18.01"/><line x1="14" y1="6" x2="14" y2="6.01"/><line x1="14" y1="18" x2="14" y2="18.01"/><line x1="18" y1="6" x2="18.01" y2="6"/><line x1="18" y1="18" x2="18.01" y2="18"/></svg></div>
             <div>
               <h4>Configuration serveurs & virtualisation</h4>
               <p>Proxmox, VMware, Windows Server</p>
             </div>
           </div>
           <div class="competence-card">
-            <div class="competence-icon">🌐</div>
+            <div class="competence-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
             <div>
               <h4>Mise en place solutions réseau</h4>
               <p>VLAN, Routage, Firewall</p>
             </div>
           </div>
           <div class="competence-card">
-            <div class="competence-icon">🛡️</div>
+            <div class="competence-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
             <div>
               <h4>Audit sécurité</h4>
               <p>Analyse vulnérabilités & hardening</p>
             </div>
           </div>
           <div class="competence-card">
-            <div class="competence-icon">📄</div>
+            <div class="competence-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg></div>
             <div>
               <h4>Documentation technique</h4>
               <p>Procédures & rapports détaillés</p>
@@ -271,13 +350,13 @@
       </div>
 
       <div class="contact-buttons">
-        <a href="mailto:kadaamine37@hotmail.com" class="btn-primary">📧 Me contacter par mail</a>
-        <a href="https://github.com/IT-Amine" target="_blank" rel="noopener noreferrer" class="btn-secondary">💻 Voir mon GitHub</a>
-        <a href="https://www.linkedin.com/in/kada-amine" target="_blank" rel="noopener noreferrer" class="btn-outline">💼 Profil LinkedIn</a>
+        <a href="#" class="btn-primary btn-with-icon" id="contact-mail-btn"><span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>Me contacter par mail</a>
+        <a href="https://github.com/IT-Amine" target="_blank" rel="noopener noreferrer" class="btn-secondary btn-with-icon"><span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></span>Voir mon GitHub</a>
+        <a href="https://www.linkedin.com/in/kada-amine" target="_blank" rel="noopener noreferrer" class="btn-outline btn-with-icon"><span class="btn-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></span>Profil LinkedIn</a>
       </div>
 
       <p class="contact-footer">
-        © <span id="currentYear"></span> Étudiant BTS SIO SISR — Portfolio 3D.
+        © <span id="currentYear"></span> Étudiant BTS SIO SISR — Portfolio
       </p>
     </div>
   </section>

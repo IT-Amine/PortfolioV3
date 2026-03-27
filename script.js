@@ -40,85 +40,56 @@ function getIcon(name) {
 
 const projectsData = [
   {
-    title: 'Migration Système – Gestion des utilisateurs',
-    desc: 'Migration vers un nouveau système de gestion des utilisateurs, avec planification et déploiement sans interruption de service.',
-    tech: ['Windows Server', 'AD', 'Migration'],
-    color: 'from-blue-600 to-blue-800',
-  },
-  {
-    title: 'Serveur RAID',
-    desc: 'Configuration d\'un serveur RAID pour assurer la redondance et la sécurité des données.',
-    tech: ['RAID', 'Stockage', 'Sécurité'],
-    color: 'from-purple-600 to-purple-800',
-  },
-  {
-    title: 'Politique de Sauvegarde',
-    desc: 'Mise en place d\'une stratégie de sauvegarde automatique des données critiques.',
-    tech: ['Sauvegarde', 'Automatisation'],
-    color: 'from-emerald-600 to-green-700',
-  },
-  {
-    title: 'Portfolio',
-    desc: 'Conception et développement de ce portfolio en HTML, CSS et JavaScript : page unique avec navigation par sections, modales pour les PDF et certificats, icônes SVG et style sobre.',
-    tech: ['HTML5', 'CSS3', 'JavaScript'],
-    color: 'from-amber-500 to-orange-600',
-  },
-  {
-    title: 'Windows Server 2019',
-    desc: 'Déploiement et configuration complète d\'un environnement Windows Server 2019 incluant la gestion centralisée des services réseau (DNS, DHCP) et l\'administration des utilisateurs via Active Directory Domain Services',
-    tech: ['Active Directory', 'Windows Server 2019', 'DNS', 'DHCP', 'AD DS', 'GPO'],
-    color: 'from-red-500 to-indigo-600',
-  },
-  {
-    title: 'Proxmox VE',
-    desc: 'Mise en œuvre d\'une infrastructure de virtualisation hautement disponible avec Proxmox VE pour l\'hébergement et la gestion de machines virtuelles et conteneurs LXC en environnement de production',
-    tech: ['Proxmox', 'Virtualisation', 'KVM', 'LXC', 'ZFS', 'Clustering'],
-    color: 'from-orange-500 to-red-600',
-  },
-  {
-    title: 'AP1 – Architecture de prototypage BTS SIO (Infra & Tickets)',
-    desc: 'Projet complet couvrant la maquette réseau du site BTS SIO, le déploiement d\'un serveur Web/FTP et d\'un outil de tickets d\'incidents, la mise en production sur NUTANIX et l\'automatisation des sauvegardes vers un NAS avec transferts sécurisés (SFTP/FTPS).',
-    tech: [
-      'Cisco Packet Tracer',
-      'VirtualBox',
-      'Serveur Web / FTP',
-      'NUTANIX (hyperviseur type 1)',
-      'Outil de gestion de tickets',
-      'NAS',
-      'Sauvegardes automatisées',
-      'SFTP / FTPS',
-    ],
-    color: 'from-sky-600 to-indigo-700',
-    pdfHref: 'public/Projet/ap1.pdf',
-  },
-  {
-    title: 'Situation SP1 – Gestion de l\'infrastructure réseau',
-    desc: 'Situation professionnelle SP1 du BTS SIO : gestion et mise en œuvre de l\'infrastructure réseau (conception, déploiement, sécurisation et documentation).',
-    tech: [
-      'Réseau',
-      'Infrastructure',
-      'BTS SIO',
-      'Situation professionnelle',
-    ],
-    color: 'from-teal-600 to-cyan-600',
+    title: 'Situation SP1 – Infrastructure Réseau',
+    desc: 'Gestion et mise en œuvre d\'une infrastructure réseau complète : conception, déploiement, sécurisation et documentation technique.',
+    tech: ['Réseau', 'Infrastructure', 'Cisco', 'Sécurité'],
+    color: 'from-emerald-500 to-emerald-700',
     pdfHref: 'public/Projet/sp1.pdf',
+    icon: 'globe',
+    id: 'sp1Project'
   },
   {
-    title: 'Bloc 2 – Réseau avancé IMDEO (Cisco)',
-    desc: 'Projet Bloc 2 : contexte (architecture logique de l\'implantation IMDEO) et travail rendu (réseau avancé Cisco). Le premier document décrit ce qui est attendu, le second est le travail réalisé.',
-    tech: [
-      'Cisco',
-      'Réseau avancé',
-      'Architecture logique',
-      'IMDEO',
-      'BTS SIO',
-    ],
-    color: 'from-indigo-600 to-violet-600',
-    pdfs: [
-      { label: 'Contexte – Architecture logique IMDEO', href: 'public/Projet/imdeo.pdf' },
-      { label: 'Travail rendu – Réseau avancé Cisco', href: 'public/Projet/rendu-imdeo.pdf' },
-    ],
+    title: 'Projet AP1 – Architecture de Prototypage',
+    desc: 'Maquette réseau BTS SIO, serveur Web/FTP, gestion de tickets, virtualisation Nutanix et sauvegardes automatisées SFTP/FTPS.',
+    tech: ['Nutanix', 'Packet Tracer', 'AD', 'Sauvegarde'],
+    color: 'from-emerald-500 to-emerald-700',
+    pdfHref: 'public/Projet/ap1.pdf',
+    icon: 'server',
+    id: 'ap1Project'
   },
+  {
+    title: 'Bloc 2 – Réseau Avancé IMDEO',
+    desc: 'Architecture logique et configuration réseau avancée Cisco. Inclut le contexte d\'implantation et le travail technique réalisé.',
+    tech: ['Cisco', 'Réseau Avancé', 'VLAN', 'Inter-VLAN'],
+    color: 'from-emerald-500 to-emerald-700',
+    pdfs: [
+      { label: 'Contexte IMDEO', href: 'public/Projet/imdeo.pdf' },
+      { label: 'Travail Réalisé', href: 'public/Projet/rendu-imdeo.pdf' },
+    ],
+    icon: 'shield',
+    id: 'bloc2Project'
+  },
+  {
+    title: 'Administration Windows Server 2019',
+    desc: 'Déploiement DHCP, DNS et Active Directory. Gestion des GPO et des rôles serveurs pour un parc informatique.',
+    tech: ['Windows Server', 'AD DS', 'GPO', 'DNS'],
+    color: 'from-emerald-500 to-emerald-700',
+    icon: 'clipboard'
+  },
+  {
+    title: 'Virtualisation Proxmox VE',
+    desc: 'Mise en œuvre de serveurs de virtualisation (KVM & LXC) avec haute disponibilité et gestion du stockage ZFS.',
+    tech: ['Proxmox', 'Virtualisation', 'KVM', 'LXC'],
+    color: 'from-emerald-500 to-emerald-700',
+    icon: 'storage'
+  },
+  {
+    title: 'Portfolio Professionnel',
+    desc: 'Conception d\'un portfolio dynamique en mode "Pro Clean" avec intégration de veille techno auto et déploiement serverless.',
+    tech: ['Vercel', 'Node.js', 'Postgres', 'Design'],
+    color: 'from-emerald-500 to-emerald-700',
+    icon: 'terminal'
+  }
 ];
 
 const skillsData = [
@@ -480,20 +451,18 @@ function renderProjects() {
   const grid = document.getElementById('projectsGrid');
   if (!grid) return;
 
-  const mainProjects = projectsData.filter(p => !p.pdfHref && !p.pdfs);
-  const ap1Project = projectsData.find(p => p.pdfHref && p.pdfHref.includes('ap1'));
-  const sp1Project = projectsData.find(p => p.pdfHref && p.pdfHref.includes('sp1'));
-  const bloc2Project = projectsData.find(p => p.pdfs && p.pdfs.length >= 2);
+  const mainProjects = projectsData.filter(p => !p.id);
+  const ap1Project = projectsData.find(p => p.id === 'ap1Project');
+  const sp1Project = projectsData.find(p => p.id === 'sp1Project');
+  const bloc2Project = projectsData.find(p => p.id === 'bloc2Project');
 
   grid.innerHTML = mainProjects.map(project => {
-    const [start] = project.color.replace('from-', '').replace('to-', '').split(' to-');
-    const accentColor = getColorValue(start);
     const iconSvg = getIcon(project.icon || 'terminal');
     return `
-      <article class="project-card" style="--card-accent: ${accentColor};">
+      <article class="project-card">
         <div class="project-card-inner">
           <div class="project-head">
-            <div style="color: var(--card-accent); width: 24px; height: 24px; margin-bottom: 1rem;">${iconSvg}</div>
+            <div style="color: var(--accent); width: 24px; height: 24px; margin-bottom: 1rem;">${iconSvg}</div>
           </div>
           <div>
             <h3 class="project-card-title">${project.title}</h3>
@@ -512,22 +481,16 @@ function renderProjects() {
   if (ap1Project) {
     const ap1El = document.getElementById('ap1Project');
     if (ap1El) {
-      const [start] = ap1Project.color.replace('from-', '').replace('to-', '').split(' to-');
-      const accentColor = getColorValue(start);
-      ap1El.style.setProperty('--card-accent', accentColor);
       ap1El.innerHTML = `
         <div class="project-card-inner">
           <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem;">
-            <div style="color: var(--card-accent); width: 28px; height: 28px;">${getIcon('server')}</div>
+            <div style="color: var(--accent); width: 28px; height: 28px;">${getIcon('server')}</div>
             <div class="project-validated-badge">✅ Compétence validée</div>
           </div>
           <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem;">
             <h3 class="project-card-title">${ap1Project.title}</h3>
             <button type="button" onclick="openPdfModal()" class="project-card-view-btn" title="Afficher le sujet AP1 (PDF)">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="height: 0.875rem; width: 0.875rem;">
-                <path d="M1.5 12s3.5-6.5 10.5-6.5S22.5 12 22.5 12 19 18.5 12 18.5 1.5 12 1.5 12Z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
+              ${getIcon('document')}
             </button>
           </div>
           <p class="project-card-desc">${ap1Project.desc}</p>
@@ -544,22 +507,16 @@ function renderProjects() {
   if (sp1Project) {
     const sp1El = document.getElementById('sp1Project');
     if (sp1El) {
-      const [start] = sp1Project.color.replace('from-', '').replace('to-', '').split(' to-');
-      const accentColor = getColorValue(start);
-      sp1El.style.setProperty('--card-accent', accentColor);
       sp1El.innerHTML = `
         <div class="project-card-inner">
           <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem;">
-            <div style="color: var(--card-accent); width: 28px; height: 28px;">${getIcon('globe')}</div>
+            <div style="color: var(--accent); width: 28px; height: 28px;">${getIcon('globe')}</div>
             <div class="project-validated-badge">✅ Compétence validée</div>
           </div>
           <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem;">
             <h3 class="project-card-title">${sp1Project.title}</h3>
             <button type="button" onclick="openSp1PdfModal()" class="project-card-view-btn" title="Afficher le document SP1 (PDF)">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="height: 0.875rem; width: 0.875rem;">
-                <path d="M1.5 12s3.5-6.5 10.5-6.5S22.5 12 22.5 12 19 18.5 12 18.5 1.5 12 1.5 12Z" />
-                <circle cx="12" cy="12" r="3" />
-              </svg>
+              ${getIcon('document')}
             </button>
           </div>
           <p class="project-card-desc">${sp1Project.desc}</p>
@@ -573,17 +530,14 @@ function renderProjects() {
     }
   }
 
-  if (bloc2Project && bloc2Project.pdfs && bloc2Project.pdfs.length >= 2) {
+  if (bloc2Project && bloc2Project.pdfs) {
     const bloc2El = document.getElementById('bloc2Project');
     if (bloc2El) {
-      const [start] = bloc2Project.color.replace('from-', '').replace('to-', '').split(' to-');
-      const accentColor = getColorValue(start);
-      bloc2El.style.setProperty('--card-accent', accentColor);
       const [ctx, work] = bloc2Project.pdfs;
       bloc2El.innerHTML = `
         <div class="project-card-inner">
           <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem;">
-            <div style="color: var(--card-accent); width: 28px; height: 28px;">${getIcon('shield')}</div>
+            <div style="color: var(--accent); width: 28px; height: 28px;">${getIcon('shield')}</div>
             <div class="project-validated-badge">✅ Compétence validée</div>
           </div>
           <h3 class="project-card-title">${bloc2Project.title}</h3>
@@ -595,11 +549,11 @@ function renderProjects() {
           </div>
           <div class="project-card-pdf-buttons mt-auto">
             <button type="button" onclick="openBloc2ContextModal()" class="project-pdf-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="height: 1rem; width: 1rem;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+              ${getIcon('document')}
               ${ctx.label}
             </button>
             <button type="button" onclick="openBloc2WorkModal()" class="project-pdf-btn">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="height: 1rem; width: 1rem;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+              ${getIcon('document')}
               ${work.label}
             </button>
           </div>
@@ -608,6 +562,7 @@ function renderProjects() {
     }
   }
 }
+
 
 function renderSkills() {
   const grid = document.getElementById('skillsGrid');

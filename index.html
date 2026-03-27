@@ -101,93 +101,29 @@
       </div>
 
       <div class="projects-grid" id="projectsGrid">
-        <article class="project-card featured" id="ap1Project"></article>
-        <article class="project-card featured" id="sp1Project"></article>
-        <article class="project-card featured" id="bloc2Project"></article>
+        <!-- Les cartes de projets seront générées ici par script.js -->
+        <div class="veille-loading">Chargement des projets techniques...</div>
       </div>
     </div>
 
-    <!-- Modal PDF AP1 -->
-    <div id="pdfModal" class="modal">
+    <!-- Modale Projet Dynamique -->
+    <div id="projectModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">
-          <h3>Détail du projet AP1 (PDF officiel)</h3>
-          <button class="modal-close" onclick="closePdfModal()">Fermer</button>
+          <h3 id="modalProjectTitle">Détail du projet</h3>
+          <button class="modal-close" onclick="closeProjectModal()">Fermer</button>
         </div>
-        <p class="modal-description">
-          Visualisation en lecture seule du sujet : « 2025 BTS SIO PLC - AP1 - SP0 - Architecture
-          de prototypage pour le site du BTS réalisé par les SLAM ».
-        </p>
-        <div class="modal-pdf-container">
-          <object data="public/Projet/ap1.pdf" type="application/pdf" width="100%" height="100%">
-            <p class="modal-fallback">
-              Votre navigateur ne peut pas afficher ce PDF.
-              <a href="public/Projet/ap1.pdf" target="_blank" rel="noopener noreferrer">Télécharger le PDF</a>
-            </p>
-          </object>
-        </div>
-      </div>
-    </div>
+        
+        <div class="modal-body">
+          <p id="modalProjectDesc" class="modal-description" style="margin-bottom: 2rem;"></p>
+          
+          <div id="modalPdfList" style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+            <!-- Les boutons PDF seront injectés ici -->
+          </div>
 
-    <!-- Modal PDF SP1 -->
-    <div id="sp1PdfModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Situation SP1 – Gestion de l'infrastructure réseau</h3>
-          <button class="modal-close" onclick="closeSp1PdfModal()">Fermer</button>
-        </div>
-        <p class="modal-description">
-          Document de la situation professionnelle SP1 du BTS SIO : gestion de l'infrastructure réseau.
-        </p>
-        <div class="modal-pdf-container">
-          <object data="public/Projet/sp1.pdf" type="application/pdf" width="100%" height="100%">
-            <p class="modal-fallback">
-              Votre navigateur ne peut pas afficher ce PDF.
-              <a href="public/Projet/sp1.pdf" target="_blank" rel="noopener noreferrer">Télécharger le PDF</a>
-            </p>
-          </object>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal Bloc 2 – Contexte (Architecture logique IMDEO) -->
-    <div id="bloc2ContextModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Bloc 2 – Contexte : Architecture logique de l'implantation IMDEO</h3>
-          <button class="modal-close" onclick="closeBloc2ContextModal()">Fermer</button>
-        </div>
-        <p class="modal-description">
-          Document 1 : ce qui est attendu (contexte et architecture logique).
-        </p>
-        <div class="modal-pdf-container">
-          <object data="public/Projet/imdeo.pdf" type="application/pdf" width="100%" height="100%">
-            <p class="modal-fallback">
-              Votre navigateur ne peut pas afficher ce PDF.
-              <a href="public/Projet/imdeo.pdf" target="_blank" rel="noopener noreferrer">Télécharger le PDF</a>
-            </p>
-          </object>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal Bloc 2 – Travail rendu (Réseau avancé Cisco) -->
-    <div id="bloc2WorkModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Bloc 2 – Travail rendu : Réseau avancé Cisco IMDEO</h3>
-          <button class="modal-close" onclick="closeBloc2WorkModal()">Fermer</button>
-        </div>
-        <p class="modal-description">
-          Travail réalisé : réseau avancé Cisco (IMDEO).
-        </p>
-        <div class="modal-pdf-container">
-          <object data="public/Projet/rendu-imdeo.pdf" type="application/pdf" width="100%" height="100%">
-            <p class="modal-fallback">
-              Votre navigateur ne peut pas afficher ce PDF.
-              <a href="public/Projet/rendu-imdeo.pdf" target="_blank" rel="noopener noreferrer">Télécharger le PDF</a>
-            </p>
-          </object>
+          <div id="modalPdfViewer" class="modal-pdf-container" style="display: none; height: 600px;">
+            <iframe id="pdfFrame" src="" width="100%" height="100%" frameborder="0"></iframe>
+          </div>
         </div>
       </div>
     </div>

@@ -40,54 +40,57 @@ function getIcon(name) {
 
 const projectsData = [
   {
-    title: 'Situation SP1 – Infrastructure Réseau',
-    desc: 'Gestion et mise en œuvre d\'une infrastructure réseau complète : conception, déploiement, sécurisation et documentation technique.',
-    tech: ['Réseau', 'Infrastructure', 'Cisco', 'Sécurité'],
-    color: 'from-emerald-500 to-emerald-700',
-    pdfHref: 'public/Projet/sp1.pdf',
+    id: 'millenuits',
+    title: 'Groupe Millenuits — Infrastructure & Services',
+    desc: 'Refonte de l\'infrastructure système et réseau. Déploiement des services critiques (AD DS, DHCP, DNS, GPO) et segmentation réseau via VLAN. Gestion centralisée du parc informatique.',
+    tech: ['Active Directory', 'Windows Server', 'VLAN', 'Systèmes'],
     icon: 'globe',
-    id: 'sp1Project'
-  },
-  {
-    title: 'Projet AP1 – Architecture de Prototypage',
-    desc: 'Maquette réseau BTS SIO, serveur Web/FTP, gestion de tickets, virtualisation Nutanix et sauvegardes automatisées SFTP/FTPS.',
-    tech: ['Nutanix', 'Packet Tracer', 'AD', 'Sauvegarde'],
-    color: 'from-emerald-500 to-emerald-700',
-    pdfHref: 'public/Projet/ap1.pdf',
-    icon: 'server',
-    id: 'ap1Project'
-  },
-  {
-    title: 'Bloc 2 – Réseau Avancé IMDEO',
-    desc: 'Architecture logique et configuration réseau avancée Cisco. Inclut le contexte d\'implantation et le travail technique réalisé.',
-    tech: ['Cisco', 'Réseau Avancé', 'VLAN', 'Inter-VLAN'],
-    color: 'from-emerald-500 to-emerald-700',
     pdfs: [
-      { label: 'Contexte IMDEO', href: 'public/Projet/imdeo.pdf' },
-      { label: 'Travail Réalisé', href: 'public/Projet/rendu-imdeo.pdf' },
-    ],
+      { label: 'Situation SP1 — Réseau', href: 'public/Projet/millenuits/Situation - SP1 - Gestion de l’infrastructure réseau.pdf' },
+      { label: 'Situation SP2 — Parc Info', href: 'public/Projet/millenuits/Situation - SP2 - Gestion du parc informatique.pdf' },
+      { label: 'Situation SP3 — AD / DHCP', href: 'public/Projet/millenuits/Situation - SP3 - Gestion des services principaux AD - DHCP.pdf' },
+      { label: 'Contexte Technique', href: 'public/Projet/millenuits/Contexte Millenuits.pdf' },
+    ]
+  },
+  {
+    id: 'cyber',
+    title: 'Laboratoire de Cybersécurité',
+    desc: 'Mise en place d\'un environnement de test sécurisé. Étude du durcissement (hardening) des terminaux, analyse des vulnérabilités et rédaction de dossiers de sécurité commun.',
+    tech: ['Cybersécurité', 'Hardening', 'Analyse de vulnérabilité', 'Audit'],
     icon: 'shield',
-    id: 'bloc2Project'
+    pdfs: [
+      { label: 'Sécurité des terminaux (TP1)', href: 'public/Projet/cyber/TP1-sécurité des terminaux.pdf' },
+      { label: 'Dossier Commun (TP2)', href: 'public/Projet/cyber/TP2-Commun-dossier.pdf' },
+      { label: 'Contexte Labo 2026', href: 'public/Projet/cyber/Contexte-labo-2026.pdf' },
+    ]
   },
   {
-    title: 'Administration Windows Server 2019',
-    desc: 'Déploiement DHCP, DNS et Active Directory. Gestion des GPO et des rôles serveurs pour un parc informatique.',
-    tech: ['Windows Server', 'AD DS', 'GPO', 'DNS'],
-    color: 'from-emerald-500 to-emerald-700',
-    icon: 'clipboard'
+    id: 'imdeo',
+    title: 'Architecture Réseau IMDEO',
+    desc: 'Conception d\'une architecture logique pour l\'implantation IMDEO. Déploiement de solutions de routage avancé et structuration des services réseau.',
+    tech: ['Cisco', 'Architecture', 'Routage', 'Switching'],
+    icon: 'antenna',
+    pdfs: [
+      { label: 'Dossier Technique IMDEO', href: 'public/Projet/imdeo/imdeo.pdf' },
+      { label: 'Structure du Projet', href: 'public/Projet/imdeo/structure-imdeo.pdf' },
+      { label: 'Contexte IMDEO 2026', href: 'public/Projet/imdeo/Contexte - IMDEO - 2026.pdf' },
+    ]
   },
   {
-    title: 'Virtualisation Proxmox VE',
-    desc: 'Mise en œuvre de serveurs de virtualisation (KVM & LXC) avec haute disponibilité et gestion du stockage ZFS.',
-    tech: ['Proxmox', 'Virtualisation', 'KVM', 'LXC'],
-    color: 'from-emerald-500 to-emerald-700',
-    icon: 'storage'
+    id: 'ap',
+    title: 'Projet AP — Architecture Prototypage',
+    desc: 'Projet complet d\'architecture de prototypage (AP1). Mise en œuvre de solutions de serveurs, virtualisation et stratégies de sauvegarde.',
+    tech: ['Virtualisation', 'Infrastructure', 'Prototypage', 'Sauvegarde'],
+    icon: 'server',
+    pdfs: [
+      { label: 'Document de projet (AP.pdf)', href: 'public/Projet/AP.pdf' },
+    ]
   },
   {
-    title: 'Portfolio Professionnel',
-    desc: 'Conception d\'un portfolio dynamique en mode "Pro Clean" avec intégration de veille techno auto et déploiement serverless.',
-    tech: ['Vercel', 'Node.js', 'Postgres', 'Design'],
-    color: 'from-emerald-500 to-emerald-700',
+    id: 'portfolio',
+    title: 'Portfolio Professionnel V3',
+    desc: 'Conception d\'une interface moderne Blanc/Vert avec automatisation de la veille technologique via Vercel et Neon Postgres.',
+    tech: ['Next.js', 'Vercel', 'Postgres', 'Design'],
     icon: 'terminal'
   }
 ];
@@ -432,25 +435,20 @@ function renderProjects() {
   const grid = document.getElementById('projectsGrid');
   if (!grid) return;
 
-  const mainProjects = projectsData.filter(p => !p.id);
-  const ap1Project = projectsData.find(p => p.id === 'ap1Project');
-  const sp1Project = projectsData.find(p => p.id === 'sp1Project');
-  const bloc2Project = projectsData.find(p => p.id === 'bloc2Project');
-
-  grid.innerHTML = mainProjects.map(project => {
+  grid.innerHTML = projectsData.map(project => {
     const iconSvg = getIcon(project.icon || 'terminal');
-    const projectId = project.title.replace(/\s+/g, '-').toLowerCase();
     return `
-      <article class="project-card" onclick="openGenericProjectModal('${projectId}')" title="Cliquer pour voir les détails">
+      <article class="project-card featured" onclick="openProjectModal('${project.id}')" title="Cliquer pour voir les détails">
         <div class="project-card-inner">
-          <div class="project-head">
-            <div style="color: var(--accent); width: 24px; height: 24px; margin-bottom: 1rem;">${iconSvg}</div>
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem;">
+            <div style="color: var(--accent); width: 28px; height: 28px;">${iconSvg}</div>
+            ${project.pdfs ? '<div class="project-validated-badge">✅ Dossier complet</div>' : ''}
           </div>
           <div>
             <h3 class="project-card-title">${project.title}</h3>
             <p class="project-card-desc">${project.desc}</p>
           </div>
-          <div class="project-card-tech">
+          <div class="project-card-tech mt-auto">
             <div class="project-card-tech-list">
               ${project.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}
             </div>
@@ -459,100 +457,8 @@ function renderProjects() {
       </article>
     `;
   }).join('');
-
-  if (ap1Project) {
-    const ap1El = document.getElementById('ap1Project');
-    if (ap1El) {
-      ap1El.setAttribute('onclick', 'openPdfModal()');
-      ap1El.setAttribute('title', 'Cliquer pour voir le sujet AP1 (PDF)');
-      ap1El.style.cursor = 'pointer';
-      ap1El.innerHTML = `
-        <div class="project-card-inner">
-          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem;">
-            <div style="color: var(--accent); width: 28px; height: 28px;">${getIcon('server')}</div>
-            <div class="project-validated-badge">✅ Compétence validée</div>
-          </div>
-          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem;">
-            <h3 class="project-card-title">${ap1Project.title}</h3>
-            <div class="project-card-view-btn">
-              ${getIcon('document')}
-            </div>
-          </div>
-          <p class="project-card-desc">${ap1Project.desc}</p>
-          <div class="project-card-tech mt-auto">
-            <div class="project-card-tech-list">
-              ${ap1Project.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}
-            </div>
-          </div>
-        </div>
-      `;
-    }
-  }
-
-  if (sp1Project) {
-    const sp1El = document.getElementById('sp1Project');
-    if (sp1El) {
-      sp1El.setAttribute('onclick', 'openSp1PdfModal()');
-      sp1El.setAttribute('title', 'Cliquer pour voir le document SP1 (PDF)');
-      sp1El.style.cursor = 'pointer';
-      sp1El.innerHTML = `
-        <div class="project-card-inner">
-          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem;">
-            <div style="color: var(--accent); width: 28px; height: 28px;">${getIcon('globe')}</div>
-            <div class="project-validated-badge">✅ Compétence validée</div>
-          </div>
-          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem;">
-            <h3 class="project-card-title">${sp1Project.title}</h3>
-            <div class="project-card-view-btn">
-              ${getIcon('document')}
-            </div>
-          </div>
-          <p class="project-card-desc">${sp1Project.desc}</p>
-          <div class="project-card-tech mt-auto">
-            <div class="project-card-tech-list">
-              ${sp1Project.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}
-            </div>
-          </div>
-        </div>
-      `;
-    }
-  }
-
-  if (bloc2Project && bloc2Project.pdfs) {
-    const bloc2El = document.getElementById('bloc2Project');
-    if (bloc2El) {
-      bloc2El.setAttribute('onclick', 'openBloc2ContextModal()');
-      bloc2El.setAttribute('title', 'Cliquer pour voir le projet IMDEO (PDF)');
-      bloc2El.style.cursor = 'pointer';
-      const [ctx, work] = bloc2Project.pdfs;
-      bloc2El.innerHTML = `
-        <div class="project-card-inner">
-          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem;">
-            <div style="color: var(--accent); width: 28px; height: 28px;">${getIcon('shield')}</div>
-            <div class="project-validated-badge">✅ Compétence validée</div>
-          </div>
-          <h3 class="project-card-title">${bloc2Project.title}</h3>
-          <p class="project-card-desc">${bloc2Project.desc}</p>
-          <div class="project-card-tech">
-            <div class="project-card-tech-list">
-              ${bloc2Project.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}
-            </div>
-          </div>
-          <div class="project-card-pdf-buttons mt-auto">
-            <button type="button" onclick="openBloc2ContextModal()" class="project-pdf-btn">
-              ${getIcon('document')}
-              ${ctx.label}
-            </button>
-            <button type="button" onclick="openBloc2WorkModal()" class="project-pdf-btn">
-              ${getIcon('document')}
-              ${work.label}
-            </button>
-          </div>
-        </div>
-      `;
-    }
-  }
 }
+
 
 
 function renderSkills() {
@@ -668,39 +574,7 @@ function renderBtsSio() {
   `;
 }
 
-function openGenericProjectModal(id) {
-  const modal = document.getElementById('genericProjectModal');
-  const titleEl = document.getElementById('genericProjectTitle');
-  const contentEl = document.getElementById('genericProjectContent');
-  
-  if (!modal || !titleEl || !contentEl) return;
-
-  // Trouver les données du projet
-  const project = projectsData.find(p => p.title.replace(/\s+/g, '-').toLowerCase() === id);
-  if (project) {
-    titleEl.textContent = project.title;
-    contentEl.innerHTML = `
-      <p style="margin-bottom: 1.5rem; line-height: 1.7;">${project.desc}</p>
-      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
-        ${project.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}
-      </div>
-      <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted); font-style: italic;">
-        Détails techniques et documentation en cours de finalisation pour ce projet.
-      </p>
-    `;
-  }
-
-  modal.classList.add('active');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeGenericProjectModal() {
-  const modal = document.getElementById('genericProjectModal');
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-}
+// Functions de modale (Supprimées car refondues en openProjectModal)
 
 async function renderVeille() {
   const container = document.getElementById('veilleContent');

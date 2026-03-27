@@ -42,10 +42,10 @@ const projectsData = [
     tech: ['Active Directory', 'Windows Server', 'VLAN', 'Systèmes'],
     icon: 'globe',
     pdfs: [
-      { label: 'Situation SP1 — Réseau', href: 'public/Projet/millenuits/Situation - SP1 - Gestion de l’infrastructure réseau.pdf' },
-      { label: 'Situation SP2 — Parc Info', href: 'public/Projet/millenuits/Situation - SP2 - Gestion du parc informatique.pdf' },
-      { label: 'Situation SP3 — AD / DHCP', href: 'public/Projet/millenuits/Situation - SP3 - Gestion des services principaux AD - DHCP.pdf' },
-      { label: 'Contexte Technique', href: 'public/Projet/millenuits/Contexte Millenuits.pdf' },
+      { label: 'Situation SP1 — Réseau', href: '/public/Projet/millenuits/Situation - SP1 - Gestion de l’infrastructure réseau.pdf' },
+      { label: 'Situation SP2 — Parc Info', href: '/public/Projet/millenuits/Situation - SP2 - Gestion du parc informatique.pdf' },
+      { label: 'Situation SP3 — AD / DHCP', href: '/public/Projet/millenuits/Situation - SP3 - Gestion des services principaux AD - DHCP.pdf' },
+      { label: 'Contexte Technique', href: '/public/Projet/millenuits/Contexte Millenuits.pdf' },
     ]
   },
   {
@@ -55,8 +55,8 @@ const projectsData = [
     tech: ['Cybersécurité', 'Hardening', 'Analyse vulnérabilités'],
     icon: 'shield',
     pdfs: [
-      { label: 'Sécurité terminaux', href: 'public/Projet/cyber/TP1-sécurité des terminaux.pdf' },
-      { label: 'Dossier Commun', href: 'public/Projet/cyber/TP2-Commun-dossier.pdf' },
+      { label: 'Sécurité terminaux', href: '/public/Projet/cyber/TP1-sécurité des terminaux.pdf' },
+      { label: 'Dossier Commun', href: '/public/Projet/cyber/TP2-Commun-dossier.pdf' },
     ]
   },
   {
@@ -66,7 +66,7 @@ const projectsData = [
     tech: ['Cisco', 'Architecture', 'Routage'],
     icon: 'antenna',
     pdfs: [
-      { label: 'Dossier IMDEO', href: 'public/Projet/imdeo/imdeo.pdf' },
+      { label: 'Dossier IMDEO', href: '/public/Projet/imdeo/imdeo.pdf' },
     ]
   },
   {
@@ -76,7 +76,7 @@ const projectsData = [
     tech: ['Virtualisation', 'Infrastructure', 'Backup'],
     icon: 'server',
     pdfs: [
-      { label: 'Document AP1', href: 'public/Projet/AP.pdf' },
+      { label: 'Document AP1', href: '/public/Projet/AP.pdf' },
     ]
   }
 ];
@@ -116,13 +116,17 @@ const formationsData = [
     title: 'BTS SIO SISR', 
     subtitle: 'Lycée Paul-Louis Courier, Tours', 
     date: '2025–2027', 
-    desc: 'Administration système, réseau et cybersécurité.'
+    desc: 'Services Informatiques aux Organisations, option SISR. Administration système, réseau et cybersécurité.',
+    image: '/public/images/bts-sio.jpg',
+    pdf: '/public/Projet/BTS_SIO_Certificat.pdf'
   },
   { 
     title: 'Bac Pro SN RISC', 
     subtitle: 'Lycée Henri Becquerel, Tours', 
     date: '2022–2025', 
-    desc: 'Réseaux et systèmes communicants.'
+    desc: 'Systèmes Numériques, option RISC. Réseaux et systèmes communicants.',
+    image: '/public/images/bac-pro.webp',
+    pdf: '/public/Projet/Bac_Pro_Diplome.pdf'
   }
 ];
 
@@ -238,6 +242,12 @@ function renderFormations() {
           </div>
           <div class="timeline-date">${f.date}</div>
           <p class="timeline-desc">${f.desc}</p>
+          ${f.pdf ? `<a href="${f.pdf}" target="_blank" class="btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 1rem; margin-bottom: 1rem;">${getIcon('document')} Voir le diplôme (PDF)</a>` : ''}
+          ${f.image ? `
+            <div class="timeline-image-container">
+              <img src="${f.image}" class="timeline-image" alt="${f.title}" onerror="this.parentElement.style.display='none'">
+            </div>
+          ` : ''}
         </div>
       </div>
     `).join('') + `</div>`;
@@ -364,6 +374,7 @@ function openProjectModal(id) {
       btn.innerHTML = `<span class="pdf-btn-icon">${getIcon('document')}</span><span>${pdf.label}</span>`;
       
       btn.onclick = () => {
+        console.log('Ouverture PDF:', pdf.href);
         // Update UI
         document.querySelectorAll('.pdf-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -372,7 +383,7 @@ function openProjectModal(id) {
         frame.src = pdf.href;
         downloadLink.href = pdf.href;
         
-        // Check if on mobile (iframes can be tricky)
+        // Check local storage / settings if iframe blocked
         if (window.innerWidth < 768) {
           fallback.style.display = 'block';
         }

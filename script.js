@@ -439,8 +439,9 @@ function renderProjects() {
 
   grid.innerHTML = mainProjects.map(project => {
     const iconSvg = getIcon(project.icon || 'terminal');
+    const projectId = project.title.replace(/\s+/g, '-').toLowerCase();
     return `
-      <article class="project-card" onclick="alert('Détails de ce projet bientôt disponibles !')" title="Cliquer pour voir les détails">
+      <article class="project-card" onclick="openGenericProjectModal('${projectId}')" title="Cliquer pour voir les détails">
         <div class="project-card-inner">
           <div class="project-head">
             <div style="color: var(--accent); width: 24px; height: 24px; margin-bottom: 1rem;">${iconSvg}</div>
@@ -665,6 +666,40 @@ function renderBtsSio() {
       `).join('')}
     </div>
   `;
+}
+
+function openGenericProjectModal(id) {
+  const modal = document.getElementById('genericProjectModal');
+  const titleEl = document.getElementById('genericProjectTitle');
+  const contentEl = document.getElementById('genericProjectContent');
+  
+  if (!modal || !titleEl || !contentEl) return;
+
+  // Trouver les données du projet
+  const project = projectsData.find(p => p.title.replace(/\s+/g, '-').toLowerCase() === id);
+  if (project) {
+    titleEl.textContent = project.title;
+    contentEl.innerHTML = `
+      <p style="margin-bottom: 1.5rem; line-height: 1.7;">${project.desc}</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem;">
+        ${project.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}
+      </div>
+      <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted); font-style: italic;">
+        Détails techniques et documentation en cours de finalisation pour ce projet.
+      </p>
+    `;
+  }
+
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGenericProjectModal() {
+  const modal = document.getElementById('genericProjectModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
 }
 
 async function renderVeille() {

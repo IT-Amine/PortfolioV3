@@ -344,22 +344,51 @@ function renderOpenClassrooms() {
 function openProjectModal(id) {
   const project = projectsData.find(p => p.id === id);
   if (!project) return;
-  document.getElementById('modalProjectTitle').textContent = project.title;
-  document.getElementById('modalProjectDesc').textContent = project.desc;
-  const list = document.getElementById('modalPdfList');
-  const viewer = document.getElementById('modalPdfViewer');
-  const frame = document.getElementById('pdfFrame');
-  list.innerHTML = ''; viewer.style.display = 'none';
 
-  if (project.pdfs) {
-    project.pdfs.forEach(pdf => {
+  document.getElementById('modalProjectTitle').textContent = project.title;
+  document.getElementById('modalProjectDesc').textContent = project.desc || '';
+  
+  const list = document.getElementById('modalPdfList');
+  const frame = document.getElementById('pdfFrame');
+  const fallback = document.getElementById('pdfFallback');
+  const downloadLink = document.getElementById('pdfDownloadLink');
+
+  list.innerHTML = '';
+  frame.src = '';
+  fallback.style.display = 'none';
+
+  if (project.pdfs && project.pdfs.length > 0) {
+    project.pdfs.forEach((pdf, index) => {
       const btn = document.createElement('button');
-      btn.className = 'btn-secondary';
-      btn.innerHTML = `${getIcon('document')} ${pdf.label}`;
-      btn.onclick = () => { frame.src = pdf.href; viewer.style.display = 'block'; };
+      btn.className = `pdf-btn ${index === 0 ? 'active' : ''}`;
+      btn.innerHTML = `<span class="pdf-btn-icon">${getIcon('document')}</span><span>${pdf.label}</span>`;
+      
+      btn.onclick = () => {
+        // Update UI
+        document.querySelectorAll('.pdf-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Load PDF
+        frame.src = pdf.href;
+        downloadLink.href = pdf.href;
+        
+        // Check if on mobile (iframes can be tricky)
+        if (window.innerWidth < 768) {
+          fallback.style.display = 'block';
+        }
+      };
+      
       list.appendChild(btn);
     });
+
+    // Auto-load first PDF
+    const firstPdf = project.pdfs[0];
+    frame.src = firstPdf.href;
+    downloadLink.href = firstPdf.href;
+  } else {
+    list.innerHTML = '<p class="text-muted">Aucun document joint.</p>';
   }
+
   document.getElementById('projectModal').classList.add('active');
 }
 

@@ -198,18 +198,25 @@
     </div>
   </section>
 
-  <!-- Section Formations -->
-  <section id="formations" class="section">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label">Mes Formations</p>
-        <h2 class="section-title">Parcours de formation</h2>
-        <p class="section-description">
-          Un parcours orienté réseaux, systèmes et cybersécurité, avec des formations complémentaires.
-        </p>
+      <div class="formations-split-layout">
+        <div class="formations-column">
+          <div class="column-header">
+            <span class="column-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
+            <h3 class="column-title">Études & Parcours</h3>
+          </div>
+          <div class="formations-grid" id="formationsGrid"></div>
+        </div>
+
+        <div class="certifications-column">
+          <div class="column-header">
+            <span class="column-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+            <h3 class="column-title">Certifications Clés</h3>
+          </div>
+          <div id="certificationsTree" class="cert-tree-container">
+            <!-- Arbre injecté par JS -->
+          </div>
+        </div>
       </div>
-      <div class="formations-grid" id="formationsGrid"></div>
-    </div>
 
     <!-- Modal Certificat -->
     <div id="certModal" class="modal" onclick="if(event.target===this) closeCertModal();">

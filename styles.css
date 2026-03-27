@@ -2600,25 +2600,217 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
   }
 
+  /* Skills Logo Grid Polish */
+  .skills-logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .skill-logo-card {
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+  }
+
+  .skill-logo-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.1);
+  }
+
   .skill-logo-icon {
     width: 3rem;
     height: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.3s ease;
   }
 
-  .skill-logo-icon svg, 
+  .skill-logo-card:hover .skill-logo-icon {
+    transform: scale(1.1);
+  }
+
   .skill-logo-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .skill-logo-name {
+    font-size: 0.875rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0;
+  }
+
+  /* ============================================
+     FORMATIONS SPLIT LAYOUT
+     ============================================ */
+  .formations-split-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-top: 2.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    .formations-split-layout {
+      grid-template-columns: 1fr 400px;
+    }
+  }
+
+  .column-header {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: 2rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 2px solid rgba(16, 185, 129, 0.1);
+  }
+
+  .column-icon {
+    width: 2rem;
+    height: 2rem;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .column-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .column-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  /* Certifications Tree */
+  .cert-tree-container {
+    position: relative;
+    padding-left: 0.5rem;
+  }
+
+  .cert-tree {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .cert-tree-line {
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    z-index: 1;
+  }
+
+  .cert-item {
+    position: relative;
+    padding-left: 3rem;
+  }
+
+  .cert-dot {
+    position: absolute;
+    left: 0.65rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.85rem;
+    height: 0.85rem;
+    background: #ffffff;
+    border: 3px solid var(--accent);
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+  }
+
+  .cert-card {
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    border-radius: 20px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
+
+  .cert-card:hover {
+    border-color: var(--accent);
+    transform: translateX(8px);
+    box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.1), 0 10px 10px -5px rgba(16, 185, 129, 0.04);
+  }
+
+  .cert-header-info {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .cert-icon-small {
+    width: 2.75rem;
+    height: 2.75rem;
+    background: var(--accent-soft);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem;
+    flex-shrink: 0;
+  }
+
+  .cert-icon-small img {
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
 
-  .skill-logo-name {
-    font-size: 0.9rem;
-    font-weight: 600;
+  .cert-title-txt {
+    font-size: 1rem;
+    font-weight: 800;
     color: var(--text-primary);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .cert-date-txt {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 0.15rem;
+  }
+
+  .cert-badge {
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
   }
 
   /* ============================================

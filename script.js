@@ -28,8 +28,37 @@ const ICONS = {
   gitlab: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#FC6D26"><path d="M23.955 13.587l-1.342-4.135-2.664-8.189c-.135-.417-.724-.417-.859 0L16.425 9.45H7.574L4.91 1.263c-.135-.417-.724-.417-.859 0L1.387 9.452.045 13.587c-.1.308.011.647.276.84l11.679 8.48 11.679-8.48c.265-.193.376-.532.276-.84z"/></svg>',
 };
 
-function getIcon(name) {
-  return ICONS[name] || '';
+function getIcon(name, color = '10b981') {
+  // Mapping pour Simple Icons (slugs)
+  const mapping = {
+    debian: 'debian',
+    windows: 'windows8',
+    proxmox: 'proxmox',
+    docker: 'docker',
+    vmware: 'vmware',
+    ansible: 'ansible',
+    kubernetes: 'kubernetes',
+    gitlab: 'gitlab',
+    terminal: 'gnumetadata',
+    server: 'windows-server',
+    shield: 'shield-halved', // Lucide / Heroicons fallback
+    globe: 'globe',
+    document: 'read-the-docs',
+    settings: 'cog',
+    search: 'search',
+    tool: 'wrench'
+  };
+  
+  const slug = mapping[name] || name;
+  
+  // Utiliser Simple Icons CDN pour les logos tech
+  const techLogos = ['debian', 'windows', 'proxmox', 'docker', 'vmware', 'ansible', 'kubernetes', 'gitlab', 'windows-server'];
+  if (techLogos.includes(slug)) {
+    return `<img src="https://cdn.simpleicons.org/${slug}/${color}" alt="${name}" style="width: 100%; height: 100%; object-fit: contain;">`;
+  }
+
+  // Fallback SVG Lucide simpler
+  return ICONS[name] || ICONS['terminal'];
 }
 
 /* --- DONNÉES DES COMPOSANTS --- */
@@ -109,6 +138,12 @@ const skillsCategories = [
       { name: 'Bash', icon: 'terminal' }
     ]
   }
+];
+
+const certificationsTreeData = [
+  { title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: '/public/certif/PIX.jpg', type: 'image' },
+  { title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: '/public/certif/MOOC.jpg', type: 'image' },
+  { title: 'EBIOS — Analyse de risque', date: '2025', icon: 'shield', file: '/public/certif/EBIOS.pdf', type: 'pdf' },
 ];
 
 const formationsData = [
@@ -410,7 +445,77 @@ function openOcModalByIndex(i) {
   document.getElementById('ocModalImage').src = c.image;
   document.getElementById('ocModal').classList.add('active');
 }
-function closeOcModal() { document.getElementById('ocModal').classList.remove('active'); }
+function renderCertificationsTree() {
+  const container = document.getElementById('certificationsTree');
+  if (!container) return;
+  container.innerHTML = `
+    <div class="cert-tree">
+      <div class="cert-tree-line"></div>
+      ${certificationsTreeData.map(c => `
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div class="cert-card" onclick="${c.type === 'pdf' ? `window.open('${c.file}', '_blank')` : `openImageModal('${c.file}', '${c.title}')`}">
+            <div class="cert-header-info">
+              <div class="cert-icon-small">${getIcon(c.icon)}</div>
+              <div class="cert-details">
+                <h4 class="cert-title-txt">${c.title}</h4>
+                <div class="cert-date-txt">${c.date}</div>
+              </div>
+            </div>
+            <div class="cert-badge">Voir</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function openImageModal(src, title) {
+  const modal = document.getElementById('ocModal'); // Re-use OC modal for simplicity
+  const img = document.getElementById('ocModalImage');
+  const modalTitle = document.getElementById('ocModalTitle');
+  if (!modal || !img) return;
+
+  img.src = src;
+  modalTitle.textContent = title;
+  modal.classList.add('active');
+}
+
+function renderCertificationsTree() {
+  const container = document.getElementById('certificationsTree');
+  if (!container) return;
+  container.innerHTML = `
+    <div class="cert-tree">
+      <div class="cert-tree-line"></div>
+      ${certificationsTreeData.map(c => `
+        <div class="cert-item">
+          <div class="cert-dot"></div>
+          <div class="cert-card" onclick="${c.type === 'pdf' ? `window.open('${c.file}', '_blank')` : `openImageModal('${c.file}', '${c.title}')`}">
+            <div class="cert-header-info">
+              <div class="cert-icon-small">${getIcon(c.icon)}</div>
+              <div class="cert-details">
+                <h4 class="cert-title-txt">${c.title}</h4>
+                <div class="cert-date-txt">${c.date}</div>
+              </div>
+            </div>
+            <div class="cert-badge">Voir</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function openImageModal(src, title) {
+  const modal = document.getElementById('ocModal'); // Ré-utiliser la modale OC
+  const img = document.getElementById('ocModalImage');
+  const modalTitle = document.getElementById('ocModalTitle');
+  if (!modal || !img) return;
+
+  img.src = src;
+  modalTitle.textContent = title;
+  modal.classList.add('active');
+}
 
 /* --- INIT --- */
 
@@ -444,6 +549,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderOpenClassrooms();
   renderBtsSio();
   renderCompetencesTable();
+  renderCertificationsTree();
 
   const yearEl = document.getElementById('currentYear');
   if (yearEl) yearEl.textContent = new Date().getFullYear();

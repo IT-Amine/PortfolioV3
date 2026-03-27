@@ -255,26 +255,7 @@ const veilleData = {
     { name: 'Bleeping Computer', desc: 'Actualités malwares, ransomwares et incidents de sécurité', url: 'https://www.bleepingcomputer.com' },
     { name: 'Exploit Database', desc: 'Référence des exploits publics pour la veille offensive', url: 'https://www.exploit-db.com' },
   ],
-  articles: [
-    {
-      titre: 'Les VPNs en entreprise : enjeux et alternatives Zero Trust',
-      date: 'Janvier 2026',
-      resume: 'Analyse de l\'évolution des VPN d\'entreprise vers des architectures Zero Trust Network Access (ZTNA), avec étude des solutions Wireguard, OpenVPN et Cloudflare Access.',
-      tags: ['VPN', 'Zero Trust', 'ZTNA', 'Réseau'],
-    },
-    {
-      titre: 'Firewall nouvelle génération : OPNsense vs pfSense',
-      date: 'Décembre 2025',
-      resume: 'Comparatif technique des solutions open-source de firewall NGFW, avec test de déploiement sous Proxmox, gestion des VLANs et intégration IDS/IPS (Suricata).',
-      tags: ['Firewall', 'OPNsense', 'pfSense', 'IDS/IPS'],
-    },
-    {
-      titre: 'Ransomwares ciblant les infrastructure ESXi (VMware)',
-      date: 'Novembre 2025',
-      resume: 'Étude des attaques ESXiArgs et ALPHV ciblant les hyperviseurs VMware ESXi, mesures de protection et bonnes pratiques de sauvegarde hors-ligne.',
-      tags: ['Ransomware', 'VMware', 'ESXi', 'Sauvegarde'],
-    },
-  ],
+  articles: [], // Sera rempli par l'API Neon/Vercel
   impact: 'Cette veille me permet de comprendre les menaces actuelles, d\'adapter mes configurations réseau (règles firewall, segmentation VLAN) et de proposer des recommandations de sécurité basées sur des données réelles lors de mes projets PPE et stages.',
 };
 
@@ -459,7 +440,7 @@ function renderProjects() {
   grid.innerHTML = mainProjects.map(project => {
     const iconSvg = getIcon(project.icon || 'terminal');
     return `
-      <article class="project-card">
+      <article class="project-card" onclick="alert('Détails de ce projet bientôt disponibles !')">
         <div class="project-card-inner">
           <div class="project-head">
             <div style="color: var(--accent); width: 24px; height: 24px; margin-bottom: 1rem;">${iconSvg}</div>
@@ -481,6 +462,8 @@ function renderProjects() {
   if (ap1Project) {
     const ap1El = document.getElementById('ap1Project');
     if (ap1El) {
+      ap1El.setAttribute('onclick', 'openPdfModal()');
+      ap1El.style.cursor = 'pointer';
       ap1El.innerHTML = `
         <div class="project-card-inner">
           <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem;">
@@ -489,9 +472,9 @@ function renderProjects() {
           </div>
           <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem;">
             <h3 class="project-card-title">${ap1Project.title}</h3>
-            <button type="button" onclick="openPdfModal()" class="project-card-view-btn" title="Afficher le sujet AP1 (PDF)">
+            <div class="project-card-view-btn">
               ${getIcon('document')}
-            </button>
+            </div>
           </div>
           <p class="project-card-desc">${ap1Project.desc}</p>
           <div class="project-card-tech mt-auto">
@@ -507,6 +490,8 @@ function renderProjects() {
   if (sp1Project) {
     const sp1El = document.getElementById('sp1Project');
     if (sp1El) {
+      sp1El.setAttribute('onclick', 'openSp1PdfModal()');
+      sp1El.style.cursor = 'pointer';
       sp1El.innerHTML = `
         <div class="project-card-inner">
           <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem;">
@@ -515,9 +500,9 @@ function renderProjects() {
           </div>
           <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem;">
             <h3 class="project-card-title">${sp1Project.title}</h3>
-            <button type="button" onclick="openSp1PdfModal()" class="project-card-view-btn" title="Afficher le document SP1 (PDF)">
+            <div class="project-card-view-btn">
               ${getIcon('document')}
-            </button>
+            </div>
           </div>
           <p class="project-card-desc">${sp1Project.desc}</p>
           <div class="project-card-tech mt-auto">
@@ -533,6 +518,8 @@ function renderProjects() {
   if (bloc2Project && bloc2Project.pdfs) {
     const bloc2El = document.getElementById('bloc2Project');
     if (bloc2El) {
+      bloc2El.setAttribute('onclick', 'openBloc2ContextModal()');
+      bloc2El.style.cursor = 'pointer';
       const [ctx, work] = bloc2Project.pdfs;
       bloc2El.innerHTML = `
         <div class="project-card-inner">
@@ -733,15 +720,21 @@ async function renderVeille() {
 
   try {
     const response = await fetch('/api/veille?limit=10');
+    console.log('Veille API Status:', response.status);
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const data = await response.json();
+    console.log('Veille Articles received:', data.articles ? data.articles.length : 0);
     const articles = data.articles || [];
 
     if (articles.length === 0) {
-      // Fallback sur les articles statiques
-      renderVeilleStatic(fluxContainer);
+      fluxContainer.innerHTML = `
+        <div class="veille-empty">
+          <p>Aucun article trouvé dans la base Neon.</p>
+          <p style="font-size: 0.8rem; margin-top: 0.5rem;">Lancez une synchronisation via curl pour remplir la base.</p>
+        </div>
+      `;
       return;
     }
 

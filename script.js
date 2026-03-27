@@ -49,7 +49,7 @@ const projectsData = [
     title: 'Groupe Millenuits — Infrastructure & Services',
     desc: 'Refonte de l\'infrastructure système et réseau. Déploiement des services critiques (AD DS, DHCP, DNS, GPO) et segmentation réseau via VLAN.',
     tech: ['Active Directory', 'Windows Server', 'VLAN', 'Systèmes'],
-    icon: 'globe',
+    logo: '/public/MilleNuits.jpg',
     pdfs: [
       { label: 'Situation SP1 — Réseau', href: '/public/Projet/millenuits/Situation - SP1 - Gestion de l’infrastructure réseau.pdf' },
       { label: 'Situation SP2 — Parc Info', href: '/public/Projet/millenuits/Situation - SP2 - Gestion du parc informatique.pdf' },
@@ -74,7 +74,7 @@ const projectsData = [
     title: 'Architecture Réseau IMDEO',
     desc: 'Conception d\'une architecture logique pour l\'implantation IMDEO. Routage avancé et segmentation.',
     tech: ['Cisco', 'Architecture', 'Routage'],
-    icon: 'antenna',
+    logo: '/public/imdeo.jpeg',
     pdfs: [
       { label: 'Dossier Technique', href: '/public/Projet/imdeo/imdeo.pdf' },
       { label: 'Contexte Projet', href: '/public/Projet/imdeo/Contexte - IMDEO - 2026.pdf' },
@@ -214,7 +214,11 @@ function renderProjects() {
   grid.innerHTML = projectsData.map(p => `
     <article class="project-card" onclick="openProjectModal('${p.id}')">
       <div class="project-card-header">
-        <div class="project-icon">${getIcon(p.icon)}</div>
+        <div class="project-icon">
+          ${p.logo 
+            ? `<img src="${p.logo}" alt="Logo ${p.title}" style="width: 100%; height: 100%; object-fit: contain;">` 
+            : getIcon(p.icon)}
+        </div>
         <div class="project-view-badge">Voir</div>
       </div>
       <h3 class="project-card-title">${p.title}</h3>

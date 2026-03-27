@@ -2,10 +2,6 @@
  * /api/sync-veille.js
  * Vercel Serverless Function — appelée chaque jour à 7h par le Cron Job.
  * Récupère les flux RSS des sources de cybersécurité et les stocke dans Neon (Postgres).
- *
- * Variables d'environnement requises dans Vercel :
- *   POSTGRES_URL (connexion Neon fournie automatiquement)
- *   CRON_SECRET   (token pour sécuriser l'endpoint du cron)
  */
 
 import { sql } from '@vercel/postgres';
@@ -52,16 +48,16 @@ function parseRSS(xmlText, sourceName, category) {
   while ((match = itemRegex.exec(xmlText)) !== null) {
     const itemXml = match[1];
 
-    const title   = (itemXml.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/) || 
-                     itemXml.match(/<title>(.*?)<\/title>/))?.[1]?.trim() || 'Sans titre';
-    const link    = (itemXml.match(/<link>(.*?)<\/link>/) || 
-                     itemXml.match(/<link href="(.*?)"/))?.[1]?.trim() || '#';
+    const title = (itemXml.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/) ||
+      itemXml.match(/<title>(.*?)<\/title>/))?.[1]?.trim() || 'Sans titre';
+    const link = (itemXml.match(/<link>(.*?)<\/link>/) ||
+      itemXml.match(/<link href="(.*?)"/))?.[1]?.trim() || '#';
     const pubDate = (itemXml.match(/<pubDate>(.*?)<\/pubDate>/))?.[1]?.trim() || new Date().toISOString();
-    const desc    = (itemXml.match(/<description><!\[CDATA\[(.*?)\]\]><\/description>/) || 
-                     itemXml.match(/<description>(.*?)<\/description>/))?.[1]
-                     ?.replace(/<[^>]+>/g, '')
-                     ?.substring(0, 300)
-                     ?.trim() || '';
+    const desc = (itemXml.match(/<description><!\[CDATA\[(.*?)\]\]><\/description>/) ||
+      itemXml.match(/<description>(.*?)<\/description>/))?.[1]
+      ?.replace(/<[^>]+>/g, '')
+      ?.substring(0, 300)
+      ?.trim() || '';
 
     items.push({ title, link, pubDate, desc, source: sourceName, category });
   }
@@ -119,28 +115,30 @@ export default async function handler(req, res) {
       }
     }
 
-    // Insérer seulement le premier article le plus récent trouvé (le plus "intéressant")
+    // Insérer les articles les plus récents (Top 10)
     let inserted = 0;
     if (allArticles.length > 0) {
-      // On trie par date pour être sûr d'avoir le plus récent
-      const latest = allArticles.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate))[0];
-      
-      try {
-        await sql`
-          INSERT INTO veille_articles (title, link, pub_date, description, source, category)
-          VALUES (
-            ${latest.title},
-            ${latest.link},
-            ${new Date(latest.pubDate).toISOString()},
-            ${latest.desc},
-            ${latest.source},
-            ${latest.category}
-          )
-          ON CONFLICT (link) DO NOTHING;
-        `;
-        inserted = 1;
-      } catch (err) {
-        console.error('Error inserting article:', err);
+      // Trier par date décroissante
+      const sourcesLatest = allArticles.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate)).slice(0, 10);
+
+      for (const article of sourcesLatest) {
+        try {
+          const res = await sql`
+            INSERT INTO veille_articles (title, link, pub_date, description, source, category)
+            VALUES (
+              ${article.title},
+              ${article.link},
+              ${new Date(article.pubDate).toISOString()},
+              ${article.desc},
+              ${article.source},
+              ${article.category}
+            )
+            ON CONFLICT (link) DO NOTHING;
+          `;
+          if (res.rowCount > 0) inserted++;
+        } catch (err) {
+          console.error('Error inserting article:', err);
+        }
       }
     }
 

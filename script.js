@@ -1,42 +1,35 @@
-// ============================================
-// CONFIGURATION CONTACT (mailto compatible Windows / Mac / Linux)
-// ============================================
+/* ============================================================
+   PORTFOLIO BTS SIO — SCRIPT PRINCIPAL (CERVEAU)
+   ============================================================ */
+
 const CONTACT_EMAIL = 'kadaamine37@hotmail.com';
 const CONTACT_SUBJECT = 'Contact depuis portfolio BTS SIO';
 
-// ============================================
-// ICÔNES SVG (style Heroicons / professionnel)
-// ============================================
+/* --- ICÔNES SVG --- */
 
 const ICONS = {
   server: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/><line x1="10" y1="6" x2="10" y2="6.01"/><line x1="10" y1="18" x2="10" y2="18.01"/><line x1="14" y1="6" x2="14" y2="6.01"/><line x1="14" y1="18" x2="14" y2="18.01"/><line x1="18" y1="6" x2="18.01" y2="6"/><line x1="18" y1="18" x2="18.01" y2="18"/></svg>',
   globe: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
   shield: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
   terminal: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>',
-  clipboard: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>',
-  database: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>',
-  chart: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
-  lock: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
-  cog: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
-  ticket: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>',
-  antenna: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12 7 2"/><path d="m7 12 5-10"/><path d="m12 12 5-10"/><path d="m17 12 5-10"/><path d="M4 22h16"/></svg>',
-  storage: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>',
-  target: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>',
-  wrench: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
   document: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>',
-  mail: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>',
-  search: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
-  github: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>',
-  linkedin: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>',
+
+  // Logos Officiels Tech
+  debian: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#D70A53"><path d="M12.007 0c-4.137 0-7.387 2.05-8.875 5.562 2.688-2.612 6.55-2.85 8.163-1.025 1.587 1.787.975 4.675-2.113 6.038-2.787 1.237-6.025.1-7.112-2.313a5.59 5.59 0 0 1-.375-1.925C1.132 8.788.632 11.237.632 13.912c0 5.65 3.125 10.088 8.188 10.088 5.612 0 9.063-4.5 9.063-10.375 0-7.125-5.325-13.625-5.875-13.625zm-1.05 6.012c1.725 0 2.25 2.1 1.012 3.262-.975.912-3.113.3-3.113-1.5 0-.825.187-1.762 2.1-1.762z"/></svg>',
+  windows: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#00A4EF"><path d="M0 3.449L9.75 2.1V11.4H0V3.449zm0 8.851h9.75v9.3L0 20.25v-7.95zm10.55-10.5L24 0v11.4h-13.45V1.8zm13.45 10.5V24l-13.45-1.9v-9.3H24z"/></svg>',
+  vmware: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#607078"><path d="M18.396 17.135l3.204-1.85V11.59l-3.204 1.85v3.695zm-3.8 2.193l3.204-1.85V13.784l-3.204 1.85v3.694zM7.004 10.56L3.8 12.41v3.695L7.004 14.256V10.56zm3.8-2.193L7.6 10.217v3.695l3.204-1.85v-3.695zm3.8 6.09l3.204-1.85v-3.696l-3.204 1.85v3.696zm-7.6 4.386L10.204 17l3.205-1.85v-3.694L10.205 13.305l-3.204 1.85zM22.204 7.896L19 9.746v3.695l3.204-1.85V7.896zM1.796 11.41L5 9.56V5.865L1.796 7.715v3.695zm3.8-2.193L8.8 7.367V3.673l-3.204 1.85V9.217z"/></svg>',
+  proxmox: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#E57000"><path d="M4.363 4.417L0 6.64v8.835l4.363 2.181 4.364-2.18v-8.836l-4.364-2.22zm4.364 8.835l-4.364 2.182-4.363-2.182V8.818l4.363-2.181 4.364 2.181v4.434zm3.272-8.835L8.727 6.64v8.835l3.272 2.181L15.273 15.476V6.64l-3.272-2.22zm3.27 8.835l-3.273 2.182L8.727 13.25V8.818l3.272-2.181 3.273 2.181v4.434zm3.274-8.835L15.273 6.64v8.835l3.272 2.181 3.273-2.18v-8.836l-3.273-2.22zm3.273 8.835l-3.273 2.182L15.273 13.25V8.818l3.273-2.181 3.273 2.181v4.434zM24 6.64v8.835l-4.364 2.181L15.273 15.476v-8.836L19.636 4.417 24 6.638zm-4.364 8.835l-4.363-2.182V8.818l4.363-2.181 4.364 2.181V13.25l-4.364 2.22z"/></svg>',
+  docker: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#2496ED"><path d="M13.983 11.078h2.119c.102 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186h-2.119a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm-2.917-2.917h2.119c.102 0 .186.084.186.186V10.46a.186.186 0 0 1-.186.186h-2.119a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm-2.917 2.917h2.119c.102 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186H8.149a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm-2.917 0h2.119c.101 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186H5.232a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm-2.917 0h2.119c.102 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186H2.315a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm0-2.917h2.119c.102 0 .186.084.186.186V10.46a.186.186 0 0 1-.186.186H2.315a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm2.917 0h2.119c.101 0 .186.084.186.186V10.46a.186.186 0 0 1-.186.186H5.232a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm2.917 0h2.119c.102 0 .186.084.186.186V10.46a.186.186 0 0 1-.186.186H8.149a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm-5.834-2.917h2.119c.101 0 .186.084.186.186V7.54a.186.186 0 0 1-.186.186H2.315a.186.186 0 0 1-.186-.186V5.43c0-.102.084-.186.186-.186zm14.374 2.137c-.305-.596-.543-.591-.564-.591h-2.181c-.021 0-.042.001-.063.003L15 8.127c-.312.012-.486.027-.812.274-.15.114-.233.242-.258.406-.025.163-.04.49-.041.884V10.5h1.125a1.125 1.125 0 0 1 1.125 1.125v1.25h1.125a1.125 1.125 0 0 1 1.125 1.125v1.25H16.5a1.125 1.125 0 0 1-1.125 1.125H12V21a1.5 1.5 0 0 1-.375.986 1.5 1.5 0 0 1-.75.485c-.375.125-.75.029-1.125-.125-.375-.154-1.375-.625-1.375-1.121 0-.5 0-.75 1.012-1.25a.874.874 0 0 1 .863-.125c.188.062.375.152.375-.125V17.5H8.75c-.345 0-.625-.28-.625-.625v-1.25H6.875c-.345 0-.625-.28-.625-.625v-1.25H5c-.345 0-.625-.28-.625-.625V12.5H2.341c-.482-.016-.841-.417-.841-.9V9.5h-.186a1.125 1.125 0 0 1-1.125-1.125V6.125A1.125 1.125 0 0 1 1.315 5h1.125A1.125 1.125 0 0 1 3.565 6.125v1.125h.186V5.375a1.125 1.125 0 0 1 1.125-1.125H5.8A1.125 1.125 0 0 1 6.92 5.375v2h2.247V5.375a1.125 1.125 0 0 1 1.125-1.125h.186A1.125 1.125 0 0 1 11.603 5.375v2h.186V5.375a1.125 1.125 0 0 1 1.125-1.125h.186a1.125 1.125 0 0 1 1.125 1.125v2c.225.016.4-.1.6-.2l1.125-.1s1.375-1.125 2.125-1.125 3.5.5 3.5 4.5c0 2.5-1.125 3.75-2.245 4.417z"/></svg>',
+  ansible: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.82 18.232l-1.636-3.877H7.817l-1.636 3.877H3.97l6.653-15.07h2.753l6.653 15.07h-2.206zm-7.653-5.23h3.666L12 8.243l-1.833 4.759z"/></svg>',
+  kubernetes: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#326CE5"><path d="M12 4.148L19.23 8.324v8.352L12 20.852l-7.23-4.176V8.324L12 4.148zm0-1.332L3.5 7.844v10.312L12 22.5l8.5-4.344V7.844L12 2.816zM11.25 7.5h1.5v9h-1.5v-9z"/></svg>',
+  gitlab: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#FC6D26"><path d="M23.955 13.587l-1.342-4.135-2.664-8.189c-.135-.417-.724-.417-.859 0L16.425 9.45H7.574L4.91 1.263c-.135-.417-.724-.417-.859 0L1.387 9.452.045 13.587c-.1.308.011.647.276.84l11.679 8.48 11.679-8.48c.265-.193.376-.532.276-.84z"/></svg>',
 };
 
 function getIcon(name) {
   return ICONS[name] || '';
 }
 
-// ============================================
-// DONNÉES
-// ============================================
+/* --- DONNÉES DES COMPOSANTS --- */
 
 const projectsData = [
   {
@@ -95,455 +88,169 @@ const projectsData = [
   }
 ];
 
-const skillsData = [
-  { name: 'Administration Serveurs', level: 90, color: 'from-emerald-500 to-teal-500', icon: 'server' },
-  { name: 'Réseaux & Infrastructure', level: 85, color: 'from-purple-500 to-pink-500', icon: 'globe' },
-  { name: 'Cybersécurité', level: 80, color: 'from-red-500 to-orange-500', icon: 'shield' },
-  { name: 'Scripting (PowerShell, Bash)', level: 75, color: 'from-green-500 to-emerald-500', icon: 'terminal' },
-  { name: 'Active Directory & GPO', level: 70, color: 'from-indigo-500 to-blue-600', icon: 'clipboard' },
-  { name: 'Sauvegarde & PRA', level: 60, color: 'from-purple-500 to-pink-600', icon: 'database' },
-  { name: 'Supervision (Zabbix, Nagios)', level: 55, color: 'from-green-500 to-emerald-600', icon: 'chart' },
-  { name: 'VPN & Accès Distant', level: 65, color: 'from-cyan-500 to-teal-600', icon: 'lock' },
-  { name: 'Ansible & Automatisation', level: 50, color: 'from-red-500 to-orange-600', icon: 'cog' },
-  { name: 'Ticketing (GLPI, ServiceNow)', level: 55, color: 'from-amber-500 to-yellow-600', icon: 'ticket' },
-  { name: 'Protocoles Réseau (OSPF, BGP)', level: 60, color: 'from-violet-500 to-purple-600', icon: 'antenna' },
-  { name: 'Stockage NAS', level: 55, color: 'from-slate-500 to-gray-600', icon: 'storage' },
+const skillsCategories = [
+  {
+    title: 'Administration système',
+    skills: [
+      { name: 'Debian', icon: 'debian' },
+      { name: 'Windows server', icon: 'windows' },
+      { name: 'Active Directory', icon: 'clipboard' },
+      { name: 'Linux Admin', icon: 'terminal' }
+    ]
+  },
+  {
+    title: 'Virtualisation & Conteneurs',
+    skills: [
+      { name: 'VMware ESXi', icon: 'vmware' },
+      { name: 'Proxmox', icon: 'proxmox' },
+      { name: 'Docker', icon: 'docker' },
+      { name: 'Docker Compose', icon: 'docker' }
+    ]
+  },
+  {
+    title: 'Automatisation & DevOps',
+    skills: [
+      { name: 'Ansible', icon: 'ansible' },
+      { name: 'Kubernetes', icon: 'kubernetes' },
+      { name: 'GitLab CI/CD', icon: 'gitlab' },
+      { name: 'Scripting Bash', icon: 'terminal' }
+    ]
+  }
 ];
 
 const formationsData = [
   {
     title: 'BTS SIO SISR',
-    subtitle: 'Lycée Paul-Louis Courier, Tours — 2025–2026',
-    gradient: 'from-blue-600 to-cyan-600',
-    shadow: 'shadow-blue-900/40',
-    cta: { type: 'link', label: 'En savoir plus sur le BTS SIO', href: 'https://nizar-it.github.io/formation/', color: 'blue' },
+    subtitle: 'Lycée Paul-Louis Courier, Tours',
+    date: '2025–2027',
+    desc: 'Services Informatiques aux Organisations, option Solutions d’Infrastructure, Systèmes et Réseaux. Étude approfondie de l\'administration système, réseau et cybersécurité.'
   },
   {
-    title: 'Bac Pro Systèmes Numériques',
-    subtitle: 'Lycée Henri Becquerel, Tours — 2025 — Mention Bien',
-    gradient: 'from-amber-600 to-orange-600',
-    shadow: 'shadow-amber-900/40',
+    title: 'Bac Pro SN RISC',
+    subtitle: 'Lycée Henri Becquerel, Tours',
+    date: '2022–2025',
+    desc: 'Systèmes Numériques, option Réseaux Informatiques et Systèmes Communicants. Apprentissage des bases de l\'informatique, du réseau et de la maintenance matérielle.'
   },
   {
-    title: 'Club EBIOS - MOOC',
-    subtitle: 'Lycée Paul-Louis Courier, Tours — 2025',
-    gradient: 'from-purple-600 to-pink-600',
-    shadow: 'shadow-purple-900/40',
-    certificate: { label: 'Voir le certificat EBIOS', href: 'public/certif/EBIOS.pdf', color: 'purple' },
-  },
-  {
-    title: 'MOOC ANSSI — Cybersécurité',
-    subtitle: 'Lycée Paul-Louis Courier, Tours — 2025',
-    gradient: 'from-green-600 to-emerald-600',
-    shadow: 'shadow-emerald-900/40',
-    certificate: { label: 'Voir l\'attestation ANSSI', href: 'public/certif/MOOC.jpg', color: 'emerald' },
-  },
-  {
-    title: 'OpenClassrooms',
-    subtitle: 'Mes certifications sur OpenClassrooms',
-    gradient: 'from-sky-500 to-indigo-600',
-    shadow: 'shadow-sky-900/40',
-    cta: { type: 'action', label: 'Voir mes cours OpenClassrooms', color: 'indigo' },
-  },
-  {
-    title: 'GIP Pix - PIX',
-    subtitle: 'Lycée Henri Becquerel, Tours — 2025',
-    gradient: 'from-fuchsia-500 to-rose-600',
-    shadow: 'shadow-rose-900/40',
-    certificate: { label: 'Voir le certificat PIX', href: 'public/certif/PIX.jpg', color: 'rose' },
-  },
-  {
-    title: 'SST',
-    subtitle: 'Lycée Henri Becquerel, Tours — 2024–2025',
-    gradient: 'from-red-500 to-orange-600',
-    shadow: 'shadow-red-900/40',
-  },
+    title: 'Certifications OpenClassrooms',
+    subtitle: 'Auto-formation continue',
+    date: '2024–Présent',
+    desc: 'Plusieurs certifications obtenues sur TCP/IP, Linux, Windows Server, Git, Docker et Active Directory.'
+  }
 ];
 
 const openclassroomsCerts = [
-  {
-    title: 'TCP/IP',
-    description: 'Maîtrise des protocoles TCP/IP et des bases des réseaux informatiques.',
-    image: 'public/openclassroom/TCP:IP.png',
-    tags: ['Réseaux', 'TCP/IP', 'Protocoles'],
-  },
-  {
-    title: 'Windows Server',
-    description: 'Administration et gestion de serveurs Windows Server en environnement professionnel.',
-    image: 'public/openclassroom/Windows Server.png',
-    tags: ['Windows Server', 'Administration', 'Serveurs'],
-  },
-  {
-    title: 'Gérer Git & GitHub',
-    description: 'Contrôle de version et collaboration avec Git et GitHub sur des projets informatiques.',
-    image: 'public/openclassroom/git.png',
-    tags: ['Git', 'GitHub', 'Version Control'],
-  },
-  {
-    title: 'Déployez Windows 10',
-    description: 'Déploiement et configuration de Windows 10 en contexte entreprise.',
-    image: 'public/openclassroom/déployez Win10.png',
-    tags: ['Windows 10', 'Déploiement', 'Entreprise'],
-  },
-  {
-    title: 'Montez un PC',
-    description: 'Assemblage et configuration complète d\'un ordinateur personnel.',
-    image: 'public/openclassroom/pc.png',
-    tags: ['Hardware', 'Assemblage', 'PC'],
-  },
-  {
-    title: 'Utiliser ChatGPT',
-    description: 'Utilisation de l\'IA conversationnelle pour la productivité et l\'assistance technique.',
-    image: 'public/openclassroom/utiliser ChatGPT.png',
-    tags: ['IA', 'ChatGPT', 'Productivité'],
-  },
-  {
-    title: 'Centralisez et sécurisez avec Active Directory',
-    description: 'Administration et configuration d\'Active Directory pour centraliser et sécuriser la gestion des utilisateurs et ressources.',
-    image: 'public/openclassroom/Centralisez et sécuriser avec Active Directory.jpg',
-    tags: ['Active Directory', 'Windows Server', 'Sécurité'],
-  },
-  {
-    title: 'Initiez-vous à Linux',
-    description: 'Découverte et apprentissage de Linux pour l\'administration système et les serveurs.',
-    image: 'public/openclassroom/linux.jpg',
-    tags: ['Linux', 'Administration', 'Systèmes'],
-  },
-  {
-    title: 'Optimisez avec des Conteneurs Docker',
-    description: 'Maîtrise de Docker pour conteneuriser et déployer des applications de manière efficace.',
-    image: 'public/openclassroom/Optimisez avec des Conteneur Docker.jpg',
-    tags: ['Docker', 'Conteneurs', 'DevOps'],
-  },
-  {
-    title: 'Simulez des schémas avec Cisco Packet Tracer',
-    description: 'Conception et simulation de réseaux avec Cisco Packet Tracer pour la configuration et le dépannage.',
-    image: 'public/openclassroom/cisco.jpg',
-    tags: ['Réseaux', 'Cisco', 'Simulation'],
-  },
-  {
-    title: 'Virtualisez vos environnements de travail',
-    description: 'Mise en place d\'environnements virtuels pour tester et déployer des infrastructures.',
-    image: 'public/openclassroom/virtualiser vos environnement travail.jpg',
-    tags: ['Virtualisation', 'Infrastructure', 'VMware'],
-  },
+  { title: 'TCP/IP', description: 'Maîtrise des protocoles TCP/IP.', image: 'public/openclassroom/TCP:IP.png', tags: ['Réseaux', 'TCP/IP'] },
+  { title: 'Windows Server', description: 'Administration Windows Server.', image: 'public/openclassroom/Windows Server.png', tags: ['Windows Server', 'Administration'] },
+  { title: 'Gérer Git & GitHub', description: 'Contrôle de version.', image: 'public/openclassroom/git.png', tags: ['Git', 'GitHub'] },
+  { title: 'Déployez Windows 10', description: 'Déploiement Windows 10.', image: 'public/openclassroom/déployez Win10.png', tags: ['Windows 10'] },
+  { title: 'Montez un PC', description: 'Assemblage matériel.', image: 'public/openclassroom/pc.png', tags: ['Hardware'] },
+  { title: 'Utiliser ChatGPT', description: 'IA conversationnelle.', image: 'public/openclassroom/utiliser ChatGPT.png', tags: ['IA'] },
+  { title: 'Active Directory', description: 'Gestion centralisée.', image: 'public/openclassroom/Centralisez et sécuriser avec Active Directory.jpg', tags: ['AD', 'Sécurité'] },
+  { title: 'Initiez-vous à Linux', description: 'Administration Linux.', image: 'public/openclassroom/linux.jpg', tags: ['Linux'] },
+  { title: 'Conteneurs Docker', description: 'Conteneurisation.', image: 'public/openclassroom/Optimisez avec des Conteneur Docker.jpg', tags: ['Docker'] },
+  { title: 'Packet Tracer', description: 'Simulation réseau Cisco.', image: 'public/openclassroom/cisco.jpg', tags: ['Réseaux', 'Cisco'] },
+  { title: 'Virtualisation', description: 'Environnements virtuels.', image: 'public/openclassroom/virtualiser vos environnement travail.jpg', tags: ['Virtualisation'] },
 ];
 
-// ============================================
-// DONNÉES NOUVELLES SECTIONS
-// ============================================
-
 const btsSioData = {
-  description: `Spécialisé en Solutions d'Infrastructure, Systèmes et Réseaux (SISR), je maîtrise
-  l'administration de serveurs, la gestion des réseaux, la virtualisation et la cybersécurité.
-  Cette formation de 2 ans prépare aux métiers d'administrateur réseau, technicien système
-  et responsable infrastructure.`,
+  description: "Spécialisé en SISR, je maîtrise l'administration système et réseau, la virtualisation et la cybersécurité.",
   objectifs: [
-    { icon: 'server', label: 'Administrer des serveurs', desc: 'Windows Server, Debian, gestion des services réseau (DNS, DHCP, AD)' },
-    { icon: 'globe', label: 'Gérer des infrastructures réseau', desc: 'VLANs, routage, firewall, VPN, segmentation réseau' },
-    { icon: 'shield', label: 'Sécuriser les systèmes', desc: 'Audit, hardening, règles de pare-feu, supervision (Zabbix, Nagios)' },
-    { icon: 'database', label: 'Virtualiser des environnements', desc: 'Proxmox VE, VMware, Docker, LXC, conteneurisation' },
-    { icon: 'terminal', label: 'Automatiser les tâches', desc: 'PowerShell, Bash, scripts de déploiement et de sauvegarde' },
-    { icon: 'clipboard', label: 'Documenter et piloter', desc: 'Procédures techniques, rapports d\'audit, gestion de tickets' },
-  ],
-  competencesCles: ['Windows Server', 'Linux (Debian)', 'Proxmox VE', 'OPNsense', 'Active Directory', 'Docker', 'VPN/VLANs', 'Cisco Packet Tracer'],
-};
-
-const veilleData = {
-  sujet: 'La cybersécurité des infrastructures réseau',
-  accroche: 'Face à l\'explosion des attaques réseau (ransomwares, intrusions, DDoS), je suis l\'évolution des technologies de protection des infrastructures IT pour rester à la pointe des bonnes pratiques SISR.',
-  outils: [
-    { name: 'ANSSI / CERT-FR', desc: 'Bulletins d\'alerte officiels sur les vulnérabilités critiques', url: 'https://www.cert.ssi.gouv.fr' },
-    { name: 'CVE / NVD', desc: 'Base de données des failles de sécurité référencées (NIST)', url: 'https://nvd.nist.gov' },
-    { name: 'Bleeping Computer', desc: 'Actualités malwares, ransomwares et incidents de sécurité', url: 'https://www.bleepingcomputer.com' },
-    { name: 'Exploit Database', desc: 'Référence des exploits publics pour la veille offensive', url: 'https://www.exploit-db.com' },
-  ],
-  articles: [], // Sera rempli par l'API Neon/Vercel
-  impact: 'Cette veille me permet de comprendre les menaces actuelles, d\'adapter mes configurations réseau (règles firewall, segmentation VLAN) et de proposer des recommandations de sécurité basées sur des données réelles lors de mes projets PPE et stages.',
-};
-
-const patrimoineData = {
-  intro: 'La gestion du patrimoine informatique consiste à inventorier, maintenir et sécuriser l\'ensemble des ressources matérielles et logicielles d\'un système d\'information.',
-  activites: [
-    {
-      icon: 'clipboard',
-      titre: 'Inventaire matériel & logiciel',
-      desc: 'Recensement des équipements (PCs, serveurs, switches, routeurs) et des logiciels installés. Utilisation de GLPI et OCSInventory pour la gestion automatisée du parc.',
-      outils: ['GLPI', 'OCSInventory', 'Fusion Inventory'],
-    },
-    {
-      icon: 'wrench',
-      titre: 'Maintenance & support',
-      desc: 'Diagnostic et résolution d\'incidents matériels et logiciels. Gestion des tickets via GLPI, remplacement de composants défectueux, mises à jour système.',
-      outils: ['GLPI (tickets)', 'Windows Update', 'WSUS'],
-    },
-    {
-      icon: 'shield',
-      titre: 'Sécurisation du parc',
-      desc: 'Mise en place de stratégies de sécurité : GPO, antivirus centralisé, chiffrement des disques (BitLocker), contrôle des accès et politique de mots de passe.',
-      outils: ['GPO', 'BitLocker', 'Active Directory', 'Antivirus centralisé'],
-    },
-    {
-      icon: 'chart',
-      titre: 'Supervision & monitoring',
-      desc: 'Surveillance des équipements réseau et serveurs avec des outils de supervision. Alertes en cas de panne, analyse des performances et traçabilité des incidents.',
-      outils: ['Zabbix', 'Nagios', 'PRTG', 'Prometheus'],
-    },
-    {
-      icon: 'database',
-      titre: 'Sauvegardes & PRA',
-      desc: 'Mise en œuvre de politiques de sauvegarde (règle 3-2-1), planification des sauvegardes automatiques, test de restauration et plan de reprise d\'activité.',
-      outils: ['Veeam', 'Synology DSM', 'rsync', 'Proxmox Backup'],
-    },
-    {
-      icon: 'document',
-      titre: 'Documentation technique',
-      desc: 'Rédaction de procédures d\'installation, de fiches techniques, de schémas réseau et de rapports d\'audit pour assurer la traçabilité et la transmission des savoirs.',
-      outils: ['Draw.io', 'Markdown', 'Word/LibreOffice', 'Confluence'],
-    },
+    { icon: 'server', label: 'Administrer des serveurs', desc: 'Windows Server, Debian, AD, DNS, DHCP' },
+    { icon: 'globe', label: 'Gérer les réseaux', desc: 'VLANs, routage, segmentation' },
+    { icon: 'shield', label: 'Sécuriser les systèmes', desc: 'Audit, hardening, firewall' },
+    { icon: 'terminal', label: 'Automatisation', desc: 'PowerShell, Bash' },
   ],
 };
 
-// ============================================
-// ÉTAT GLOBAL
-// ============================================
+/* --- ÉTAT GLOBAL & ROUTING --- */
 
 let activeSection = 'accueil';
 
-// ============================================
-// ROUTING & NAVIGATION
-// ============================================
-
 function getDefaultSection() {
-  const rawHash = window.location.hash.slice(1);
-  if (!rawHash) return 'accueil';
+  const hash = window.location.hash.slice(1);
   const sections = ['accueil', 'bts-sio', 'projets', 'veille', 'patrimoine', 'formations', 'compétences', 'contact', 'openclassrooms'];
-  let decodedHash = rawHash;
-  try {
-    decodedHash = decodeURIComponent(rawHash);
-  } catch (e) {
-    decodedHash = rawHash;
-  }
-  return sections.includes(decodedHash) ? decodedHash : 'accueil';
-}
-
-function goToSection(sectionId) {
-  if (!sectionId) return;
-  activeSection = sectionId;
-  updateActiveSection();
-  try {
-    window.location.hash = '#' + encodeURIComponent(sectionId).replace(/%E2%80%8B/g, '');
-  } catch (e) {
-    window.location.hash = '#' + sectionId;
-  }
+  return sections.includes(hash) ? hash : 'accueil';
 }
 
 function updateActiveSection() {
-  // Mettre à jour les sections visibles
-  document.querySelectorAll('.section').forEach(section => {
-    section.classList.remove('active');
-  });
-  const targetSection = document.getElementById(activeSection);
-  if (targetSection) {
-    targetSection.classList.add('active');
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(activeSection);
+  if (target) {
+    target.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Mettre à jour les boutons de navigation
   document.querySelectorAll('.nav-btn').forEach(btn => {
-    btn.classList.remove('active');
-    if (btn.dataset.section === activeSection) {
-      btn.classList.add('active');
-    }
+    btn.classList.toggle('active', btn.dataset.section === activeSection);
   });
-
-  // Mettre à jour le titre et la meta description
-  updateSEO();
 }
 
-function updateSEO() {
-  const seoData = {
-    accueil: {
-      title: 'Amine IT - Portfolio BTS SIO SISR | Administrateur Réseaux & Systèmes',
-      description: 'Portfolio d\'Amine, étudiant en BTS SIO option SISR. Découvrez mes projets, compétences et formations en administration de réseaux, systèmes et cybersécurité.',
-    },
-    'bts-sio': {
-      title: 'BTS SIO SISR - Portfolio Amine IT',
-      description: 'Présentation du BTS SIO option SISR : objectifs, compétences clés et spécialisation en Solutions d\'Infrastructure, Systèmes et Réseaux.',
-    },
-    projets: {
-      title: 'Projets SISR - Portfolio Amine IT',
-      description: 'Explorez mes projets techniques en infrastructure, virtualisation, réseau et sécurité réalisés dans le cadre de ma formation BTS SIO SISR.',
-    },
-    veille: {
-      title: 'Veille Technologique - Portfolio Amine IT',
-      description: 'Ma veille technologique en cybersécurité et réseaux : outils, sources, articles de synthèse et impact sur ma pratique SISR.',
-    },
-    patrimoine: {
-      title: 'Gestion du Patrimoine Informatique - Portfolio Amine IT',
-      description: 'Inventaire, maintenance, sécurisation et supervision du parc informatique. Utilisation de GLPI, OCSInventory, Zabbix et autres outils de gestion de parc.',
-    },
-    formations: {
-      title: 'Mon Parcours - Portfolio Amine IT',
-      description: 'Mon parcours de formation, du Bac Pro Systèmes Numériques au BTS SIO SISR, en passant par des certifications OpenClassrooms et des MOOCs en cybersécurité.',
-    },
-    compétences: {
-      title: 'Tableau de Synthèse des Compétences - Portfolio Amine IT',
-      description: 'Tableau de synthèse des compétences BTS SIO SISR : compétences maîtrisées, niveau et preuves associées selon le référentiel officiel.',
-    },
-    contact: {
-      title: 'Me Contacter - Portfolio Amine IT',
-      description: 'Contactez-moi pour toute proposition de stage, de projet ou pour discuter d\'opportunités en lien avec l\'administration de systèmes et réseaux.',
-    },
-    openclassrooms: {
-      title: 'Certifications OpenClassrooms - Portfolio Amine IT',
-      description: 'Mes certifications et parcours de formation sur OpenClassrooms, validant mes compétences en TCP/IP, Windows Server, Git et plus encore.',
-    },
-  };
-
-  const current = seoData[activeSection] || seoData.accueil;
-  document.title = current.title;
-  const metaDesc = document.querySelector('meta[name="description"]');
-  if (metaDesc) {
-    metaDesc.setAttribute('content', current.description);
-  }
+function goToSection(sectionId) {
+  activeSection = sectionId;
+  updateActiveSection();
+  window.location.hash = sectionId;
 }
 
-// ============================================
-// INITIALISATION DES DONNÉES
-// ============================================
-
-// Mapping des couleurs Tailwind
-const colorMap = {
-  'blue-600': '#2563eb', 'blue-800': '#1e40af', 'blue-500': '#3b82f6',
-  'purple-600': '#9333ea', 'purple-800': '#6b21a8', 'purple-500': '#a855f7',
-  'emerald-600': '#059669', 'green-700': '#15803d', 'emerald-500': '#10b981',
-  'amber-500': '#f59e0b', 'amber-600': '#d97706', 'orange-600': '#ea580c',
-  'red-500': '#ef4444', 'red-600': '#dc2626', 'indigo-600': '#4f46e5',
-  'orange-500': '#f97316', 'indigo-500': '#6366f1', 'indigo-700': '#4338ca',
-  'sky-500': '#0ea5e9', 'sky-600': '#0284c7', 'cyan-500': '#06b6d4',
-  'pink-600': '#db2777', 'fuchsia-500': '#d946ef', 'rose-600': '#e11d48',
-  'pink-500': '#ec4899', 'violet-500': '#8b5cf6', 'slate-500': '#64748b',
-  'gray-600': '#4b5563', 'teal-600': '#0d9488', 'green-500': '#22c55e',
-};
-
-function getColorValue(colorName) {
-  return colorMap[colorName] || '#10b981';
-}
+/* --- RENDU DES COMPOSANTS --- */
 
 function renderProjects() {
   const grid = document.getElementById('projectsGrid');
   if (!grid) return;
-
-  grid.innerHTML = projectsData.map(project => {
-    const iconSvg = getIcon(project.icon || 'terminal');
-    return `
-      <article class="project-card featured" onclick="openProjectModal('${project.id}')" title="Cliquer pour voir les détails">
-        <div class="project-card-inner">
-          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem;">
-            <div style="color: var(--accent); width: 28px; height: 28px;">${iconSvg}</div>
-            ${project.pdfs ? '<div class="project-validated-badge">✅ Dossier complet</div>' : ''}
-          </div>
-          <div>
-            <h3 class="project-card-title">${project.title}</h3>
-            <p class="project-card-desc">${project.desc}</p>
-          </div>
-          <div class="project-card-tech mt-auto">
-            <div class="project-card-tech-list">
-              ${project.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}
-            </div>
-          </div>
+  grid.innerHTML = projectsData.map(p => `
+    <article class="project-card featured" onclick="openProjectModal('${p.id}')">
+      <div class="project-card-inner">
+        <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
+          <div style="color:var(--accent); width:28px;">${getIcon(p.icon)}</div>
+          ${p.pdfs ? '<div class="project-view-badge">Voir</div>' : ''}
         </div>
-      </article>
-    `;
-  }).join('');
+        <h3 class="project-card-title">${p.title}</h3>
+        <p class="project-card-desc">${p.desc}</p>
+        <div class="project-card-tech mt-auto">
+          ${p.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}
+        </div>
+      </div>
+    </article>
+  `).join('');
 }
-
-
 
 function renderSkills() {
   const grid = document.getElementById('skillsGrid');
   if (!grid) return;
-
-  grid.innerHTML = skillsData.map(skill => {
-    const [start] = skill.color.replace('from-', '').replace('to-', '').split(' to-');
-    const accentColor = getColorValue(start);
-    return `
-      <div class="skill-card" style="--card-accent: ${accentColor};">
-        <div class="skill-card-inner">
-          <div class="skill-header">
-            <div class="skill-icon skill-icon-svg">${getIcon(skill.icon)}</div>
-            <div class="skill-info">
-              <h3>${skill.name}</h3>
-              <p>${skill.level}%</p>
-            </div>
+  grid.innerHTML = skillsCategories.map(cat => `
+    <div class="skills-category">
+      <h3 class="skills-category-title">${cat.title}</h3>
+      <div class="skills-logo-grid">
+        ${cat.skills.map(s => `
+          <div class="skill-logo-card">
+            <div class="skill-logo-icon">${getIcon(s.icon)}</div>
+            <span class="skill-logo-name">${s.name}</span>
           </div>
-          <div class="skill-progress">
-            <div class="skill-progress-header">
-              <span>Maîtrise</span>
-              <span>${skill.level}%</span>
-            </div>
-            <div class="skill-progress-bar">
-              <div class="skill-progress-fill" style="width: ${skill.level}%"></div>
-            </div>
-          </div>
-        </div>
+        `).join('')}
       </div>
-    `;
-  }).join('');
+    </div>
+  `).join('');
 }
 
-const competencesTableData = [
-  { competence: 'Installer et configurer un poste de travail', niveau: 'Avancé', preuve: 'Stage – déploiement Windows 10/11' },
-  { competence: 'Administrer un réseau local', niveau: 'Intermédiaire', preuve: 'Projet AP1 – maquette Cisco Packet Tracer' },
-  { competence: 'Maintenir et dépanner une infrastructure', niveau: 'Intermédiaire', preuve: 'Projet SP1 – gestion infrastructure réseau' },
-  { competence: 'Gérer la virtualisation (VMs & conteneurs)', niveau: 'Avancé', preuve: 'Lab Proxmox VE – VMs, LXC, clustering' },
-  { competence: 'Sécuriser une infrastructure réseau', niveau: 'Intermédiaire', preuve: 'OPNsense – VLANs, DMZ, règles firewall' },
-  { competence: 'Administrer Active Directory & GPO', niveau: 'Intermédiaire', preuve: 'Windows Server 2019 – AD DS, GPO, DNS, DHCP' },
-  { competence: 'Mettre en place une politique de sauvegarde', niveau: 'Intermédiaire', preuve: 'Projet Sauvegarde – Veeam, Synology, rsync' },
-  { competence: 'Superviser un parc informatique', niveau: 'Débutant', preuve: 'Formation Nagios/Zabbix – OpenClassrooms' },
-  { competence: 'Gérer les tickets et incidents (GLPI)', niveau: 'Intermédiaire', preuve: 'Projet AP1 – déploiement outil de tickets' },
-  { competence: 'Réaliser une veille technologique', niveau: 'Avancé', preuve: 'Veille cybersécurité – ANSSI, CVE, Bleeping Computer' },
-  { competence: 'Documenter et rédiger des procédures', niveau: 'Avancé', preuve: 'Rapports de projets PPE, fiches techniques' },
-  { competence: 'Scripting & automatisation', niveau: 'Débutant', preuve: 'Scripts PowerShell/Bash – sauvegardes, déploiements' },
-];
-
-const niveauColors = {
-  'Avancé': '#10b981',
-  'Intermédiaire': '#f59e0b',
-  'Débutant': '#ef4444',
-};
-
-function renderCompetencesTable() {
-  const container = document.getElementById('competencesTable');
-  if (!container) return;
-
-  container.innerHTML = `
-    <h3 class="comp-table-title">Tableau de synthèse — Référentiel BTS SIO SISR</h3>
-    <div class="comp-table-wrapper">
-      <table class="comp-table">
-        <thead>
-          <tr>
-            <th>Compétence (référentiel BTS SIO)</th>
-            <th>Niveau</th>
-            <th>Preuve / Contexte</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${competencesTableData.map(row => `
-            <tr>
-              <td>${row.competence}</td>
-              <td><span class="comp-niveau" style="--niveau-color: ${niveauColors[row.niveau] || '#6366f1'}">${row.niveau}</span></td>
-              <td class="comp-preuve">${row.preuve}</td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    </div>
-    <div class="comp-legend">
-      <span class="comp-niveau" style="--niveau-color: #10b981">Avancé</span>
-      <span class="comp-niveau" style="--niveau-color: #f59e0b">Intermédiaire</span>
-      <span class="comp-niveau" style="--niveau-color: #ef4444">Débutant</span>
+function renderFormations() {
+  const grid = document.getElementById('formationsGrid');
+  if (!grid) return;
+  grid.innerHTML = `
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      ${formationsData.map(f => `
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3 class="timeline-title">${f.title}</h3>
+              <div class="timeline-subtitle">${f.subtitle}</div>
+            </div>
+            <div class="timeline-date">${f.date}</div>
+            <p class="timeline-desc">${f.desc}</p>
+          </div>
+        </div>
+      `).join('')}
     </div>
   `;
 }
@@ -551,521 +258,123 @@ function renderCompetencesTable() {
 function renderBtsSio() {
   const container = document.getElementById('btsSioContent');
   if (!container) return;
-
   container.innerHTML = `
-    <div class="bts-intro-card">
-      <p class="bts-intro-text">${btsSioData.description}</p>
-      <div class="bts-tags">
-        ${btsSioData.competencesCles.map(t => `<span class="bts-tag">${t}</span>`).join('')}
-      </div>
-    </div>
-    <h3 class="bts-objectifs-title">Objectifs de la formation SISR</h3>
+    <div class="bts-intro-card"><p>${btsSioData.description}</p></div>
     <div class="bts-objectifs-grid">
-      ${btsSioData.objectifs.map(obj => `
+      ${btsSioData.objectifs.map(o => `
         <div class="bts-objectif-card">
-          <div class="bts-objectif-icon">${getIcon(obj.icon)}</div>
-          <div>
-            <h4>${obj.label}</h4>
-            <p>${obj.desc}</p>
-          </div>
+          <div class="bts-objectif-icon">${getIcon(o.icon)}</div>
+          <h4>${o.label}</h4><p>${o.desc}</p>
         </div>
       `).join('')}
     </div>
   `;
 }
 
-// Functions de modale (Supprimées car refondues en openProjectModal)
-
 async function renderVeille() {
-  const container = document.getElementById('veilleContent');
+  const container = document.getElementById('veilleFlux');
   if (!container) return;
-
-  // Squelette de chargement
-  container.innerHTML = `
-    <div class="veille-intro-card">
-      <div class="veille-sujet-label">Sujet de veille</div>
-      <h3 class="veille-sujet-title">${veilleData.sujet}</h3>
-      <p class="veille-sujet-desc">${veilleData.accroche}</p>
-    </div>
-    <div class="veille-two-col">
-      <div>
-        <h3 class="veille-section-title">Outils de veille utilisés</h3>
-        <div class="veille-outils-list">
-          ${veilleData.outils.map(o => `
-            <a href="${o.url}" target="_blank" rel="noopener noreferrer" class="veille-outil-card">
-              <div class="veille-outil-icon">${getIcon('search')}</div>
-              <div>
-                <strong>${o.name}</strong>
-                <p>${o.desc}</p>
-              </div>
-            </a>
-          `).join('')}
-        </div>
-      </div>
-      <div>
-        <h3 class="veille-section-title">
-          Flux en direct
-          <span class="veille-live-badge">
-            <span class="veille-live-dot"></span>Live
-          </span>
-        </h3>
-        <div id="veilleFlux" class="veille-articles-list">
-          <div class="veille-loading">
-            <div class="veille-loading-spinner"></div>
-            Récupération des derniers articles…
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="veille-impact-card">
-      <div class="veille-impact-icon">${getIcon('target')}</div>
-      <div>
-        <h4>Impact sur ma pratique professionnelle</h4>
-        <p>${veilleData.impact}</p>
-      </div>
-    </div>
-  `;
-
-  // Tenter de charger les articles depuis l'API Vercel
-  const fluxContainer = document.getElementById('veilleFlux');
-  if (!fluxContainer) return;
+  
+  container.innerHTML = '<div class="veille-loading"><div class="veille-loading-spinner"></div>Chargement des derniers flux...</div>';
 
   try {
-    const response = await fetch('/api/veille?limit=10');
-    console.log('Veille API Status:', response.status);
-
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    const data = await response.json();
-    console.log('Veille Articles received:', data.articles ? data.articles.length : 0);
+    // Ajouter un timestamp pour s'assurer de ne pas avoir de cache navigateur
+    const res = await fetch(`/api/veille?limit=5&t=${Date.now()}`);
+    const data = await res.json();
     const articles = data.articles || [];
-
+    
     if (articles.length === 0) {
-      fluxContainer.innerHTML = `
-        <div class="veille-empty">
-          <p>Aucun article trouvé dans la base Neon.</p>
-          <p style="font-size: 0.8rem; margin-top: 0.5rem;">Lancez une synchronisation via curl pour remplir la base.</p>
-        </div>
-      `;
+      container.innerHTML = '<p class="veille-empty">Aucun article récent. La synchronisation automatique est en cours.</p>';
       return;
     }
 
-    // Affichage des articles dynamiques
-    fluxContainer.innerHTML = articles.map(a => {
-      const date = new Date(a.pub_date);
-      const formattedDate = date.toLocaleDateString('fr-FR', {
-        day: 'numeric', month: 'short', year: 'numeric'
-      });
-
-      return `
-        <a href="${a.link}" target="_blank" rel="noopener noreferrer" class="veille-article-card veille-article-link" title="Lire l'article complet sur ${a.source}">
-          <div class="veille-article-meta">
-            <span class="veille-article-source">${a.source}</span>
-            <span>${formattedDate}</span>
-          </div>
-          <h4>${a.title}</h4>
-          ${a.description ? `<p>${a.description}</p>` : ''}
-          <div class="veille-article-tags">
-            <span class="veille-tag">${a.category || 'Veille Cyber'}</span>
-            <span class="veille-tag" style="background: rgba(16, 185, 129, 0.05);">Détails →</span>
-          </div>
-        </a>
-      `;
-    }).join('');
-
-  } catch (_err) {
-    // Fallback si l'API n'est pas encore disponible (local ou premier déploiement)
-    renderVeilleStatic(fluxContainer);
+    container.innerHTML = articles.map(a => `
+      <a href="${a.link}" target="_blank" class="veille-article-card">
+        <div class="veille-article-meta">${a.source} — ${new Date(a.pub_date).toLocaleDateString()}</div>
+        <h4>${a.title}</h4>
+        <p>${a.description || ''}</p>
+        <div class="veille-tag">${a.category || 'Info'}</div>
+      </a>
+    `).join('');
+  } catch (err) {
+    console.error('Erreur fetch veille:', err);
+    container.innerHTML = '<p class="veille-empty">Erreur de chargement du flux de veille.</p>';
   }
-}
-
-function renderVeilleStatic(container) {
-  container.innerHTML = veilleData.articles.map(a => `
-    <div class="veille-article-card">
-      <div class="veille-article-meta">${a.date}</div>
-      <h4>${a.titre}</h4>
-      <p>${a.resume}</p>
-      <div class="veille-article-tags">
-        ${a.tags.map(t => `<span class="veille-tag">${t}</span>`).join('')}
-      </div>
-    </div>
-  `).join('');
-}
-
-
-function renderPatrimoine() {
-  const container = document.getElementById('patrimoineContent');
-  if (!container) return;
-
-  container.innerHTML = `
-    <div class="patrimoine-intro-card">
-      <p>${patrimoineData.intro}</p>
-    </div>
-    <div class="patrimoine-grid">
-      ${patrimoineData.activites.map(a => `
-        <div class="patrimoine-card">
-          <div class="patrimoine-card-header">
-            <div class="patrimoine-icon">${getIcon(a.icon)}</div>
-            <h4>${a.titre}</h4>
-          </div>
-          <p>${a.desc}</p>
-          <div class="patrimoine-outils">
-            ${a.outils.map(o => `<span class="patrimoine-outil-tag">${o}</span>`).join('')}
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `;
-}
-
-function renderFormations() {
-  const grid = document.getElementById('formationsGrid');
-  if (!grid) return;
-
-  const btnColorMap = {
-    blue: 'formation-btn-blue',
-    indigo: 'formation-btn-indigo',
-    emerald: 'formation-btn-emerald',
-    purple: 'formation-btn-purple',
-    rose: 'formation-btn-rose',
-  };
-
-  grid.innerHTML = formationsData.map((formation, index) => {
-    const [start] = formation.gradient.replace('from-', '').replace('to-', '').split(' to-');
-    const accentColor = getColorValue(start);
-    return `
-      <div class="formation-card" style="--card-accent: ${accentColor};">
-        <div class="formation-card-inner">
-          <div>
-            <h3 class="formation-title">${formation.title}</h3>
-            <p class="formation-subtitle">${formation.subtitle}</p>
-          </div>
-          ${(formation.cta || formation.certificate) ? `
-            <div class="formation-actions">
-              ${formation.cta ? (formation.cta.type === 'link' ? `
-                <a href="${formation.cta.href}" target="_blank" rel="noopener noreferrer" class="formation-btn ${btnColorMap[formation.cta.color] || 'formation-btn-blue'}">
-                  ${formation.cta.label}
-                </a>
-              ` : `
-                <button type="button" onclick="goToSection('openclassrooms')" class="formation-btn ${btnColorMap[formation.cta.color] || 'formation-btn-indigo'}">
-                  ${formation.cta.label}
-                </button>
-              `) : ''}
-              ${formation.certificate ? `
-                <button type="button" onclick="openCertModalByIndex(${index})" class="formation-btn ${btnColorMap[formation.certificate.color] || 'formation-btn-blue'}">
-                  ${formation.certificate.label}
-                </button>
-              ` : ''}
-            </div>
-          ` : ''}
-        </div>
-      </div>
-    `;
-  }).join('');
 }
 
 function renderOpenClassrooms() {
   const grid = document.getElementById('openclassroomsGrid');
   if (!grid) return;
-
-  grid.innerHTML = openclassroomsCerts.map((cert, index) => {
-    // Échapper les caractères spéciaux pour éviter les erreurs JavaScript
-    const titleEscaped = cert.title.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-    const descEscaped = cert.description.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-    const tagsEscaped = JSON.stringify(cert.tags).replace(/'/g, "\\'");
-
-    return `
-    <article class="oc-card">
-      <div class="oc-card-inner">
-        <div class="oc-card-image-container" onclick="openOcModalByIndex(${index})">
-          <img src="${cert.image}" alt="${cert.title}" class="oc-card-image" loading="lazy">
-          <div class="oc-card-image-overlay"></div>
-          <span class="oc-card-badge">Certifié</span>
-          <button type="button" onclick="event.stopPropagation(); openOcModalByIndex(${index})" class="oc-card-view-btn" title="Voir la certification">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="height: 0.875rem; width: 0.875rem;">
-              <path d="M1.5 12s3.5-6.5 10.5-6.5S22.5 12 22.5 12 19 18.5 12 18.5 1.5 12 1.5 12Z" />
-              <circle cx="12" cy="12" r="3" />
-            </svg>
-          </button>
-        </div>
-        <div class="oc-card-content">
-          <div>
-            <h3 class="oc-card-title">${cert.title}</h3>
-            <p class="oc-card-description">${cert.description}</p>
-          </div>
-          <div class="oc-card-tags">
-            ${cert.tags.map(tag => `<span class="oc-card-tag">${tag}</span>`).join('')}
-          </div>
-        </div>
-      </div>
+  grid.innerHTML = openclassroomsCerts.map((c, i) => `
+    <article class="oc-card" onclick="openOcModalByIndex(${i})">
+      <img src="${c.image}" alt="${c.title}">
+      <h4>${c.title}</h4>
     </article>
-    `;
-  }).join('');
+  `).join('');
 }
 
-// ============================================
-// MODALS
-// ============================================
+/* --- MODALES --- */
 
-function openPdfModal() {
-  const modal = document.getElementById('pdfModal');
-  if (modal) {
-    modal.classList.add('active');
+function openProjectModal(id) {
+  const project = projectsData.find(p => p.id === id);
+  if (!project) return;
+  document.getElementById('modalProjectTitle').textContent = project.title;
+  document.getElementById('modalProjectDesc').textContent = project.desc;
+  const list = document.getElementById('modalPdfList');
+  const viewer = document.getElementById('modalPdfViewer');
+  const frame = document.getElementById('pdfFrame');
+  list.innerHTML = ''; viewer.style.display = 'none';
+
+  if (project.pdfs) {
+    project.pdfs.forEach(pdf => {
+      const btn = document.createElement('button');
+      btn.className = 'btn-secondary';
+      btn.innerHTML = `${getIcon('document')} ${pdf.label}`;
+      btn.onclick = () => { frame.src = pdf.href; viewer.style.display = 'block'; };
+      list.appendChild(btn);
+    });
   }
+  document.getElementById('projectModal').classList.add('active');
 }
 
-function closePdfModal() {
-  const modal = document.getElementById('pdfModal');
-  if (modal) {
-    modal.classList.remove('active');
-  }
+function closeProjectModal() {
+  document.getElementById('projectModal').classList.remove('active');
+  document.getElementById('pdfFrame').src = '';
 }
 
-function openSp1PdfModal() {
-  const modal = document.getElementById('sp1PdfModal');
-  if (modal) {
-    modal.classList.add('active');
-  }
+function openOcModalByIndex(i) {
+  const c = openclassroomsCerts[i];
+  document.getElementById('ocModalTitle').textContent = c.title;
+  document.getElementById('ocModalImage').src = c.image;
+  document.getElementById('ocModal').classList.add('active');
 }
 
-function closeSp1PdfModal() {
-  const modal = document.getElementById('sp1PdfModal');
-  if (modal) {
-    modal.classList.remove('active');
-  }
-}
+function closeOcModal() { document.getElementById('ocModal').classList.remove('active'); }
 
-function openBloc2ContextModal() {
-  const modal = document.getElementById('bloc2ContextModal');
-  if (modal) modal.classList.add('active');
-}
-
-function closeBloc2ContextModal() {
-  const modal = document.getElementById('bloc2ContextModal');
-  if (modal) modal.classList.remove('active');
-}
-
-function openBloc2WorkModal() {
-  const modal = document.getElementById('bloc2WorkModal');
-  if (modal) modal.classList.add('active');
-}
-
-function closeBloc2WorkModal() {
-  const modal = document.getElementById('bloc2WorkModal');
-  if (modal) modal.classList.remove('active');
-}
-
-function openCertModalByIndex(index) {
-  const formation = formationsData[index];
-  if (!formation || !formation.certificate) return;
-
-  openCertModal(
-    formation.title,
-    formation.subtitle,
-    formation.certificate.label,
-    formation.certificate.href
-  );
-}
-
-function openCertModal(title, subtitle, label, href) {
-  const modal = document.getElementById('certModal');
-  if (!modal) {
-    console.error('Modal certModal non trouvé');
-    return;
-  }
-
-  const titleElement = document.getElementById('certModalTitle');
-  const subtitleElement = document.getElementById('certModalSubtitle');
-  const descElement = document.getElementById('certModalDescription');
-  const container = document.getElementById('certModalContent');
-
-  if (!titleElement || !subtitleElement || !descElement || !container) {
-    console.error('Éléments du modal non trouvés');
-    return;
-  }
-
-  titleElement.textContent = `${title} — Certificat`;
-  subtitleElement.textContent = subtitle;
-  descElement.textContent = `Visualisation en lecture seule de la certification : ${label}.`;
-
-  const isPdf = href.toLowerCase().endsWith('.pdf');
-
-  if (isPdf) {
-    container.innerHTML = `
-      <object data="${href}" type="application/pdf" width="100%" height="100%">
-        <p class="modal-fallback">
-          Votre navigateur ne peut pas afficher ce PDF.
-          <a href="${href}" target="_blank" rel="noopener noreferrer">Télécharger le certificat</a>
-        </p>
-      </object>
-    `;
-  } else {
-    // Pour les images, on utilise une balise img avec gestion d'erreur
-    container.innerHTML = `
-      <img src="${href}" alt="${label}" onerror="this.onerror=null; this.parentElement.innerHTML='<p class=\\'modal-fallback\\'>Image non trouvée. <a href=\\'${href}\\' target=\\'_blank\\' rel=\\'noopener noreferrer\\'>Ouvrir l\\'image</a></p>';" style="max-height: 100%; max-width: 100%; object-fit: contain; border-radius: 1rem; display: block; margin: 0 auto;">
-    `;
-  }
-
-  modal.classList.add('active');
-}
-
-function closeCertModal() {
-  const modal = document.getElementById('certModal');
-  if (modal) {
-    modal.classList.remove('active');
-    modal.onclick = null;
-  }
-}
-
-function openOcModalByIndex(index) {
-  const cert = openclassroomsCerts[index];
-  if (!cert) return;
-
-  openOcModal(cert.title, cert.description, cert.image, cert.tags);
-}
-
-function openOcModal(title, description, image, tags) {
-  const modal = document.getElementById('ocModal');
-  if (!modal) return;
-
-  // S'assurer que tags est un tableau
-  const tagsArray = Array.isArray(tags) ? tags : [];
-
-  const imgElement = document.getElementById('ocModalImage');
-  const titleElement = document.getElementById('ocModalTitle');
-  const descElement = document.getElementById('ocModalDescription');
-  const tagsContainer = document.getElementById('ocModalTags');
-
-  if (imgElement) imgElement.src = image;
-  if (imgElement) imgElement.alt = title;
-  if (titleElement) titleElement.textContent = title;
-  if (descElement) descElement.textContent = description;
-  if (tagsContainer) {
-    tagsContainer.innerHTML = tagsArray.map(tag => `<span class="modal-oc-tag">${tag}</span>`).join('');
-  }
-
-  modal.classList.add('active');
-
-  // Fermer en cliquant en dehors
-  modal.onclick = (e) => {
-    if (e.target === modal) closeOcModal();
-  };
-}
-
-function closeOcModal() {
-  const modal = document.getElementById('ocModal');
-  if (modal) {
-    modal.classList.remove('active');
-    modal.onclick = null;
-  }
-}
-
-
-// ============================================
-// INITIALISATION
-// ============================================
+/* --- INITIALISATION --- */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Routing
   activeSection = getDefaultSection();
   updateActiveSection();
-
   window.addEventListener('hashchange', () => {
-    const hash = window.location.hash.slice(1);
-    const decodedHash = decodeURIComponent(hash);
-    if (decodedHash) {
-      activeSection = decodedHash;
-      updateActiveSection();
-    }
+    activeSection = window.location.hash.slice(1) || 'accueil';
+    updateActiveSection();
   });
 
-  // Navigation : délégation d’événements sur le menu pour que chaque clic change bien de section
-  const navMenu = document.getElementById('nav-menu');
   const navToggle = document.getElementById('nav-toggle');
-
-  function closeNavMenu() {
-    if (navMenu) {
-      navMenu.classList.remove('is-open');
-      navMenu.setAttribute('aria-hidden', 'true');
-    }
-    if (navToggle) {
-      navToggle.setAttribute('aria-expanded', 'false');
-      navToggle.setAttribute('aria-label', 'Ouvrir le menu');
-    }
-    document.body.classList.remove('nav-open');
-  }
-
-  function openNavMenu() {
-    if (navMenu) {
-      navMenu.classList.add('is-open');
-      navMenu.setAttribute('aria-hidden', 'false');
-    }
-    if (navToggle) {
-      navToggle.setAttribute('aria-expanded', 'true');
-      navToggle.setAttribute('aria-label', 'Fermer le menu');
-    }
-    document.body.classList.add('nav-open');
-  }
-
-  function toggleNavMenu() {
-    const isOpen = navMenu && navMenu.classList.contains('is-open');
-    if (isOpen) closeNavMenu();
-    else openNavMenu();
-  }
-
-  if (navToggle) {
-    navToggle.addEventListener('click', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      toggleNavMenu();
-    });
-  }
-
-  if (navMenu) {
-    navMenu.addEventListener('click', function (e) {
-      const btn = e.target && e.target.closest ? e.target.closest('.nav-btn') : null;
-      if (btn && btn.dataset.section) {
-        e.preventDefault();
-        e.stopPropagation();
-        goToSection(btn.dataset.section);
-        closeNavMenu();
-      }
-      if (e.target === navMenu) closeNavMenu();
-    });
-  }
-
-  document.querySelectorAll('.nav-btn').forEach(btn => {
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      if (this.dataset.section) goToSection(this.dataset.section);
-    });
+  const navMenu = document.getElementById('nav-menu');
+  navToggle?.addEventListener('click', () => navMenu?.classList.toggle('is-open'));
+  navMenu?.addEventListener('click', (e) => {
+    if (e.target.closest('.nav-btn')) navMenu.classList.remove('is-open');
   });
 
-  window.addEventListener('resize', function () {
-    if (window.innerWidth >= 768) closeNavMenu();
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && navMenu && navMenu.classList.contains('is-open')) closeNavMenu();
-  });
-
-  // Render data
   renderProjects();
   renderSkills();
-  renderCompetencesTable();
   renderFormations();
-  renderOpenClassrooms();
   renderBtsSio();
   renderVeille();
-  renderPatrimoine();
+  renderOpenClassrooms();
 
-  // Year
-  document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-  // Lien mail : mailto fonctionne sur Windows, Mac et Linux (ouvre le client mail par défaut)
-  const contactMailBtn = document.getElementById('contact-mail-btn');
-  if (contactMailBtn && CONTACT_EMAIL) {
-    const subject = encodeURIComponent(CONTACT_SUBJECT || 'Contact depuis portfolio BTS SIO');
-    contactMailBtn.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + subject;
-  }
+  const yearEl = document.getElementById('currentYear');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 });

@@ -1,11 +1,6 @@
-/**
- * /api/veille.js
- * Vercel Serverless Function — retourne les derniers articles de veille en JSON.
- * Appelé par le frontend du portfolio pour afficher la section Veille.
- *
- * Variables d'environnement requises dans Vercel :
- *   POSTGRES_URL (connexion Neon fournie automatiquement)
- */
+/* ============================================================
+   API VEILLE — RÉCUPÉRATION DES ARTICLES
+   ============================================================ */
 
 import { sql } from '@vercel/postgres';
 
@@ -14,6 +9,9 @@ export default async function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Méthode non autorisée' });
   }
+
+  // Désactiver le cache pour avoir les données en temps réel
+  res.setHeader('Cache-Control', 'no-store, max-age=0, must-revalidate');
 
   try {
     const category = req.query.category || null;

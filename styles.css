@@ -1268,6 +1268,22 @@
     font-weight: 500;
     color: var(--accent);
   }
+
+.project-view-badge {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover .project-view-badge {
+  background: #10b981;
+  color: white;
+}
   
   .openclassrooms-footer {
     text-align: center;
@@ -2312,6 +2328,153 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+  }
+
+  /* ============================================
+     TIMELINE (FORMATIONS)
+     ============================================ */
+  .timeline-container {
+    position: relative;
+    padding-left: 2.5rem;
+    margin-top: 2rem;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 0.75rem;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: rgba(16, 185, 129, 0.2);
+    border-radius: 10px;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+  }
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2.25rem;
+    top: 0.25rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #ffffff;
+    border: 3px solid var(--accent);
+    border-radius: 50%;
+    z-index: 2;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+  }
+
+  .timeline-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  .timeline-content:hover {
+    transform: translateX(8px);
+    border-color: var(--accent);
+  }
+
+  .timeline-header {
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-subtitle {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .timeline-date {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ============================================
+     SKILL CATEGORIES
+     ============================================ */
+  .skills-category {
+    margin-bottom: 3rem;
+  }
+
+  .skills-category-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block;
+  }
+
+  .skills-logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .skill-logo-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .skill-logo-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  }
+
+  .skill-logo-icon {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .skill-logo-icon svg, 
+  .skill-logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .skill-logo-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
   }
 
   /* ============================================

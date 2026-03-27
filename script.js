@@ -132,16 +132,16 @@ const formationsData = [
     subtitle: 'Lycée Paul-Louis Courier, Tours',
     date: '2025–2027',
     desc: 'Services Informatiques aux Organisations, option SISR. Administration système, réseau et cybersécurité.',
-    image: '/public/images/bts-sio.jpg',
-    pdf: '/public/Projet/BTS_SIO_Certificat.pdf'
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=400',
+    pdf: '/public/Projet/AP.pdf'
   },
   {
     title: 'Bac Pro SN RISC',
     subtitle: 'Lycée Henri Becquerel, Tours',
     date: '2022–2025',
     desc: 'Systèmes Numériques, option RISC. Réseaux et systèmes communicants.',
-    image: '/public/images/bac-pro.webp',
-    pdf: '/public/Projet/Bac_Pro_Diplome.pdf'
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=400',
+    pdf: '/public/Projet/AP.pdf'
   }
 ];
 

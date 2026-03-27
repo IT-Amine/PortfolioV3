@@ -13,13 +13,16 @@ const ICONS = {
   shield: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
   terminal: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>',
   document: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>',
+  settings: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12.23 2h-.46c-.4 0-.79.2-1.01.53l-.35.53a8.3 8.3 0 0 1-.9.41l-.6.22c-.41.15-.65.57-.59 1l.07.63c.03.3-.01.6-.14.86a2 2 0 0 1-1.07 1.07c-.26.13-.56.17-.86.14l-.63-.07c-.44-.06-.86.18-1 .59l-.22.6c-.1.3-.23.6-.4.9l-.54.34c-.33.22-.53.61-.53 1.01v.46c0 .4.2.79.53 1.01l.53.35c.18.29.32.59.41.9l.22.6c.15.41.57.65 1 .59l.63-.07c.3-.03.6.01.86.14a2 2 0 0 1 1.07 1.07c.13.26.17.56.14.86l-.07.63c-.06.44.18.86.59 1l.6.22c.3.1.6.23.9.4l.35.53c.22.33.61.53 1.01.53h.46c.4 0 .79-.2 1.01-.53l.35-.53c.29-.18.59-.32.9-.41l.6-.22c.41-.15.65-.57.59-1l-.07-.63a2 2 0 0 1 1.21-1.93c.3-.13.6-.17.86-.14l.63.07c.44.06.86-.18 1-.59l.22-.6c.1-.3.23-.6.4-.9l.53-.35c.33-.22.53-.61.53-1.01v-.46c0-.4-.2-.79-.53-1.01l-.53-.35a8.3 8.3 0 0 1-.41-.9l-.22-.6c-.15-.41-.57-.65-1-.59l-.63.07a2 2 0 0 1-1.21-1.93c-.13-.3-.17-.6-.14-.86l.07-.63c.06-.44-.18-.86-.59-1l-.6-.22a8.3 8.3 0 0 1-.9-.41l-.35-.53A1.23 1.23 0 0 0 12.23 2z"/><circle cx="12" cy="12" r="3"/></svg>',
+  search: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+  tool: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
 
   // Logos Officiels Tech
   debian: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#D70A53"><path d="M12.007 0c-4.137 0-7.387 2.05-8.875 5.562 2.688-2.612 6.55-2.85 8.163-1.025 1.587 1.787.975 4.675-2.113 6.038-2.787 1.237-6.025.1-7.112-2.313a5.59 5.59 0 0 1-.375-1.925C1.132 8.788.632 11.237.632 13.912c0 5.65 3.125 10.088 8.188 10.088 5.612 0 9.063-4.5 9.063-10.375 0-7.125-5.325-13.625-5.875-13.625zm-1.05 6.012c1.725 0 2.25 2.1 1.012 3.262-.975.912-3.113.3-3.113-1.5 0-.825.187-1.762 2.1-1.762z"/></svg>',
   windows: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#00A4EF"><path d="M0 3.449L9.75 2.1V11.4H0V3.449zm0 8.851h9.75v9.3L0 20.25v-7.95zm10.55-10.5L24 0v11.4h-13.45V1.8zm13.45 10.5V24l-13.45-1.9v-9.3H24z"/></svg>',
+  proxmox: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#E57000"><path d="M12 0L2.4 4.8v14.4L12 24l9.6-4.8V4.8L12 0zm7.2 18L12 21.6 4.8 18V6l7.2-3.6L19.2 6v12zM12 7.2L8.4 9v6l3.6 1.8 3.6-1.8V9L12 7.2z"/></svg>',
+  docker: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#2496ED"><path d="M13.983 11.078h2.119c.102 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186h-2.119a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm-2.917-2.917h2.119c.102 0 .186.084.186.186V10.46a.186.186 0 0 1-.186.186h-2.119a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm-2.917 2.917h2.119c.102 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186H8.149a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm-2.917 0h2.119c.101 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186H5.232a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm-2.917 0h2.119c.102 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186H2.315a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm0-2.917h2.119c.102 0 .186.084.186.186V10.46a.186.186 0 0 1-.186-.186H2.315a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm2.917 0h2.119c.101 0 .186.084.186.186V10.46a.186.186 0 0 1-.186.186H5.232a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm2.917 0h2.119c.102 0 .186.084.186.186V10.46a.186.186 0 0 1-.186-.186H8.149a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm-5.834-2.917h2.119c.101 0 .186.084.186.186V7.54a.186.186 0 0 1-.186-.186H2.315a.186.186 0 0 1-.186-.186V5.43c0-.102.084-.186.186-.186zm14.374 2.137c-.305-.596-.543-.591-.564-.591h-2.181c-.021 0-.042.001-.063.003L15 8.127c-.312.012-.486.027-.812.274-.15.114-.233.242-.258.406-.025.163-.04.49-.041.884V10.5h1.125a1.125 1.125 0 0 1 1.125 1.125v1.25h1.125a1.125 1.125 0 0 1 1.125 1.125v1.25H16.5a1.125 1.125 0 0 1-1.125 1.125H12V21a1.5 1.5 0 0 1-.375.986 1.5 1.5 0 0 1-.75.485c-.375.125-.75.029-1.125-.125-.375-.154-1.375-.625-1.375-1.121 0-.5 0-.75 1.012-1.25a.874.874 0 0 1 .863-.125c.188.062.375.152.375-.125V17.5H8.75c-.345 0-.625-.28-.625-.625v-1.25H6.875c-.345 0-.625-.28-.625-.625v-1.25H5c-.345 0-.625-.28-.625-.625V12.5H2.341c-.482-.016-.841-.417-.841-.9V9.5h-.186a1.125 1.125 0 0 1-1.125-1.125V6.125A1.125 1.125 0 0 1 1.315 5h1.125A1.125 1.125 0 0 1 3.565 6.125v1.125h.186V5.375a1.125 1.125 0 0 1 1.125-1.125H5.8A1.125 1.125 0 0 1 6.92 5.375v2h2.247V5.375a1.125 1.125 0 0 1 1.125-1.125h.186A1.125 1.125 0 0 1 11.603 5.375v2h.186V5.375a1.125 1.125 0 0 1 1.125-1.125h.186a1.125 1.125 0 0 1 1.125 1.125v2c.225.016.4-.1.6-.2l1.125-.1s1.375-1.125 2.125-1.125 3.5.5 3.5 4.5c0 2.5-1.125 3.75-2.245 4.417z"/></svg>',
   vmware: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#607078"><path d="M18.396 17.135l3.204-1.85V11.59l-3.204 1.85v3.695zm-3.8 2.193l3.204-1.85V13.784l-3.204 1.85v3.694zM7.004 10.56L3.8 12.41v3.695L7.004 14.256V10.56zm3.8-2.193L7.6 10.217v3.695l3.204-1.85v-3.695zm3.8 6.09l3.204-1.85v-3.696l-3.204 1.85v3.696zm-7.6 4.386L10.204 17l3.205-1.85v-3.694L10.205 13.305l-3.204 1.85zM22.204 7.896L19 9.746v3.695l3.204-1.85V7.896zM1.796 11.41L5 9.56V5.865L1.796 7.715v3.695zm3.8-2.193L8.8 7.367V3.673l-3.204 1.85V9.217z"/></svg>',
-  proxmox: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#E57000"><path d="M4.363 4.417L0 6.64v8.835l4.363 2.181 4.364-2.18v-8.836l-4.364-2.22zm4.364 8.835l-4.364 2.182-4.363-2.182V8.818l4.363-2.181 4.364 2.181v4.434zm3.272-8.835L8.727 6.64v8.835l3.272 2.181L15.273 15.476V6.64l-3.272-2.22zm3.27 8.835l-3.273 2.182L8.727 13.25V8.818l3.272-2.181 3.273 2.181v4.434zm3.274-8.835L15.273 6.64v8.835l3.272 2.181 3.273-2.18v-8.836l-3.273-2.22zm3.273 8.835l-3.273 2.182L15.273 13.25V8.818l3.273-2.181 3.273 2.181v4.434zM24 6.64v8.835l-4.364 2.181L15.273 15.476v-8.836L19.636 4.417 24 6.638zm-4.364 8.835l-4.363-2.182V8.818l4.363-2.181 4.364 2.181V13.25l-4.364 2.22z"/></svg>',
-  docker: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#2496ED"><path d="M13.983 11.078h2.119c.102 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186h-2.119a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm-2.917-2.917h2.119c.102 0 .186.084.186.186V10.46a.186.186 0 0 1-.186.186h-2.119a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm-2.917 2.917h2.119c.102 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186H8.149a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm-2.917 0h2.119c.101 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186H5.232a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm-2.917 0h2.119c.102 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186H2.315a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm0-2.917h2.119c.102 0 .186.084.186.186V10.46a.186.186 0 0 1-.186.186H2.315a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm2.917 0h2.119c.101 0 .186.084.186.186V10.46a.186.186 0 0 1-.186.186H5.232a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm2.917 0h2.119c.102 0 .186.084.186.186V10.46a.186.186 0 0 1-.186.186H8.149a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm-5.834-2.917h2.119c.101 0 .186.084.186.186V7.54a.186.186 0 0 1-.186.186H2.315a.186.186 0 0 1-.186-.186V5.43c0-.102.084-.186.186-.186zm14.374 2.137c-.305-.596-.543-.591-.564-.591h-2.181c-.021 0-.042.001-.063.003L15 8.127c-.312.012-.486.027-.812.274-.15.114-.233.242-.258.406-.025.163-.04.49-.041.884V10.5h1.125a1.125 1.125 0 0 1 1.125 1.125v1.25h1.125a1.125 1.125 0 0 1 1.125 1.125v1.25H16.5a1.125 1.125 0 0 1-1.125 1.125H12V21a1.5 1.5 0 0 1-.375.986 1.5 1.5 0 0 1-.75.485c-.375.125-.75.029-1.125-.125-.375-.154-1.375-.625-1.375-1.121 0-.5 0-.75 1.012-1.25a.874.874 0 0 1 .863-.125c.188.062.375.152.375-.125V17.5H8.75c-.345 0-.625-.28-.625-.625v-1.25H6.875c-.345 0-.625-.28-.625-.625v-1.25H5c-.345 0-.625-.28-.625-.625V12.5H2.341c-.482-.016-.841-.417-.841-.9V9.5h-.186a1.125 1.125 0 0 1-1.125-1.125V6.125A1.125 1.125 0 0 1 1.315 5h1.125A1.125 1.125 0 0 1 3.565 6.125v1.125h.186V5.375a1.125 1.125 0 0 1 1.125-1.125H5.8A1.125 1.125 0 0 1 6.92 5.375v2h2.247V5.375a1.125 1.125 0 0 1 1.125-1.125h.186A1.125 1.125 0 0 1 11.603 5.375v2h.186V5.375a1.125 1.125 0 0 1 1.125-1.125h.186a1.125 1.125 0 0 1 1.125 1.125v2c.225.016.4-.1.6-.2l1.125-.1s1.375-1.125 2.125-1.125 3.5.5 3.5 4.5c0 2.5-1.125 3.75-2.245 4.417z"/></svg>',
   ansible: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.82 18.232l-1.636-3.877H7.817l-1.636 3.877H3.97l6.653-15.07h2.753l6.653 15.07h-2.206zm-7.653-5.23h3.666L12 8.243l-1.833 4.759z"/></svg>',
   kubernetes: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#326CE5"><path d="M12 4.148L19.23 8.324v8.352L12 20.852l-7.23-4.176V8.324L12 4.148zm0-1.332L3.5 7.844v10.312L12 22.5l8.5-4.344V7.844L12 2.816zM11.25 7.5h1.5v9h-1.5v-9z"/></svg>',
   gitlab: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#FC6D26"><path d="M23.955 13.587l-1.342-4.135-2.664-8.189c-.135-.417-.724-.417-.859 0L16.425 9.45H7.574L4.91 1.263c-.135-.417-.724-.417-.859 0L1.387 9.452.045 13.587c-.1.308.011.647.276.84l11.679 8.48 11.679-8.48c.265-.193.376-.532.276-.84z"/></svg>',
@@ -35,7 +38,7 @@ const projectsData = [
   {
     id: 'millenuits',
     title: 'Groupe Millenuits — Infrastructure & Services',
-    desc: 'Refonte de l\'infrastructure système et réseau. Déploiement des services critiques (AD DS, DHCP, DNS, GPO) et segmentation réseau via VLAN. Gestion centralisée du parc informatique.',
+    desc: 'Refonte de l\'infrastructure système et réseau. Déploiement des services critiques (AD DS, DHCP, DNS, GPO) et segmentation réseau via VLAN.',
     tech: ['Active Directory', 'Windows Server', 'VLAN', 'Systèmes'],
     icon: 'globe',
     pdfs: [
@@ -48,43 +51,33 @@ const projectsData = [
   {
     id: 'cyber',
     title: 'Laboratoire de Cybersécurité',
-    desc: 'Mise en place d\'un environnement de test sécurisé. Étude du durcissement (hardening) des terminaux, analyse des vulnérabilités et rédaction de dossiers de sécurité commun.',
-    tech: ['Cybersécurité', 'Hardening', 'Analyse de vulnérabilité', 'Audit'],
+    desc: 'Environnement de test sécurisé. Étude du durcissement (hardening) des terminaux et analyse des vulnérabilités.',
+    tech: ['Cybersécurité', 'Hardening', 'Analyse vulnérabilités'],
     icon: 'shield',
     pdfs: [
-      { label: 'Sécurité des terminaux (TP1)', href: 'public/Projet/cyber/TP1-sécurité des terminaux.pdf' },
-      { label: 'Dossier Commun (TP2)', href: 'public/Projet/cyber/TP2-Commun-dossier.pdf' },
-      { label: 'Contexte Labo 2026', href: 'public/Projet/cyber/Contexte-labo-2026.pdf' },
+      { label: 'Sécurité terminaux', href: 'public/Projet/cyber/TP1-sécurité des terminaux.pdf' },
+      { label: 'Dossier Commun', href: 'public/Projet/cyber/TP2-Commun-dossier.pdf' },
     ]
   },
   {
     id: 'imdeo',
     title: 'Architecture Réseau IMDEO',
-    desc: 'Conception d\'une architecture logique pour l\'implantation IMDEO. Déploiement de solutions de routage avancé et structuration des services réseau.',
-    tech: ['Cisco', 'Architecture', 'Routage', 'Switching'],
+    desc: 'Conception d\'une architecture logique pour l\'implantation IMDEO. Routage avancé et segmentation.',
+    tech: ['Cisco', 'Architecture', 'Routage'],
     icon: 'antenna',
     pdfs: [
-      { label: 'Dossier Technique IMDEO', href: 'public/Projet/imdeo/imdeo.pdf' },
-      { label: 'Structure du Projet', href: 'public/Projet/imdeo/structure-imdeo.pdf' },
-      { label: 'Contexte IMDEO 2026', href: 'public/Projet/imdeo/Contexte - IMDEO - 2026.pdf' },
+      { label: 'Dossier IMDEO', href: 'public/Projet/imdeo/imdeo.pdf' },
     ]
   },
   {
     id: 'ap',
     title: 'Projet AP — Architecture Prototypage',
-    desc: 'Projet complet d\'architecture de prototypage (AP1). Mise en œuvre de solutions de serveurs, virtualisation et stratégies de sauvegarde.',
-    tech: ['Virtualisation', 'Infrastructure', 'Prototypage', 'Sauvegarde'],
+    desc: 'Serveurs, virtualisation et stratégies de sauvegarde sur l\'infrastructure Lab.',
+    tech: ['Virtualisation', 'Infrastructure', 'Backup'],
     icon: 'server',
     pdfs: [
-      { label: 'Document de projet (AP.pdf)', href: 'public/Projet/AP.pdf' },
+      { label: 'Document AP1', href: 'public/Projet/AP.pdf' },
     ]
-  },
-  {
-    id: 'portfolio',
-    title: 'Portfolio Professionnel V3',
-    desc: 'Conception d\'une interface moderne Blanc/Vert avec automatisation de la veille technologique via Vercel et Neon Postgres.',
-    tech: ['Next.js', 'Vercel', 'Postgres', 'Design'],
-    icon: 'terminal'
   }
 ];
 
@@ -94,7 +87,7 @@ const skillsCategories = [
     skills: [
       { name: 'Debian', icon: 'debian' },
       { name: 'Windows server', icon: 'windows' },
-      { name: 'Active Directory', icon: 'clipboard' },
+      { name: 'Active Directory', icon: 'server' },
       { name: 'Linux Admin', icon: 'terminal' }
     ]
   },
@@ -104,7 +97,7 @@ const skillsCategories = [
       { name: 'VMware ESXi', icon: 'vmware' },
       { name: 'Proxmox', icon: 'proxmox' },
       { name: 'Docker', icon: 'docker' },
-      { name: 'Docker Compose', icon: 'docker' }
+      { name: 'LXC', icon: 'box' }
     ]
   },
   {
@@ -112,45 +105,38 @@ const skillsCategories = [
     skills: [
       { name: 'Ansible', icon: 'ansible' },
       { name: 'Kubernetes', icon: 'kubernetes' },
-      { name: 'GitLab CI/CD', icon: 'gitlab' },
-      { name: 'Scripting Bash', icon: 'terminal' }
+      { name: 'GitLab', icon: 'gitlab' },
+      { name: 'Bash', icon: 'terminal' }
     ]
   }
 ];
 
 const formationsData = [
-  {
-    title: 'BTS SIO SISR',
-    subtitle: 'Lycée Paul-Louis Courier, Tours',
-    date: '2025–2027',
-    desc: 'Services Informatiques aux Organisations, option Solutions d’Infrastructure, Systèmes et Réseaux. Étude approfondie de l\'administration système, réseau et cybersécurité.'
+  { 
+    title: 'BTS SIO SISR', 
+    subtitle: 'Lycée Paul-Louis Courier, Tours', 
+    date: '2025–2027', 
+    desc: 'Administration système, réseau et cybersécurité.'
   },
-  {
-    title: 'Bac Pro SN RISC',
-    subtitle: 'Lycée Henri Becquerel, Tours',
-    date: '2022–2025',
-    desc: 'Systèmes Numériques, option Réseaux Informatiques et Systèmes Communicants. Apprentissage des bases de l\'informatique, du réseau et de la maintenance matérielle.'
-  },
-  {
-    title: 'Certifications OpenClassrooms',
-    subtitle: 'Auto-formation continue',
-    date: '2024–Présent',
-    desc: 'Plusieurs certifications obtenues sur TCP/IP, Linux, Windows Server, Git, Docker et Active Directory.'
+  { 
+    title: 'Bac Pro SN RISC', 
+    subtitle: 'Lycée Henri Becquerel, Tours', 
+    date: '2022–2025', 
+    desc: 'Réseaux et systèmes communicants.'
   }
 ];
 
+const patrimoineData = [
+  { title: 'Inventaire Matériel', desc: 'Gestion du parc via GLPI et OCS Inventory.', icon: 'search', outils: ['GLPI', 'OCS'] },
+  { title: 'Maintenance Préventive', desc: 'Déploiement de mises à jour via WSUS / Ansible.', icon: 'settings', outils: ['WSUS', 'Ansible'] },
+  { title: 'Support Utilisateur', desc: 'Gestion des tickets et assistance technique.', icon: 'tool', outils: ['Tickets', 'Remote'] },
+];
+
 const openclassroomsCerts = [
-  { title: 'TCP/IP', description: 'Maîtrise des protocoles TCP/IP.', image: 'public/openclassroom/TCP:IP.png', tags: ['Réseaux', 'TCP/IP'] },
-  { title: 'Windows Server', description: 'Administration Windows Server.', image: 'public/openclassroom/Windows Server.png', tags: ['Windows Server', 'Administration'] },
-  { title: 'Gérer Git & GitHub', description: 'Contrôle de version.', image: 'public/openclassroom/git.png', tags: ['Git', 'GitHub'] },
-  { title: 'Déployez Windows 10', description: 'Déploiement Windows 10.', image: 'public/openclassroom/déployez Win10.png', tags: ['Windows 10'] },
-  { title: 'Montez un PC', description: 'Assemblage matériel.', image: 'public/openclassroom/pc.png', tags: ['Hardware'] },
-  { title: 'Utiliser ChatGPT', description: 'IA conversationnelle.', image: 'public/openclassroom/utiliser ChatGPT.png', tags: ['IA'] },
-  { title: 'Active Directory', description: 'Gestion centralisée.', image: 'public/openclassroom/Centralisez et sécuriser avec Active Directory.jpg', tags: ['AD', 'Sécurité'] },
-  { title: 'Initiez-vous à Linux', description: 'Administration Linux.', image: 'public/openclassroom/linux.jpg', tags: ['Linux'] },
-  { title: 'Conteneurs Docker', description: 'Conteneurisation.', image: 'public/openclassroom/Optimisez avec des Conteneur Docker.jpg', tags: ['Docker'] },
-  { title: 'Packet Tracer', description: 'Simulation réseau Cisco.', image: 'public/openclassroom/cisco.jpg', tags: ['Réseaux', 'Cisco'] },
-  { title: 'Virtualisation', description: 'Environnements virtuels.', image: 'public/openclassroom/virtualiser vos environnement travail.jpg', tags: ['Virtualisation'] },
+  { title: 'TCP/IP', image: 'public/openclassroom/TCP:IP.png' },
+  { title: 'Active Directory', image: 'public/openclassroom/Centralisez et sécuriser avec Active Directory.jpg' },
+  { title: 'Docker', image: 'public/openclassroom/Optimisez avec des Conteneur Docker.jpg' },
+  { title: 'Linux', image: 'public/openclassroom/linux.jpg' },
 ];
 
 const btsSioData = {
@@ -162,6 +148,14 @@ const btsSioData = {
     { icon: 'terminal', label: 'Automatisation', desc: 'PowerShell, Bash' },
   ],
 };
+
+const competencesListData = [
+  { ref: '1.1', desc: 'Gérer le patrimoine informatique', niveau: 'Avancé', preuve: 'Inventaire OCS/GLPI' },
+  { ref: '1.2', desc: 'Répondre aux incidents / demandes', niveau: 'Maîtrisé', preuve: 'Ticketing IT' },
+  { ref: '2.1', desc: 'Concevoir une solution infrastructure', niveau: 'Intermédiaire', preuve: 'Maquettage Cisco/VMware' },
+  { ref: '2.2', desc: 'Installer et configurer des équipements', niveau: 'Avancé', preuve: 'Switching, Windows Server' },
+  { ref: '3.1', desc: 'Protéger les données et les systèmes', niveau: 'Maîtrisé', preuve: 'GPO, Firewall, Backup' },
+];
 
 /* --- ÉTAT GLOBAL & ROUTING --- */
 
@@ -192,23 +186,21 @@ function goToSection(sectionId) {
   window.location.hash = sectionId;
 }
 
-/* --- RENDU DES COMPOSANTS --- */
+/* --- RENDU --- */
 
 function renderProjects() {
   const grid = document.getElementById('projectsGrid');
   if (!grid) return;
   grid.innerHTML = projectsData.map(p => `
-    <article class="project-card featured" onclick="openProjectModal('${p.id}')">
-      <div class="project-card-inner">
-        <div style="display:flex; justify-content:space-between; margin-bottom:1rem;">
-          <div style="color:var(--accent); width:28px;">${getIcon(p.icon)}</div>
-          ${p.pdfs ? '<div class="project-view-badge">Voir</div>' : ''}
-        </div>
-        <h3 class="project-card-title">${p.title}</h3>
-        <p class="project-card-desc">${p.desc}</p>
-        <div class="project-card-tech mt-auto">
-          ${p.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}
-        </div>
+    <article class="project-card" onclick="openProjectModal('${p.id}')">
+      <div class="project-card-header">
+        <div class="project-icon">${getIcon(p.icon)}</div>
+        <div class="project-view-badge">Voir</div>
+      </div>
+      <h3 class="project-card-title">${p.title}</h3>
+      <p class="project-card-desc">${p.desc}</p>
+      <div class="project-card-tech">
+        ${p.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}
       </div>
     </article>
   `).join('');
@@ -235,24 +227,20 @@ function renderSkills() {
 function renderFormations() {
   const grid = document.getElementById('formationsGrid');
   if (!grid) return;
-  grid.innerHTML = `
-    <div class="timeline-container">
-      <div class="timeline-line"></div>
-      ${formationsData.map(f => `
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-header">
-              <h3 class="timeline-title">${f.title}</h3>
-              <div class="timeline-subtitle">${f.subtitle}</div>
-            </div>
-            <div class="timeline-date">${f.date}</div>
-            <p class="timeline-desc">${f.desc}</p>
+  grid.innerHTML = `<div class="timeline-container"><div class="timeline-line"></div>` + 
+    formationsData.map(f => `
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <h3 class="timeline-title">${f.title}</h3>
+            <div class="timeline-subtitle">${f.subtitle}</div>
           </div>
+          <div class="timeline-date">${f.date}</div>
+          <p class="timeline-desc">${f.desc}</p>
         </div>
-      `).join('')}
-    </div>
-  `;
+      </div>
+    `).join('') + `</div>`;
 }
 
 function renderBtsSio() {
@@ -271,34 +259,72 @@ function renderBtsSio() {
   `;
 }
 
-async function renderVeille() {
-  const container = document.getElementById('veilleFlux');
+function renderCompetencesTable() {
+  const container = document.getElementById('competencesTable');
   if (!container) return;
-  
-  container.innerHTML = '<div class="veille-loading"><div class="veille-loading-spinner"></div>Chargement des derniers flux...</div>';
+  container.innerHTML = `
+    <div class="comp-table-wrapper">
+      <table class="comp-table">
+        <thead>
+          <tr><th>Réf</th><th>Description</th><th>Niveau</th><th>Preuves</th></tr>
+        </thead>
+        <tbody>
+          ${competencesListData.map(c => `
+            <tr>
+              <td>${c.ref}</td>
+              <td>${c.desc}</td>
+              <td><span class="comp-niveau" style="--niveau-color: ${c.niveau === 'Avancé' ? '#10b981' : (c.niveau === 'Maîtrisé' ? '#3b82f6' : '#f59e0b')}">${c.niveau}</span></td>
+              <td class="comp-preuve">${c.preuve}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
 
+function renderPatrimoine() {
+  const container = document.getElementById('patrimoineContent');
+  if (!container) return;
+  container.innerHTML = `
+    <div class="patrimoine-grid">
+      ${patrimoineData.map(p => `
+        <div class="patrimoine-card">
+          <div class="patrimoine-card-header">
+            <div class="patrimoine-icon">${getIcon(p.icon)}</div>
+            <h4>${p.title}</h4>
+          </div>
+          <p>${p.desc}</p>
+          <div class="patrimoine-outils">
+            ${p.outils.map(o => `<span class="patrimoine-outil-tag">${o}</span>`).join('')}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+async function renderVeille() {
+  // Correction ID : veilleContent dans l'HTML
+  const container = document.getElementById('veilleContent');
+  if (!container) return;
+  container.innerHTML = '<div class="veille-loading">Chargement...</div>';
   try {
-    // Ajouter un timestamp pour s'assurer de ne pas avoir de cache navigateur
     const res = await fetch(`/api/veille?limit=5&t=${Date.now()}`);
     const data = await res.json();
     const articles = data.articles || [];
-    
     if (articles.length === 0) {
-      container.innerHTML = '<p class="veille-empty">Aucun article récent. La synchronisation automatique est en cours.</p>';
+      container.innerHTML = '<p class="veille-empty">Aucun article pour le moment.</p>';
       return;
     }
-
     container.innerHTML = articles.map(a => `
       <a href="${a.link}" target="_blank" class="veille-article-card">
         <div class="veille-article-meta">${a.source} — ${new Date(a.pub_date).toLocaleDateString()}</div>
         <h4>${a.title}</h4>
-        <p>${a.description || ''}</p>
-        <div class="veille-tag">${a.category || 'Info'}</div>
       </a>
     `).join('');
-  } catch (err) {
-    console.error('Erreur fetch veille:', err);
-    container.innerHTML = '<p class="veille-empty">Erreur de chargement du flux de veille.</p>';
+  } catch {
+    container.innerHTML = '<p class="veille-empty">Erreur flux.</p>';
   }
 }
 
@@ -337,21 +363,16 @@ function openProjectModal(id) {
   document.getElementById('projectModal').classList.add('active');
 }
 
-function closeProjectModal() {
-  document.getElementById('projectModal').classList.remove('active');
-  document.getElementById('pdfFrame').src = '';
-}
-
+function closeProjectModal() { document.getElementById('projectModal').classList.remove('active'); document.getElementById('pdfFrame').src = ''; }
 function openOcModalByIndex(i) {
   const c = openclassroomsCerts[i];
   document.getElementById('ocModalTitle').textContent = c.title;
   document.getElementById('ocModalImage').src = c.image;
   document.getElementById('ocModal').classList.add('active');
 }
-
 function closeOcModal() { document.getElementById('ocModal').classList.remove('active'); }
 
-/* --- INITIALISATION --- */
+/* --- INIT --- */
 
 document.addEventListener('DOMContentLoaded', () => {
   activeSection = getDefaultSection();
@@ -361,20 +382,36 @@ document.addEventListener('DOMContentLoaded', () => {
     updateActiveSection();
   });
 
-  const navToggle = document.getElementById('nav-toggle');
+  // Fix Navigation : Écouter les clics sur les boutons de nav
   const navMenu = document.getElementById('nav-menu');
-  navToggle?.addEventListener('click', () => navMenu?.classList.toggle('is-open'));
   navMenu?.addEventListener('click', (e) => {
-    if (e.target.closest('.nav-btn')) navMenu.classList.remove('is-open');
+    const btn = e.target.closest('.nav-btn');
+    if (btn && btn.dataset.section) {
+      goToSection(btn.dataset.section);
+      navMenu.classList.remove('is-open');
+    }
   });
 
+  const navToggle = document.getElementById('nav-toggle');
+  navToggle?.addEventListener('click', () => navMenu?.classList.toggle('is-open'));
+
+  // Rendu initial
   renderProjects();
   renderSkills();
   renderFormations();
-  renderBtsSio();
+  renderPatrimoine();
   renderVeille();
   renderOpenClassrooms();
+  renderBtsSio();
+  renderCompetencesTable();
 
   const yearEl = document.getElementById('currentYear');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
+
+// Exposer goToSection pour les clics directs dans le HTML (ex: boutons hero)
+window.goToSection = goToSection;
+window.openProjectModal = openProjectModal;
+window.closeProjectModal = closeProjectModal;
+window.openOcModalByIndex = openOcModalByIndex;
+window.closeOcModal = closeOcModal;

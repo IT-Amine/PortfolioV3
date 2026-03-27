@@ -12,7 +12,7 @@ out/
 # Vercel
 .vercel/
 
-# Variables d'environnement (NE JAMAIS METTRE EN GIT)
+# Variables d'environnement
 .env
 .env.local
 .env.development.local

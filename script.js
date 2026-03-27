@@ -18,47 +18,27 @@ const ICONS = {
   tool: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
 
   // Logos Officiels Tech
-  debian: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#D70A53"><path d="M12.007 0c-4.137 0-7.387 2.05-8.875 5.562 2.688-2.612 6.55-2.85 8.163-1.025 1.587 1.787.975 4.675-2.113 6.038-2.787 1.237-6.025.1-7.112-2.313a5.59 5.59 0 0 1-.375-1.925C1.132 8.788.632 11.237.632 13.912c0 5.65 3.125 10.088 8.188 10.088 5.612 0 9.063-4.5 9.063-10.375 0-7.125-5.325-13.625-5.875-13.625zm-1.05 6.012c1.725 0 2.25 2.1 1.012 3.262-.975.912-3.113.3-3.113-1.5 0-.825.187-1.762 2.1-1.762z"/></svg>',
-  windows: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#00A4EF"><path d="M0 3.449L9.75 2.1V11.4H0V3.449zm0 8.851h9.75v9.3L0 20.25v-7.95zm10.55-10.5L24 0v11.4h-13.45V1.8zm13.45 10.5V24l-13.45-1.9v-9.3H24z"/></svg>',
-  proxmox: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#E57000"><path d="M12 0L2.4 4.8v14.4L12 24l9.6-4.8V4.8L12 0zm7.2 18L12 21.6 4.8 18V6l7.2-3.6L19.2 6v12zM12 7.2L8.4 9v6l3.6 1.8 3.6-1.8V9L12 7.2z"/></svg>',
-  docker: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#2496ED"><path d="M13.983 11.078h2.119c.102 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186h-2.119a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm-2.917-2.917h2.119c.102 0 .186.084.186.186V10.46a.186.186 0 0 1-.186.186h-2.119a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm-2.917 2.917h2.119c.102 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186H8.149a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm-2.917 0h2.119c.101 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186H5.232a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm-2.917 0h2.119c.102 0 .186.084.186.186v2.119c0 .102-.084.186-.186.186H2.315a.186.186 0 0 1-.186-.186v-2.119c0-.102.084-.186.186-.186zm0-2.917h2.119c.102 0 .186.084.186.186V10.46a.186.186 0 0 1-.186-.186H2.315a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm2.917 0h2.119c.101 0 .186.084.186.186V10.46a.186.186 0 0 1-.186.186H5.232a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm2.917 0h2.119c.102 0 .186.084.186.186V10.46a.186.186 0 0 1-.186-.186H8.149a.186.186 0 0 1-.186-.186V8.347c0-.101.084-.186.186-.186zm-5.834-2.917h2.119c.101 0 .186.084.186.186V7.54a.186.186 0 0 1-.186-.186H2.315a.186.186 0 0 1-.186-.186V5.43c0-.102.084-.186.186-.186zm14.374 2.137c-.305-.596-.543-.591-.564-.591h-2.181c-.021 0-.042.001-.063.003L15 8.127c-.312.012-.486.027-.812.274-.15.114-.233.242-.258.406-.025.163-.04.49-.041.884V10.5h1.125a1.125 1.125 0 0 1 1.125 1.125v1.25h1.125a1.125 1.125 0 0 1 1.125 1.125v1.25H16.5a1.125 1.125 0 0 1-1.125 1.125H12V21a1.5 1.5 0 0 1-.375.986 1.5 1.5 0 0 1-.75.485c-.375.125-.75.029-1.125-.125-.375-.154-1.375-.625-1.375-1.121 0-.5 0-.75 1.012-1.25a.874.874 0 0 1 .863-.125c.188.062.375.152.375-.125V17.5H8.75c-.345 0-.625-.28-.625-.625v-1.25H6.875c-.345 0-.625-.28-.625-.625v-1.25H5c-.345 0-.625-.28-.625-.625V12.5H2.341c-.482-.016-.841-.417-.841-.9V9.5h-.186a1.125 1.125 0 0 1-1.125-1.125V6.125A1.125 1.125 0 0 1 1.315 5h1.125A1.125 1.125 0 0 1 3.565 6.125v1.125h.186V5.375a1.125 1.125 0 0 1 1.125-1.125H5.8A1.125 1.125 0 0 1 6.92 5.375v2h2.247V5.375a1.125 1.125 0 0 1 1.125-1.125h.186A1.125 1.125 0 0 1 11.603 5.375v2h.186V5.375a1.125 1.125 0 0 1 1.125-1.125h.186a1.125 1.125 0 0 1 1.125 1.125v2c.225.016.4-.1.6-.2l1.125-.1s1.375-1.125 2.125-1.125 3.5.5 3.5 4.5c0 2.5-1.125 3.75-2.245 4.417z"/></svg>',
-  vmware: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#607078"><path d="M18.396 17.135l3.204-1.85V11.59l-3.204 1.85v3.695zm-3.8 2.193l3.204-1.85V13.784l-3.204 1.85v3.694zM7.004 10.56L3.8 12.41v3.695L7.004 14.256V10.56zm3.8-2.193L7.6 10.217v3.695l3.204-1.85v-3.695zm3.8 6.09l3.204-1.85v-3.696l-3.204 1.85v3.696zm-7.6 4.386L10.204 17l3.205-1.85v-3.694L10.205 13.305l-3.204 1.85zM22.204 7.896L19 9.746v3.695l3.204-1.85V7.896zM1.796 11.41L5 9.56V5.865L1.796 7.715v3.695zm3.8-2.193L8.8 7.367V3.673l-3.204 1.85V9.217z"/></svg>',
-  ansible: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.82 18.232l-1.636-3.877H7.817l-1.636 3.877H3.97l6.653-15.07h2.753l6.653 15.07h-2.206zm-7.653-5.23h3.666L12 8.243l-1.833 4.759z"/></svg>',
-  kubernetes: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#326CE5"><path d="M12 4.148L19.23 8.324v8.352L12 20.852l-7.23-4.176V8.324L12 4.148zm0-1.332L3.5 7.844v10.312L12 22.5l8.5-4.344V7.844L12 2.816zM11.25 7.5h1.5v9h-1.5v-9z"/></svg>',
-  gitlab: '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#FC6D26"><path d="M23.955 13.587l-1.342-4.135-2.664-8.189c-.135-.417-.724-.417-.859 0L16.425 9.45H7.574L4.91 1.263c-.135-.417-.724-.417-.859 0L1.387 9.452.045 13.587c-.1.308.011.647.276.84l11.679 8.48 11.679-8.48c.265-.193.376-.532.276-.84z"/></svg>',
+  debian: 'https://cdn.simpleicons.org/debian/D70A53',
+  windows: 'https://cdn.simpleicons.org/windows11/0078D4',
+  proxmox: 'https://cdn.simpleicons.org/proxmox/E57000',
+  docker: 'https://cdn.simpleicons.org/docker/2496ED',
+  vmware: 'https://cdn.simpleicons.org/vmware/607078',
+  ansible: 'https://cdn.simpleicons.org/ansible/000000',
+  kubernetes: 'https://cdn.simpleicons.org/kubernetes/326CE5',
+  gitlab: 'https://cdn.simpleicons.org/gitlab/FC6D26',
 };
 
-function getIcon(name, color = '10b981') {
-  // Mapping pour Simple Icons (slugs)
-  const mapping = {
-    debian: 'debian',
-    windows: 'windows8',
-    proxmox: 'proxmox',
-    docker: 'docker',
-    vmware: 'vmware',
-    ansible: 'ansible',
-    kubernetes: 'kubernetes',
-    gitlab: 'gitlab',
-    terminal: 'gnumetadata',
-    server: 'windows-server',
-    shield: 'shield-halved', // Lucide / Heroicons fallback
-    globe: 'globe',
-    document: 'read-the-docs',
-    settings: 'cog',
-    search: 'search',
-    tool: 'wrench'
-  };
-  
-  const slug = mapping[name] || name;
-  
-  // Utiliser Simple Icons CDN pour les logos tech
-  const techLogos = ['debian', 'windows', 'proxmox', 'docker', 'vmware', 'ansible', 'kubernetes', 'gitlab', 'windows-server'];
-  if (techLogos.includes(slug)) {
-    return `<img src="https://cdn.simpleicons.org/${slug}/${color}" alt="${name}" style="width: 100%; height: 100%; object-fit: contain;">`;
+function getIcon(name, defaultColor = '10b981') {
+  const iconContent = ICONS[name];
+  if (!iconContent) return ICONS['terminal'];
+
+  // Si c'est une URL (commence par http), on renvoie un tag img
+  if (typeof iconContent === 'string' && iconContent.startsWith('http')) {
+    return `<img src="${iconContent}" alt="${name}" style="width: 100%; height: 100%; object-fit: contain;">`;
   }
 
-  // Fallback SVG Lucide simpler
-  return ICONS[name] || ICONS['terminal'];
+  // Sinon c'est un SVG local (stocké dans ICONS)
+  return iconContent;
 }
 
 /* --- DONNÉES DES COMPOSANTS --- */
@@ -147,18 +127,18 @@ const certificationsTreeData = [
 ];
 
 const formationsData = [
-  { 
-    title: 'BTS SIO SISR', 
-    subtitle: 'Lycée Paul-Louis Courier, Tours', 
-    date: '2025–2027', 
+  {
+    title: 'BTS SIO SISR',
+    subtitle: 'Lycée Paul-Louis Courier, Tours',
+    date: '2025–2027',
     desc: 'Services Informatiques aux Organisations, option SISR. Administration système, réseau et cybersécurité.',
     image: '/public/images/bts-sio.jpg',
     pdf: '/public/Projet/BTS_SIO_Certificat.pdf'
   },
-  { 
-    title: 'Bac Pro SN RISC', 
-    subtitle: 'Lycée Henri Becquerel, Tours', 
-    date: '2022–2025', 
+  {
+    title: 'Bac Pro SN RISC',
+    subtitle: 'Lycée Henri Becquerel, Tours',
+    date: '2022–2025',
     desc: 'Systèmes Numériques, option RISC. Réseaux et systèmes communicants.',
     image: '/public/images/bac-pro.webp',
     pdf: '/public/Projet/Bac_Pro_Diplome.pdf'
@@ -266,7 +246,7 @@ function renderSkills() {
 function renderFormations() {
   const grid = document.getElementById('formationsGrid');
   if (!grid) return;
-  grid.innerHTML = `<div class="timeline-container"><div class="timeline-line"></div>` + 
+  grid.innerHTML = `<div class="timeline-container"><div class="timeline-line"></div>` +
     formationsData.map(f => `
       <div class="timeline-item">
         <div class="timeline-dot"></div>
@@ -392,7 +372,7 @@ function openProjectModal(id) {
 
   document.getElementById('modalProjectTitle').textContent = project.title;
   document.getElementById('modalProjectDesc').textContent = project.desc || '';
-  
+
   const list = document.getElementById('modalPdfList');
   const frame = document.getElementById('pdfFrame');
   const fallback = document.getElementById('pdfFallback');
@@ -407,23 +387,23 @@ function openProjectModal(id) {
       const btn = document.createElement('button');
       btn.className = `pdf-btn ${index === 0 ? 'active' : ''}`;
       btn.innerHTML = `<span class="pdf-btn-icon">${getIcon('document')}</span><span>${pdf.label}</span>`;
-      
+
       btn.onclick = () => {
         console.log('Ouverture PDF:', pdf.href);
         // Update UI
         document.querySelectorAll('.pdf-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        
+
         // Load PDF
         frame.src = pdf.href;
         downloadLink.href = pdf.href;
-        
+
         // Check local storage / settings if iframe blocked
         if (window.innerWidth < 768) {
           fallback.style.display = 'block';
         }
       };
-      
+
       list.appendChild(btn);
     });
 

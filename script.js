@@ -440,7 +440,7 @@ function renderProjects() {
   grid.innerHTML = mainProjects.map(project => {
     const iconSvg = getIcon(project.icon || 'terminal');
     return `
-      <article class="project-card" onclick="alert('Détails de ce projet bientôt disponibles !')">
+      <article class="project-card" onclick="alert('Détails de ce projet bientôt disponibles !')" title="Cliquer pour voir les détails">
         <div class="project-card-inner">
           <div class="project-head">
             <div style="color: var(--accent); width: 24px; height: 24px; margin-bottom: 1rem;">${iconSvg}</div>
@@ -463,6 +463,7 @@ function renderProjects() {
     const ap1El = document.getElementById('ap1Project');
     if (ap1El) {
       ap1El.setAttribute('onclick', 'openPdfModal()');
+      ap1El.setAttribute('title', 'Cliquer pour voir le sujet AP1 (PDF)');
       ap1El.style.cursor = 'pointer';
       ap1El.innerHTML = `
         <div class="project-card-inner">
@@ -491,6 +492,7 @@ function renderProjects() {
     const sp1El = document.getElementById('sp1Project');
     if (sp1El) {
       sp1El.setAttribute('onclick', 'openSp1PdfModal()');
+      sp1El.setAttribute('title', 'Cliquer pour voir le document SP1 (PDF)');
       sp1El.style.cursor = 'pointer';
       sp1El.innerHTML = `
         <div class="project-card-inner">
@@ -519,6 +521,7 @@ function renderProjects() {
     const bloc2El = document.getElementById('bloc2Project');
     if (bloc2El) {
       bloc2El.setAttribute('onclick', 'openBloc2ContextModal()');
+      bloc2El.setAttribute('title', 'Cliquer pour voir le projet IMDEO (PDF)');
       bloc2El.style.cursor = 'pointer';
       const [ctx, work] = bloc2Project.pdfs;
       bloc2El.innerHTML = `
@@ -746,7 +749,7 @@ async function renderVeille() {
       });
 
       return `
-        <a href="${a.link}" target="_blank" rel="noopener noreferrer" class="veille-article-card veille-article-link">
+        <a href="${a.link}" target="_blank" rel="noopener noreferrer" class="veille-article-card veille-article-link" title="Lire l'article complet sur ${a.source}">
           <div class="veille-article-meta">
             <span class="veille-article-source">${a.source}</span>
             <span>${formattedDate}</span>
@@ -754,7 +757,8 @@ async function renderVeille() {
           <h4>${a.title}</h4>
           ${a.description ? `<p>${a.description}</p>` : ''}
           <div class="veille-article-tags">
-            <span class="veille-tag">${a.category}</span>
+            <span class="veille-tag">${a.category || 'Veille Cyber'}</span>
+            <span class="veille-tag" style="background: rgba(16, 185, 129, 0.05);">Détails →</span>
           </div>
         </a>
       `;

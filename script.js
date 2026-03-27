@@ -330,26 +330,47 @@ function renderPatrimoine() {
 }
 
 async function renderVeille() {
-  // Correction ID : veilleContent dans l'HTML
   const container = document.getElementById('veilleContent');
   if (!container) return;
-  container.innerHTML = '<div class="veille-loading">Chargement...</div>';
+  container.innerHTML = '<div class="veille-loading">Chargement du flux de sécurité...</div>';
   try {
     const res = await fetch(`/api/veille?limit=5&t=${Date.now()}`);
     const data = await res.json();
     const articles = data.articles || [];
+    
     if (articles.length === 0) {
-      container.innerHTML = '<p class="veille-empty">Aucun article pour le moment.</p>';
+      container.innerHTML = '<p class="veille-empty">Aucun article de veille disponible.</p>';
       return;
     }
-    container.innerHTML = articles.map(a => `
-      <a href="${a.link}" target="_blank" class="veille-article-card">
-        <div class="veille-article-meta">${a.source} — ${new Date(a.pub_date).toLocaleDateString()}</div>
-        <h4>${a.title}</h4>
-      </a>
-    `).join('');
-  } catch {
-    container.innerHTML = '<p class="veille-empty">Erreur flux.</p>';
+
+    const [featured, ...others] = articles;
+
+    container.innerHTML = `
+      <div class="veille-magazine-layout">
+        <a href="${featured.link}" target="_blank" class="veille-featured-card">
+          <div class="veille-card-bg-overlay"></div>
+          <div class="veille-card-content">
+            <div class="veille-badge-live">Dernière Mise à jour</div>
+            <div class="veille-meta">${featured.source} • ${new Date(featured.pub_date).toLocaleDateString('fr-FR')}</div>
+            <h3 class="veille-featured-title">${featured.title}</h3>
+            <div class="veille-read-btn">Consulter l'article <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+          </div>
+        </a>
+        <div class="veille-secondary-grid">
+          ${others.map(a => `
+            <a href="${a.link}" target="_blank" class="veille-small-card">
+              <div class="veille-small-meta">
+                <span class="source-tag">${a.source}</span>
+                <span class="date-tag">${new Date(a.pub_date).toLocaleDateString('fr-FR')}</span>
+              </div>
+              <h4>${a.title}</h4>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  } catch (err) {
+    container.innerHTML = '<p class="veille-empty">Flux temporairement indisponible.</p>';
   }
 }
 

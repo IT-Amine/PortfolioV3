@@ -19,7 +19,7 @@ const ICONS = {
 
   // Logos Officiels Tech
   debian: 'https://cdn.simpleicons.org/debian/D70A53',
-  windows: 'https://cdn.simpleicons.org/windows11/0078D4',
+  windows: 'https://cdn.simpleicons.org/windows/0078D4',
   proxmox: 'https://cdn.simpleicons.org/proxmox/E57000',
   docker: 'https://cdn.simpleicons.org/docker/2496ED',
   vmware: 'https://cdn.simpleicons.org/vmware/607078',
@@ -255,14 +255,13 @@ function renderFormations() {
     formationsData.map(f => `
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-content">
+        <div class="timeline-content" onclick="viewPDF('${f.pdf}', '${f.title}')" style="cursor: pointer;">
           <div class="timeline-header">
             <h3 class="timeline-title">${f.title}</h3>
             <div class="timeline-subtitle">${f.subtitle}</div>
           </div>
           <div class="timeline-date">${f.date}</div>
           <p class="timeline-desc">${f.desc}</p>
-          ${f.pdf ? `<a href="${f.pdf}" target="_blank" class="btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 1rem; margin-bottom: 1rem;">${getIcon('document')} Voir le diplôme (PDF)</a>` : ''}
           ${f.image ? `
             <div class="timeline-image-container">
               <img src="${f.image}" class="timeline-image" alt="${f.title}" onerror="this.parentElement.style.display='none'">
@@ -440,7 +439,26 @@ function openProjectModal(id) {
   document.getElementById('projectModal').classList.add('active');
 }
 
-function closeProjectModal() { document.getElementById('projectModal').classList.remove('active'); document.getElementById('pdfFrame').src = ''; }
+function viewPDF(url, title) {
+  document.getElementById('modalProjectTitle').textContent = title;
+  document.getElementById('modalProjectDesc').textContent = '';
+  const list = document.getElementById('modalPdfList');
+  const frame = document.getElementById('pdfFrame');
+  const fallback = document.getElementById('pdfFallback');
+  const downloadLink = document.getElementById('pdfDownloadLink');
+
+  list.innerHTML = `<p class="text-muted" style="font-size:0.8rem;">Document unique</p>`;
+  frame.src = url;
+  downloadLink.href = url;
+  fallback.style.display = 'block';
+
+  document.getElementById('projectModal').classList.add('active');
+}
+
+function closeProjectModal() { 
+  document.getElementById('projectModal').classList.remove('active'); 
+  document.getElementById('pdfFrame').src = ''; 
+}
 function openOcModalByIndex(i) {
   const c = openclassroomsCerts[i];
   document.getElementById('ocModalTitle').textContent = c.title;
@@ -456,7 +474,7 @@ function renderCertificationsTree() {
       ${certificationsTreeData.map(c => `
         <div class="cert-item">
           <div class="cert-dot"></div>
-          <div class="cert-card" onclick="${c.type === 'pdf' ? `window.open('${c.file}', '_blank')` : `openImageModal('${c.file}', '${c.title}')`}">
+          <div class="cert-card" onclick="${c.type === 'pdf' ? `viewPDF('${c.file}', '${c.title}')` : `openImageModal('${c.file}', '${c.title}')`}">
             <div class="cert-header-info">
               <div class="cert-icon-small">${getIcon(c.icon)}</div>
               <div class="cert-details">

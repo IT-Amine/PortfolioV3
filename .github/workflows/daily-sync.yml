@@ -1,0 +1,55 @@
+# ─────────────────────────────────────────────────────────────────
+# 📌 daily-sync.yml
+# Déclenche /api/sync-veille chaque matin à 7h (en plus du cron Vercel)
+# et s'assure que le repo GitHub est toujours à jour.
+# ─────────────────────────────────────────────────────────────────
+name: Daily Veille Sync
+
+on:
+  # Cron GitHub Actions : chaque jour à 7h30 UTC (= 8h30 heure de Paris)
+  schedule:
+    - cron: '30 6 */2 * *'
+  # Permettre le déclenchement manuel depuis GitHub
+  workflow_dispatch:
+
+jobs:
+  sync-veille:
+    name: 🔄 Synchroniser les articles de veille
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Appeler l'API sync-veille sur Vercel
+        run: |
+          echo "📡 Appel de l'API sync-veille..."
+          STATUS=$(curl -s -o /tmp/response.json -w "%{http_code}" \
+            -X GET "${{ secrets.VERCEL_URL }}/api/sync-veille" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}")
+          
+          echo "Réponse HTTP : $STATUS"
+          cat /tmp/response.json
+          
+          if [ "$STATUS" != "200" ]; then
+            echo "❌ Erreur lors de la synchronisation (HTTP $STATUS)"
+            exit 1
+          fi
+          
+          echo "✅ Synchronisation réussie !"
+          
+          # Afficher le résumé
+          INSERTED=$(cat /tmp/response.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('inserted', '?'))")
+          FETCHED=$(cat /tmp/response.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('fetched', '?'))")
+          echo "📰 Articles récupérés : $FETCHED | Insérés en base : $INSERTED"
+
+  # ─────────────────────────────────────────────────────────────────
+  # Job facultatif : notifier si erreur (peut être désactivé)
+  # ─────────────────────────────────────────────────────────────────
+  notify-on-failure:
+    name: 🚨 Notifier en cas d'erreur
+    runs-on: ubuntu-latest
+    needs: sync-veille
+    if: failure()
+    steps:
+      - name: Log d'erreur
+        run: |
+          echo "❌ Le sync veille a échoué le $(date +'%d/%m/%Y à %H:%M')"
+          echo "Vérifier les logs sur : https://github.com/${{ github.repository }}/actions"

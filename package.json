@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-bts-sio",
+  "version": "1.0.0",
+  "description": "Portfolio BTS SIO SISR — Amine Kada",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@vercel/postgres": "^0.10.0"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}

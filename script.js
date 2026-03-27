@@ -1,7 +1,6 @@
 // ============================================
 // CONFIGURATION CONTACT (mailto compatible Windows / Mac / Linux)
 // ============================================
-// Remplacez par votre vraie adresse e-mail. Le bouton ouvrira le client mail par défaut.
 const CONTACT_EMAIL = 'kadaamine37@hotmail.com';
 const CONTACT_SUBJECT = 'Contact depuis portfolio BTS SIO';
 
@@ -123,7 +122,7 @@ const projectsData = [
 ];
 
 const skillsData = [
-  { name: 'Administration Serveurs', level: 90, color: 'from-blue-500 to-cyan-500', icon: 'server' },
+  { name: 'Administration Serveurs', level: 90, color: 'from-emerald-500 to-teal-500', icon: 'server' },
   { name: 'Réseaux & Infrastructure', level: 85, color: 'from-purple-500 to-pink-500', icon: 'globe' },
   { name: 'Cybersécurité', level: 80, color: 'from-red-500 to-orange-500', icon: 'shield' },
   { name: 'Scripting (PowerShell, Bash)', level: 75, color: 'from-green-500 to-emerald-500', icon: 'terminal' },
@@ -143,7 +142,7 @@ const formationsData = [
     subtitle: 'Lycée Paul-Louis Courier, Tours — 2025–2026',
     gradient: 'from-blue-600 to-cyan-600',
     shadow: 'shadow-blue-900/40',
-    cta: { type: 'link', label: 'En savoir plus sur le BTS SIO', href: 'https://lycee-paul-louis-courier.fr/2022/06/22/bts-sio-services-informatiques-aux-organisations/', color: 'blue' },
+    cta: { type: 'link', label: 'En savoir plus sur le BTS SIO', href: 'https://nizar-it.github.io/formation/', color: 'blue' },
   },
   {
     title: 'Bac Pro Systèmes Numériques',
@@ -257,6 +256,100 @@ const openclassroomsCerts = [
 ];
 
 // ============================================
+// DONNÉES NOUVELLES SECTIONS
+// ============================================
+
+const btsSioData = {
+  description: `Spécialisé en Solutions d'Infrastructure, Systèmes et Réseaux (SISR), je maîtrise
+  l'administration de serveurs, la gestion des réseaux, la virtualisation et la cybersécurité.
+  Cette formation de 2 ans prépare aux métiers d'administrateur réseau, technicien système
+  et responsable infrastructure.`,
+  objectifs: [
+    { icon: 'server', label: 'Administrer des serveurs', desc: 'Windows Server, Debian, gestion des services réseau (DNS, DHCP, AD)' },
+    { icon: 'globe', label: 'Gérer des infrastructures réseau', desc: 'VLANs, routage, firewall, VPN, segmentation réseau' },
+    { icon: 'shield', label: 'Sécuriser les systèmes', desc: 'Audit, hardening, règles de pare-feu, supervision (Zabbix, Nagios)' },
+    { icon: 'database', label: 'Virtualiser des environnements', desc: 'Proxmox VE, VMware, Docker, LXC, conteneurisation' },
+    { icon: 'terminal', label: 'Automatiser les tâches', desc: 'PowerShell, Bash, scripts de déploiement et de sauvegarde' },
+    { icon: 'clipboard', label: 'Documenter et piloter', desc: 'Procédures techniques, rapports d\'audit, gestion de tickets' },
+  ],
+  competencesCles: ['Windows Server', 'Linux (Debian)', 'Proxmox VE', 'OPNsense', 'Active Directory', 'Docker', 'VPN/VLANs', 'Cisco Packet Tracer'],
+};
+
+const veilleData = {
+  sujet: 'La cybersécurité des infrastructures réseau',
+  accroche: 'Face à l\'explosion des attaques réseau (ransomwares, intrusions, DDoS), je suis l\'évolution des technologies de protection des infrastructures IT pour rester à la pointe des bonnes pratiques SISR.',
+  outils: [
+    { name: 'ANSSI / CERT-FR', desc: 'Bulletins d\'alerte officiels sur les vulnérabilités critiques', url: 'https://www.cert.ssi.gouv.fr' },
+    { name: 'CVE / NVD', desc: 'Base de données des failles de sécurité référencées (NIST)', url: 'https://nvd.nist.gov' },
+    { name: 'Bleeping Computer', desc: 'Actualités malwares, ransomwares et incidents de sécurité', url: 'https://www.bleepingcomputer.com' },
+    { name: 'Exploit Database', desc: 'Référence des exploits publics pour la veille offensive', url: 'https://www.exploit-db.com' },
+  ],
+  articles: [
+    {
+      titre: 'Les VPNs en entreprise : enjeux et alternatives Zero Trust',
+      date: 'Janvier 2026',
+      resume: 'Analyse de l\'évolution des VPN d\'entreprise vers des architectures Zero Trust Network Access (ZTNA), avec étude des solutions Wireguard, OpenVPN et Cloudflare Access.',
+      tags: ['VPN', 'Zero Trust', 'ZTNA', 'Réseau'],
+    },
+    {
+      titre: 'Firewall nouvelle génération : OPNsense vs pfSense',
+      date: 'Décembre 2025',
+      resume: 'Comparatif technique des solutions open-source de firewall NGFW, avec test de déploiement sous Proxmox, gestion des VLANs et intégration IDS/IPS (Suricata).',
+      tags: ['Firewall', 'OPNsense', 'pfSense', 'IDS/IPS'],
+    },
+    {
+      titre: 'Ransomwares ciblant les infrastructure ESXi (VMware)',
+      date: 'Novembre 2025',
+      resume: 'Étude des attaques ESXiArgs et ALPHV ciblant les hyperviseurs VMware ESXi, mesures de protection et bonnes pratiques de sauvegarde hors-ligne.',
+      tags: ['Ransomware', 'VMware', 'ESXi', 'Sauvegarde'],
+    },
+  ],
+  impact: 'Cette veille me permet de comprendre les menaces actuelles, d\'adapter mes configurations réseau (règles firewall, segmentation VLAN) et de proposer des recommandations de sécurité basées sur des données réelles lors de mes projets PPE et stages.',
+};
+
+const patrimoineData = {
+  intro: 'La gestion du patrimoine informatique consiste à inventorier, maintenir et sécuriser l\'ensemble des ressources matérielles et logicielles d\'un système d\'information.',
+  activites: [
+    {
+      icon: 'clipboard',
+      titre: 'Inventaire matériel & logiciel',
+      desc: 'Recensement des équipements (PCs, serveurs, switches, routeurs) et des logiciels installés. Utilisation de GLPI et OCSInventory pour la gestion automatisée du parc.',
+      outils: ['GLPI', 'OCSInventory', 'Fusion Inventory'],
+    },
+    {
+      icon: 'wrench',
+      titre: 'Maintenance & support',
+      desc: 'Diagnostic et résolution d\'incidents matériels et logiciels. Gestion des tickets via GLPI, remplacement de composants défectueux, mises à jour système.',
+      outils: ['GLPI (tickets)', 'Windows Update', 'WSUS'],
+    },
+    {
+      icon: 'shield',
+      titre: 'Sécurisation du parc',
+      desc: 'Mise en place de stratégies de sécurité : GPO, antivirus centralisé, chiffrement des disques (BitLocker), contrôle des accès et politique de mots de passe.',
+      outils: ['GPO', 'BitLocker', 'Active Directory', 'Antivirus centralisé'],
+    },
+    {
+      icon: 'chart',
+      titre: 'Supervision & monitoring',
+      desc: 'Surveillance des équipements réseau et serveurs avec des outils de supervision. Alertes en cas de panne, analyse des performances et traçabilité des incidents.',
+      outils: ['Zabbix', 'Nagios', 'PRTG', 'Prometheus'],
+    },
+    {
+      icon: 'database',
+      titre: 'Sauvegardes & PRA',
+      desc: 'Mise en œuvre de politiques de sauvegarde (règle 3-2-1), planification des sauvegardes automatiques, test de restauration et plan de reprise d\'activité.',
+      outils: ['Veeam', 'Synology DSM', 'rsync', 'Proxmox Backup'],
+    },
+    {
+      icon: 'document',
+      titre: 'Documentation technique',
+      desc: 'Rédaction de procédures d\'installation, de fiches techniques, de schémas réseau et de rapports d\'audit pour assurer la traçabilité et la transmission des savoirs.',
+      outils: ['Draw.io', 'Markdown', 'Word/LibreOffice', 'Confluence'],
+    },
+  ],
+};
+
+// ============================================
 // ÉTAT GLOBAL
 // ============================================
 
@@ -269,7 +362,7 @@ let activeSection = 'accueil';
 function getDefaultSection() {
   const rawHash = window.location.hash.slice(1);
   if (!rawHash) return 'accueil';
-  const sections = ['accueil', 'projets', 'formations', 'compétences', 'contact', 'openclassrooms'];
+  const sections = ['accueil', 'bts-sio', 'projets', 'veille', 'patrimoine', 'formations', 'compétences', 'contact', 'openclassrooms'];
   let decodedHash = rawHash;
   try {
     decodedHash = decodeURIComponent(rawHash);
@@ -319,17 +412,29 @@ function updateSEO() {
       title: 'Amine IT - Portfolio BTS SIO SISR | Administrateur Réseaux & Systèmes',
       description: 'Portfolio d\'Amine, étudiant en BTS SIO option SISR. Découvrez mes projets, compétences et formations en administration de réseaux, systèmes et cybersécurité.',
     },
+    'bts-sio': {
+      title: 'BTS SIO SISR - Portfolio Amine IT',
+      description: 'Présentation du BTS SIO option SISR : objectifs, compétences clés et spécialisation en Solutions d\'Infrastructure, Systèmes et Réseaux.',
+    },
     projets: {
       title: 'Projets SISR - Portfolio Amine IT',
       description: 'Explorez mes projets techniques en infrastructure, virtualisation, réseau et sécurité réalisés dans le cadre de ma formation BTS SIO SISR.',
+    },
+    veille: {
+      title: 'Veille Technologique - Portfolio Amine IT',
+      description: 'Ma veille technologique en cybersécurité et réseaux : outils, sources, articles de synthèse et impact sur ma pratique SISR.',
+    },
+    patrimoine: {
+      title: 'Gestion du Patrimoine Informatique - Portfolio Amine IT',
+      description: 'Inventaire, maintenance, sécurisation et supervision du parc informatique. Utilisation de GLPI, OCSInventory, Zabbix et autres outils de gestion de parc.',
     },
     formations: {
       title: 'Mon Parcours - Portfolio Amine IT',
       description: 'Mon parcours de formation, du Bac Pro Systèmes Numériques au BTS SIO SISR, en passant par des certifications OpenClassrooms et des MOOCs en cybersécurité.',
     },
     compétences: {
-      title: 'Compétences Techniques - Portfolio Amine IT',
-      description: 'Mes compétences en administration système (Windows Server, Debian), virtualisation (Proxmox, Docker), réseau (OPNsense, VLAN) et automatisation.',
+      title: 'Tableau de Synthèse des Compétences - Portfolio Amine IT',
+      description: 'Tableau de synthèse des compétences BTS SIO SISR : compétences maîtrisées, niveau et preuves associées selon le référentiel officiel.',
     },
     contact: {
       title: 'Me Contacter - Portfolio Amine IT',
@@ -368,7 +473,7 @@ const colorMap = {
 };
 
 function getColorValue(colorName) {
-  return colorMap[colorName] || '#3b82f6';
+  return colorMap[colorName] || '#10b981';
 }
 
 function renderProjects() {
@@ -383,15 +488,18 @@ function renderProjects() {
   grid.innerHTML = mainProjects.map(project => {
     const [start] = project.color.replace('from-', '').replace('to-', '').split(' to-');
     const accentColor = getColorValue(start);
+    const iconSvg = getIcon(project.icon || 'terminal');
     return `
       <article class="project-card" style="--card-accent: ${accentColor};">
         <div class="project-card-inner">
+          <div class="project-head">
+            <div style="color: var(--card-accent); width: 24px; height: 24px; margin-bottom: 1rem;">${iconSvg}</div>
+          </div>
           <div>
             <h3 class="project-card-title">${project.title}</h3>
             <p class="project-card-desc">${project.desc}</p>
           </div>
           <div class="project-card-tech">
-            <p class="project-card-tech-label">Technologies</p>
             <div class="project-card-tech-list">
               ${project.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}
             </div>
@@ -409,6 +517,10 @@ function renderProjects() {
       ap1El.style.setProperty('--card-accent', accentColor);
       ap1El.innerHTML = `
         <div class="project-card-inner">
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem;">
+            <div style="color: var(--card-accent); width: 28px; height: 28px;">${getIcon('server')}</div>
+            <div class="project-validated-badge">✅ Compétence validée</div>
+          </div>
           <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem;">
             <h3 class="project-card-title">${ap1Project.title}</h3>
             <button type="button" onclick="openPdfModal()" class="project-card-view-btn" title="Afficher le sujet AP1 (PDF)">
@@ -419,8 +531,7 @@ function renderProjects() {
             </button>
           </div>
           <p class="project-card-desc">${ap1Project.desc}</p>
-          <div class="project-card-tech">
-            <p class="project-card-tech-label">Technologies</p>
+          <div class="project-card-tech mt-auto">
             <div class="project-card-tech-list">
               ${ap1Project.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}
             </div>
@@ -438,6 +549,10 @@ function renderProjects() {
       sp1El.style.setProperty('--card-accent', accentColor);
       sp1El.innerHTML = `
         <div class="project-card-inner">
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem;">
+            <div style="color: var(--card-accent); width: 28px; height: 28px;">${getIcon('globe')}</div>
+            <div class="project-validated-badge">✅ Compétence validée</div>
+          </div>
           <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem;">
             <h3 class="project-card-title">${sp1Project.title}</h3>
             <button type="button" onclick="openSp1PdfModal()" class="project-card-view-btn" title="Afficher le document SP1 (PDF)">
@@ -448,8 +563,7 @@ function renderProjects() {
             </button>
           </div>
           <p class="project-card-desc">${sp1Project.desc}</p>
-          <div class="project-card-tech">
-            <p class="project-card-tech-label">Technologies</p>
+          <div class="project-card-tech mt-auto">
             <div class="project-card-tech-list">
               ${sp1Project.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}
             </div>
@@ -468,15 +582,18 @@ function renderProjects() {
       const [ctx, work] = bloc2Project.pdfs;
       bloc2El.innerHTML = `
         <div class="project-card-inner">
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; margin-bottom: 1rem;">
+            <div style="color: var(--card-accent); width: 28px; height: 28px;">${getIcon('shield')}</div>
+            <div class="project-validated-badge">✅ Compétence validée</div>
+          </div>
           <h3 class="project-card-title">${bloc2Project.title}</h3>
           <p class="project-card-desc">${bloc2Project.desc}</p>
           <div class="project-card-tech">
-            <p class="project-card-tech-label">Technologies</p>
             <div class="project-card-tech-list">
               ${bloc2Project.tech.map(t => `<span class="project-tech-tag">${t}</span>`).join('')}
             </div>
           </div>
-          <div class="project-card-pdf-buttons">
+          <div class="project-card-pdf-buttons mt-auto">
             <button type="button" onclick="openBloc2ContextModal()" class="project-pdf-btn">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="height: 1rem; width: 1rem;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
               ${ctx.label}
@@ -522,6 +639,222 @@ function renderSkills() {
       </div>
     `;
   }).join('');
+}
+
+const competencesTableData = [
+  { competence: 'Installer et configurer un poste de travail', niveau: 'Avancé', preuve: 'Stage – déploiement Windows 10/11' },
+  { competence: 'Administrer un réseau local', niveau: 'Intermédiaire', preuve: 'Projet AP1 – maquette Cisco Packet Tracer' },
+  { competence: 'Maintenir et dépanner une infrastructure', niveau: 'Intermédiaire', preuve: 'Projet SP1 – gestion infrastructure réseau' },
+  { competence: 'Gérer la virtualisation (VMs & conteneurs)', niveau: 'Avancé', preuve: 'Lab Proxmox VE – VMs, LXC, clustering' },
+  { competence: 'Sécuriser une infrastructure réseau', niveau: 'Intermédiaire', preuve: 'OPNsense – VLANs, DMZ, règles firewall' },
+  { competence: 'Administrer Active Directory & GPO', niveau: 'Intermédiaire', preuve: 'Windows Server 2019 – AD DS, GPO, DNS, DHCP' },
+  { competence: 'Mettre en place une politique de sauvegarde', niveau: 'Intermédiaire', preuve: 'Projet Sauvegarde – Veeam, Synology, rsync' },
+  { competence: 'Superviser un parc informatique', niveau: 'Débutant', preuve: 'Formation Nagios/Zabbix – OpenClassrooms' },
+  { competence: 'Gérer les tickets et incidents (GLPI)', niveau: 'Intermédiaire', preuve: 'Projet AP1 – déploiement outil de tickets' },
+  { competence: 'Réaliser une veille technologique', niveau: 'Avancé', preuve: 'Veille cybersécurité – ANSSI, CVE, Bleeping Computer' },
+  { competence: 'Documenter et rédiger des procédures', niveau: 'Avancé', preuve: 'Rapports de projets PPE, fiches techniques' },
+  { competence: 'Scripting & automatisation', niveau: 'Débutant', preuve: 'Scripts PowerShell/Bash – sauvegardes, déploiements' },
+];
+
+const niveauColors = {
+  'Avancé': '#10b981',
+  'Intermédiaire': '#f59e0b',
+  'Débutant': '#ef4444',
+};
+
+function renderCompetencesTable() {
+  const container = document.getElementById('competencesTable');
+  if (!container) return;
+
+  container.innerHTML = `
+    <h3 class="comp-table-title">Tableau de synthèse — Référentiel BTS SIO SISR</h3>
+    <div class="comp-table-wrapper">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Compétence (référentiel BTS SIO)</th>
+            <th>Niveau</th>
+            <th>Preuve / Contexte</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${competencesTableData.map(row => `
+            <tr>
+              <td>${row.competence}</td>
+              <td><span class="comp-niveau" style="--niveau-color: ${niveauColors[row.niveau] || '#6366f1'}">${row.niveau}</span></td>
+              <td class="comp-preuve">${row.preuve}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>
+    <div class="comp-legend">
+      <span class="comp-niveau" style="--niveau-color: #10b981">Avancé</span>
+      <span class="comp-niveau" style="--niveau-color: #f59e0b">Intermédiaire</span>
+      <span class="comp-niveau" style="--niveau-color: #ef4444">Débutant</span>
+    </div>
+  `;
+}
+
+function renderBtsSio() {
+  const container = document.getElementById('btsSioContent');
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="bts-intro-card">
+      <p class="bts-intro-text">${btsSioData.description}</p>
+      <div class="bts-tags">
+        ${btsSioData.competencesCles.map(t => `<span class="bts-tag">${t}</span>`).join('')}
+      </div>
+    </div>
+    <h3 class="bts-objectifs-title">Objectifs de la formation SISR</h3>
+    <div class="bts-objectifs-grid">
+      ${btsSioData.objectifs.map(obj => `
+        <div class="bts-objectif-card">
+          <div class="bts-objectif-icon">${getIcon(obj.icon)}</div>
+          <div>
+            <h4>${obj.label}</h4>
+            <p>${obj.desc}</p>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+async function renderVeille() {
+  const container = document.getElementById('veilleContent');
+  if (!container) return;
+
+  // Squelette de chargement
+  container.innerHTML = `
+    <div class="veille-intro-card">
+      <div class="veille-sujet-label">Sujet de veille</div>
+      <h3 class="veille-sujet-title">${veilleData.sujet}</h3>
+      <p class="veille-sujet-desc">${veilleData.accroche}</p>
+    </div>
+    <div class="veille-two-col">
+      <div>
+        <h3 class="veille-section-title">Outils de veille utilisés</h3>
+        <div class="veille-outils-list">
+          ${veilleData.outils.map(o => `
+            <a href="${o.url}" target="_blank" rel="noopener noreferrer" class="veille-outil-card">
+              <div class="veille-outil-icon">${getIcon('search')}</div>
+              <div>
+                <strong>${o.name}</strong>
+                <p>${o.desc}</p>
+              </div>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+      <div>
+        <h3 class="veille-section-title">
+          Flux en direct
+          <span class="veille-live-badge">
+            <span class="veille-live-dot"></span>Live
+          </span>
+        </h3>
+        <div id="veilleFlux" class="veille-articles-list">
+          <div class="veille-loading">
+            <div class="veille-loading-spinner"></div>
+            Récupération des derniers articles…
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="veille-impact-card">
+      <div class="veille-impact-icon">${getIcon('target')}</div>
+      <div>
+        <h4>Impact sur ma pratique professionnelle</h4>
+        <p>${veilleData.impact}</p>
+      </div>
+    </div>
+  `;
+
+  // Tenter de charger les articles depuis l'API Vercel
+  const fluxContainer = document.getElementById('veilleFlux');
+  if (!fluxContainer) return;
+
+  try {
+    const response = await fetch('/api/veille?limit=10');
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    const data = await response.json();
+    const articles = data.articles || [];
+
+    if (articles.length === 0) {
+      // Fallback sur les articles statiques
+      renderVeilleStatic(fluxContainer);
+      return;
+    }
+
+    // Affichage des articles dynamiques
+    fluxContainer.innerHTML = articles.map(a => {
+      const date = new Date(a.pub_date);
+      const formattedDate = date.toLocaleDateString('fr-FR', {
+        day: 'numeric', month: 'short', year: 'numeric'
+      });
+
+      return `
+        <a href="${a.link}" target="_blank" rel="noopener noreferrer" class="veille-article-card veille-article-link">
+          <div class="veille-article-meta">
+            <span class="veille-article-source">${a.source}</span>
+            <span>${formattedDate}</span>
+          </div>
+          <h4>${a.title}</h4>
+          ${a.description ? `<p>${a.description}</p>` : ''}
+          <div class="veille-article-tags">
+            <span class="veille-tag">${a.category}</span>
+          </div>
+        </a>
+      `;
+    }).join('');
+
+  } catch (_err) {
+    // Fallback si l'API n'est pas encore disponible (local ou premier déploiement)
+    renderVeilleStatic(fluxContainer);
+  }
+}
+
+function renderVeilleStatic(container) {
+  container.innerHTML = veilleData.articles.map(a => `
+    <div class="veille-article-card">
+      <div class="veille-article-meta">${a.date}</div>
+      <h4>${a.titre}</h4>
+      <p>${a.resume}</p>
+      <div class="veille-article-tags">
+        ${a.tags.map(t => `<span class="veille-tag">${t}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+
+function renderPatrimoine() {
+  const container = document.getElementById('patrimoineContent');
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="patrimoine-intro-card">
+      <p>${patrimoineData.intro}</p>
+    </div>
+    <div class="patrimoine-grid">
+      ${patrimoineData.activites.map(a => `
+        <div class="patrimoine-card">
+          <div class="patrimoine-card-header">
+            <div class="patrimoine-icon">${getIcon(a.icon)}</div>
+            <h4>${a.titre}</h4>
+          </div>
+          <p>${a.desc}</p>
+          <div class="patrimoine-outils">
+            ${a.outils.map(o => `<span class="patrimoine-outil-tag">${o}</span>`).join('')}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
 }
 
 function renderFormations() {
@@ -579,7 +912,7 @@ function renderOpenClassrooms() {
     const titleEscaped = cert.title.replace(/'/g, "\\'").replace(/"/g, '&quot;');
     const descEscaped = cert.description.replace(/'/g, "\\'").replace(/"/g, '&quot;');
     const tagsEscaped = JSON.stringify(cert.tags).replace(/'/g, "\\'");
-    
+
     return `
     <article class="oc-card">
       <div class="oc-card-inner">
@@ -664,11 +997,11 @@ function closeBloc2WorkModal() {
 function openCertModalByIndex(index) {
   const formation = formationsData[index];
   if (!formation || !formation.certificate) return;
-  
+
   openCertModal(
-    formation.title, 
-    formation.subtitle, 
-    formation.certificate.label, 
+    formation.title,
+    formation.subtitle,
+    formation.certificate.label,
     formation.certificate.href
   );
 }
@@ -695,7 +1028,7 @@ function openCertModal(title, subtitle, label, href) {
   descElement.textContent = `Visualisation en lecture seule de la certification : ${label}.`;
 
   const isPdf = href.toLowerCase().endsWith('.pdf');
-  
+
   if (isPdf) {
     container.innerHTML = `
       <object data="${href}" type="application/pdf" width="100%" height="100%">
@@ -726,7 +1059,7 @@ function closeCertModal() {
 function openOcModalByIndex(index) {
   const cert = openclassroomsCerts[index];
   if (!cert) return;
-  
+
   openOcModal(cert.title, cert.description, cert.image, cert.tags);
 }
 
@@ -736,12 +1069,12 @@ function openOcModal(title, description, image, tags) {
 
   // S'assurer que tags est un tableau
   const tagsArray = Array.isArray(tags) ? tags : [];
-  
+
   const imgElement = document.getElementById('ocModalImage');
   const titleElement = document.getElementById('ocModalTitle');
   const descElement = document.getElementById('ocModalDescription');
   const tagsContainer = document.getElementById('ocModalTags');
-  
+
   if (imgElement) imgElement.src = image;
   if (imgElement) imgElement.alt = title;
   if (titleElement) titleElement.textContent = title;
@@ -751,7 +1084,7 @@ function openOcModal(title, description, image, tags) {
   }
 
   modal.classList.add('active');
-  
+
   // Fermer en cliquant en dehors
   modal.onclick = (e) => {
     if (e.target === modal) closeOcModal();
@@ -858,8 +1191,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Render data
   renderProjects();
   renderSkills();
+  renderCompetencesTable();
   renderFormations();
   renderOpenClassrooms();
+  renderBtsSio();
+  renderVeille();
+  renderPatrimoine();
 
   // Year
   document.getElementById('currentYear').textContent = new Date().getFullYear();

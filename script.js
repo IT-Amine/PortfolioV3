@@ -66,6 +66,7 @@ const projectsData = [
     pdfs: [
       { label: 'Sécurité terminaux', href: '/public/Projet/cyber/TP1-sécurité des terminaux.pdf' },
       { label: 'Dossier Commun', href: '/public/Projet/cyber/TP2-Commun-dossier.pdf' },
+      { label: 'Contexte Labo', href: '/public/Projet/cyber/Contexte-labo-2026.pdf' }
     ]
   },
   {
@@ -75,7 +76,9 @@ const projectsData = [
     tech: ['Cisco', 'Architecture', 'Routage'],
     icon: 'antenna',
     pdfs: [
-      { label: 'Dossier IMDEO', href: '/public/Projet/imdeo/imdeo.pdf' },
+      { label: 'Dossier Technique', href: '/public/Projet/imdeo/imdeo.pdf' },
+      { label: 'Contexte Projet', href: '/public/Projet/imdeo/Contexte - IMDEO - 2026.pdf' },
+      { label: 'Structure Réseau', href: '/public/Projet/imdeo/structure-imdeo.pdf' }
     ]
   },
   {
@@ -133,7 +136,6 @@ const formationsData = [
     date: '2025–2027',
     desc: 'Services Informatiques aux Organisations, option SISR. Administration système, réseau et cybersécurité.',
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=400',
-    pdf: '/public/Projet/AP.pdf'
   },
   {
     title: 'Bac Pro SN RISC',
@@ -141,7 +143,6 @@ const formationsData = [
     date: '2022–2025',
     desc: 'Systèmes Numériques, option RISC. Réseaux et systèmes communicants.',
     image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=400',
-    pdf: '/public/Projet/AP.pdf'
   }
 ];
 
@@ -337,7 +338,7 @@ async function renderVeille() {
     const res = await fetch(`/api/veille?limit=5&t=${Date.now()}`);
     const data = await res.json();
     const articles = data.articles || [];
-    
+
     if (articles.length === 0) {
       container.innerHTML = '<p class="veille-empty">Aucun article de veille disponible.</p>';
       return;
@@ -418,11 +419,7 @@ function openProjectModal(id) {
         // Load PDF
         frame.src = pdf.href;
         downloadLink.href = pdf.href;
-
-        // Check local storage / settings if iframe blocked
-        if (window.innerWidth < 768) {
-          fallback.style.display = 'block';
-        }
+        fallback.style.display = 'block';
       };
 
       list.appendChild(btn);

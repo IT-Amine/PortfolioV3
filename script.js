@@ -3,7 +3,7 @@
    ============================================================ */
 
 const CONTACT_EMAIL = 'kadaamine37@hotmail.com';
-const CONTACT_SUBJECT = 'Contact depuis portfolio BTS SIO';
+const CONTACT_SUBJECT = 'Portfolio BTS SIO - Contact';
 
 /* --- ICÔNES SVG --- */
 
@@ -28,7 +28,7 @@ const ICONS = {
   gitlab: 'https://cdn.simpleicons.org/gitlab/FC6D26',
 };
 
-function getIcon(name, defaultColor = '10b981') {
+function getIcon(name) {
   const iconContent = ICONS[name];
   if (!iconContent) return ICONS['terminal'];
 
@@ -41,6 +41,21 @@ function getIcon(name, defaultColor = '10b981') {
   return iconContent;
 }
 
+/* --- UTILS --- */
+
+function escapeHTML(str) {
+  if (!str) return '';
+  return str.replace(/[&<>'"]/g,
+    tag => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    }[tag])
+  );
+}
+
 /* --- DONNÉES DES COMPOSANTS --- */
 
 const projectsData = [
@@ -51,10 +66,10 @@ const projectsData = [
     tech: ['Active Directory', 'Windows Server', 'VLAN', 'Systèmes'],
     logo: '/public/MilleNuits.jpg',
     pdfs: [
-      { label: 'Situation SP1', href: '/public/Projet/millenuits/SP1.pdf' },
-      { label: 'Situation SP2', href: '/public/Projet/millenuits/SP2.pdf' },
-      { label: 'Situation SP3', href: '/public/Projet/millenuits/SP3.pdf' },
-      { label: 'Contexte Technique', href: '/public/Projet/millenuits/contexte.pdf' },
+      { label: 'Situation SP1', href: 'public/Projet/millenuits/SP1.pdf' },
+      { label: 'Situation SP2', href: 'public/Projet/millenuits/SP2.pdf' },
+      { label: 'Situation SP3', href: 'public/Projet/millenuits/SP3.pdf' },
+      { label: 'Contexte Technique', href: 'public/Projet/millenuits/contexte.pdf' },
     ]
   },
   {
@@ -64,9 +79,9 @@ const projectsData = [
     tech: ['Cybersécurité', 'Hardening', 'Analyse vulnérabilités'],
     icon: 'shield',
     pdfs: [
-      { label: 'TP1 — Sécurité', href: '/public/Projet/cyber/TP1.pdf' },
-      { label: 'TP2 — Commun', href: '/public/Projet/cyber/TP2.pdf' },
-      { label: 'Contexte Labo', href: '/public/Projet/cyber/Contexte.pdf' }
+      { label: 'TP1 — Sécurité', href: 'public/Projet/cyber/TP1.pdf' },
+      { label: 'TP2 — Commun', href: 'public/Projet/cyber/TP2.pdf' },
+      { label: 'Contexte Labo', href: 'public/Projet/cyber/Contexte.pdf' }
     ]
   },
   {
@@ -76,9 +91,9 @@ const projectsData = [
     tech: ['Cisco', 'Architecture', 'Routage'],
     logo: '/public/imdeo.jpeg',
     pdfs: [
-      { label: 'Dossier Technique', href: '/public/Projet/imdeo/imdeo.pdf' },
-      { label: 'Contexte Projet', href: '/public/Projet/imdeo/Contexte.pdf' },
-      { label: 'Structure Réseau', href: '/public/Projet/imdeo/structure.pdf' }
+      { label: 'Dossier Technique', href: 'public/Projet/imdeo/imdeo.pdf' },
+      { label: 'Contexte Projet', href: 'public/Projet/imdeo/Contexte.pdf' },
+      { label: 'Structure Réseau', href: 'public/Projet/imdeo/structure.pdf' }
     ]
   },
   {
@@ -88,7 +103,7 @@ const projectsData = [
     tech: ['Virtualisation', 'Infrastructure', 'Backup'],
     icon: 'server',
     pdfs: [
-      { label: 'Document AP1', href: '/public/Projet/AP.pdf' },
+      { label: 'Document AP1', href: 'public/Projet/AP.pdf' },
     ]
   }
 ];
@@ -136,6 +151,7 @@ const formationsData = [
     subtitle: 'Lycée Paul-Louis Courier, Tours',
     date: '2025–2027',
     desc: 'Services Informatiques aux Organisations, option SISR. Administration système, réseau',
+    pdf: 'public/Projet/AP.pdf',
     showVoir: false
   },
   {
@@ -143,6 +159,7 @@ const formationsData = [
     subtitle: 'Lycée Henri Becquerel, Tours',
     date: '2022–2025',
     desc: 'Systèmes Numériques, option RISC. Réseaux et systèmes communicants.',
+    pdf: 'public/Projet/AP.pdf',
     showVoir: false
   }
 ];
@@ -154,18 +171,18 @@ const patrimoineData = [
 ];
 
 const openclassroomsCerts = [
-  { title: 'Active Directory', image: '/public/openclassroom/Centralisez et sécuriser avec Active Directory.jpg' },
-  { title: 'Docker', image: '/public/openclassroom/Optimisez avec des Conteneur Docker.jpg' },
-  { title: 'TCP/IP', image: '/public/openclassroom/TCP:IP.png' },
-  { title: 'Windows Server', image: '/public/openclassroom/Windows Server.png' },
-  { title: 'Cisco Networking', image: '/public/openclassroom/cisco.jpg' },
-  { title: 'Déploiement Win10', image: '/public/openclassroom/déployez Win10.png' },
-  { title: 'Git & GitHub', image: '/public/openclassroom/gérer du code avec git & Github.jpg' },
-  { title: 'Git Fundamentals', image: '/public/openclassroom/git.png' },
-  { title: 'Linux Administration', image: '/public/openclassroom/linux.jpg' },
-  { title: 'Hardware PC', image: '/public/openclassroom/pc.png' },
-  { title: 'ChatGPT', image: '/public/openclassroom/utiliser ChatGPT.png' },
-  { title: 'Virtualisation Environnement', image: '/public/openclassroom/virtualiser vos environnement travail.jpg' },
+  { title: 'Active Directory', image: 'public/openclassroom/Centralisez et sécuriser avec Active Directory.jpg' },
+  { title: 'Docker', image: 'public/openclassroom/Optimisez avec des Conteneur Docker.jpg' },
+  { title: 'TCP/IP', image: 'public/openclassroom/TCP:IP.png' },
+  { title: 'Windows Server', image: 'public/openclassroom/Windows Server.png' },
+  { title: 'Cisco Networking', image: 'public/openclassroom/cisco.jpg' },
+  { title: 'Déploiement Win10', image: 'public/openclassroom/déployez Win10.png' },
+  { title: 'Git & GitHub', image: 'public/openclassroom/gérer du code avec git & Github.jpg' },
+  { title: 'Git Fundamentals', image: 'public/openclassroom/git.png' },
+  { title: 'Linux Administration', image: 'public/openclassroom/linux.jpg' },
+  { title: 'Hardware PC', image: 'public/openclassroom/pc.png' },
+  { title: 'ChatGPT', image: 'public/openclassroom/utiliser ChatGPT.png' },
+  { title: 'Virtualisation Environnement', image: 'public/openclassroom/virtualiser vos environnement travail.jpg' },
 ];
 
 const btsSioData = {
@@ -210,8 +227,6 @@ function updateActiveSection() {
 }
 
 function goToSection(sectionId) {
-  activeSection = sectionId;
-  updateActiveSection();
   window.location.hash = sectionId;
 }
 
@@ -262,15 +277,14 @@ function renderFormations() {
   if (!grid) return;
   grid.innerHTML = `<div class="timeline-container"><div class="timeline-line"></div>` +
     formationsData.map(f => {
-      const isScrollLink = f.pdf?.startsWith('#');
       const shouldShowVoir = f.showVoir !== false;
-      const onClick = shouldShowVoir ? `onclick="viewPDF('${f.pdf}', '${f.title}')"` : '';
-      const cursorStyle = shouldShowVoir ? 'style="cursor: pointer;"' : '';
+      const onClickAttr = shouldShowVoir ? `onclick="viewPDF('${f.pdf}', '${f.title}')"` : '';
+      const cursorAttr = shouldShowVoir ? 'style="cursor: pointer;"' : '';
 
       return `
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-content" ${onClick} ${cursorStyle}>
+        <div class="timeline-content" ${onClickAttr} ${cursorAttr}>
           <div class="timeline-header">
             <div>
               <h3 class="timeline-title">${f.title}</h3>
@@ -357,6 +371,7 @@ async function renderVeille() {
   container.innerHTML = '<div class="veille-loading">Chargement du flux de sécurité...</div>';
   try {
     const res = await fetch(`/api/veille?limit=5&t=${Date.now()}`);
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
     const data = await res.json();
     const articles = data.articles || [];
 
@@ -373,8 +388,8 @@ async function renderVeille() {
           <div class="veille-card-bg-overlay"></div>
           <div class="veille-card-content">
             <div class="veille-badge-live">Dernière Mise à jour</div>
-            <div class="veille-meta">${featured.source} • ${new Date(featured.pub_date).toLocaleDateString('fr-FR')}</div>
-            <h3 class="veille-featured-title">${featured.title}</h3>
+            <div class="veille-meta">${escapeHTML(featured.source)} • ${new Date(featured.pub_date).toLocaleDateString('fr-FR')}</div>
+            <h3 class="veille-featured-title">${escapeHTML(featured.title)}</h3>
             <div class="veille-read-btn">Consulter l'article <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
           </div>
         </a>
@@ -382,16 +397,17 @@ async function renderVeille() {
           ${others.map(a => `
             <a href="${a.link}" target="_blank" class="veille-small-card">
               <div class="veille-small-meta">
-                <span class="source-tag">${a.source}</span>
+                <span class="source-tag">${escapeHTML(a.source)}</span>
                 <span class="date-tag">${new Date(a.pub_date).toLocaleDateString('fr-FR')}</span>
               </div>
-              <h4>${a.title}</h4>
+              <h4>${escapeHTML(a.title)}</h4>
             </a>
           `).join('')}
         </div>
       </div>
     `;
   } catch (err) {
+    console.error('Erreur Veille:', err);
     container.innerHTML = '<p class="veille-empty">Flux temporairement indisponible.</p>';
   }
 }
@@ -400,7 +416,7 @@ function renderOpenClassrooms() {
   const grid = document.getElementById('openclassroomsGrid');
   if (!grid) return;
   grid.innerHTML = openclassroomsCerts.map((c, i) => `
-    <article class="oc-card" onclick="openOcModalByIndex(${i})">
+    <article class="oc-card" onclick="viewCertificateImageByIndex(${i})">
       <div class="oc-card-image-container">
         <img src="${c.image}" alt="${c.title}" class="oc-card-image">
       </div>
@@ -436,12 +452,8 @@ function openProjectModal(id) {
       btn.innerHTML = `<span class="pdf-btn-icon">${getIcon('document')}</span><span>${pdf.label}</span>`;
 
       btn.onclick = () => {
-        console.log('Ouverture PDF:', pdf.href);
-        // Update UI
         document.querySelectorAll('.pdf-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
-        // Load PDF
         frame.src = pdf.href;
         downloadLink.href = pdf.href;
         fallback.style.display = 'block';
@@ -450,10 +462,10 @@ function openProjectModal(id) {
       list.appendChild(btn);
     });
 
-    // Auto-load first PDF
     const firstPdf = project.pdfs[0];
     frame.src = firstPdf.href;
     downloadLink.href = firstPdf.href;
+    fallback.style.display = 'block';
   } else {
     list.innerHTML = '<p class="text-muted">Aucun document joint.</p>';
   }
@@ -476,51 +488,64 @@ function viewPDF(url, title) {
   const modalDesc = document.getElementById('modalProjectDesc');
   const list = document.getElementById('modalPdfList');
 
-  // Reset & Setup
   modalTitle.textContent = title;
-  modalDesc.textContent = '';
   list.innerHTML = `<p class="text-muted" style="font-size:0.8rem;">Consultation interne</p>`;
 
-  // Clear frame and load new one
-  frame.src = 'about:blank';
-  setTimeout(() => {
-    frame.src = url;
-    downloadLink.href = url;
-    fallback.style.display = 'block';
-  }, 50);
+  frame.src = url;
+  downloadLink.href = url;
+  fallback.style.display = 'block';
 
   modal.classList.add('active');
 }
 
 function closeProjectModal() {
-  document.getElementById('projectModal').classList.remove('active');
-  document.getElementById('pdfFrame').src = '';
+  const modal = document.getElementById('projectModal');
+  const frame = document.getElementById('pdfFrame');
+  modal.classList.remove('active');
+  frame.src = 'about:blank';
 }
-function closeOcModal() {
-  const modal = document.getElementById('ocModal');
+
+/* --- VISIONNEUSE IMAGE (CERTIFICATS) --- */
+
+function viewCertificateImageByIndex(index) {
+  const cert = openclassroomsCerts[index];
+  if (!cert) return;
+  viewCertificateImage(cert.image, cert.title);
+}
+
+function viewCertificateImage(src, title, tags = [], desc = '') {
+  const modal = document.getElementById('imageViewerModal');
+  const img = document.getElementById('viewerModalImage');
+  const titleEl = document.getElementById('viewerModalTitle');
+  const descEl = document.getElementById('viewerModalDescription');
+  const tagsEl = document.getElementById('viewerModalTags');
+
+  if (!modal || !img) return;
+
+  img.src = src;
+  titleEl.textContent = title;
+  descEl.textContent = desc || '';
+
+  if (tagsEl) {
+    tagsEl.innerHTML = tags.map(t => `<span class="viewer-modal-tag">${t}</span>`).join('');
+  }
+
+  modal.classList.add('active');
+}
+
+function closeImageViewerModal() {
+  const modal = document.getElementById('imageViewerModal');
   if (modal) modal.classList.remove('active');
 }
-function openOcModalByIndex(i) {
-  const c = openclassroomsCerts[i];
-  document.getElementById('ocModalTitle').textContent = c.title;
-  document.getElementById('ocModalImage').src = c.image;
-  document.getElementById('ocModal').classList.add('active');
-}
+
 function renderCertificationsTree() {
   const container = document.getElementById('certificationsTree');
   if (!container) return;
   container.innerHTML = `
     <div class="cert-tree">
       <div class="cert-tree-line"></div>
-      ${certificationsTreeData.map(c => {
-    let onClickAction = '';
-    if (c.type === 'section') {
-      onClickAction = `goToSection('${c.file.slice(1)}')`;
-    } else if (c.type === 'pdf') {
-      onClickAction = `viewPDF('${c.file}', '${c.title}')`;
-    } else {
-      onClickAction = `openImageModal('${c.file}', '${c.title}')`;
-    }
+      ${certificationsTreeData.map((c, i) => {
+    const onClickAction = `viewCertInTree(${i})`;
 
     return `
         <div class="cert-item">
@@ -542,15 +567,16 @@ function renderCertificationsTree() {
   `;
 }
 
-function openImageModal(src, title) {
-  const modal = document.getElementById('ocModal'); // Ré-utiliser la modale OC
-  const img = document.getElementById('ocModalImage');
-  const modalTitle = document.getElementById('ocModalTitle');
-  if (!modal || !img) return;
-
-  img.src = src;
-  modalTitle.textContent = title;
-  modal.classList.add('active');
+function viewCertInTree(index) {
+  const c = certificationsTreeData[index];
+  if (!c) return;
+  if (c.type === 'section') {
+    goToSection(c.file.slice(1));
+  } else if (c.type === 'pdf') {
+    viewPDF(c.file, c.title);
+  } else {
+    viewCertificateImage(c.file, c.title);
+  }
 }
 
 /* --- INIT --- */
@@ -563,7 +589,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateActiveSection();
   });
 
-  // Fix Navigation : Écouter les clics sur les boutons de nav
   const navMenu = document.getElementById('nav-menu');
   navMenu?.addEventListener('click', (e) => {
     const btn = e.target.closest('.nav-btn');
@@ -576,7 +601,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const navToggle = document.getElementById('nav-toggle');
   navToggle?.addEventListener('click', () => navMenu?.classList.toggle('is-open'));
 
-  // Rendu initial
   renderProjects();
   renderSkills();
   renderFormations();
@@ -591,9 +615,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
 
-// Exposer goToSection pour les clics directs dans le HTML (ex: boutons hero)
 window.goToSection = goToSection;
 window.openProjectModal = openProjectModal;
 window.closeProjectModal = closeProjectModal;
-window.openOcModalByIndex = openOcModalByIndex;
-window.closeOcModal = closeOcModal;
+window.viewPDF = viewPDF;
+window.viewCertificateImageByIndex = viewCertificateImageByIndex;
+window.viewCertificateImage = viewCertificateImage;
+window.closeImageViewerModal = closeImageViewerModal;
+window.viewCertInTree = viewCertInTree;

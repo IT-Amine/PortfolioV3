@@ -97,6 +97,9 @@ export default async function handler(req, res) {
     const allArticles = [];
     const errors = [];
 
+    // Mots-clés de cybersécurité pour le filtrage
+    const cyberKeywords = ['cyber', 'sécurité', 'security', 'vulnerabilité', 'vulnerability', 'hack', 'faille', 'attaque', 'malware', 'ransomware', 'data breach', 'phishing', 'anssi', 'cert-fr'];
+
     // Récupérer chaque flux RSS
     for (const feed of RSS_SOURCES) {
       try {
@@ -108,7 +111,20 @@ export default async function handler(req, res) {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
         const xml = await response.text();
-        const articles = parseRSS(xml, feed.name, feed.category);
+        let articles = parseRSS(xml, feed.name, feed.category);
+
+        // FILTRAGE : Cybersécurité & Pertinence
+        articles = articles.filter(art => {
+          const content = (art.title + ' ' + art.desc).toLowerCase();
+          const hasCyberKeyword = cyberKeywords.some(kw => content.includes(kw));
+          
+          // Si la source est déjà cybersécurité (ANSSI, CERT-FR, Hacker News), on garde
+          if (feed.category === 'Cybersécurité') return true;
+          
+          // Pour les autres (Korben, Bleeping), on ne garde que si c'est lié au cyber
+          return hasCyberKeyword;
+        });
+
         allArticles.push(...articles.slice(0, 5)); // Max 5 articles par source
       } catch (err) {
         errors.push({ source: feed.name, error: err.message });
@@ -142,10 +158,30 @@ export default async function handler(req, res) {
       }
     }
 
-    // Nettoyer les articles de plus de 6 mois pour économiser l'espace Neon
+    // ───────────────────────────────────────────────
+    // AUTOMATISATION : Nettoyage Hebdomadaire & Limite
+    // ───────────────────────────────────────────────
+    
+    const today = new Date();
+    let maintenanceLog = 'None';
+
+    // 1. Suppression du plus ancien chaque semaine (si on est lundi)
+    if (today.getDay() === 1) { // 1 = Lundi
+      await sql`
+        DELETE FROM veille_articles
+        WHERE id = (SELECT id FROM veille_articles ORDER BY created_at ASC LIMIT 1);
+      `;
+      maintenanceLog = 'Oldest entry deleted (Weekly Cleanup)';
+    }
+
+    // 2. Nettoyage général : On ne garde que les 15 derniers articles pour une veille fraîche
     await sql`
       DELETE FROM veille_articles
-      WHERE created_at < NOW() - INTERVAL '6 months';
+      WHERE id NOT IN (
+        SELECT id FROM veille_articles
+        ORDER BY pub_date DESC
+        LIMIT 15
+      );
     `;
 
     return res.status(200).json({
@@ -153,7 +189,8 @@ export default async function handler(req, res) {
       fetched: allArticles.length,
       inserted,
       errors,
-      timestamp: new Date().toISOString(),
+      maintenance: maintenanceLog,
+      timestamp: today.toISOString(),
     });
 
   } catch (err) {

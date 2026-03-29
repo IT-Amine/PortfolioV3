@@ -273,8 +273,11 @@ function renderFormations() {
         <div class="timeline-dot"></div>
         <div class="timeline-content" onclick="viewPDF('${f.pdf}', '${f.title}')" style="cursor: pointer;">
           <div class="timeline-header">
-            <h3 class="timeline-title">${f.title}</h3>
-            <div class="timeline-subtitle">${f.subtitle}</div>
+            <div>
+              <h3 class="timeline-title">${f.title}</h3>
+              <div class="timeline-subtitle">${f.subtitle}</div>
+            </div>
+            <div class="timeline-view-badge">Voir</div>
           </div>
           <div class="timeline-date">${f.date}</div>
           <p class="timeline-desc">${f.desc}</p>
@@ -399,8 +402,12 @@ function renderOpenClassrooms() {
   if (!grid) return;
   grid.innerHTML = openclassroomsCerts.map((c, i) => `
     <article class="oc-card" onclick="openOcModalByIndex(${i})">
-      <img src="${c.image}" alt="${c.title}">
-      <h4>${c.title}</h4>
+      <div class="oc-card-image-container">
+        <img src="${c.image}" alt="${c.title}" class="oc-card-image">
+      </div>
+      <div class="oc-card-content">
+        <h4 class="oc-card-title">${c.title}</h4>
+      </div>
     </article>
   `).join('');
 }
@@ -461,19 +468,29 @@ function viewPDF(url, title) {
     goToSection(sectionId);
     return;
   }
-  document.getElementById('modalProjectTitle').textContent = title;
-  document.getElementById('modalProjectDesc').textContent = '';
-  const list = document.getElementById('modalPdfList');
+  
+  const modal = document.getElementById('projectModal');
   const frame = document.getElementById('pdfFrame');
   const fallback = document.getElementById('pdfFallback');
   const downloadLink = document.getElementById('pdfDownloadLink');
+  const modalTitle = document.getElementById('modalProjectTitle');
+  const modalDesc = document.getElementById('modalProjectDesc');
+  const list = document.getElementById('modalPdfList');
 
-  list.innerHTML = `<p class="text-muted" style="font-size:0.8rem;">Document unique</p>`;
-  frame.src = url;
-  downloadLink.href = url;
-  fallback.style.display = 'block';
+  // Reset & Setup
+  modalTitle.textContent = title;
+  modalDesc.textContent = '';
+  list.innerHTML = `<p class="text-muted" style="font-size:0.8rem;">Consultation interne</p>`;
+  
+  // Clear frame and load new one
+  frame.src = 'about:blank';
+  setTimeout(() => {
+    frame.src = url;
+    downloadLink.href = url;
+    fallback.style.display = 'block';
+  }, 50);
 
-  document.getElementById('projectModal').classList.add('active');
+  modal.classList.add('active');
 }
 
 function closeProjectModal() {
@@ -501,7 +518,7 @@ function renderCertificationsTree() {
         if (c.type === 'section') {
           onClickAction = `goToSection('${c.file.slice(1)}')`;
         } else if (c.type === 'pdf') {
-          onClickAction = `window.open('${c.file}', '_blank')`;
+          onClickAction = `viewPDF('${c.file}', '${c.title}')`;
         } else {
           onClickAction = `openImageModal('${c.file}', '${c.title}')`;
         }

@@ -51,10 +51,10 @@ const projectsData = [
     tech: ['Active Directory', 'Windows Server', 'VLAN', 'Systèmes'],
     logo: 'public/MilleNuits.jpg',
     pdfs: [
-      { label: 'Situation SP1 — Réseau', href: 'public/Projet/millenuits/Situation - SP1 - Gestion de l’infrastructure réseau.pdf' },
-      { label: 'Situation SP2 — Parc Info', href: 'public/Projet/millenuits/Situation - SP2 - Gestion du parc informatique.pdf' },
-      { label: 'Situation SP3 — AD / DHCP', href: 'public/Projet/millenuits/Situation - SP3 - Gestion des services principaux AD - DHCP.pdf' },
-      { label: 'Contexte Technique', href: 'public/Projet/millenuits/Contexte Millenuits.pdf' },
+      { label: 'Situation SP1 — Réseau', href: '../public/Projet/millenuits/Situation - SP1 - Gestion de l’infrastructure réseau.pdf' },
+      { label: 'Situation SP2 — Parc Info', href: '../public/Projet/millenuits/Situation - SP2 - Gestion du parc informatique.pdf' },
+      { label: 'Situation SP3 — AD / DHCP', href: '../public/Projet/millenuits/Situation - SP3 - Gestion des services principaux AD - DHCP.pdf' },
+      { label: 'Contexte Technique', href: '../public/Projet/millenuits/Contexte Millenuits.pdf' },
     ]
   },
   {

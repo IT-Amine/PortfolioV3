@@ -49,12 +49,12 @@ const projectsData = [
     title: 'Groupe Millenuits — Infrastructure & Services',
     desc: 'Refonte de l\'infrastructure système et réseau. Déploiement des services critiques (AD DS, DHCP, DNS, GPO) et segmentation réseau via VLAN.',
     tech: ['Active Directory', 'Windows Server', 'VLAN', 'Systèmes'],
-    logo: 'public/MilleNuits.jpg',
+    logo: '/public/MilleNuits.jpg',
     pdfs: [
-      { label: 'Situation SP1 — Réseau', href: '../public/Projet/millenuits/Situation - SP1 - Gestion de l’infrastructure réseau.pdf' },
-      { label: 'Situation SP2 — Parc Info', href: '../public/Projet/millenuits/Situation - SP2 - Gestion du parc informatique.pdf' },
-      { label: 'Situation SP3 — AD / DHCP', href: '../public/Projet/millenuits/Situation - SP3 - Gestion des services principaux AD - DHCP.pdf' },
-      { label: 'Contexte Technique', href: '../public/Projet/millenuits/Contexte Millenuits.pdf' },
+      { label: 'Situation SP1', href: '/public/Projet/millenuits/SP1.pdf' },
+      { label: 'Situation SP2', href: '/public/Projet/millenuits/SP2.pdf' },
+      { label: 'Situation SP3', href: '/public/Projet/millenuits/SP3.pdf' },
+      { label: 'Contexte Technique', href: '/public/Projet/millenuits/contexte.pdf' },
     ]
   },
   {
@@ -64,9 +64,9 @@ const projectsData = [
     tech: ['Cybersécurité', 'Hardening', 'Analyse vulnérabilités'],
     icon: 'shield',
     pdfs: [
-      { label: 'Sécurité terminaux', href: 'public/Projet/cyber/TP1-sécurité des terminaux.pdf' },
-      { label: 'Dossier Commun', href: 'public/Projet/cyber/TP2-Commun-dossier.pdf' },
-      { label: 'Contexte Labo', href: 'public/Projet/cyber/Contexte-labo-2026.pdf' }
+      { label: 'TP1 — Sécurité', href: '/public/Projet/cyber/TP1.pdf' },
+      { label: 'TP2 — Commun', href: '/public/Projet/cyber/TP2.pdf' },
+      { label: 'Contexte Labo', href: '/public/Projet/cyber/Contexte.pdf' }
     ]
   },
   {
@@ -74,11 +74,11 @@ const projectsData = [
     title: 'Architecture Réseau IMDEO',
     desc: 'Conception d\'une architecture logique pour l\'implantation IMDEO. Routage avancé et segmentation.',
     tech: ['Cisco', 'Architecture', 'Routage'],
-    logo: 'public/imdeo.jpeg',
+    logo: '/public/imdeo.jpeg',
     pdfs: [
-      { label: 'Dossier Technique', href: 'public/Projet/imdeo/imdeo.pdf' },
-      { label: 'Contexte Projet', href: 'public/Projet/imdeo/Contexte - IMDEO - 2026.pdf' },
-      { label: 'Structure Réseau', href: 'public/Projet/imdeo/structure-imdeo.pdf' }
+      { label: 'Dossier Technique', href: '/public/Projet/imdeo/imdeo.pdf' },
+      { label: 'Contexte Projet', href: '/public/Projet/imdeo/Contexte.pdf' },
+      { label: 'Structure Réseau', href: '/public/Projet/imdeo/structure.pdf' }
     ]
   },
   {
@@ -88,7 +88,7 @@ const projectsData = [
     tech: ['Virtualisation', 'Infrastructure', 'Backup'],
     icon: 'server',
     pdfs: [
-      { label: 'Document AP1', href: 'public/Projet/AP.pdf' },
+      { label: 'Document AP1', href: '/public/Projet/AP.pdf' },
     ]
   }
 ];
@@ -124,9 +124,10 @@ const skillsCategories = [
 ];
 
 const certificationsTreeData = [
-  { title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: 'public/certif/PIX.jpg', type: 'image' },
-  { title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: 'public/certif/MOOC.jpg', type: 'image' },
-  { title: 'EBIOS — Analyse de risque', date: '2025', icon: 'shield', file: 'public/certif/EBIOS.pdf', type: 'pdf' },
+  { title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: '/public/certif/PIX.jpg', type: 'image' },
+  { title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: '/public/certif/MOOC.jpg', type: 'image' },
+  { title: 'EBIOS — Analyse de risque', date: '2025', icon: 'shield', file: '/public/certif/EBIOS.pdf', type: 'pdf' },
+  { title: 'OpenClassrooms — Réseaux & Systèmes', date: '2024–2025', icon: 'globe', file: '#openclassrooms', type: 'section' },
 ];
 
 const formationsData = [
@@ -134,15 +135,22 @@ const formationsData = [
     title: 'BTS SIO SISR',
     subtitle: 'Lycée Paul-Louis Courier, Tours',
     date: '2025–2027',
-    desc: 'Services Informatiques aux Organisations, option SISR. Administration système, réseau et cybersécurité.',
-    pdf: 'public/Projet/AP.pdf'
+    desc: 'Services Informatiques aux Organisations, option SISR. Administration système, réseau',
+    pdf: '/public/Projet/AP.pdf'
   },
   {
-    title: 'Bac Pro SN RISC',
+    title: 'Bach Pro SN RISC',
     subtitle: 'Lycée Henri Becquerel, Tours',
     date: '2022–2025',
     desc: 'Systèmes Numériques, option RISC. Réseaux et systèmes communicants.',
-    pdf: 'public/Projet/AP.pdf'
+    pdf: '/public/Projet/AP.pdf'
+  },
+  {
+    title: 'OpenClassrooms Specialist',
+    subtitle: 'Auto-formation en ligne',
+    date: 'En cours',
+    desc: 'Perfectionnement sur Active Directory, Docker, Linux et les réseaux TCP/IP.',
+    pdf: '#openclassrooms'
   }
 ];
 
@@ -153,10 +161,18 @@ const patrimoineData = [
 ];
 
 const openclassroomsCerts = [
-  { title: 'TCP/IP', image: 'public/openclassroom/TCP:IP.png' },
-  { title: 'Active Directory', image: 'public/openclassroom/Centralisez et sécuriser avec Active Directory.jpg' },
-  { title: 'Docker', image: 'public/openclassroom/Optimisez avec des Conteneur Docker.jpg' },
-  { title: 'Linux', image: 'public/openclassroom/linux.jpg' },
+  { title: 'Active Directory', image: '/public/openclassroom/Centralisez et sécuriser avec Active Directory.jpg' },
+  { title: 'Docker', image: '/public/openclassroom/Optimisez avec des Conteneur Docker.jpg' },
+  { title: 'TCP/IP', image: '/public/openclassroom/TCP:IP.png' },
+  { title: 'Windows Server', image: '/public/openclassroom/Windows Server.png' },
+  { title: 'Cisco Networking', image: '/public/openclassroom/cisco.jpg' },
+  { title: 'Déploiement Win10', image: '/public/openclassroom/déployez Win10.png' },
+  { title: 'Git & GitHub', image: '/public/openclassroom/gérer du code avec git & Github.jpg' },
+  { title: 'Git Fundamentals', image: '/public/openclassroom/git.png' },
+  { title: 'Linux Administration', image: '/public/openclassroom/linux.jpg' },
+  { title: 'Hardware PC', image: '/public/openclassroom/pc.png' },
+  { title: 'ChatGPT', image: '/public/openclassroom/utiliser ChatGPT.png' },
+  { title: 'Virtualisation Environnement', image: '/public/openclassroom/virtualiser vos environnement travail.jpg' },
 ];
 
 const btsSioData = {
@@ -440,6 +456,11 @@ function openProjectModal(id) {
 }
 
 function viewPDF(url, title) {
+  if (url && url.startsWith('#')) {
+    const sectionId = url.slice(1);
+    goToSection(sectionId);
+    return;
+  }
   document.getElementById('modalProjectTitle').textContent = title;
   document.getElementById('modalProjectDesc').textContent = '';
   const list = document.getElementById('modalPdfList');
@@ -475,10 +496,20 @@ function renderCertificationsTree() {
   container.innerHTML = `
     <div class="cert-tree">
       <div class="cert-tree-line"></div>
-      ${certificationsTreeData.map(c => `
+      ${certificationsTreeData.map(c => {
+        let onClickAction = '';
+        if (c.type === 'section') {
+          onClickAction = `goToSection('${c.file.slice(1)}')`;
+        } else if (c.type === 'pdf') {
+          onClickAction = `window.open('${c.file}', '_blank')`;
+        } else {
+          onClickAction = `openImageModal('${c.file}', '${c.title}')`;
+        }
+        
+        return `
         <div class="cert-item">
           <div class="cert-dot"></div>
-          <div class="cert-card" onclick="${c.type === 'pdf' ? `viewPDF('${c.file}', '${c.title}')` : `openImageModal('${c.file}', '${c.title}')`}">
+          <div class="cert-card" onclick="${onClickAction}">
             <div class="cert-header-info">
               <div class="cert-icon-small">${getIcon(c.icon)}</div>
               <div class="cert-details">
@@ -489,43 +520,7 @@ function renderCertificationsTree() {
             <div class="cert-badge">Voir</div>
           </div>
         </div>
-      `).join('')}
-    </div>
-  `;
-}
-
-function openImageModal(src, title) {
-  const modal = document.getElementById('ocModal'); // Re-use OC modal for simplicity
-  const img = document.getElementById('ocModalImage');
-  const modalTitle = document.getElementById('ocModalTitle');
-  if (!modal || !img) return;
-
-  img.src = src;
-  modalTitle.textContent = title;
-  modal.classList.add('active');
-}
-
-function renderCertificationsTree() {
-  const container = document.getElementById('certificationsTree');
-  if (!container) return;
-  container.innerHTML = `
-    <div class="cert-tree">
-      <div class="cert-tree-line"></div>
-      ${certificationsTreeData.map(c => `
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div class="cert-card" onclick="${c.type === 'pdf' ? `window.open('${c.file}', '_blank')` : `openImageModal('${c.file}', '${c.title}')`}">
-            <div class="cert-header-info">
-              <div class="cert-icon-small">${getIcon(c.icon)}</div>
-              <div class="cert-details">
-                <h4 class="cert-title-txt">${c.title}</h4>
-                <div class="cert-date-txt">${c.date}</div>
-              </div>
-            </div>
-            <div class="cert-badge">Voir</div>
-          </div>
-        </div>
-      `).join('')}
+      `;}).join('')}
     </div>
   `;
 }

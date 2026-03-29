@@ -66,6 +66,17 @@ function parseRSS(xmlText, sourceName, category) {
 }
 
 // ───────────────────────────────────────────────
+// Helper : Numéro de semaine actuelle (Calendrier)
+// ───────────────────────────────────────────────
+function getWeekNumber(d) {
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+  var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  var weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+  return weekNo;
+}
+
+// ───────────────────────────────────────────────
 // Handler principal
 // ───────────────────────────────────────────────
 export default async function handler(req, res) {
@@ -159,28 +170,34 @@ export default async function handler(req, res) {
     }
 
     // ───────────────────────────────────────────────
-    // AUTOMATISATION : Nettoyage Hebdomadaire & Limite
+    // AUTOMATISATION : Maintenance Bi-hebdomadaire & Limite
     // ───────────────────────────────────────────────
     
     const today = new Date();
-    let maintenanceLog = 'None';
+    const weekNum = getWeekNumber(today);
+    const isEvenWeek = (weekNum % 2 === 0);
+    let maintenanceLog = 'Daily Keeping';
 
-    // 1. Suppression du plus ancien chaque semaine (si on est lundi)
-    if (today.getDay() === 1) { // 1 = Lundi
+    // 1. Suppression des 8 plus anciens tous les 15 jours (semaines paires, le lundi)
+    if (isEvenWeek && today.getDay() === 1) { // 1 = Lundi
       await sql`
         DELETE FROM veille_articles
-        WHERE id = (SELECT id FROM veille_articles ORDER BY created_at ASC LIMIT 1);
+        WHERE id IN (
+          SELECT id FROM veille_articles
+          ORDER BY pub_date ASC
+          LIMIT 8
+        );
       `;
-      maintenanceLog = 'Oldest entry deleted (Weekly Cleanup)';
+      maintenanceLog = `Bi-weekly cleanup (Week ${weekNum}): 8 oldest articles deleted`;
     }
 
-    // 2. Nettoyage général : On ne garde que les 15 derniers articles pour une veille fraîche
+    // 2. Nettoyage quotidien : On ne garde que les 14 derniers articles
     await sql`
       DELETE FROM veille_articles
       WHERE id NOT IN (
         SELECT id FROM veille_articles
         ORDER BY pub_date DESC
-        LIMIT 15
+        LIMIT 14
       );
     `;
 

@@ -124,9 +124,9 @@ const skillsCategories = [
 ];
 
 const certificationsTreeData = [
-  { title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: '/public/certif/PIX.jpg', type: 'image' },
-  { title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: '/public/certif/MOOC.jpg', type: 'image' },
-  { title: 'EBIOS — Analyse de risque', date: '2025', icon: 'shield', file: '/public/certif/EBIOS.pdf', type: 'pdf' },
+  { title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: 'public/certif/PIX.jpg', type: 'image' },
+  { title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: 'public/certif/MOOC.jpg', type: 'image' },
+  { title: 'EBIOS — Analyse de risque', date: '2025', icon: 'shield', file: 'public/certif/EBIOS.pdf', type: 'pdf' },
   { title: 'OpenClassrooms — Réseaux & Systèmes', date: '2024–2025', icon: 'globe', file: '#openclassrooms', type: 'section' },
 ];
 
@@ -136,21 +136,14 @@ const formationsData = [
     subtitle: 'Lycée Paul-Louis Courier, Tours',
     date: '2025–2027',
     desc: 'Services Informatiques aux Organisations, option SISR. Administration système, réseau',
-    pdf: '/public/Projet/AP.pdf'
+    showVoir: false
   },
   {
-    title: 'Bach Pro SN RISC',
+    title: 'Bac Pro SN RISC',
     subtitle: 'Lycée Henri Becquerel, Tours',
     date: '2022–2025',
     desc: 'Systèmes Numériques, option RISC. Réseaux et systèmes communicants.',
-    pdf: '/public/Projet/AP.pdf'
-  },
-  {
-    title: 'OpenClassrooms Specialist',
-    subtitle: 'Auto-formation en ligne',
-    date: 'En cours',
-    desc: 'Perfectionnement sur Active Directory, Docker, Linux et les réseaux TCP/IP.',
-    pdf: '#openclassrooms'
+    showVoir: false
   }
 ];
 
@@ -268,16 +261,22 @@ function renderFormations() {
   const grid = document.getElementById('formationsGrid');
   if (!grid) return;
   grid.innerHTML = `<div class="timeline-container"><div class="timeline-line"></div>` +
-    formationsData.map(f => `
+    formationsData.map(f => {
+      const isScrollLink = f.pdf?.startsWith('#');
+      const shouldShowVoir = f.showVoir !== false;
+      const onClick = shouldShowVoir ? `onclick="viewPDF('${f.pdf}', '${f.title}')"` : '';
+      const cursorStyle = shouldShowVoir ? 'style="cursor: pointer;"' : '';
+
+      return `
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-content" onclick="viewPDF('${f.pdf}', '${f.title}')" style="cursor: pointer;">
+        <div class="timeline-content" ${onClick} ${cursorStyle}>
           <div class="timeline-header">
             <div>
               <h3 class="timeline-title">${f.title}</h3>
               <div class="timeline-subtitle">${f.subtitle}</div>
             </div>
-            <div class="timeline-view-badge">Voir</div>
+            ${shouldShowVoir ? '<div class="timeline-view-badge">Voir</div>' : ''}
           </div>
           <div class="timeline-date">${f.date}</div>
           <p class="timeline-desc">${f.desc}</p>
@@ -288,7 +287,7 @@ function renderFormations() {
           ` : ''}
         </div>
       </div>
-    `).join('') + `</div>`;
+    `}).join('') + `</div>`;
 }
 
 function renderBtsSio() {
@@ -468,7 +467,7 @@ function viewPDF(url, title) {
     goToSection(sectionId);
     return;
   }
-  
+
   const modal = document.getElementById('projectModal');
   const frame = document.getElementById('pdfFrame');
   const fallback = document.getElementById('pdfFallback');
@@ -481,7 +480,7 @@ function viewPDF(url, title) {
   modalTitle.textContent = title;
   modalDesc.textContent = '';
   list.innerHTML = `<p class="text-muted" style="font-size:0.8rem;">Consultation interne</p>`;
-  
+
   // Clear frame and load new one
   frame.src = 'about:blank';
   setTimeout(() => {
@@ -514,16 +513,16 @@ function renderCertificationsTree() {
     <div class="cert-tree">
       <div class="cert-tree-line"></div>
       ${certificationsTreeData.map(c => {
-        let onClickAction = '';
-        if (c.type === 'section') {
-          onClickAction = `goToSection('${c.file.slice(1)}')`;
-        } else if (c.type === 'pdf') {
-          onClickAction = `viewPDF('${c.file}', '${c.title}')`;
-        } else {
-          onClickAction = `openImageModal('${c.file}', '${c.title}')`;
-        }
-        
-        return `
+    let onClickAction = '';
+    if (c.type === 'section') {
+      onClickAction = `goToSection('${c.file.slice(1)}')`;
+    } else if (c.type === 'pdf') {
+      onClickAction = `viewPDF('${c.file}', '${c.title}')`;
+    } else {
+      onClickAction = `openImageModal('${c.file}', '${c.title}')`;
+    }
+
+    return `
         <div class="cert-item">
           <div class="cert-dot"></div>
           <div class="cert-card" onclick="${onClickAction}">
@@ -537,7 +536,8 @@ function renderCertificationsTree() {
             <div class="cert-badge">Voir</div>
           </div>
         </div>
-      `;}).join('')}
+      `;
+  }).join('')}
     </div>
   `;
 }

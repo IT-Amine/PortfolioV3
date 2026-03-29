@@ -49,12 +49,12 @@ const projectsData = [
     title: 'Groupe Millenuits — Infrastructure & Services',
     desc: 'Refonte de l\'infrastructure système et réseau. Déploiement des services critiques (AD DS, DHCP, DNS, GPO) et segmentation réseau via VLAN.',
     tech: ['Active Directory', 'Windows Server', 'VLAN', 'Systèmes'],
-    logo: '/public/MilleNuits.jpg',
+    logo: 'public/MilleNuits.jpg',
     pdfs: [
-      { label: 'Situation SP1 — Réseau', href: '/public/Projet/millenuits/Situation - SP1 - Gestion de l’infrastructure réseau.pdf' },
-      { label: 'Situation SP2 — Parc Info', href: '/public/Projet/millenuits/Situation - SP2 - Gestion du parc informatique.pdf' },
-      { label: 'Situation SP3 — AD / DHCP', href: '/public/Projet/millenuits/Situation - SP3 - Gestion des services principaux AD - DHCP.pdf' },
-      { label: 'Contexte Technique', href: '/public/Projet/millenuits/Contexte Millenuits.pdf' },
+      { label: 'Situation SP1 — Réseau', href: 'public/Projet/millenuits/Situation - SP1 - Gestion de l’infrastructure réseau.pdf' },
+      { label: 'Situation SP2 — Parc Info', href: 'public/Projet/millenuits/Situation - SP2 - Gestion du parc informatique.pdf' },
+      { label: 'Situation SP3 — AD / DHCP', href: 'public/Projet/millenuits/Situation - SP3 - Gestion des services principaux AD - DHCP.pdf' },
+      { label: 'Contexte Technique', href: 'public/Projet/millenuits/Contexte Millenuits.pdf' },
     ]
   },
   {
@@ -64,9 +64,9 @@ const projectsData = [
     tech: ['Cybersécurité', 'Hardening', 'Analyse vulnérabilités'],
     icon: 'shield',
     pdfs: [
-      { label: 'Sécurité terminaux', href: '/public/Projet/cyber/TP1-sécurité des terminaux.pdf' },
-      { label: 'Dossier Commun', href: '/public/Projet/cyber/TP2-Commun-dossier.pdf' },
-      { label: 'Contexte Labo', href: '/public/Projet/cyber/Contexte-labo-2026.pdf' }
+      { label: 'Sécurité terminaux', href: 'public/Projet/cyber/TP1-sécurité des terminaux.pdf' },
+      { label: 'Dossier Commun', href: 'public/Projet/cyber/TP2-Commun-dossier.pdf' },
+      { label: 'Contexte Labo', href: 'public/Projet/cyber/Contexte-labo-2026.pdf' }
     ]
   },
   {
@@ -74,11 +74,11 @@ const projectsData = [
     title: 'Architecture Réseau IMDEO',
     desc: 'Conception d\'une architecture logique pour l\'implantation IMDEO. Routage avancé et segmentation.',
     tech: ['Cisco', 'Architecture', 'Routage'],
-    logo: '/public/imdeo.jpeg',
+    logo: 'public/imdeo.jpeg',
     pdfs: [
-      { label: 'Dossier Technique', href: '/public/Projet/imdeo/imdeo.pdf' },
-      { label: 'Contexte Projet', href: '/public/Projet/imdeo/Contexte - IMDEO - 2026.pdf' },
-      { label: 'Structure Réseau', href: '/public/Projet/imdeo/structure-imdeo.pdf' }
+      { label: 'Dossier Technique', href: 'public/Projet/imdeo/imdeo.pdf' },
+      { label: 'Contexte Projet', href: 'public/Projet/imdeo/Contexte - IMDEO - 2026.pdf' },
+      { label: 'Structure Réseau', href: 'public/Projet/imdeo/structure-imdeo.pdf' }
     ]
   },
   {
@@ -88,7 +88,7 @@ const projectsData = [
     tech: ['Virtualisation', 'Infrastructure', 'Backup'],
     icon: 'server',
     pdfs: [
-      { label: 'Document AP1', href: '/public/Projet/AP.pdf' },
+      { label: 'Document AP1', href: 'public/Projet/AP.pdf' },
     ]
   }
 ];
@@ -124,9 +124,9 @@ const skillsCategories = [
 ];
 
 const certificationsTreeData = [
-  { title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: '/public/certif/PIX.jpg', type: 'image' },
-  { title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: '/public/certif/MOOC.jpg', type: 'image' },
-  { title: 'EBIOS — Analyse de risque', date: '2025', icon: 'shield', file: '/public/certif/EBIOS.pdf', type: 'pdf' },
+  { title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: 'public/certif/PIX.jpg', type: 'image' },
+  { title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: 'public/certif/MOOC.jpg', type: 'image' },
+  { title: 'EBIOS — Analyse de risque', date: '2025', icon: 'shield', file: 'public/certif/EBIOS.pdf', type: 'pdf' },
 ];
 
 const formationsData = [
@@ -135,14 +135,14 @@ const formationsData = [
     subtitle: 'Lycée Paul-Louis Courier, Tours',
     date: '2025–2027',
     desc: 'Services Informatiques aux Organisations, option SISR. Administration système, réseau et cybersécurité.',
-    pdf: '/public/Projet/AP.pdf'
+    pdf: 'public/Projet/AP.pdf'
   },
   {
     title: 'Bac Pro SN RISC',
     subtitle: 'Lycée Henri Becquerel, Tours',
     date: '2022–2025',
     desc: 'Systèmes Numériques, option RISC. Réseaux et systèmes communicants.',
-    pdf: '/public/Projet/AP.pdf'
+    pdf: 'public/Projet/AP.pdf'
   }
 ];
 
@@ -153,10 +153,10 @@ const patrimoineData = [
 ];
 
 const openclassroomsCerts = [
-  { title: 'TCP/IP', image: '/public/openclassroom/TCP:IP.png' },
-  { title: 'Active Directory', image: '/public/openclassroom/Centralisez et sécuriser avec Active Directory.jpg' },
-  { title: 'Docker', image: '/public/openclassroom/Optimisez avec des Conteneur Docker.jpg' },
-  { title: 'Linux', image: '/public/openclassroom/linux.jpg' },
+  { title: 'TCP/IP', image: 'public/openclassroom/TCP:IP.png' },
+  { title: 'Active Directory', image: 'public/openclassroom/Centralisez et sécuriser avec Active Directory.jpg' },
+  { title: 'Docker', image: 'public/openclassroom/Optimisez avec des Conteneur Docker.jpg' },
+  { title: 'Linux', image: 'public/openclassroom/linux.jpg' },
 ];
 
 const btsSioData = {
@@ -215,9 +215,9 @@ function renderProjects() {
     <article class="project-card" onclick="openProjectModal('${p.id}')">
       <div class="project-card-header">
         <div class="project-icon">
-          ${p.logo 
-            ? `<img src="${p.logo}" alt="Logo ${p.title}" style="width: 100%; height: 100%; object-fit: contain;">` 
-            : getIcon(p.icon)}
+          ${p.logo
+      ? `<img src="${p.logo}" alt="Logo ${p.title}" style="width: 100%; height: 100%; object-fit: contain;">`
+      : getIcon(p.icon)}
         </div>
         <div class="project-view-badge">Voir</div>
       </div>
@@ -455,9 +455,9 @@ function viewPDF(url, title) {
   document.getElementById('projectModal').classList.add('active');
 }
 
-function closeProjectModal() { 
-  document.getElementById('projectModal').classList.remove('active'); 
-  document.getElementById('pdfFrame').src = ''; 
+function closeProjectModal() {
+  document.getElementById('projectModal').classList.remove('active');
+  document.getElementById('pdfFrame').src = '';
 }
 function closeOcModal() {
   const modal = document.getElementById('ocModal');

@@ -19,7 +19,7 @@ const ICONS = {
 
   // Logos Officiels Tech
   debian: 'https://cdn.simpleicons.org/debian/D70A53',
-  windows: 'https://cdn.simpleicons.org/windows/10b981',
+  windows: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg',
   proxmox: 'https://cdn.simpleicons.org/proxmox/E57000',
   docker: 'https://cdn.simpleicons.org/docker/2496ED',
   vmware: 'https://cdn.simpleicons.org/vmware/607078',
@@ -151,7 +151,6 @@ const formationsData = [
     subtitle: 'Lycée Paul-Louis Courier, Tours',
     date: '2025–2027',
     desc: 'Services Informatiques aux Organisations, option SISR. Administration système, réseau',
-    pdf: 'public/Projet/AP.pdf',
     showVoir: false
   },
   {
@@ -159,7 +158,6 @@ const formationsData = [
     subtitle: 'Lycée Henri Becquerel, Tours',
     date: '2022–2025',
     desc: 'Systèmes Numériques, option RISC. Réseaux et systèmes communicants.',
-    pdf: 'public/Projet/AP.pdf',
     showVoir: false
   }
 ];

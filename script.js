@@ -1,10 +1,6 @@
-import { injectSpeedInsights } from '@vercel/speed-insights';
-
 /* ============================================================
    PORTFOLIO BTS SIO — SCRIPT PRINCIPAL (CERVEAU)
    ============================================================ */
-
-injectSpeedInsights();
 
 
 const CONTACT_EMAIL = 'kadaamine37@hotmail.com';

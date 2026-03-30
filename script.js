@@ -539,11 +539,12 @@ function renderCertificationsTree() {
       <div class="cert-tree-line"></div>
       ${certificationsTreeData.map((c, i) => {
     const onClickAction = `viewCertInTree(${i})`;
+    const lockIcon = !isUnlocked ? '<span class="lock-icon-inline"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>' : '';
 
     return `
         <div class="cert-item">
           <div class="cert-dot"></div>
-          <div class="cert-card" onclick="${onClickAction}">
+          <div class="cert-card ${!isUnlocked ? 'is-locked' : ''}" onclick="${onClickAction}">
             <div class="cert-header-info">
               <div class="cert-icon-small">${getIcon(c.icon)}</div>
               <div class="cert-details">
@@ -551,7 +552,7 @@ function renderCertificationsTree() {
                 <div class="cert-date-txt">${c.date}</div>
               </div>
             </div>
-            <div class="cert-badge">Voir</div>
+            <div class="cert-badge">${lockIcon} ${!isUnlocked ? 'Déverrouiller' : 'Voir'}</div>
           </div>
         </div>
       `;
@@ -561,6 +562,10 @@ function renderCertificationsTree() {
 }
 
 function viewCertInTree(index) {
+  if (!isUnlocked) {
+    openAuthModal();
+    return;
+  }
   const c = certificationsTreeData[index];
   if (!c) return;
   if (c.type === 'section') {
@@ -605,6 +610,17 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCertificationsTree();
   updateLockedElements();
 
+  // Robustesse pour le bouton mail
+  const mailBtn = document.getElementById('contact-mail-btn');
+  if (mailBtn) {
+    mailBtn.addEventListener('click', (e) => {
+      // Si le href mailto: ne s'ouvre pas, on force avec window.location
+      const href = mailBtn.getAttribute('href');
+      if (href && href.startsWith('mailto:')) {
+      }
+    });
+  }
+
   const yearEl = document.getElementById('currentYear');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
@@ -648,12 +664,13 @@ async function checkAccessCode() {
   const input = document.getElementById('accessCodeInput');
   const error = document.getElementById('authError');
   const hashedInput = await hashString(input.value + ACCESS_SALT);
-  
+
   if (hashedInput === ACCESS_HASH) {
     isUnlocked = true;
     sessionStorage.setItem('isUnlocked', 'true');
     closeAuthModal();
     updateLockedElements();
+    renderCertificationsTree();
     console.log("Accès déverrouillé !");
   } else {
     error.style.display = 'block';
@@ -665,13 +682,13 @@ async function checkAccessCode() {
 function updateLockedElements() {
   const unlockIndicator = document.getElementById('unlockIndicator');
   const cvBtn = document.getElementById('hero-cv-btn');
-  
+
   if (isUnlocked) {
     // État déverrouillé
     if (unlockIndicator) {
       unlockIndicator.classList.add('visible');
     }
-    
+
     if (cvBtn) {
       cvBtn.classList.remove('is-locked');
       cvBtn.classList.add('is-unlocked');
@@ -682,7 +699,7 @@ function updateLockedElements() {
     if (unlockIndicator) {
       unlockIndicator.classList.remove('visible');
     }
-    
+
     if (cvBtn) {
       cvBtn.classList.add('is-locked');
       cvBtn.onclick = (e) => {

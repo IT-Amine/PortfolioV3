@@ -2918,15 +2918,19 @@
   color: white;
   font-weight: 700;
   font-size: 0.9rem;
-  z-index: 9999;
+  z-index: 10000;
   cursor: pointer;
   box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-  transform: translateX(-150%);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .unlock-floating-badge.visible {
-  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .unlock-icon {
@@ -3035,4 +3039,25 @@
     width: 100%;
     justify-content: center;
   }
+}
+
+/* Style pour les certificats verrouillés */
+.cert-card.is-locked {
+  filter: grayscale(0.8);
+  opacity: 0.8;
+  border-style: dashed;
+  background: rgba(16, 185, 129, 0.03);
+}
+
+.cert-card.is-locked:hover {
+  filter: grayscale(0.4);
+  opacity: 0.9;
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.lock-icon-inline {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 6px;
+  color: var(--accent);
 }

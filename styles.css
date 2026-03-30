@@ -2903,51 +2903,26 @@
    SYSTEME D'ACCÈS RECRUTEUR (SECURE)
    ============================================ */
 
-.unlock-floating-badge {
-  position: fixed;
-  right: 20px;
-  top: 100px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 18px;
-  background: rgba(16, 185, 129, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50px;
-  color: white;
-  font-weight: 700;
-  font-size: 0.9rem;
-  z-index: 10000;
-  cursor: pointer;
-  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-20px);
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.unlock-floating-badge.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
-.unlock-icon {
+.unlock-status-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: white;
-  border-radius: 50%;
-  color: var(--accent);
+  margin-left: 0.75rem;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
 }
 
-.unlock-floating-badge:hover {
-  transform: scale(1.05) translateX(0);
-  background: #10b981;
+.unlock-status-icon.visible {
+  opacity: 1;
+  transform: scale(1);
 }
+
+.unlock-status-icon svg {
+  filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.3));
+}
+
 
 .auth-modal-content {
   max-width: 450px !important;

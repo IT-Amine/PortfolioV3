@@ -4,7 +4,7 @@
 
 const CONTACT_EMAIL = 'kadaamine37@hotmail.com';
 const CONTACT_SUBJECT = 'Portfolio BTS SIO - Contact';
-const ACCESS_HASH = '926a447158b115dd1b6ea5500a38fac7c33e007b66de5532c9e4ac08fb6cc0da';
+const ACCESS_HASH = 'f5bed3c7a6735605cba10570570cec54138eec871150f6e3c0773cd3cd3773d1';
 const ACCESS_SALT = 'G8-L2S-I-S-R-2025';
 
 /* --- ICÔNES SVG --- */
@@ -206,7 +206,7 @@ const competencesListData = [
 /* --- ÉTAT GLOBAL & ROUTING --- */
 
 let activeSection = 'accueil';
-let isUnlocked = localStorage.getItem('isUnlocked') === 'true';
+let isUnlocked = sessionStorage.getItem('isUnlocked') === 'true';
 
 function getDefaultSection() {
   const hash = decodeURIComponent(window.location.hash.slice(1));
@@ -651,7 +651,7 @@ async function checkAccessCode() {
   
   if (hashedInput === ACCESS_HASH) {
     isUnlocked = true;
-    localStorage.setItem('isUnlocked', 'true');
+    sessionStorage.setItem('isUnlocked', 'true');
     closeAuthModal();
     updateLockedElements();
     console.log("Accès déverrouillé !");

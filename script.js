@@ -552,7 +552,7 @@ function renderCertificationsTree() {
                 <div class="cert-date-txt">${c.date}</div>
               </div>
             </div>
-            <div class="cert-badge">${lockIcon} ${!isUnlocked ? 'Déverrouiller' : 'Voir'}</div>
+            <div class="cert-badge">${lockIcon}${!isUnlocked ? '' : 'Voir'}</div>
           </div>
         </div>
       `;

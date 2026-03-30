@@ -3061,3 +3061,7 @@
   margin-right: 6px;
   color: var(--accent);
 }
+
+.lock-icon-inline:last-child {
+  margin-right: 0;
+}

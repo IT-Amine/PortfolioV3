@@ -61,7 +61,10 @@
         <div class="hero-buttons">
           <button class="btn-primary" onclick="goToSection('projets')">Consulter mes réalisations</button>
           <a href="https://cvdesignr.com/p/6808a706550eb?hl=fr_FR" target="_blank" rel="noopener noreferrer"
-            class="btn-outline">Mon CV</a>
+            class="btn-outline protected-link" id="hero-cv-btn">
+            <span class="lock-icon-small"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+            Mon CV
+          </a>
         </div>
         <div class="hero-stack">
           <span class="stack-label">STACK</span>
@@ -459,6 +462,31 @@
       <p id="viewerModalDescription" class="viewer-modal-description"></p>
       <div id="viewerModalTags" class="viewer-modal-tags"></div>
     </div>
+  </div>
+
+  <!-- Modale d'Authentification Recruteur -->
+  <div id="authModal" class="modal">
+    <div class="modal-content auth-modal-content">
+      <div class="modal-header">
+        <h3>Accès Recruteur</h3>
+        <button class="modal-close" onclick="closeAuthModal()">Fermer</button>
+      </div>
+      <div class="modal-body">
+        <p class="auth-message">Veuillez saisir votre code d'accès pour déverrouiller les informations sensibles (CV, contacts prioritaires).</p>
+        <div class="auth-input-group">
+          <input type="password" id="accessCodeInput" placeholder="Saisir le code..." onkeydown="if(event.key==='Enter') checkAccessCode()">
+          <button class="btn-primary" onclick="checkAccessCode()">Déverrouiller</button>
+        </div>
+        <div id="authError" class="auth-error-msg">Code incorrect, veuillez réessayer.</div>
+        <p class="auth-hint">Note : Le code vous a été transmis lors du premier contact.</p>
+      </div>
+    </div>
+  <!-- Indicateur de déverrouillage (Tout à gauche) -->
+  <div id="unlockIndicator" class="unlock-floating-badge" onclick="openAuthModal()">
+    <div class="unlock-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/><circle cx="12" cy="16" r="1"/></svg>
+    </div>
+    <span class="unlock-text">Accès Recruteur Déverrouillé</span>
   </div>
 
   <script src="script.js"></script>

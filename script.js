@@ -4,6 +4,8 @@
 
 const CONTACT_EMAIL = 'kadaamine37@hotmail.com';
 const CONTACT_SUBJECT = 'Portfolio BTS SIO - Contact';
+const ACCESS_HASH = '926a447158b115dd1b6ea5500a38fac7c33e007b66de5532c9e4ac08fb6cc0da';
+const ACCESS_SALT = 'G8-L2S-I-S-R-2025';
 
 /* --- ICÔNES SVG --- */
 
@@ -204,6 +206,7 @@ const competencesListData = [
 /* --- ÉTAT GLOBAL & ROUTING --- */
 
 let activeSection = 'accueil';
+let isUnlocked = localStorage.getItem('isUnlocked') === 'true';
 
 function getDefaultSection() {
   const hash = decodeURIComponent(window.location.hash.slice(1));
@@ -600,6 +603,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderBtsSio();
   renderCompetencesTable();
   renderCertificationsTree();
+  updateLockedElements();
 
   const yearEl = document.getElementById('currentYear');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -613,3 +617,83 @@ window.viewCertificateImageByIndex = viewCertificateImageByIndex;
 window.viewCertificateImage = viewCertificateImage;
 window.closeImageViewerModal = closeImageViewerModal;
 window.viewCertInTree = viewCertInTree;
+
+/* --- SYSTÈME D'ACCÈS RECRUTEUR --- */
+
+function openAuthModal() {
+  const modal = document.getElementById('authModal');
+  if (modal) {
+    modal.classList.add('active');
+    setTimeout(() => document.getElementById('accessCodeInput')?.focus(), 300);
+  }
+}
+
+function closeAuthModal() {
+  const modal = document.getElementById('authModal');
+  if (modal) {
+    modal.classList.remove('active');
+    document.getElementById('authError').style.display = 'none';
+    document.getElementById('accessCodeInput').value = '';
+  }
+}
+
+async function hashString(str) {
+  const msgUint8 = new TextEncoder().encode(str);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function checkAccessCode() {
+  const input = document.getElementById('accessCodeInput');
+  const error = document.getElementById('authError');
+  const hashedInput = await hashString(input.value + ACCESS_SALT);
+  
+  if (hashedInput === ACCESS_HASH) {
+    isUnlocked = true;
+    localStorage.setItem('isUnlocked', 'true');
+    closeAuthModal();
+    updateLockedElements();
+    console.log("Accès déverrouillé !");
+  } else {
+    error.style.display = 'block';
+    input.classList.add('shake');
+    setTimeout(() => input.classList.remove('shake'), 400);
+  }
+}
+
+function updateLockedElements() {
+  const unlockIndicator = document.getElementById('unlockIndicator');
+  const cvBtn = document.getElementById('hero-cv-btn');
+  
+  if (isUnlocked) {
+    // État déverrouillé
+    if (unlockIndicator) {
+      unlockIndicator.classList.add('visible');
+    }
+    
+    if (cvBtn) {
+      cvBtn.classList.remove('is-locked');
+      cvBtn.classList.add('is-unlocked');
+      cvBtn.onclick = null;
+    }
+  } else {
+    // État verrouillé
+    if (unlockIndicator) {
+      unlockIndicator.classList.remove('visible');
+    }
+    
+    if (cvBtn) {
+      cvBtn.classList.add('is-locked');
+      cvBtn.onclick = (e) => {
+        e.preventDefault();
+        openAuthModal();
+      };
+    }
+  }
+}
+
+// Export des fonctions globales
+window.openAuthModal = openAuthModal;
+window.closeAuthModal = closeAuthModal;
+window.checkAccessCode = checkAccessCode;

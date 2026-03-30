@@ -37,7 +37,6 @@ function getIcon(name) {
     return `<img src="${iconContent}" alt="${name}" style="width: 100%; height: 100%; object-fit: contain;">`;
   }
 
-  // Sinon c'est un SVG local (stocké dans ICONS)
   return iconContent;
 }
 
@@ -56,6 +55,7 @@ function escapeHTML(str) {
   );
 }
 
+
 /* --- DONNÉES DES COMPOSANTS --- */
 
 const projectsData = [
@@ -66,10 +66,10 @@ const projectsData = [
     tech: ['Active Directory', 'Windows Server', 'VLAN', 'Systèmes'],
     logo: '/public/MilleNuits.jpg',
     pdfs: [
-      { label: 'Situation SP1', href: 'public/Projet/millenuits/SP1.pdf' },
-      { label: 'Situation SP2', href: 'public/Projet/millenuits/SP2.pdf' },
-      { label: 'Situation SP3', href: 'public/Projet/millenuits/SP3.pdf' },
-      { label: 'Contexte Technique', href: 'public/Projet/millenuits/contexte.pdf' },
+      { label: 'Situation SP1', href: '/public/Projet/millenuits/SP1.pdf' },
+      { label: 'Situation SP2', href: '/public/Projet/millenuits/SP2.pdf' },
+      { label: 'Situation SP3', href: '/public/Projet/millenuits/SP3.pdf' },
+      { label: 'Contexte Technique', href: '/public/Projet/millenuits/contexte.pdf' },
     ]
   },
   {
@@ -79,9 +79,9 @@ const projectsData = [
     tech: ['Cybersécurité', 'Hardening', 'Analyse vulnérabilités'],
     icon: 'shield',
     pdfs: [
-      { label: 'TP1 — Sécurité', href: 'public/Projet/cyber/TP1.pdf' },
-      { label: 'TP2 — Commun', href: 'public/Projet/cyber/TP2.pdf' },
-      { label: 'Contexte Labo', href: 'public/Projet/cyber/Contexte.pdf' }
+      { label: 'TP1 — Sécurité', href: '/public/Projet/cyber/TP1.pdf' },
+      { label: 'TP2 — Commun', href: '/public/Projet/cyber/TP2.pdf' },
+      { label: 'Contexte Labo', href: '/public/Projet/cyber/Contexte.pdf' }
     ]
   },
   {
@@ -91,9 +91,9 @@ const projectsData = [
     tech: ['Cisco', 'Architecture', 'Routage'],
     logo: '/public/imdeo.jpeg',
     pdfs: [
-      { label: 'Dossier Technique', href: 'public/Projet/imdeo/imdeo.pdf' },
-      { label: 'Contexte Projet', href: 'public/Projet/imdeo/Contexte.pdf' },
-      { label: 'Structure Réseau', href: 'public/Projet/imdeo/structure.pdf' }
+      { label: 'Dossier Technique', href: '/public/Projet/imdeo/imdeo.pdf' },
+      { label: 'Contexte Projet', href: '/public/Projet/imdeo/Contexte.pdf' },
+      { label: 'Structure Réseau', href: '/public/Projet/imdeo/structure.pdf' }
     ]
   },
   {
@@ -103,7 +103,7 @@ const projectsData = [
     tech: ['Virtualisation', 'Infrastructure', 'Backup'],
     icon: 'server',
     pdfs: [
-      { label: 'Document AP1', href: 'public/Projet/AP.pdf' },
+      { label: 'Document AP1', href: '/public/Projet/AP.pdf' },
     ]
   }
 ];
@@ -139,9 +139,9 @@ const skillsCategories = [
 ];
 
 const certificationsTreeData = [
-  { title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: 'public/certif/PIX.jpg', type: 'image' },
-  { title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: 'public/certif/MOOC.jpg', type: 'image' },
-  { title: 'EBIOS — Analyse de risque', date: '2025', icon: 'shield', file: 'public/certif/EBIOS.pdf', type: 'pdf' },
+  { title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: '/public/certif/PIX.jpg', type: 'image' },
+  { title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: '/public/certif/MOOC.jpg', type: 'image' },
+  { title: 'EBIOS — Analyse de risque', date: '2025', icon: 'shield', file: '/public/certif/EBIOS.pdf', type: 'pdf' },
   { title: 'OpenClassrooms — Réseaux & Systèmes', date: '2024–2025', icon: 'globe', file: '#openclassrooms', type: 'section' },
 ];
 
@@ -169,18 +169,18 @@ const patrimoineData = [
 ];
 
 const openclassroomsCerts = [
-  { title: 'Active Directory', image: 'public/openclassroom/Centralisez et sécuriser avec Active Directory.jpg' },
-  { title: 'Docker', image: 'public/openclassroom/Optimisez avec des Conteneur Docker.jpg' },
-  { title: 'TCP/IP', image: 'public/openclassroom/TCP:IP.png' },
-  { title: 'Windows Server', image: 'public/openclassroom/Windows Server.png' },
-  { title: 'Cisco Networking', image: 'public/openclassroom/cisco.jpg' },
-  { title: 'Déploiement Win10', image: 'public/openclassroom/déployez Win10.png' },
-  { title: 'Git & GitHub', image: 'public/openclassroom/gérer du code avec git & Github.jpg' },
-  { title: 'Git Fundamentals', image: 'public/openclassroom/git.png' },
-  { title: 'Linux Administration', image: 'public/openclassroom/linux.jpg' },
-  { title: 'Hardware PC', image: 'public/openclassroom/pc.png' },
-  { title: 'ChatGPT', image: 'public/openclassroom/utiliser ChatGPT.png' },
-  { title: 'Virtualisation Environnement', image: 'public/openclassroom/virtualiser vos environnement travail.jpg' },
+  { title: 'Active Directory', image: '/public/openclassroom/Centralisez et sécuriser avec Active Directory.jpg' },
+  { title: 'Docker', image: '/public/openclassroom/Optimisez avec des Conteneur Docker.jpg' },
+  { title: 'TCP/IP', image: '/public/openclassroom/TCP:IP.png' },
+  { title: 'Windows Server', image: '/public/openclassroom/Windows Server.png' },
+  { title: 'Cisco Networking', image: '/public/openclassroom/cisco.jpg' },
+  { title: 'Déploiement Win10', image: '/public/openclassroom/déployez Win10.png' },
+  { title: 'Git & GitHub', image: '/public/openclassroom/gérer du code avec git & Github.jpg' },
+  { title: 'Git Fundamentals', image: '/public/openclassroom/git.png' },
+  { title: 'Linux Administration', image: '/public/openclassroom/linux.jpg' },
+  { title: 'Hardware PC', image: '/public/openclassroom/pc.png' },
+  { title: 'ChatGPT', image: '/public/openclassroom/utiliser ChatGPT.png' },
+  { title: 'Virtualisation Environnement', image: '/public/openclassroom/virtualiser vos environnement travail.jpg' },
 ];
 
 const btsSioData = {
@@ -436,12 +436,8 @@ function openProjectModal(id) {
 
   const list = document.getElementById('modalPdfList');
   const frame = document.getElementById('pdfFrame');
-  const fallback = document.getElementById('pdfFallback');
-  const downloadLink = document.getElementById('pdfDownloadLink');
 
   list.innerHTML = '';
-  frame.src = '';
-  fallback.style.display = 'none';
 
   if (project.pdfs && project.pdfs.length > 0) {
     project.pdfs.forEach((pdf, index) => {
@@ -449,49 +445,45 @@ function openProjectModal(id) {
       btn.className = `pdf-btn ${index === 0 ? 'active' : ''}`;
       btn.innerHTML = `<span class="pdf-btn-icon">${getIcon('document')}</span><span>${pdf.label}</span>`;
 
-      btn.onclick = () => {
+      btn.onclick = (e) => {
+        e.stopPropagation(); // Évite les conflits de clics
         document.querySelectorAll('.pdf-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        frame.src = pdf.href;
-        downloadLink.href = pdf.href;
-        fallback.style.display = 'block';
-      };
 
+        // On change la source de l'iframe
+        frame.src = pdf.href;
+        if (document.getElementById('pdfDownloadLink')) {
+          document.getElementById('pdfDownloadLink').href = pdf.href;
+        }
+      };
       list.appendChild(btn);
     });
 
-    const firstPdf = project.pdfs[0];
-    frame.src = firstPdf.href;
-    downloadLink.href = firstPdf.href;
-    fallback.style.display = 'block';
-  } else {
-    list.innerHTML = '<p class="text-muted">Aucun document joint.</p>';
+    // Chargement initial du premier PDF
+    frame.src = project.pdfs[0].href;
   }
 
   document.getElementById('projectModal').classList.add('active');
 }
 
 function viewPDF(url, title) {
+  // 1. Vérification si c'est une ancre interne
   if (url && url.startsWith('#')) {
-    const sectionId = url.slice(1);
-    goToSection(sectionId);
+    goToSection(url.slice(1));
     return;
   }
 
   const modal = document.getElementById('projectModal');
   const frame = document.getElementById('pdfFrame');
-  const fallback = document.getElementById('pdfFallback');
   const downloadLink = document.getElementById('pdfDownloadLink');
-  const modalTitle = document.getElementById('modalProjectTitle');
-  const modalDesc = document.getElementById('modalProjectDesc');
-  const list = document.getElementById('modalPdfList');
 
-  modalTitle.textContent = title;
-  list.innerHTML = `<p class="text-muted" style="font-size:0.8rem;">Consultation interne</p>`;
+  // 2. On prépare la modale avant d'injecter la source
+  document.getElementById('modalProjectTitle').textContent = title;
 
+  // 3. Injection de la source (directe, sans viewer externe)
   frame.src = url;
-  downloadLink.href = url;
-  fallback.style.display = 'block';
+
+  if (downloadLink) downloadLink.href = url;
 
   modal.classList.add('active');
 }

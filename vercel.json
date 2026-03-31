@@ -2,15 +2,28 @@
   "functions": {
     "api/**/*.php": {
       "runtime": "vercel-php@0.6.0"
-    },
-    "*.php": {
-      "runtime": "vercel-php@0.6.0"
     }
   },
   "routes": [
     {
-      "src": "/api/admin/upload_handler.php",
-      "dest": "/api/admin/upload_handler.php"
+      "src": "/styles.css",
+      "dest": "/styles.css"
+    },
+    {
+      "src": "/script.js",
+      "dest": "/script.js"
+    },
+    {
+      "src": "/public/(.*)",
+      "dest": "/public/$1"
+    },
+    {
+      "src": "/admin",
+      "dest": "/api/admin.php"
+    },
+    {
+      "src": "/api/auth.php",
+      "dest": "/api/auth.php"
     },
     {
       "src": "/api/(.*)",
@@ -18,7 +31,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/index.php"
+      "dest": "/api/index.php"
     }
   ]
 }

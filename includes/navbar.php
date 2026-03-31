@@ -21,11 +21,11 @@
         <button type="button" class="nav-btn" data-section="contact">Contact</button>
         
         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-          <a href="admin.php" class="nav-btn btn-admin-nav">Dashboard Admin</a>
+          <a href="/admin" class="nav-btn btn-admin-nav">Dashboard Admin</a>
         <?php endif; ?>
 
         <?php if (isset($_SESSION['user_id'])): ?>
-          <a href="api/auth.php?action=logout" class="nav-btn btn-logout-nav">Déconnexion</a>
+          <a href="/api/auth.php?action=logout" class="nav-btn btn-logout-nav">Déconnexion</a>
         <?php else: ?>
           <button type="button" class="nav-btn btn-login-nav" onclick="openLoginModal()">S'identifier</button>
         <?php endif; ?>

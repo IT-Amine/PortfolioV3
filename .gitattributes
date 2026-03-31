@@ -1,7 +1,8 @@
-# Chiffrement des fichiers sensibles pour le Portfolio
-includes/config.php filter=git-crypt diff=git-crypt
-api/admin/** filter=git-crypt diff=git-crypt
+# On ne garde le chiffrement QUE pour les secrets locaux
 .env filter=git-crypt diff=git-crypt
-api/auth.php filter=git-crypt diff=git-crypt
-cron/sync-veille.php filter=git-crypt diff=git-crypt
-api/content_actions.php filter=git-crypt diff=git-crypt
+git_crypt_portfolio.key filter=git-crypt diff=git-crypt
+
+# Le reste du code doit être lisible pour Vercel
+*.php !filter !diff
+api/**/*.php !filter !diff
+includes/**/*.php !filter !diff

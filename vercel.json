@@ -51,5 +51,35 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*).css",
+      "destination": "/$1.css"
+    },
+    {
+      "source": "/(.*).js",
+      "destination": "/$1.js"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
+    },
+    {
+      "source": "/public/(.*)",
+      "destination": "/public/$1"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/api/index.php"
+    }
   ]
 }

@@ -1,5 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /includes/
+Disallow: /cron/
+Disallow: /private/
+Disallow: /vendor/
 
-# Indique à Google où trouver ton plan de site
+# SISR SEO Optimization
 Sitemap: https://amine-it.vercel.app/sitemap.xml

@@ -14,6 +14,9 @@
     content="Portfolio Amine, Amine Kada, BTS SIO, SISR, administration réseau, cybersécurité, portfolio informatique">
 
   <meta name="google-site-verification" content="myYa0w-hRRlwmUmHPxMpOmUG4C7hZyRMU4uqcCCqAmQ" />
+  
+  <!-- SEO SISR : URL Canonique -->
+  <link rel="canonical" href="https://amine-it.vercel.app/" />
 
   <title>Portfolio Amine Kada - BTS SIO SISR</title>
 

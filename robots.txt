@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Indique à Google où trouver ton plan de site
+Sitemap: https://amine-it.vercel.app/sitemap.xml

@@ -28,9 +28,9 @@ if ($fileKey === 'CV') {
 // Cela permet de "cacher" le vrai chemin (ex: PIX -> /public/certif/PIX_v7l2s3.jpg)
 $FILE_MAP = [
     'CV' => getenv('CV_LINK') ?: 'https://cvdesignr.com/p/6808a706550eb?hl=fr_FR',
-    'PIX' => '../public/certif/PIX_v7l2s3.jpg',
-    'MOOC' => '../public/certif/MOOC_x4n1m8.jpg',
-    'EBIOS' => '../public/certif/EBIOS_k8v9z2.pdf',
+    'PIX' => getenv('CERT_PIX_PATH') ?: '../public/certif/PIX_v7l2s3.jpg',
+    'MOOC' => getenv('CERT_MOOC_PATH') ?: '../public/certif/MOOC_x4n1m8.jpg',
+    'EBIOS' => getenv('CERT_EBIOS_PATH') ?: '../public/certif/EBIOS_k8v9z2.pdf',
 ];
 
 if (!isset($FILE_MAP[$fileKey])) {

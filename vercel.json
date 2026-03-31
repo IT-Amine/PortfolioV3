@@ -3,15 +3,9 @@
   "cleanUrls": true,
   "functions": {
     "api/*.php": {
-      "runtime": "vercel-php@0.9.0"
+      "runtime": "vercel-php"
     }
   },
-  "crons": [
-    {
-      "path": "/api/sync-veille",
-      "schedule": "0 7 */2 * *"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -62,16 +56,28 @@
       "destination": "/$1.js"
     },
     {
+      "source": "/(.*).png",
+      "destination": "/$1.png"
+    },
+    {
+      "source": "/(.*).jpg",
+      "destination": "/$1.jpg"
+    },
+    {
+      "source": "/(.*).svg",
+      "destination": "/$1.svg"
+    },
+    {
+      "source": "/(.*).ico",
+      "destination": "/$1.ico"
+    },
+    {
       "source": "/sitemap.xml",
       "destination": "/sitemap.xml"
     },
     {
       "source": "/robots.txt",
       "destination": "/robots.txt"
-    },
-    {
-      "source": "/public/(.*)",
-      "destination": "/public/$1"
     },
     {
       "source": "/api/(.*)",

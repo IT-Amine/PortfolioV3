@@ -3,12 +3,15 @@
 # Configuration
 BRANCH="main"
 
+# Se placer à la racine du projet (SISR Fix)
+cd "$(dirname "$0")/.." || exit
+
 # Vérifier s'il y a des changements locaux
 if [[ -n $(git status -s) ]]; then
   DATE=$(date +"%d/%m/%Y %H:%M:%S")
   echo "[$DATE] Changements détectés. Préparation de l'envoi..."
   
-  # Ajouter tous les fichiers
+  # Ajouter tous les fichiers (PROPREMENT)
   git add .
   
   # Commit avec message auto

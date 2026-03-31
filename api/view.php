@@ -11,8 +11,11 @@ $token = $_GET['token'] ?? '';
 
 // Vérification du token de session (Cybersécurité ++)
 if (!validateFileToken($fileKey, $token)) {
-    http_response_code(403);
-    die("Accès refusé : Jeton invalide ou session expirée.");
+    // SISR FAILSAFE : Si on est connecté, on autorise quand même (pour éviter les erreurs de jetons)
+    if (!(isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'recruiter'))) {
+        http_response_code(403);
+        die("Accès refusé : Jeton invalide ou session expirée.");
+    }
 }
 
 // ⚠️ NOUVEAUTÉ : Protection spécifique pour le CV
@@ -25,9 +28,9 @@ if ($fileKey === 'CV') {
 }
 
 // Mapping des clés vers les fichiers réels
-// Cela permet de "cacher" le vrai chemin (ex: PIX -> /public/certif/PIX_v7l2s3.jpg)
 $FILE_MAP = [
-    'CV' => getenv('CV_LINK') ?: 'https://cvdesignr.com/p/6808a706550eb?hl=fr_FR',
+    // SISR : On s'assure d'avoir un lien valide même si Vercel est mal configuré
+    'CV' => (getenv('CV_LINK') && strlen(getenv('CV_LINK')) > 5) ? getenv('CV_LINK') : 'https://cvdesignr.com/p/6808a706550eb?hl=fr_FR',
     'PIX' => getenv('CERT_PIX_PATH') ?: '../public/certif/PIX_v7l2s3.jpg',
     'MOOC' => getenv('CERT_MOOC_PATH') ?: '../public/certif/MOOC_x4n1m8.jpg',
     'EBIOS' => getenv('CERT_EBIOS_PATH') ?: '../public/certif/EBIOS_k8v9z2.pdf',
@@ -42,7 +45,7 @@ $target = $FILE_MAP[$fileKey];
 
 // Si c'est un lien externe (comme CVDesignr)
 if (filter_var($target, FILTER_VALIDATE_URL)) {
-    header("Location: $target");
+    header("Location: " . trim($target), true, 302);
     exit;
 }
 

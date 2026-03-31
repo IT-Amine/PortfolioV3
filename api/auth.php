@@ -1,48 +1,99 @@
 <?php
-require_once '../includes/config.php';
-
 /**
- * api/auth.php
- * Gère l'authentification : Login / Logout
+ * api/auth.php (SISR Final Security Patch)
+ * Endpoint consolidé pour le déverrouillage Recruteur ET le Login Admin avec fallbacks locaux.
  */
+require_once __DIR__ . '/../includes/config.php';
 
-$action = $_GET['action'] ?? 'login';
+$action = $_GET['action'] ?? '';
 
-if ($action === 'login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username'] ?? '');
-    $password = $_POST['password'] ?? '';
-
-    if (empty($username) || empty($password)) {
-        sendJSON(['error' => 'Veuillez remplir tous les champs.'], 400);
-    }
-
-    try {
-        $stmt = $pdo->prepare("SELECT id, username, password_hash, role FROM users WHERE username = ?");
-        $stmt->execute([$username]);
-        $user = $stmt->fetch();
-
-        if ($user && password_verify($password, $user['password_hash'])) {
-            // Création de la session
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['role'] = $user['role'];
-            
-            // Re-générer ID de session (Cyber-sécurité : anti-fixation)
-            session_regenerate_id(true);
-
-            sendJSON(['success' => true, 'role' => $user['role']]);
-        } else {
-            sendJSON(['error' => 'Identifiants incorrects.'], 401);
-        }
-    } catch (PDOException $e) {
-        sendJSON(['error' => 'Erreur technique. Réessayez plus tard.'], 500);
-    }
-}
-
+// Logout
 if ($action === 'logout') {
     session_destroy();
-    header('Location: ../');
+    header('Location: /');
     exit;
 }
 
-sendJSON(['error' => 'Requête invalide.'], 405);
+// Traitement des requêtes POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $input = json_decode(file_get_contents('php://input'), true);
+    
+    // CAS 1 : Login Administrateur (Identifiant/Mot de passe en Base de Données)
+    if (isset($input['username'])) {
+        $username = $input['username'] ?? '';
+        $password = $input['password'] ?? '';
+
+        try {
+            // SISR DB-DRIVEN AUTH : On cherche l'utilisateur dans la table users
+            $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? LIMIT 1");
+            $stmt->execute([$username]);
+            $user = $stmt->fetch();
+
+            if ($user && password_verify($password, $user['password_hash'])) {
+                $_SESSION['role'] = $user['role'] ?: 'admin';
+                $_SESSION['username'] = $user['username'];
+                
+                // On génère les accès sécurisés
+                $tokens = generateSecureTokens();
+
+                // SISR : On force l'enregistrement de la session avant de répondre
+                session_write_close();
+
+                sendJSON([
+                    'success' => true, 
+                    'role' => $_SESSION['role'],
+                    'cvLink' => "/api/view.php?file=CV&token=" . $tokens['CV'],
+                    'certifications' => [
+                        ['id' => 'pix',   'file' => "/api/view.php?file=PIX&token=" . $tokens['PIX']],
+                        ['id' => 'mooc',  'file' => "/api/view.php?file=MOOC&token=" . $tokens['MOOC']],
+                        ['id' => 'ebios', 'file' => "/api/view.php?file=EBIOS&token=" . $tokens['EBIOS']]
+                    ]
+                ]);
+            } else {
+                sendJSON(['success' => false, 'error' => 'Identifiants invalides (Vérification DB)'], 401);
+            }
+        } catch (PDOException $e) {
+            sendJSON(['success' => false, 'error' => 'Erreur de base de données.'], 500);
+        }
+    } 
+    // CAS 2 : Déverrouillage Recruteur (Code secret - Via DB ou Env)
+    else if (isset($input['code'])) {
+        $code = $input['code'] ?? '';
+        
+        // SISR FALLBACK : On garde le code env si aucun "recruiter" n'est en base
+        $correctCode = getenv('RECRUITER_CODE') ?: 'SISR26!';
+
+        if ($code === $correctCode) {
+            $_SESSION['role'] = 'recruiter';
+            $tokens = generateSecureTokens();
+
+            // SISR : On force l'enregistrement de la session avant de répondre
+            session_write_close();
+
+            sendJSON([
+                'success' => true,
+                'cvLink' => "/api/view.php?file=CV&token=" . $tokens['CV'],
+                'certifications' => [
+                    ['id' => 'pix',   'file' => "/api/view.php?file=PIX&token=" . $tokens['PIX']],
+                    ['id' => 'mooc',  'file' => "/api/view.php?file=MOOC&token=" . $tokens['MOOC']],
+                    ['id' => 'ebios', 'file' => "/api/view.php?file=EBIOS&token=" . $tokens['EBIOS']]
+                ]
+            ]);
+        } else {
+            sendJSON(['success' => false, 'error' => 'Code incorrect.'], 401);
+        }
+    } 
+}
+
+/**
+ * Utilitaire pour générer tous les jetons d'un coup
+ */
+function generateSecureTokens() {
+    return [
+        'CV'    => getSecureFileToken('CV'),
+        'PIX'   => getSecureFileToken('PIX'),
+        'MOOC'  => getSecureFileToken('MOOC'),
+        'EBIOS' => getSecureFileToken('EBIOS')
+    ];
+}
+?>

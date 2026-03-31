@@ -72,9 +72,12 @@
     </div>
   </div>
 
+  <!-- Modale d'Authentification Recruteur -->
+  <div id="authModal" class="modal">
+    ...
   </div>
 
-  <!-- Modale de Connexion (Admin/Recruteur) -->
+  <!-- Modale de Connexion (Admin) -->
   <div id="loginModal" class="modal">
     <div class="modal-content login-modal-card">
       <div class="login-modal-header">
@@ -87,16 +90,16 @@
       
       <form id="loginForm" class="login-modal-form" onsubmit="handleLogin(event);">
         <div class="login-input-group">
-          <label for="username">Identifiant</label>
+          <label for="admin_username">Identifiant</label>
           <div class="input-wrapper">
-            <input type="text" id="username" placeholder="Admin ou Recruteur" required>
+            <input type="text" id="admin_username" placeholder="Admin" required>
           </div>
         </div>
         
         <div class="login-input-group">
-          <label for="password">Mot de passe</label>
+          <label for="admin_password">Mot de passe</label>
           <div class="input-wrapper">
-            <input type="password" id="password" placeholder="••••••••" required>
+            <input type="password" id="admin_password" placeholder="••••••••" required>
           </div>
         </div>
         
@@ -106,7 +109,6 @@
         </button>
         
         <div id="loginError" class="login-error-msg" style="display: none;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           Identifiants incorrects
         </div>
       </form>
@@ -115,15 +117,19 @@
     </div>
   </div>
 
+  <style>
+    /* Styles discrets pour la modale login sans casser le reste */
+    .login-modal-card { max-width: 400px; padding: 2rem; border-radius: 20px; }
+    .login-modal-header { text-align: center; margin-bottom: 2rem; }
+    .login-modal-icon { width: 48px; height: 48px; background: rgba(45, 106, 79, 0.1); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+    .login-modal-form { display: flex; flex-direction: column; gap: 1.5rem; }
+    .login-input-group label { display: block; font-size: 0.85rem; font-weight: 700; color: var(--text-secondary); margin-bottom: 0.5rem; }
+    .input-wrapper input { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-subtle); border-radius: 12px; font-family: inherit; }
+    .btn-login-submit { padding: 0.75rem; background: var(--accent); color: white; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+    .login-modal-close { margin-top: 1rem; background: none; border: none; color: var(--text-muted); cursor: pointer; width: 100%; font-size: 0.85rem; }
+    .login-error-msg { color: #ef4444; font-size: 0.85rem; text-align: center; margin-top: 0.5rem; }
+  </style>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 800,
-      once: true,
-      easing: 'ease-out-quad'
-    });
-  </script>
-  <script src="/script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

@@ -21,30 +21,31 @@ function loadEnv($path) {
 // Charger le .env à la racine
 loadEnv(__DIR__ . '/../.env');
 
-// Configuration de la base de données (PDO)
-// Remplacez ces valeurs si vous migrez vers un hébergeur MySQL
-$dbHost = getenv('POSTGRES_HOST') ?: 'localhost';
-$dbName = getenv('POSTGRES_DATABASE') ?: 'portfolio';
-$dbUser = getenv('POSTGRES_USER') ?: 'postgres';
-$dbPass = getenv('POSTGRES_PASSWORD') ?: '';
+// Configuration de la base de données (PDO) - SISR Neon Sync
+$dbHost = getenv('POSTGRES_HOST') ?: (getenv('PGHOST') ?: 'localhost');
+$dbName = getenv('POSTGRES_DATABASE') ?: (getenv('PGDATABASE') ?: 'portfolio');
+$dbUser = getenv('POSTGRES_USER') ?: (getenv('PGUSER') ?: 'postgres');
+$dbPass = getenv('POSTGRES_PASSWORD') ?: (getenv('PGPASSWORD') ?: '');
 
 try {
-    // Tentative de connexion PostgreSQL (Neon/Vercel)
-    // Si vous passez sous MySQL, changez 'pgsql' par 'mysql'
     $dsn = "pgsql:host=$dbHost;port=5432;dbname=$dbName;sslmode=require";
     $pdo = new PDO($dsn, $dbUser, $dbPass, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     ]);
 } catch (PDOException $e) {
-    // Fallback/Log d'erreur (à adapter pour la prod)
-    error_log("Connection failed: " . $e->getMessage());
+    // Si la DB n'est pas dispo, on laisse le site tourner avec des statics
+    error_log("Connection failed (Neo/Vercel Sync): " . $e->getMessage());
 }
 
-// Sécurisation des sessions
+// Sécurisation des sessions (SISR Sync Pro)
 ini_set('session.cookie_httponly', 1);
 ini_set('session.use_only_cookies', 1);
-ini_set('session.cookie_secure', isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 1 : 0);
+
+// Détection HTTPS pour le cookie secure
+$isHttps = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
+ini_set('session.cookie_secure', $isHttps ? 1 : 0);
+ini_set('session.gc_maxlifetime', 3600); // 1 heure
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

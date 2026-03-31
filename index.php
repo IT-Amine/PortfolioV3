@@ -1,65 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
+<?php include_once 'includes/config.php'; ?>
+<?php include_once 'includes/head.php'; ?>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#f9fafb">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-
-  <meta name="description"
-    content="Portfolio d'Amine Kada, étudiant en BTS SIO option SISR. Découvrez mes projets, compétences et formations en administration de réseaux, systèmes et cybersécurité.">
-  <meta name="keywords"
-    content="Portfolio Amine, Amine Kada, BTS SIO, SISR, administration réseau, cybersécurité, portfolio informatique">
-
-  <meta name="google-site-verification" content="myYa0w-hRRlwmUmHPxMpOmUG4C7hZyRMU4uqcCCqAmQ" />
-
-  <title>Portfolio Amine Kada - BTS SIO SISR</title>
-
-  <link rel="icon" type="image/x-icon" href="public/icon.ico">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <script>
-    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
-</head>
-
-<body>
-  <!-- Navigation -->
-  <header class="nav-header">
-    <div class="nav-container">
-      <div class="nav-brand">BTS SIO</div>
-      <!-- Indicateur de déverrouillage (Barre de navigation) -->
-      <div id="unlockIndicator" class="unlock-status-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981"
-          stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-          <path d="M7 11V7a5 5 0 0 1 10 0" />
-        </svg>
-      </div>
-      <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false"
-        aria-controls="nav-menu">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-      </button>
-      <nav class="nav-menu" id="nav-menu" role="navigation" aria-label="Menu principal">
-        <button type="button" class="nav-btn active" data-section="accueil">Accueil</button>
-        <button type="button" class="nav-btn" data-section="bts-sio">BTS SIO</button>
-        <button type="button" class="nav-btn" data-section="projets">Projets</button>
-        <button type="button" class="nav-btn" data-section="veille">Veille</button>
-        <button type="button" class="nav-btn" data-section="patrimoine">Patrimoine</button>
-        <button type="button" class="nav-btn" data-section="formations">Formations</button>
-        <button type="button" class="nav-btn" data-section="competences">Compétences</button>
-        <button type="button" class="nav-btn" data-section="contact">Contact</button>
-      </nav>
-    </div>
-  </header>
+<?php include_once 'includes/navbar.php'; ?>
 
   <!-- Arrière-plan animé -->
   <div class="animated-background"></div>
@@ -80,16 +22,11 @@
         </p>
         <div class="hero-buttons">
           <button class="btn-primary" onclick="goToSection('projets')">Consulter mes réalisations</button>
-          <a href="https://cvdesignr.com/p/6808a706550eb?hl=fr_FR" target="_blank" rel="noopener noreferrer"
-            class="btn-outline protected-link" id="hero-cv-btn">
-            <span class="lock-icon-small"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-              </svg></span>
-            Mon CV
-          </a>
+          <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'recruiter')): ?>
+            <button onclick="window.open(getSecureUrl('CV'))" class="btn-outline" id="hero-cv-btn">
+              Mon CV
+            </button>
+          <?php endif; ?>
         </div>
         <div class="hero-stack">
           <span class="stack-label">STACK</span>
@@ -135,9 +72,6 @@
     </div>
   </section>
 
-
-  </section>
-
   <!-- Section Veille Technologique -->
   <section id="veille" class="section">
     <div class="container">
@@ -149,24 +83,17 @@
           pour rester à jour sur les menaces et bonnes pratiques.
         </p>
       </div>
+      <div class="veille-sources-info">
+        <p class="sources-label">Sources officielles surveillées :</p>
+        <div class="sources-links">
+          <a href="https://www.cert.ssi.gouv.fr/" target="_blank" class="source-link">ANSSI (CERT-FR)</a>
+          <a href="https://www.ssi.gouv.fr/" target="_blank" class="source-link">Cyber-sécurité Gouvernementale</a>
+        </div>
+      </div>
       <div id="veilleContent"></div>
     </div>
   </section>
 
-  <!-- Section Patrimoine Informatique -->
-  <section id="patrimoine" class="section">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label">Gestion du patrimoine informatique</p>
-        <h2 class="section-title">Inventaire &amp; <span class="gradient-text">Maintenance</span></h2>
-        <p class="section-description">
-          Gestion et suivi du parc informatique : inventaire matériel et logiciel, maintenance,
-          sécurisation et utilisation d'outils de gestion de parc.
-        </p>
-      </div>
-      <div id="patrimoineContent"></div>
-    </div>
-  </section>
 
   <!-- Section Compétences -->
   <section id="competences" class="section">
@@ -185,6 +112,7 @@
     </div>
   </section>
 
+  <?php if (isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'recruiter')): ?>
   <!-- Section Formations -->
   <section id="formations" class="section">
     <div class="container">
@@ -223,9 +151,8 @@
         </div>
       </div>
     </div>
-
-
   </section>
+  <?php endif; ?>
 
   <!-- Section OpenClassrooms -->
   <section id="openclassrooms" class="section">
@@ -247,8 +174,6 @@
         productivité modernes.
       </p>
     </div>
-
-
   </section>
 
   <!-- Section Contact -->
@@ -417,107 +342,9 @@
       </div>
 
       <p class="contact-footer">
-        © <span id="currentYear"></span> Étudiant BTS SIO SISR — Portfolio
+        © <?php echo date('Y'); ?> Étudiant BTS SIO SISR — Portfolio
       </p>
     </div>
   </section>
 
-  <!-- Modales -->
-  <!-- Modale Projet Dynamique -->
-  <div id="projectModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 id="modalProjectTitle">Détail du projet</h3>
-        <button class="modal-close" onclick="closeProjectModal()">Fermer</button>
-      </div>
-
-      <div class="modal-body">
-        <p id="modalProjectDesc" class="modal-description"></p>
-
-        <div class="project-modal-layout">
-          <div class="project-modal-sidebar">
-            <h4 class="sidebar-title">Documents</h4>
-            <div id="modalPdfList" class="pdf-selection-list">
-              <!-- Boutons injectés ici -->
-            </div>
-          </div>
-
-          <div class="project-modal-main">
-            <div id="modalPdfViewer" class="modal-pdf-container">
-              <iframe id="pdfFrame" src="" width="100%" height="500px" frameborder="0"></iframe>
-              <div id="pdfFallback" class="pdf-fallback" style="display: none;">
-                <p>Aperçu indisponible. <a id="pdfDownloadLink" href="#" target="_blank">Ouvrir le document</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Projet Générique -->
-  <div id="genericProjectModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 id="genericProjectTitle">Détails du projet</h3>
-        <button class="modal-close" onclick="closeGenericProjectModal()">Fermer</button>
-      </div>
-      <div id="genericProjectContent" class="modal-body">
-        <p>Description détaillée en cours de rédaction...</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal Certificat -->
-  <div id="certModal" class="modal" onclick="if(event.target===this) closeCertModal();">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <div class="modal-header">
-        <div>
-          <h3 id="certModalTitle"></h3>
-          <p id="certModalSubtitle" class="modal-subtitle"></p>
-        </div>
-        <button class="modal-close" onclick="closeCertModal()">Fermer</button>
-      </div>
-      <p class="modal-description" id="certModalDescription"></p>
-      <div class="modal-cert-container" id="certModalContent"></div>
-    </div>
-  </div>
-
-  <!-- Visionneuse Image Générique (Certificats, etc.) -->
-  <div id="imageViewerModal" class="modal">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="modal-close-absolute" onclick="closeImageViewerModal()">Fermer</button>
-      <div class="viewer-modal-image-container">
-        <img id="viewerModalImage" src="" alt="" class="viewer-modal-image">
-      </div>
-      <h3 id="viewerModalTitle" class="viewer-modal-title"></h3>
-      <p id="viewerModalDescription" class="viewer-modal-description"></p>
-      <div id="viewerModalTags" class="viewer-modal-tags"></div>
-    </div>
-  </div>
-
-  <!-- Modale d'Authentification Recruteur -->
-  <div id="authModal" class="modal">
-    <div class="modal-content auth-modal-content">
-      <div class="modal-header">
-        <h3>Accès Recruteur</h3>
-        <button class="modal-close" onclick="closeAuthModal()">Fermer</button>
-      </div>
-      <div class="modal-body">
-        <p class="auth-message">Veuillez saisir votre code d'accès pour déverrouiller les informations sensibles (CV,
-          contacts prioritaires).</p>
-        <div class="auth-input-group">
-          <input type="password" id="accessCodeInput" placeholder="Saisir le code..."
-            onkeydown="if(event.key==='Enter') checkAccessCode()">
-          <button class="btn-primary" onclick="checkAccessCode()">Déverrouiller</button>
-        </div>
-        <div id="authError" class="auth-error-msg">Code incorrect, veuillez réessayer.</div>
-        <p class="auth-hint">Note : Le code vous a été transmis lors du premier contact.</p>
-      </div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-
-</html>
+<?php include_once 'includes/footer.php'; ?>

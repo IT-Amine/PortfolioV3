@@ -1,0 +1,7 @@
+# Chiffrement des fichiers sensibles pour le Portfolio
+includes/config.php filter=git-crypt diff=git-crypt
+api/admin/** filter=git-crypt diff=git-crypt
+.env filter=git-crypt diff=git-crypt
+api/auth.php filter=git-crypt diff=git-crypt
+cron/sync-veille.php filter=git-crypt diff=git-crypt
+api/content_actions.php filter=git-crypt diff=git-crypt

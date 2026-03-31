@@ -2,7 +2,6 @@
    PORTFOLIO BTS SIO — SCRIPT PRINCIPAL (CERVEAU)
    ============================================================ */
 
-
 const CONTACT_EMAIL = 'kadaamine37@hotmail.com';
 const CONTACT_SUBJECT = 'Portfolio BTS SIO - Contact';
 
@@ -14,6 +13,7 @@ const ICONS = {
   shield: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
   terminal: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>',
   document: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>',
+
   settings: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12.23 2h-.46c-.4 0-.79.2-1.01.53l-.35.53a8.3 8.3 0 0 1-.9.41l-.6.22c-.41.15-.65.57-.59 1l.07.63c.03.3-.01.6-.14.86a2 2 0 0 1-1.07 1.07c-.26.13-.56.17-.86.14l-.63-.07c-.44-.06-.86.18-1 .59l-.22.6c-.1.3-.23.6-.4.9l-.54.34c-.33.22-.53.61-.53 1.01v.46c0 .4.2.79.53 1.01l.53.35c.18.29.32.59.41.9l.22.6c.15.41.57.65 1 .59l.63-.07c.3-.03.6.01.86.14a2 2 0 0 1 1.07 1.07c.13.26.17.56.14.86l-.07.63c-.06.44.18.86.59 1l.6.22c.3.1.6.23.9.4l.35.53c.22.33.61.53 1.01.53h.46c.4 0 .79-.2 1.01-.53l.35-.53c.29-.18.59-.32.9-.41l.6-.22c.41-.15.65-.57.59-1l-.07-.63a2 2 0 0 1 1.21-1.93c.3-.13.6-.17.86-.14l.63.07c.44.06.86-.18 1-.59l.22-.6c.1-.3.23-.6.4-.9l.53-.35c.33-.22.53-.61.53-1.01v-.46c0-.4-.2-.79-.53-1.01l-.53-.35a8.3 8.3 0 0 1-.41-.9l-.22-.6c-.15-.41-.57-.65-1-.59l-.63.07a2 2 0 0 1-1.21-1.93c-.13-.3-.17-.6-.14-.86l.07-.63c.06-.44-.18-.86-.59-1l-.6-.22a8.3 8.3 0 0 1-.9-.41l-.35-.53A1.23 1.23 0 0 0 12.23 2z"/><circle cx="12" cy="12" r="3"/></svg>',
   search: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
   tool: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
@@ -140,9 +140,9 @@ const skillsCategories = [
 ];
 
 const certificationsTreeData = [
-  { id: 'pix', title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: null, type: 'image' },
-  { id: 'mooc', title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: null, type: 'image' },
-  { id: 'ebios', title: 'EBIOS — Analyse de risque', date: '2025', icon: 'shield', file: null, type: 'pdf' },
+  { id: 'pix', title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: getSecureUrl('PIX'), type: 'image' },
+  { id: 'mooc', title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: getSecureUrl('MOOC'), type: 'image' },
+  { id: 'ebios', title: 'EBIOS — Analyse de risque', date: '2025', icon: 'shield', file: getSecureUrl('EBIOS'), type: 'pdf' },
   { id: 'oc', title: 'OpenClassrooms — Réseaux & Systèmes', date: '2024–2025', icon: 'globe', file: '#openclassrooms', type: 'section' },
 ];
 
@@ -152,6 +152,7 @@ const formationsData = [
     subtitle: 'Lycée Paul-Louis Courier, Tours',
     date: '2025–2027',
     desc: 'Services Informatiques aux Organisations, option SISR. Administration système, réseau',
+    icon: 'award',
     showVoir: false
   },
   {
@@ -159,29 +160,24 @@ const formationsData = [
     subtitle: 'Lycée Henri Becquerel, Tours',
     date: '2022–2025',
     desc: 'Systèmes Numériques, option RISC. Réseaux et systèmes communicants.',
+    icon: 'book',
     showVoir: false
   }
 ];
 
-const patrimoineData = [
-  { title: 'Inventaire Matériel', desc: 'Gestion du parc via GLPI et OCS Inventory.', icon: 'search', outils: ['GLPI', 'OCS'] },
-  { title: 'Maintenance Préventive', desc: 'Déploiement de mises à jour via WSUS / Ansible.', icon: 'settings', outils: ['WSUS', 'Ansible'] },
-  { title: 'Support Utilisateur', desc: 'Gestion des tickets et assistance technique.', icon: 'tool', outils: ['Tickets', 'Remote'] },
-];
-
 let openclassroomsCerts = [
-  { title: 'Active Directory', image: null },
-  { title: 'Docker', image: null },
-  { title: 'TCP/IP', image: null },
-  { title: 'Windows Server', image: null },
-  { title: 'Cisco Networking', image: null },
-  { title: 'Déploiement Win10', image: null },
-  { title: 'Git & GitHub', image: null },
-  { title: 'Git Fundamentals', image: null },
-  { title: 'Linux Administration', image: null },
-  { title: 'Hardware PC', image: null },
-  { title: 'ChatGPT', image: null },
-  { title: 'Virtualisation Environnement', image: null },
+  { title: 'Active Directory', image: '/public/openclassroom/AD_z9v2l8.jpg' },
+  { title: 'Docker', image: '/public/openclassroom/Docker_m5n1x4.jpg' },
+  { title: 'TCP/IP', image: '/public/openclassroom/TCPIP_v8l2n3.png' },
+  { title: 'Windows Server', image: '/public/openclassroom/WinServer_k9v1m4.png' },
+  { title: 'Cisco Networking', image: '/public/openclassroom/Cisco_x2l9n3.jpg' },
+  { title: 'Déploiement Win10', image: '/public/openclassroom/Win10_v5n1m8.png' },
+  { title: 'Git & GitHub', image: '/public/openclassroom/GitGithub_z9v3l8.jpg' },
+  { title: 'Git Fundamentals', image: '/public/openclassroom/Git_k2n5m4.png' },
+  { title: 'Linux Administration', image: '/public/openclassroom/Linux_v8l1n3.jpg' },
+  { title: 'Hardware PC', image: '/public/openclassroom/PC_x5v9m4.png' },
+  { title: 'ChatGPT', image: '/public/openclassroom/ChatGPT_k8v2l9.png' },
+  { title: 'Virtualisation Environnement', image: '/public/openclassroom/Virtualisation_m9n1x4.jpg' },
 ];
 
 const btsSioData = {
@@ -205,28 +201,10 @@ const competencesListData = [
 /* --- ÉTAT GLOBAL & ROUTING --- */
 
 let activeSection = 'accueil';
-let isUnlocked = sessionStorage.getItem('isUnlocked') === 'true';
-let decryptedCvLink = sessionStorage.getItem('decryptedCvLink') || '';
-
-// Restauration des fichiers de certifications si déjà déverrouillé
-if (isUnlocked) {
-  const savedCerts = JSON.parse(sessionStorage.getItem('decryptedCerts') || '[]');
-  const savedOC = JSON.parse(sessionStorage.getItem('decryptedOC') || '[]');
-
-  savedCerts.forEach(cert => {
-    const target = certificationsTreeData.find(c => c.id === cert.id);
-    if (target) target.file = cert.file;
-  });
-
-  savedOC.forEach(oc => {
-    const target = openclassroomsCerts.find(c => c.title === oc.title);
-    if (target) target.image = oc.image;
-  });
-}
 
 function getDefaultSection() {
   const hash = decodeURIComponent(window.location.hash.slice(1));
-  const sections = ['accueil', 'bts-sio', 'projets', 'veille', 'patrimoine', 'formations', 'competences', 'contact', 'openclassrooms'];
+  const sections = ['accueil', 'bts-sio', 'projets', 'veille', 'formations', 'competences', 'contact', 'openclassrooms'];
   return sections.includes(hash) ? hash : 'accueil';
 }
 
@@ -292,33 +270,36 @@ function renderSkills() {
 function renderFormations() {
   const grid = document.getElementById('formationsGrid');
   if (!grid) return;
-  grid.innerHTML = `<div class="timeline-container"><div class="timeline-line"></div>` +
-    formationsData.map(f => {
-      const shouldShowVoir = f.showVoir !== false;
-      const onClickAttr = shouldShowVoir ? `onclick="viewPDF('${f.pdf}', '${f.title}')"` : '';
-      const cursorAttr = shouldShowVoir ? 'style="cursor: pointer;"' : '';
+  grid.innerHTML = `
+    <div class="timeline-container">
+      <div class="timeline-line"></div>
+      ${formationsData.map(f => {
+    const shouldShowVoir = f.showVoir !== false;
+    const onClickAttr = shouldShowVoir ? `onclick="viewPDF('${f.pdf}', '${f.title}')"` : '';
+    const cursorAttr = shouldShowVoir ? 'style="cursor: pointer;"' : '';
 
-      return `
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content" ${onClickAttr} ${cursorAttr}>
-          <div class="timeline-header">
-            <div>
-              <h3 class="timeline-title">${f.title}</h3>
-              <div class="timeline-subtitle">${f.subtitle}</div>
+    return `
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content" ${onClickAttr} ${cursorAttr}>
+            <div class="timeline-header">
+              <div class="timeline-meta-box">
+                <div class="timeline-icon-box">${getIcon(f.icon || 'award')}</div>
+                <div class="timeline-info">
+                  <h3 class="timeline-title">${f.title}</h3>
+                  <div class="timeline-subtitle">${f.subtitle}</div>
+                </div>
+              </div>
+              ${shouldShowVoir ? '<div class="timeline-view-badge">Voir</div>' : ''}
             </div>
-            ${shouldShowVoir ? '<div class="timeline-view-badge">Voir</div>' : ''}
+            <div class="timeline-date">${f.date}</div>
+            <p class="timeline-desc">${f.desc}</p>
           </div>
-          <div class="timeline-date">${f.date}</div>
-          <p class="timeline-desc">${f.desc}</p>
-          ${f.image ? `
-            <div class="timeline-image-container">
-              <img src="${f.image}" class="timeline-image" alt="${f.title}" onerror="this.parentElement.style.display='none'">
-            </div>
-          ` : ''}
         </div>
-      </div>
-    `}).join('') + `</div>`;
+      `;
+  }).join('')}
+    </div>
+  `;
 }
 
 function renderBtsSio() {
@@ -361,33 +342,13 @@ function renderCompetencesTable() {
   `;
 }
 
-function renderPatrimoine() {
-  const container = document.getElementById('patrimoineContent');
-  if (!container) return;
-  container.innerHTML = `
-    <div class="patrimoine-grid">
-      ${patrimoineData.map(p => `
-        <div class="patrimoine-card">
-          <div class="patrimoine-card-header">
-            <div class="patrimoine-icon">${getIcon(p.icon)}</div>
-            <h4>${p.title}</h4>
-          </div>
-          <p>${p.desc}</p>
-          <div class="patrimoine-outils">
-            ${p.outils.map(o => `<span class="patrimoine-outil-tag">${o}</span>`).join('')}
-          </div>
-        </div>
-      `).join('')}
-    </div>
-  `;
-}
 
 async function renderVeille() {
   const container = document.getElementById('veilleContent');
   if (!container) return;
   container.innerHTML = '<div class="veille-loading">Chargement du flux de sécurité...</div>';
   try {
-    const res = await fetch(`/api/veille?limit=5&t=${Date.now()}`);
+    const res = await fetch(`/api/veille.php?limit=5&t=${Date.now()}`);
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
     const data = await res.json();
     const articles = data.articles || [];
@@ -433,17 +394,11 @@ function renderOpenClassrooms() {
   const grid = document.getElementById('openclassroomsGrid');
   if (!grid) return;
   grid.innerHTML = openclassroomsCerts.map((c, i) => {
-    const isLocked = !isUnlocked || !c.image;
-    const onClickAction = isLocked ? 'openAuthModal()' : `viewCertificateImageByIndex(${i})`;
-    const imageTag = isLocked 
-      ? `<div class="oc-card-locked-overlay">
-           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-           <span>Accès Verrouillé</span>
-         </div>`
-      : `<img src="${c.image}" alt="${c.title}" class="oc-card-image">`;
+    const onClickAction = `viewCertificateImageByIndex(${i})`;
+    const imageTag = `<img src="${c.image}" alt="${c.title}" class="oc-card-image">`;
 
     return `
-      <article class="oc-card ${isLocked ? 'is-locked' : ''}" onclick="${onClickAction}">
+      <article class="oc-card" onclick="${onClickAction}">
         <div class="oc-card-image-container">
           ${imageTag}
         </div>
@@ -453,6 +408,22 @@ function renderOpenClassrooms() {
       </article>
     `;
   }).join('');
+}
+
+function viewCertificateImageByIndex(index) {
+  const c = openclassroomsCerts[index];
+  if (c) viewCertificateImage(c.image, c.title);
+}
+
+function viewCertificateImage(url, title) {
+  const modal = document.getElementById('imageViewerModal');
+  const img = document.getElementById('viewerImg');
+  const titleEl = document.getElementById('viewerTitle');
+  if (modal && img && titleEl) {
+    img.src = url;
+    titleEl.textContent = title;
+    modal.classList.add('active');
+  }
 }
 
 /* --- MODALES --- */
@@ -506,8 +477,12 @@ function viewPDF(url, title) {
   const modal = document.getElementById('projectModal');
   const frame = document.getElementById('pdfFrame');
   const downloadLink = document.getElementById('pdfDownloadLink');
+  const pdfList = document.getElementById('modalPdfList');
+  const desc = document.getElementById('modalProjectDesc');
 
-  // 2. On prépare la modale avant d'injecter la source
+  // 2. Nettoyage et préparation
+  if (pdfList) pdfList.innerHTML = ''; // Crucial pour éviter de voir les anciens PDF
+  if (desc) desc.textContent = ''; 
   document.getElementById('modalProjectTitle').textContent = title;
 
   // 3. Injection de la source (directe, sans viewer externe)
@@ -566,12 +541,11 @@ function renderCertificationsTree() {
       <div class="cert-tree-line"></div>
       ${certificationsTreeData.map((c, i) => {
     const onClickAction = `viewCertInTree(${i})`;
-    const lockIcon = !isUnlocked ? '<span class="lock-icon-inline"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>' : '';
 
     return `
         <div class="cert-item">
           <div class="cert-dot"></div>
-          <div class="cert-card ${!isUnlocked ? 'is-locked' : ''}" onclick="${onClickAction}">
+          <div class="cert-card" onclick="${onClickAction}">
             <div class="cert-header-info">
               <div class="cert-icon-small">${getIcon(c.icon)}</div>
               <div class="cert-details">
@@ -579,7 +553,7 @@ function renderCertificationsTree() {
                 <div class="cert-date-txt">${c.date}</div>
               </div>
             </div>
-            <div class="cert-badge">${lockIcon}${!isUnlocked ? '' : 'Voir'}</div>
+            <div class="cert-badge">Voir</div>
           </div>
         </div>
       `;
@@ -589,10 +563,6 @@ function renderCertificationsTree() {
 }
 
 function viewCertInTree(index) {
-  if (!isUnlocked) {
-    openAuthModal();
-    return;
-  }
   const c = certificationsTreeData[index];
   if (!c) return;
   if (c.type === 'section') {
@@ -629,29 +599,27 @@ document.addEventListener('DOMContentLoaded', () => {
   renderProjects();
   renderSkills();
   renderFormations();
-  renderPatrimoine();
   renderVeille();
   renderOpenClassrooms();
   renderBtsSio();
   renderCompetencesTable();
   renderCertificationsTree();
-  updateLockedElements();
 
-  // Robustesse pour le bouton mail
-  const mailBtn = document.getElementById('contact-mail-btn');
-  if (mailBtn) {
-    mailBtn.addEventListener('click', (e) => {
-      // Si le href mailto: ne s'ouvre pas, on force avec window.location
-      const href = mailBtn.getAttribute('href');
-      if (href && href.startsWith('mailto:')) {
-      }
-    });
-  }
+  // Effet de scroll sur la NavBar
+  const header = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header?.classList.add('scrolled');
+    } else {
+      header?.classList.remove('scrolled');
+    }
+  });
 
   const yearEl = document.getElementById('currentYear');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
 
+// Export des fonctions globales
 window.goToSection = goToSection;
 window.openProjectModal = openProjectModal;
 window.closeProjectModal = closeProjectModal;
@@ -661,108 +629,77 @@ window.viewCertificateImage = viewCertificateImage;
 window.closeImageViewerModal = closeImageViewerModal;
 window.viewCertInTree = viewCertInTree;
 
-/* --- SYSTÈME D'ACCÈS RECRUTEUR --- */
-
-function openAuthModal() {
-  const modal = document.getElementById('authModal');
+/* --- SYSTÈME DE CONNEXION (UI) --- */
+function openLoginModal() {
+  const modal = document.getElementById('loginModal');
   if (modal) {
     modal.classList.add('active');
-    setTimeout(() => document.getElementById('accessCodeInput')?.focus(), 300);
+    setTimeout(() => document.getElementById('loginEmail')?.focus(), 300);
   }
 }
-
-function closeAuthModal() {
-  const modal = document.getElementById('authModal');
+function closeLoginModal() {
+  const modal = document.getElementById('loginModal');
   if (modal) {
     modal.classList.remove('active');
-    document.getElementById('authError').style.display = 'none';
-    document.getElementById('accessCodeInput').value = '';
+    document.getElementById('loginError').style.display = 'none';
   }
 }
+async function handleLogin(event) {
+  if (event) event.preventDefault();
+  
+  const userEl = document.getElementById('username');
+  const passEl = document.getElementById('password');
+  const errorEl = document.getElementById('loginError');
 
-async function checkAccessCode() {
-  const input = document.getElementById('accessCodeInput');
-  const codeValue = input.value;
-  const error = document.getElementById('authError');
+  if (!userEl || !passEl) return;
+
+  const username = userEl.value;
+  const password = passEl.value;
 
   try {
-    const response = await fetch('/api/unlock', {
+    const response = await fetch('api/auth.php?action=login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code: codeValue })
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
     });
 
     const data = await response.json();
 
-    if (data.success) {
-      isUnlocked = true;
-      decryptedCvLink = data.cvLink;
-      
-      sessionStorage.setItem('isUnlocked', 'true');
-      sessionStorage.setItem('decryptedCvLink', data.cvLink);
-      sessionStorage.setItem('decryptedCerts', JSON.stringify(data.certifications));
-      sessionStorage.setItem('decryptedOC', JSON.stringify(data.openclassrooms)); // Nouveau
-
-      // Mise à jour des certificats dans l'arbre
-      data.certifications.forEach(cert => {
-        const target = certificationsTreeData.find(c => c.id === cert.id);
-        if (target) target.file = cert.file;
-      });
-
-      // Mise à jour des certificats OpenClassrooms
-      data.openclassrooms.forEach(oc => {
-        const target = openclassroomsCerts.find(c => c.title === oc.title);
-        if (target) target.image = oc.image;
-      });
-
-      closeAuthModal();
-      updateLockedElements();
-      renderCertificationsTree();
-      renderOpenClassrooms(); // Nouveau : Re-rendu de la grille OC
-      console.log("Accès déverrouillé via API");
+    if (response.ok && data.success) {
+      // Recharger pour mettre à jour la NavBar (PHP se chargera de la logique)
+      window.location.reload();
     } else {
-      throw new Error("Code invalide");
+      if (errorEl) {
+        errorEl.textContent = data.error || 'Erreur d\'identification.';
+        errorEl.style.display = 'block';
+      }
     }
-  } catch (e) {
-    error.style.display = 'block';
-    input.classList.add('shake');
-    setTimeout(() => input.classList.remove('shake'), 400);
-  }
-}
-
-function updateLockedElements() {
-  const unlockIndicator = document.getElementById('unlockIndicator');
-  const cvBtn = document.getElementById('hero-cv-btn');
-
-  if (isUnlocked) {
-    // État déverrouillé
-    if (unlockIndicator) {
-      unlockIndicator.classList.add('visible');
-    }
-
-    if (cvBtn) {
-      cvBtn.classList.remove('is-locked');
-      cvBtn.classList.add('is-unlocked');
-      cvBtn.href = decryptedCvLink;
-      cvBtn.onclick = null;
-    }
-  } else {
-    // État verrouillé
-    if (unlockIndicator) {
-      unlockIndicator.classList.remove('visible');
-    }
-
-    if (cvBtn) {
-      cvBtn.classList.add('is-locked');
-      cvBtn.onclick = (e) => {
-        e.preventDefault();
-        openAuthModal();
-      };
+  } catch (err) {
+    if (errorEl) {
+      errorEl.textContent = 'Erreur technique. Réessayez plus tard.';
+      errorEl.style.display = 'block';
     }
   }
 }
+window.openLoginModal = openLoginModal;
+window.closeLoginModal = closeLoginModal;
+window.handleLogin = handleLogin;
 
-// Export des fonctions globales
-window.openAuthModal = openAuthModal;
-window.closeAuthModal = closeAuthModal;
-window.checkAccessCode = checkAccessCode;
+/* --- CYBER-SÉCURITÉ (ANTI-INSPECT) --- */
+// Bloquer le clic droit
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// Bloquer les raccourcis inspecteur (F12, Ctrl+Maj+I, etc.)
+document.addEventListener('keydown', e => {
+  if (
+    e.key === 'F12' || 
+    (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+    (e.ctrlKey && e.shiftKey && e.key === 'J') || 
+    (e.ctrlKey && e.key === 'U') ||
+    (e.metaKey && e.altKey && e.key === 'i') // Mac
+  ) {
+    e.preventDefault();
+    console.warn("L'inspection est désactivée par sécurité.");
+    return false;
+  }
+});

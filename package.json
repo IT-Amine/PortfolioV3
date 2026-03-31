@@ -5,7 +5,8 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@vercel/postgres": "^0.10.0"
+    "@vercel/postgres": "^0.10.0",
+    "crypto-js": "^4.2.0"
   },
   "engines": {
     "node": ">=18.x"

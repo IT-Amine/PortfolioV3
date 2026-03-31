@@ -5,8 +5,6 @@
 
 const CONTACT_EMAIL = 'kadaamine37@hotmail.com';
 const CONTACT_SUBJECT = 'Portfolio BTS SIO - Contact';
-const ACCESS_HASH = 'f5bed3c7a6735605cba10570570cec54138eec871150f6e3c0773cd3cd3773d1';
-const ACCESS_SALT = 'G8-L2S-I-S-R-2025';
 
 /* --- ICÔNES SVG --- */
 
@@ -142,10 +140,10 @@ const skillsCategories = [
 ];
 
 const certificationsTreeData = [
-  { title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: '/public/certif/PIX.jpg', type: 'image' },
-  { title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: '/public/certif/MOOC.jpg', type: 'image' },
-  { title: 'EBIOS — Analyse de risque', date: '2025', icon: 'shield', file: '/public/certif/EBIOS.pdf', type: 'pdf' },
-  { title: 'OpenClassrooms — Réseaux & Systèmes', date: '2024–2025', icon: 'globe', file: '#openclassrooms', type: 'section' },
+  { id: 'pix', title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: null, type: 'image' },
+  { id: 'mooc', title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: null, type: 'image' },
+  { id: 'ebios', title: 'EBIOS — Analyse de risque', date: '2025', icon: 'shield', file: null, type: 'pdf' },
+  { id: 'oc', title: 'OpenClassrooms — Réseaux & Systèmes', date: '2024–2025', icon: 'globe', file: '#openclassrooms', type: 'section' },
 ];
 
 const formationsData = [
@@ -171,19 +169,19 @@ const patrimoineData = [
   { title: 'Support Utilisateur', desc: 'Gestion des tickets et assistance technique.', icon: 'tool', outils: ['Tickets', 'Remote'] },
 ];
 
-const openclassroomsCerts = [
-  { title: 'Active Directory', image: '/public/openclassroom/Centralisez et sécuriser avec Active Directory.jpg' },
-  { title: 'Docker', image: '/public/openclassroom/Optimisez avec des Conteneur Docker.jpg' },
-  { title: 'TCP/IP', image: '/public/openclassroom/TCP:IP.png' },
-  { title: 'Windows Server', image: '/public/openclassroom/Windows Server.png' },
-  { title: 'Cisco Networking', image: '/public/openclassroom/cisco.jpg' },
-  { title: 'Déploiement Win10', image: '/public/openclassroom/déployez Win10.png' },
-  { title: 'Git & GitHub', image: '/public/openclassroom/gérer du code avec git & Github.jpg' },
-  { title: 'Git Fundamentals', image: '/public/openclassroom/git.png' },
-  { title: 'Linux Administration', image: '/public/openclassroom/linux.jpg' },
-  { title: 'Hardware PC', image: '/public/openclassroom/pc.png' },
-  { title: 'ChatGPT', image: '/public/openclassroom/utiliser ChatGPT.png' },
-  { title: 'Virtualisation Environnement', image: '/public/openclassroom/virtualiser vos environnement travail.jpg' },
+let openclassroomsCerts = [
+  { title: 'Active Directory', image: null },
+  { title: 'Docker', image: null },
+  { title: 'TCP/IP', image: null },
+  { title: 'Windows Server', image: null },
+  { title: 'Cisco Networking', image: null },
+  { title: 'Déploiement Win10', image: null },
+  { title: 'Git & GitHub', image: null },
+  { title: 'Git Fundamentals', image: null },
+  { title: 'Linux Administration', image: null },
+  { title: 'Hardware PC', image: null },
+  { title: 'ChatGPT', image: null },
+  { title: 'Virtualisation Environnement', image: null },
 ];
 
 const btsSioData = {
@@ -208,6 +206,23 @@ const competencesListData = [
 
 let activeSection = 'accueil';
 let isUnlocked = sessionStorage.getItem('isUnlocked') === 'true';
+let decryptedCvLink = sessionStorage.getItem('decryptedCvLink') || '';
+
+// Restauration des fichiers de certifications si déjà déverrouillé
+if (isUnlocked) {
+  const savedCerts = JSON.parse(sessionStorage.getItem('decryptedCerts') || '[]');
+  const savedOC = JSON.parse(sessionStorage.getItem('decryptedOC') || '[]');
+
+  savedCerts.forEach(cert => {
+    const target = certificationsTreeData.find(c => c.id === cert.id);
+    if (target) target.file = cert.file;
+  });
+
+  savedOC.forEach(oc => {
+    const target = openclassroomsCerts.find(c => c.title === oc.title);
+    if (target) target.image = oc.image;
+  });
+}
 
 function getDefaultSection() {
   const hash = decodeURIComponent(window.location.hash.slice(1));
@@ -417,16 +432,27 @@ async function renderVeille() {
 function renderOpenClassrooms() {
   const grid = document.getElementById('openclassroomsGrid');
   if (!grid) return;
-  grid.innerHTML = openclassroomsCerts.map((c, i) => `
-    <article class="oc-card" onclick="viewCertificateImageByIndex(${i})">
-      <div class="oc-card-image-container">
-        <img src="${c.image}" alt="${c.title}" class="oc-card-image">
-      </div>
-      <div class="oc-card-content">
-        <h4 class="oc-card-title">${c.title}</h4>
-      </div>
-    </article>
-  `).join('');
+  grid.innerHTML = openclassroomsCerts.map((c, i) => {
+    const isLocked = !isUnlocked || !c.image;
+    const onClickAction = isLocked ? 'openAuthModal()' : `viewCertificateImageByIndex(${i})`;
+    const imageTag = isLocked 
+      ? `<div class="oc-card-locked-overlay">
+           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+           <span>Accès Verrouillé</span>
+         </div>`
+      : `<img src="${c.image}" alt="${c.title}" class="oc-card-image">`;
+
+    return `
+      <article class="oc-card ${isLocked ? 'is-locked' : ''}" onclick="${onClickAction}">
+        <div class="oc-card-image-container">
+          ${imageTag}
+        </div>
+        <div class="oc-card-content">
+          <h4 class="oc-card-title">${c.title}</h4>
+        </div>
+      </article>
+    `;
+  }).join('');
 }
 
 /* --- MODALES --- */
@@ -654,26 +680,50 @@ function closeAuthModal() {
   }
 }
 
-async function hashString(str) {
-  const msgUint8 = new TextEncoder().encode(str);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
 async function checkAccessCode() {
   const input = document.getElementById('accessCodeInput');
+  const codeValue = input.value;
   const error = document.getElementById('authError');
-  const hashedInput = await hashString(input.value + ACCESS_SALT);
 
-  if (hashedInput === ACCESS_HASH) {
-    isUnlocked = true;
-    sessionStorage.setItem('isUnlocked', 'true');
-    closeAuthModal();
-    updateLockedElements();
-    renderCertificationsTree();
-    console.log("Accès déverrouillé !");
-  } else {
+  try {
+    const response = await fetch('/api/unlock', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: codeValue })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      isUnlocked = true;
+      decryptedCvLink = data.cvLink;
+      
+      sessionStorage.setItem('isUnlocked', 'true');
+      sessionStorage.setItem('decryptedCvLink', data.cvLink);
+      sessionStorage.setItem('decryptedCerts', JSON.stringify(data.certifications));
+      sessionStorage.setItem('decryptedOC', JSON.stringify(data.openclassrooms)); // Nouveau
+
+      // Mise à jour des certificats dans l'arbre
+      data.certifications.forEach(cert => {
+        const target = certificationsTreeData.find(c => c.id === cert.id);
+        if (target) target.file = cert.file;
+      });
+
+      // Mise à jour des certificats OpenClassrooms
+      data.openclassrooms.forEach(oc => {
+        const target = openclassroomsCerts.find(c => c.title === oc.title);
+        if (target) target.image = oc.image;
+      });
+
+      closeAuthModal();
+      updateLockedElements();
+      renderCertificationsTree();
+      renderOpenClassrooms(); // Nouveau : Re-rendu de la grille OC
+      console.log("Accès déverrouillé via API");
+    } else {
+      throw new Error("Code invalide");
+    }
+  } catch (e) {
     error.style.display = 'block';
     input.classList.add('shake');
     setTimeout(() => input.classList.remove('shake'), 400);
@@ -693,6 +743,7 @@ function updateLockedElements() {
     if (cvBtn) {
       cvBtn.classList.remove('is-locked');
       cvBtn.classList.add('is-unlocked');
+      cvBtn.href = decryptedCvLink;
       cvBtn.onclick = null;
     }
   } else {

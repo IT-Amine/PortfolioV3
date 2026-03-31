@@ -267,37 +267,65 @@ function renderSkills() {
   `).join('');
 }
 
-function renderFormations() {
+async function renderFormations() {
   const grid = document.getElementById('formationsGrid');
   if (!grid) return;
+
+  let allFormations = [...formationsData];
+
+  try {
+    const res = await fetch('/api/content.php?action=formations');
+    if (res.ok) {
+      const dbFormations = await res.json();
+      if (dbFormations && Array.isArray(dbFormations)) {
+        // Ajouter les formations DB qui ne sont pas déjà dans le statique (par titre)
+        dbFormations.forEach(dbf => {
+          if (!allFormations.find(f => f.title === dbf.title)) {
+            allFormations.unshift({
+                title: dbf.title,
+                subtitle: dbf.subtitle,
+                date: dbf.date_range,
+                desc: dbf.description || '',
+                pdf: dbf.pdf_path,
+                icon: 'award',
+                showVoir: !!dbf.pdf_path
+            });
+          }
+        });
+      }
+    }
+  } catch (err) {
+    console.warn("Utilisation du mode hors-ligne pour les formations.");
+  }
+
   grid.innerHTML = `
     <div class="timeline-container">
       <div class="timeline-line"></div>
-      ${formationsData.map(f => {
-    const shouldShowVoir = f.showVoir !== false;
-    const onClickAttr = shouldShowVoir ? `onclick="viewPDF('${f.pdf}', '${f.title}')"` : '';
-    const cursorAttr = shouldShowVoir ? 'style="cursor: pointer;"' : '';
+      ${allFormations.map(f => {
+        const shouldShowVoir = f.showVoir !== false;
+        const onClickAttr = shouldShowVoir ? `onclick="viewPDF('${f.pdf}', '${f.title}')"` : '';
+        const cursorAttr = shouldShowVoir ? 'style="cursor: pointer;"' : '';
 
-    return `
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-content" ${onClickAttr} ${cursorAttr}>
-            <div class="timeline-header">
-              <div class="timeline-meta-box">
-                <div class="timeline-icon-box">${getIcon(f.icon || 'award')}</div>
-                <div class="timeline-info">
-                  <h3 class="timeline-title">${f.title}</h3>
-                  <div class="timeline-subtitle">${f.subtitle}</div>
+        return `
+            <div class="timeline-item" data-aos="fade-up">
+              <div class="timeline-dot"></div>
+              <div class="timeline-content" ${onClickAttr} ${cursorAttr}>
+                <div class="timeline-header">
+                  <div class="timeline-meta-box">
+                    <div class="timeline-icon-box">${getIcon(f.icon || 'award')}</div>
+                    <div class="timeline-info">
+                      <h3 class="timeline-title">${f.title}</h3>
+                      <div class="timeline-subtitle">${f.subtitle}</div>
+                    </div>
+                  </div>
+                  ${shouldShowVoir ? '<div class="timeline-view-badge">Voir</div>' : ''}
                 </div>
+                <div class="timeline-date">${f.date}</div>
+                <p class="timeline-desc">${f.desc}</p>
               </div>
-              ${shouldShowVoir ? '<div class="timeline-view-badge">Voir</div>' : ''}
             </div>
-            <div class="timeline-date">${f.date}</div>
-            <p class="timeline-desc">${f.desc}</p>
-          </div>
-        </div>
-      `;
-  }).join('')}
+          `;
+      }).join('')}
     </div>
   `;
 }
@@ -533,33 +561,75 @@ function closeImageViewerModal() {
   if (modal) modal.classList.remove('active');
 }
 
-function renderCertificationsTree() {
+async function renderCertificationsTree() {
   const container = document.getElementById('certificationsTree');
   if (!container) return;
+
+  let allCerts = [...certificationsTreeData];
+
+  try {
+    const res = await fetch('/api/content.php?action=certifications');
+    if (res.ok) {
+      const dbCerts = await res.json();
+      if (dbCerts && Array.isArray(dbCerts) && dbCerts.length > 0) {
+        dbCerts.forEach(dbc => {
+           if (dbc.category === 'tree' && !allCerts.find(c => c.title === dbc.title)) {
+             allCerts.unshift({
+               id: 'db-' + dbc.id,
+               title: dbc.title,
+               date: 'Certifié',
+               icon: dbc.icon || 'shield',
+               file: dbc.file_path,
+               type: dbc.type || 'image'
+             });
+           }
+        });
+      }
+    }
+  } catch (err) {
+    console.warn("Utilisation du mode hors-ligne pour les certifications.");
+  }
+
   container.innerHTML = `
     <div class="cert-tree">
       <div class="cert-tree-line"></div>
-      ${certificationsTreeData.map((c, i) => {
-    const onClickAction = `viewCertInTree(${i})`;
+      ${allCerts.map((c, i) => {
+        // Si c'est un index statique, on utilise viewCertInTree, sinon on gère le lien direct
+        const onClickAction = (typeof c.id === 'string' && c.id.startsWith('db-')) 
+          ? `window.open('${c.file}', '_blank')`
+          : `viewCertInTreeByIndex(${i}, ${JSON.stringify(allCerts).replace(/"/g, '&quot;')})`;
 
-    return `
-        <div class="cert-item">
-          <div class="cert-dot"></div>
-          <div class="cert-card" onclick="${onClickAction}">
-            <div class="cert-header-info">
-              <div class="cert-icon-small">${getIcon(c.icon)}</div>
-              <div class="cert-details">
-                <h4 class="cert-title-txt">${c.title}</h4>
-                <div class="cert-date-txt">${c.date}</div>
+        return `
+            <div class="cert-item" data-aos="zoom-in">
+              <div class="cert-dot"></div>
+              <div class="cert-card" onclick="${onClickAction}">
+                <div class="cert-header-info">
+                  <div class="cert-icon-small">${getIcon(c.icon)}</div>
+                  <div class="cert-details">
+                    <h4 class="cert-title-txt">${c.title}</h4>
+                    <div class="cert-date-txt">${c.date}</div>
+                  </div>
+                </div>
+                <div class="cert-badge">Voir</div>
               </div>
             </div>
-            <div class="cert-badge">Voir</div>
-          </div>
-        </div>
-      `;
-  }).join('')}
+          `;
+      }).join('')}
     </div>
   `;
+}
+
+// Nouvelle fonction helper pour gérer le mélange statique/dynamique
+function viewCertInTreeByIndex(index, data) {
+  const c = data[index];
+  if (!c) return;
+  if (c.type === 'section') {
+    goToSection(c.file.slice(1));
+  } else if (c.type === 'pdf') {
+    viewPDF(c.file, c.title);
+  } else {
+    viewCertificateImage(c.file, c.title);
+  }
 }
 
 function viewCertInTree(index) {

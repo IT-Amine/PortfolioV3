@@ -4,6 +4,9 @@ require_once '../includes/config.php';
 $action = $_GET['action'] ?? '';
 
 try {
+    if (!$pdo) {
+        sendJSON(['error' => 'Base de données non disponible.'], 500);
+    }
     if ($action === 'formations') {
         $stmt = $pdo->query("SELECT * FROM formations ORDER BY display_order ASC, id DESC");
         sendJSON($stmt->fetchAll());

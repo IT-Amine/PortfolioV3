@@ -21,21 +21,44 @@ function loadEnv($path) {
 // Charger le .env à la racine
 loadEnv(__DIR__ . '/../.env');
 
-// Configuration de la base de données (PDO) - SISR Neon Sync
-$dbHost = getenv('POSTGRES_HOST') ?: (getenv('PGHOST') ?: 'localhost');
-$dbName = getenv('POSTGRES_DATABASE') ?: (getenv('PGDATABASE') ?: 'portfolio');
-$dbUser = getenv('POSTGRES_USER') ?: (getenv('PGUSER') ?: 'postgres');
-$dbPass = getenv('POSTGRES_PASSWORD') ?: (getenv('PGPASSWORD') ?: '');
+// Architecture SISR : Connexion Neon robuste (Priorité DATABASE_URL)
+$dbUrl = getenv('DATABASE_URL');
+$pdo = null;
 
-try {
+if ($dbUrl) {
+    try {
+        $parts = parse_url($dbUrl);
+        $dbHost = $parts['host'] ?? 'localhost';
+        $dbName = isset($parts['path']) ? ltrim($parts['path'], '/') : 'portfolio';
+        $dbUser = $parts['user'] ?? 'postgres';
+        $dbPass = $parts['pass'] ?? '';
+        
+        $dsn = "pgsql:host=$dbHost;port=5432;dbname=$dbName;sslmode=require";
+        $pdo = new PDO($dsn, $dbUser, $dbPass, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ]);
+    } catch (PDOException $e) {
+        error_log("DATABASE ERROR (URL): " . $e->getMessage());
+    }
+}
+
+if (!$pdo) {
+    // Fallback local classique si DATABASE_URL n'a pas marché
+    $dbHost = getenv('POSTGRES_HOST') ?: (getenv('PGHOST') ?: 'localhost');
+    $dbName = getenv('POSTGRES_DATABASE') ?: (getenv('PGDATABASE') ?: 'portfolio');
+    $dbUser = getenv('POSTGRES_USER') ?: (getenv('PGUSER') ?: 'postgres');
+    $dbPass = getenv('POSTGRES_PASSWORD') ?: (getenv('PGPASSWORD') ?: '');
     $dsn = "pgsql:host=$dbHost;port=5432;dbname=$dbName;sslmode=require";
-    $pdo = new PDO($dsn, $dbUser, $dbPass, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ]);
-} catch (PDOException $e) {
-    // Si la DB n'est pas dispo, on laisse le site tourner avec des statics
-    error_log("Connection failed (Neo/Vercel Sync): " . $e->getMessage());
+    
+    try {
+        $pdo = new PDO($dsn, $dbUser, $dbPass, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        ]);
+    } catch (PDOException $e) {
+        error_log("DATABASE ERROR (Fallback): " . $e->getMessage());
+    }
 }
 
 // Sécurisation des sessions (SISR Sync Pro)

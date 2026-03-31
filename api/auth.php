@@ -24,6 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password = $input['password'] ?? '';
 
         try {
+            if (!$pdo) {
+                sendJSON(['success' => false, 'error' => 'Erreur Critique : Base de données non connectée. Vérifiez vos variables Neon.'], 500);
+            }
             // SISR DB-DRIVEN AUTH : On cherche l'utilisateur dans la table users
             $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? LIMIT 1");
             $stmt->execute([$username]);

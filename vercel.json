@@ -3,7 +3,7 @@
   "cleanUrls": true,
   "functions": {
     "api/*.php": {
-      "runtime": "brefphp/vercel-php@0.6.0"
+      "runtime": "vercel-php@0.6.2"
     }
   },
   "headers": [

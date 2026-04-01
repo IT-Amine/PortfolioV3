@@ -77,45 +77,7 @@
     ...
   </div>
 
-  <!-- Modale de Connexion (Admin) -->
-  <div id="loginModal" class="modal">
-    <div class="modal-content login-modal-card">
-      <div class="login-modal-header">
-        <div class="login-modal-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <h3>Espace Sécurisé</h3>
-        <p>Connexion réservée à l'administration</p>
-      </div>
-      
-      <form id="loginForm" class="login-modal-form" onsubmit="handleLogin(event);">
-        <div class="login-input-group">
-          <label for="admin_username">Identifiant</label>
-          <div class="input-wrapper">
-            <input type="text" id="admin_username" placeholder="Admin" required>
-          </div>
-        </div>
-        
-        <div class="login-input-group">
-          <label for="admin_password">Mot de passe</label>
-          <div class="input-wrapper">
-            <input type="password" id="admin_password" placeholder="••••••••" required>
-          </div>
-        </div>
-        
-        <button type="submit" class="btn-login-submit">
-          Se connecter
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
-        
-        <div id="loginError" class="login-error-msg" style="display: none;">
-          Identifiants incorrects
-        </div>
-      </form>
-      
-      <button class="login-modal-close" onclick="closeLoginModal()">Annuler</button>
-    </div>
-  </div>
+
 
   <style>
     /* Styles discrets pour la modale login sans casser le reste */

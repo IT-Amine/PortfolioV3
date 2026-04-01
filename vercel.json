@@ -64,15 +64,15 @@
     },
     {
       "source": "/admin.php",
-      "destination": "/api/admin.php"
+      "destination": "/api/admin"
     },
     {
       "source": "/",
-      "destination": "/api/index.php"
+      "destination": "/api/index"
     },
     {
       "source": "/(.*)",
-      "destination": "/api/index.php"
+      "destination": "/api/index"
     }
   ]
 }

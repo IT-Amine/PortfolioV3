@@ -43,10 +43,9 @@ if ($dbUrl) {
         $dbUser = $parts['user'] ?? 'postgres';
         $dbPass = $parts['pass'] ?? '';
         
-        // Fix SNI Neon : Extraire l'ID de l'endpoint pour les vieilles versions de libpq (Vercel)
+        // Fix SNI Neon : Utiliser le format recommandé endpoint=ID
         $endpointId = explode('.', $dbHost)[0];
-        
-        $dsn = "pgsql:host=$dbHost;port=5432;dbname=$dbName;sslmode=require;options='--endpoint=$endpointId'";
+        $dsn = "pgsql:host=$dbHost;port=5432;dbname=$dbName;sslmode=require;options='endpoint=$endpointId'";
         $pdo = new PDO($dsn, $dbUser, $dbPass, [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -65,8 +64,7 @@ if (!$pdo) {
     
     // Fix SNI Neon (Fallback logic)
     $endpointId = explode('.', $dbHost)[0];
-    
-    $dsn = "pgsql:host=$dbHost;port=5432;dbname=$dbName;sslmode=require;options='--endpoint=$endpointId'";
+    $dsn = "pgsql:host=$dbHost;port=5432;dbname=$dbName;sslmode=require;options='endpoint=$endpointId'";
     
     try {
         $pdo = new PDO($dsn, $dbUser, $dbPass, [

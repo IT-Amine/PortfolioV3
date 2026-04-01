@@ -103,11 +103,14 @@ try {
 
     // Formations
     $formations = [
-        ['BTS SIO SISR', 'Lycée Paul-Louis Courier, Tours', '2025–2027', 'Services Informatiques aux Organisations, option SISR. Administration système, réseau', 'award', '', false, 1],
-        ['Bac Pro SN RISC', 'Lycée Henri Becquerel, Tours', '2022–2025', 'Systèmes Numériques, option RISC. Réseaux et systèmes communicants.', 'book', '', false, 2]
+        ['BTS SIO SISR', 'Lycée Paul-Louis Courier, Tours', '2025–2027', 'Services Informatiques aux Organisations, option SISR. Administration système, réseau', 'award', '', 0, 1],
+        ['Bac Pro SN RISC', 'Lycée Henri Becquerel, Tours', '2022–2025', 'Systèmes Numériques, option RISC. Réseaux et systèmes communicants.', 'book', '', 0, 2]
     ];
     $stmtF = $pdo->prepare("INSERT INTO formations (title, subtitle, date_range, description, icon, pdf_path, show_voir, display_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    foreach ($formations as $f) { $stmtF->execute($f); }
+    foreach ($formations as $f) { 
+        $f[6] = (int)$f[6]; // Sécurité SISR : On force le type entier pour PostgreSQL
+        $stmtF->execute($f); 
+    }
     echo "✅ Formations restaurées.\n";
 
     // Certifications (Tree + OC)

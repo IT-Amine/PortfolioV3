@@ -13,6 +13,16 @@ require_once __DIR__ . '/../bootstrap/config.php';
 header('Content-Type: text/plain; charset=utf-8');
 
 try {
+    // Sécurité : ce script RESET la base. Interdit publiquement sur Vercel sans Bearer token.
+    $SECRET = getenv('CRON_SECRET') ?: ($_ENV['CRON_SECRET'] ?? '');
+    $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+    if (php_sapi_name() !== 'cli' && getenv('VERCEL')) {
+        if ($SECRET === '' || $authHeader !== 'Bearer ' . $SECRET) {
+            http_response_code(404);
+            die("Not Found\n");
+        }
+    }
+
     echo "================================================\n";
     echo "   RESTAURATION COMPLÈTE DU PORTFOLIO (SISR)    \n";
     echo "================================================\n\n";

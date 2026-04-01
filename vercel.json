@@ -27,6 +27,8 @@
     { "source": "/assets/(.*)", "destination": "/assets/$1" },
     { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
     { "source": "/robots.txt", "destination": "/robots.txt" },
+    { "source": "/index.php", "destination": "/api/index.php" },
+    { "source": "/admin.php", "destination": "/api/admin.php" },
     { "source": "/", "destination": "/api/index.php" },
     { "source": "/sync-veille", "destination": "/api/sync-veille.php" },
     { "source": "/veille", "destination": "/api/veille.php" },

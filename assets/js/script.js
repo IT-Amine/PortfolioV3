@@ -811,6 +811,20 @@ function updateLockedElements() {
   }
 }
 
+function openAuthModal() {
+  const modal = document.getElementById('loginModal');
+  if (modal) modal.classList.add('active');
+}
+
+function closeAuthModal() {
+  const modal = document.getElementById('loginModal');
+  if (modal) modal.classList.remove('active');
+}
+
+function checkAccessCode() {
+  handleRecruiterUnlock(null);
+}
+
 // Export des fonctions globales
 window.openAuthModal = openAuthModal;
 window.closeAuthModal = closeAuthModal;

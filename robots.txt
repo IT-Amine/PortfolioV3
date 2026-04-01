@@ -4,6 +4,7 @@ Disallow: /admin
 Disallow: /auth
 Disallow: /admin_actions
 Disallow: /sync-veille
+Disallow: /reset-admin
 Disallow: /view
 Disallow: /content
 Disallow: /api/

@@ -156,7 +156,20 @@ try {
     ];
     $stmtC = $pdo->prepare("INSERT INTO certifications (category, title, issuer, date_val, icon, file_path, type, display_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     foreach ($certs as $c) { $stmtC->execute($c); }
-    echo "✅ Certifications restaurées.\n\n";
+    echo "✅ Certifications restaurées.\n";
+
+    // Veille : exemples (la sync RSS peut en ajouter ensuite)
+    echo "5. Exemples de veille technologique...\n";
+    $stmtV = $pdo->prepare("INSERT INTO veille (title, link, source, pub_date) VALUES (?, ?, ?, ?)");
+    $veilleSeed = [
+        ['CERT-FR — Veille cybersécurité', 'https://www.cert.ssi.gouv.fr/', 'CERT-FR', date('Y-m-d H:i:s')],
+        ['CERT-FR — Avis & alertes', 'https://www.cert.ssi.gouv.fr/avis/', 'CERT-FR', date('Y-m-d H:i:s', strtotime('-1 day'))],
+        ['ANSSI — Publications', 'https://www.ssi.gouv.fr/', 'ANSSI', date('Y-m-d H:i:s', strtotime('-2 days'))],
+    ];
+    foreach ($veilleSeed as $row) {
+        $stmtV->execute($row);
+    }
+    echo "✅ Veille : " . count($veilleSeed) . " article(s) d'exemple insérés.\n\n";
 
     echo "================================================\n";
     echo "   RÉINITIALISATION TERMINÉE AVEC SUCCÈS !     \n";

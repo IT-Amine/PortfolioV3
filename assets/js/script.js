@@ -152,14 +152,16 @@ const formationsData = [
     subtitle: 'Lycée Paul-Louis Courier, Tours',
     date: '2025–2027',
     desc: 'Services Informatiques aux Organisations, option SISR. Administration système, réseau',
-    showVoir: false
+    showVoir: false,
+    icon: 'award'
   },
   {
     title: 'Bac Pro SN RISC',
     subtitle: 'Lycée Henri Becquerel, Tours',
     date: '2022–2025',
     desc: 'Systèmes Numériques, option RISC. Réseaux et systèmes communicants.',
-    showVoir: false
+    showVoir: false,
+    icon: 'book'
   }
 ];
 
@@ -307,14 +309,20 @@ async function renderFormations() {
       const dbFormations = await res.json();
       if (dbFormations && Array.isArray(dbFormations)) {
         dbFormations.forEach(dbf => {
-          if (!allFormations.find(f => f.title === dbf.title)) {
+          const existing = allFormations.find(f => f.title === dbf.title);
+          if (existing) {
+            if (dbf.icon) existing.icon = dbf.icon;
+            if (dbf.pdf_path) existing.pdf = dbf.pdf_path;
+            if (dbf.description) existing.desc = dbf.description;
+          } else {
             allFormations.unshift({
-                id: 'db-' + dbf.id,
-                title: dbf.title,
-                subtitle: dbf.subtitle,
-                date: dbf.date_range,
-                desc: dbf.description || '',
-                pdf: dbf.pdf_path
+              id: 'db-' + dbf.id,
+              title: dbf.title,
+              subtitle: dbf.subtitle,
+              date: dbf.date_range,
+              desc: dbf.description || '',
+              pdf: dbf.pdf_path,
+              icon: dbf.icon || 'award'
             });
           }
         });
@@ -324,8 +332,9 @@ async function renderFormations() {
 
   // CLEAN IT GRID : Blocs indépendants et pro
   container.innerHTML = allFormations.map(f => `
-    <div class="edu-card-pro" ${f.pdf ? `onclick="viewPDF('${f.pdf}', '${f.title}')" style="cursor:pointer;"` : ''}>
+    <div class="edu-card-pro" ${f.pdf ? `onclick="viewPDF('${String(f.pdf).replace(/'/g, "\\'")}', '${String(f.title).replace(/'/g, "\\'")}')" style="cursor:pointer;"` : ''}>
       <div class="edu-header-pro">
+        ${f.icon ? `<div class="edu-icon-pro">${getIcon(f.icon)}</div>` : ''}
         <div class="edu-info-pro">
           <h4 class="edu-title-pro">${f.title}</h4>
           <div class="edu-subtitle-pro">${f.subtitle}</div>
@@ -379,6 +388,25 @@ function renderCompetencesTable() {
 }
 
 function renderPatrimoine() { return; }
+
+/** Remplit les images OpenClassrooms depuis Neon (file_path) — les titres doivent correspondre au JS. */
+async function hydrateOpenClassroomsFromDb() {
+  try {
+    const res = await fetch('/content?action=certifications', { credentials: 'include' });
+    if (!res.ok) return;
+    const dbCerts = await res.json();
+    if (!Array.isArray(dbCerts)) return;
+    dbCerts.forEach(dbc => {
+      if (dbc.category !== 'openclassrooms' || dbc.type !== 'image') return;
+      const oc = openclassroomsCerts.find(c => c.title === dbc.title);
+      if (oc && dbc.file_path) {
+        oc.image = dbc.file_path;
+      }
+    });
+  } catch (e) {
+    console.warn('hydrateOpenClassroomsFromDb', e);
+  }
+}
 
 async function renderVeille() {
   const container = document.getElementById('veilleContent');
@@ -454,7 +482,9 @@ async function renderOpenClassrooms() {
         <div class="oc-card-image-container">
           ${isLocked 
             ? `<div class="oc-card-locked-overlay"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Accès Verrouillé</span></div>`
-            : `<img src="${c.image}" alt="${c.title}" class="oc-card-image">`
+            : (c.image
+              ? `<img src="${c.image}" alt="${escapeHTML(c.title)}" class="oc-card-image" loading="lazy" decoding="async">`
+              : `<div class="oc-card-image oc-card-image-fallback" aria-hidden="true">${getIcon('globe')}</div>`)
           }
         </div>
         <div class="oc-card-content">
@@ -663,7 +693,7 @@ function viewCertInTree(index) {
 
 /* --- INIT --- */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   activeSection = getDefaultSection();
   updateActiveSection();
   window.addEventListener('hashchange', () => {
@@ -688,6 +718,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderFormations();
   renderPatrimoine();
   renderVeille();
+  await hydrateOpenClassroomsFromDb();
   renderOpenClassrooms();
   renderBtsSio();
   renderCompetencesTable();

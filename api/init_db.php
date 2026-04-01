@@ -1,29 +1,39 @@
 <?php
 /**
  * api/init_db.php
- * Script d'initialisation de la base de données Neon.
- * Crée les tables nécessaires (users, veille, formations, certifications)
- * et insère un administrateur par défaut si aucun n'existe.
+ * Script d'initialisation et de restauration COMPLÈTE du Portfolio.
+ * Ce script :
+ * 1. SUPPRIME les tables existantes (Reset total).
+ * 2. CRÉE les structures (users, veille, formations, certifications).
+ * 3. INSÈRE ton compte admin 'amine'.
+ * 4. RESTAURE tes données (Formations & Certifications).
  */
 require_once __DIR__ . '/../includes/config.php';
 
 header('Content-Type: text/plain; charset=utf-8');
 
 try {
-    echo "========================================\n";
-    echo "INITIALISATION DE LA BASE DE DONNÉES\n";
-    echo "========================================\n\n";
+    echo "================================================\n";
+    echo "   RESTAURATION COMPLÈTE DU PORTFOLIO (SISR)    \n";
+    echo "================================================\n\n";
 
     if (!$pdo) {
-        die("ERREUR : Aucune connexion à la base de données. Vérifiez DATABASE_URL.\n");
+        die("❌ ERREUR : Connexion à la base de données échouée. Vérifiez DATABASE_URL.\n");
     }
 
     echo "✅ Connexion PDO réussie.\n\n";
 
-    // 1. Création de la table 'users'
-    echo "Création de la table 'users'...\n";
+    // 1. NETTOYAGE (DROP)
+    echo "1. Nettoyage de la base de données...\n";
+    $pdo->exec("DROP TABLE IF EXISTS certifications, formations, veille, users CASCADE");
+    echo "✅ Tables existantes supprimées.\n\n";
+
+    // 2. CRÉATION DES TABLES
+    echo "2. Création des structures...\n";
+
+    // Table 'users'
     $pdo->exec("
-        CREATE TABLE IF NOT EXISTS users (
+        CREATE TABLE users (
             id SERIAL PRIMARY KEY,
             username VARCHAR(50) UNIQUE NOT NULL,
             password_hash VARCHAR(255) NOT NULL,
@@ -31,24 +41,11 @@ try {
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ");
-    echo "✅ Table 'users' prête.\n";
+    echo "✅ Table 'users' créée.\n";
 
-    // Vérifier si l'admin existe
-    $stmt = $pdo->query("SELECT count(*) FROM users WHERE role = 'admin'");
-    if ($stmt->fetchColumn() == 0) {
-        echo "⚠️ Aucun administrateur trouvé. Création de l'admin par défaut...\n";
-        $pwdHas = password_hash('Admin2026SISR!', PASSWORD_ARGON2ID);
-        $stmtIns = $pdo->prepare("INSERT INTO users (username, password_hash, role) VALUES ('admin', ?, 'admin')");
-        $stmtIns->execute([$pwdHas]);
-        echo "✅ Compte administrateur créé.\n   -> Utilisateur : admin\n   -> Mot de passe : Admin2026SISR!\n";
-    } else {
-        echo "✅ Un administrateur existe déjà.\n";
-    }
-
-    // 2. Création de la table 'veille'
-    echo "\nCréation de la table 'veille'...\n";
+    // Table 'veille'
     $pdo->exec("
-        CREATE TABLE IF NOT EXISTS veille (
+        CREATE TABLE veille (
             id SERIAL PRIMARY KEY,
             title VARCHAR(255) NOT NULL,
             link VARCHAR(255) NOT NULL,
@@ -57,12 +54,11 @@ try {
             is_active BOOLEAN DEFAULT TRUE
         )
     ");
-    echo "✅ Table 'veille' prête.\n";
+    echo "✅ Table 'veille' créée.\n";
 
-    // 3. Création de la table 'formations'
-    echo "\nCréation de la table 'formations'...\n";
+    // Table 'formations'
     $pdo->exec("
-        CREATE TABLE IF NOT EXISTS formations (
+        CREATE TABLE formations (
             id SERIAL PRIMARY KEY,
             title VARCHAR(150),
             subtitle VARCHAR(150),
@@ -74,12 +70,11 @@ try {
             display_order INTEGER DEFAULT 0
         )
     ");
-    echo "✅ Table 'formations' prête.\n";
+    echo "✅ Table 'formations' créée.\n";
 
-    // 4. Création de la table 'certifications'
-    echo "\nCréation de la table 'certifications'...\n";
+    // Table 'certifications'
     $pdo->exec("
-        CREATE TABLE IF NOT EXISTS certifications (
+        CREATE TABLE certifications (
             id SERIAL PRIMARY KEY,
             category VARCHAR(50),
             title VARCHAR(150),
@@ -91,16 +86,63 @@ try {
             display_order INTEGER DEFAULT 0
         )
     ");
-    echo "✅ Table 'certifications' prête.\n\n";
+    echo "✅ Table 'certifications' créée.\n\n";
 
-    echo "========================================\n";
-    echo " INITIALISATION TERMINÉE AVEC SUCCÈS ! \n";
-    echo "========================================\n\n";
-    echo "Vous pouvez maintenant lancer le script de migration des données depuis le terminal avec :\n";
-    echo "php api/admin/migrate_data.php\n\n";
-    echo "Ou bien vous connecter avec l'utilisateur 'admin' et le mot de passe 'Admin2026SISR!'.\n";
+    // 3. INSERTION ADMIN
+    echo "3. Création du compte administrateur...\n";
+    $username = 'amine';
+    $password = 'Zzizou&370';
+    $pwdHash = password_hash($password, PASSWORD_ARGON2ID);
+    
+    $stmtUser = $pdo->prepare("INSERT INTO users (username, password_hash, role) VALUES (?, ?, 'admin')");
+    $stmtUser->execute([$username, $pwdHash]);
+    echo "✅ Administrateur '$username' créé avec succès.\n\n";
+
+    // 4. RESTAURATION DES DONNÉES (MIGRATE)
+    echo "4. Restauration de ton parcours et certifications...\n";
+
+    // Formations
+    $formations = [
+        ['BTS SIO SISR', 'Lycée Paul-Louis Courier, Tours', '2025–2027', 'Services Informatiques aux Organisations, option SISR. Administration système, réseau', 'award', '', false, 1],
+        ['Bac Pro SN RISC', 'Lycée Henri Becquerel, Tours', '2022–2025', 'Systèmes Numériques, option RISC. Réseaux et systèmes communicants.', 'book', '', false, 2]
+    ];
+    $stmtF = $pdo->prepare("INSERT INTO formations (title, subtitle, date_range, description, icon, pdf_path, show_voir, display_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    foreach ($formations as $f) { $stmtF->execute($f); }
+    echo "✅ Formations restaurées.\n";
+
+    // Certifications (Tree + OC)
+    $certs = [
+        // Arbre
+        ['tree', 'PIX — Compétences Numériques', 'PIX', '2024', 'shield', 'PIX', 'image', 1],
+        ['tree', 'SecNumAcadémie (ANSSI)', 'ANSSI', '2024', 'shield', 'MOOC', 'image', 2],
+        ['tree', 'EBIOS — Analyse de risque', 'ANSSI', '2025', 'shield', 'EBIOS', 'pdf', 3],
+        ['tree', 'OpenClassrooms — Réseaux & Systèmes', 'OC', '2024–2025', 'globe', '#openclassrooms', 'section', 4],
+        // OpenClassrooms Grid
+        ['openclassrooms', 'Active Directory', 'OC', '2024', 'server', '/assets/img/openclassroom/AD_z9v2l8.jpg', 'image', 1],
+        ['openclassrooms', 'Docker', 'OC', '2024', 'docker', '/assets/img/openclassroom/Docker_m5n1x4.jpg', 'image', 2],
+        ['openclassrooms', 'TCP/IP', 'OC', '2024', 'globe', '/assets/img/openclassroom/TCPIP_v8l2n3.png', 'image', 3],
+        ['openclassrooms', 'Windows Server', 'OC', '2024', 'windows', '/assets/img/openclassroom/WinServer_k9v1m4.png', 'image', 4],
+        ['openclassrooms', 'Cisco Networking', 'OC', '2024', 'globe', '/assets/img/openclassroom/Cisco_x2l9n3.jpg', 'image', 5],
+        ['openclassrooms', 'Déploiement Win10', 'OC', '2024', 'windows', '/assets/img/openclassroom/Win10_v5n1m8.png', 'image', 6],
+        ['openclassrooms', 'Git & GitHub', 'OC', '2024', 'terminal', '/assets/img/openclassroom/GitGithub_z9v3l8.jpg', 'image', 7],
+        ['openclassrooms', 'Git Fundamentals', 'OC', '2024', 'terminal', '/assets/img/openclassroom/Git_k2n5m4.png', 'image', 8],
+        ['openclassrooms', 'Linux Administration', 'OC', '2024', 'terminal', '/assets/img/openclassroom/Linux_v8l1n3.jpg', 'image', 9],
+        ['openclassrooms', 'Hardware PC', 'OC', '2024', 'server', '/assets/img/openclassroom/PC_x5v9m4.png', 'image', 10],
+        ['openclassrooms', 'ChatGPT', 'OC', '2024', 'terminal', '/assets/img/openclassroom/ChatGPT_k8v2l9.png', 'image', 11],
+        ['openclassrooms', 'Virtualisation Environnement', 'OC', '2024', 'proxmox', '/assets/img/openclassroom/Virtualisation_m9n1x4.jpg', 'image', 12],
+    ];
+    $stmtC = $pdo->prepare("INSERT INTO certifications (category, title, issuer, date_val, icon, file_path, type, display_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    foreach ($certs as $c) { $stmtC->execute($c); }
+    echo "✅ Certifications restaurées.\n\n";
+
+    echo "================================================\n";
+    echo "   RÉINITIALISATION TERMINÉE AVEC SUCCÈS !     \n";
+    echo "================================================\n\n";
+    echo "Connectez-vous maintenant sur : /admin.php\n";
+    echo "Identifiant : amine\n";
+    echo "Mot de passe : Zzizou&370\n";
 
 } catch (PDOException $e) {
-    echo "❌ ERREUR CRITIQUE DE BASE DE DONNÉES :\n";
+    echo "❌ ERREUR SQL CRITIQUE :\n";
     echo $e->getMessage() . "\n";
 }

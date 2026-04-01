@@ -5,12 +5,17 @@
  */
 require_once __DIR__ . '/../includes/config.php';
 
-// Sécurité : vérifier le token
-$SECRET = getenv('CRON_SECRET') ?: ($_ENV['CRON_SECRET'] ?? 'default_secret');
+// Sécurité : Bearer CRON_SECRET (obligatoire en prod Vercel ; dev local peut définir CRON_SECRET)
+$SECRET = getenv('CRON_SECRET') ?: ($_ENV['CRON_SECRET'] ?? '');
+if ($SECRET === '' && !getenv('VERCEL')) {
+    $SECRET = 'local-dev-cron-only';
+}
 $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
 
-if (php_sapi_name() !== 'cli' && $authHeader !== "Bearer $SECRET") {
-    sendJSON(["error" => "Non autorisé"], 401);
+if (php_sapi_name() !== 'cli') {
+    if ($SECRET === '' || $authHeader !== 'Bearer ' . $SECRET) {
+        sendJSON(['error' => 'Non autorisé'], 401);
+    }
 }
 
 $RSS_SOURCES = [
@@ -58,7 +63,7 @@ try {
 
     // 3. Insertion sélective
     $insertedCount = 0;
-    $stmtInsert = $pdo->prepare("INSERT INTO veille (title, link, source, pub_date) VALUES (?, ?, ?, ?) ON CONFLICT DO NOTHING");
+    $stmtInsert = $pdo->prepare("INSERT INTO veille (title, link, source, pub_date) VALUES (?, ?, ?, ?)");
 
     foreach ($allArticles as $art) {
         if ($insertedCount >= $availableSlots) break;

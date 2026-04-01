@@ -36,15 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['role'] = $user['role'] ?: 'admin';
                 $_SESSION['username'] = $user['username'];
                 
-                // On génère les accès sécurisés
                 $tokens = generateSecureTokens();
+                $roleOut = $_SESSION['role'];
 
-                // SISR : On force l'enregistrement de la session avant de répondre
                 session_write_close();
 
                 sendJSON([
                     'success' => true, 
-                    'role' => $_SESSION['role'],
+                    'role' => $roleOut,
                     'cvLink' => "/view?file=CV&token=" . $tokens['CV'],
                     'certifications' => [
                         ['id' => 'pix',   'file' => "/view?file=PIX&token=" . $tokens['PIX']],
@@ -70,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['role'] = 'recruiter';
             $tokens = generateSecureTokens();
 
-            // SISR : On force l'enregistrement de la session avant de répondre
             session_write_close();
 
             sendJSON([

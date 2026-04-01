@@ -30,7 +30,7 @@
         <button type="button" class="nav-btn" data-section="contact">Contact</button>
         
         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-          <a href="admin.php" class="nav-btn btn-admin-nav" style="background: var(--accent); color: white !important; font-weight: 700; border-radius: 12px; padding: 0.6rem 1.2rem; box-shadow: 0 4px 12px rgba(45, 106, 79, 0.2);">Dashboard</a>
+          <a href="/admin" class="nav-btn btn-admin-nav" style="background: var(--accent); color: white !important; font-weight: 700; border-radius: 12px; padding: 0.6rem 1.2rem; box-shadow: 0 4px 12px rgba(45, 106, 79, 0.2);">Dashboard</a>
           <a href="/auth?action=logout" class="nav-btn" style="opacity: 0.7; font-size: 0.8rem; margin-left: 10px;">Déconnexion</a>
         <?php else: ?>
           <button type="button" class="nav-btn btn-login-nav" onclick="openLoginModal()" style="background: var(--accent); color: white !important; font-weight: 700; border-radius: 12px; padding: 0.6rem 1.2rem; margin-left: 15px; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(45, 106, 79, 0.2);">

@@ -77,7 +77,29 @@ if (!$pdo) {
 }
 
 /**
- * 🔒 GESTIONNAIRE DE SESSIONS EN BASE DE DONNÉES (Pour Vercel)
+ * Schéma minimal pour les sessions PHP (Vercel / Neon).
+ * Sans cette table, le handler PDO provoque une erreur fatale au premier hit.
+ */
+function ensureSessionsTable(PDO $pdo): void {
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS sessions (
+            id VARCHAR(128) PRIMARY KEY,
+            data TEXT,
+            last_access INTEGER NOT NULL DEFAULT 0
+        )
+    ");
+}
+
+if ($pdo) {
+    try {
+        ensureSessionsTable($pdo);
+    } catch (PDOException $e) {
+        error_log("SESSIONS SCHEMA: " . $e->getMessage());
+    }
+}
+
+/**
+ * Gestionnaire de sessions en base (serverless : pas de fichiers partagés).
  */
 class DatabaseSessionHandler implements SessionHandlerInterface {
     private $pdo;
@@ -95,34 +117,54 @@ class DatabaseSessionHandler implements SessionHandlerInterface {
     }
 
     public function read($id): string {
-        $stmt = $this->pdo->prepare("SELECT data FROM sessions WHERE id = ?");
-        $stmt->execute([$id]);
-        return $stmt->fetchColumn() ?: '';
+        try {
+            $stmt = $this->pdo->prepare("SELECT data FROM sessions WHERE id = ?");
+            $stmt->execute([$id]);
+            $row = $stmt->fetchColumn();
+            return $row !== false && $row !== null ? (string) $row : '';
+        } catch (PDOException $e) {
+            error_log("SESSION READ: " . $e->getMessage());
+            return '';
+        }
     }
 
     public function write($id, $data): bool {
-        $stmt = $this->pdo->prepare("
-            INSERT INTO sessions (id, data, last_access) 
-            VALUES (?, ?, ?) 
-            ON CONFLICT (id) 
-            DO UPDATE SET data = EXCLUDED.data, last_access = EXCLUDED.last_access
-        ");
-        return $stmt->execute([$id, $data, time()]);
+        try {
+            $stmt = $this->pdo->prepare("
+                INSERT INTO sessions (id, data, last_access)
+                VALUES (?, ?, ?)
+                ON CONFLICT (id)
+                DO UPDATE SET data = EXCLUDED.data, last_access = EXCLUDED.last_access
+            ");
+            return $stmt->execute([$id, $data, time()]);
+        } catch (PDOException $e) {
+            error_log("SESSION WRITE: " . $e->getMessage());
+            return false;
+        }
     }
 
     public function destroy($id): bool {
-        $stmt = $this->pdo->prepare("DELETE FROM sessions WHERE id = ?");
-        return $stmt->execute([$id]);
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM sessions WHERE id = ?");
+            return $stmt->execute([$id]);
+        } catch (PDOException $e) {
+            error_log("SESSION DESTROY: " . $e->getMessage());
+            return false;
+        }
     }
 
     public function gc($maxlifetime): int|false {
-        $stmt = $this->pdo->prepare("DELETE FROM sessions WHERE last_access < ?");
-        $stmt->execute([time() - $maxlifetime]);
-        return $stmt->rowCount();
+        try {
+            $stmt = $this->pdo->prepare("DELETE FROM sessions WHERE last_access < ?");
+            $stmt->execute([time() - (int) $maxlifetime]);
+            return $stmt->rowCount();
+        } catch (PDOException $e) {
+            error_log("SESSION GC: " . $e->getMessage());
+            return 0;
+        }
     }
 }
 
-// Activer le handler si PDO est disponible
 if ($pdo) {
     $handler = new DatabaseSessionHandler($pdo);
     session_set_save_handler($handler, true);
@@ -143,7 +185,15 @@ if (session_status() === PHP_SESSION_NONE) {
  * Helpers de Sécurité (Hachage & Chiffrage)
  */
 
-define('APP_SECRET', getenv('CRON_SECRET') ?: 'default-secret-si-vide');
+// Jetons fichiers (HMAC) : préférer APP_SECRET ou CRON_SECRET en prod ; sinon dérivation stable depuis DATABASE_URL.
+$__appSecret = getenv('APP_SECRET') ?: getenv('CRON_SECRET') ?: '';
+if ($__appSecret === '') {
+    $dbUrl = getenv('DATABASE_URL') ?: '';
+    $__appSecret = $dbUrl !== ''
+        ? hash('sha256', $dbUrl . '|portfolio-hmac-v1')
+        : 'local-dev-only-set-CRON_SECRET';
+}
+define('APP_SECRET', $__appSecret);
 
 function hashPassword($password) {
     return password_hash($password, PASSWORD_ARGON2ID);

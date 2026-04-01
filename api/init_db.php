@@ -25,7 +25,7 @@ try {
 
     // 1. NETTOYAGE (DROP)
     echo "1. Nettoyage de la base de données...\n";
-    $pdo->exec("DROP TABLE IF EXISTS certifications, formations, veille, users CASCADE");
+    $pdo->exec("DROP TABLE IF EXISTS sessions, certifications, formations, veille, users CASCADE");
     echo "✅ Tables existantes supprimées.\n\n";
 
     // 2. CRÉATION DES TABLES
@@ -153,7 +153,11 @@ try {
     echo "================================================\n\n";
     echo "Connectez-vous maintenant sur : /admin\n";
     echo "Identifiant : amine\n";
-    echo "Mot de passe : Zzizou&370\n";
+    if (getenv('VERCEL')) {
+        echo "Mot de passe : (celui défini dans ce script — changez-le après la première connexion)\n";
+    } else {
+        echo "Mot de passe : Zzizou&370\n";
+    }
 
 } catch (PDOException $e) {
     echo "❌ ERREUR SQL CRITIQUE :\n";

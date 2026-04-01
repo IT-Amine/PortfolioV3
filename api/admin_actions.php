@@ -34,23 +34,29 @@ try {
         $relativePath = '/assets/img/uploads/' . $finalName;
 
         if (move_uploaded_file($file['tmp_name'], $targetPath)) {
-            $gitStatus = "Fichier sauvegardé localement.";
-            try {
-                $rootPath = realpath(__DIR__ . '/../');
-                $cmdAdd = "cd " . escapeshellarg($rootPath) . " && git add " . escapeshellarg($targetPath) . " 2>&1";
-                $cmdCommit = "cd " . escapeshellarg($rootPath) . " && git commit -m \"Admin: Upload " . escapeshellarg($finalName) . "\" 2>&1";
-                $cmdPush = "cd " . escapeshellarg($rootPath) . " && git push 2>&1";
-                
-                shell_exec($cmdAdd);
-                shell_exec($cmdCommit);
-                $outputPush = shell_exec($cmdPush);
+            $gitStatus = "Fichier sauvegardé.";
+            if (getenv('VERCEL')) {
+                $gitStatus = "Fichier enregistré (Vercel : pas de git push depuis le serveur).";
+            } else {
+                try {
+                    $rootPath = realpath(__DIR__ . '/../');
+                    $cmdAdd = "cd " . escapeshellarg($rootPath) . " && git add " . escapeshellarg($targetPath) . " 2>&1";
+                    $cmdCommit = "cd " . escapeshellarg($rootPath) . " && git commit -m \"Admin: Upload " . escapeshellarg($finalName) . "\" 2>&1";
+                    $cmdPush = "cd " . escapeshellarg($rootPath) . " && git push 2>&1";
 
-                if (strpos($outputPush, 'Everything up-to-date') !== false || strpos($outputPush, '->') !== false) {
-                    $gitStatus = "✅ Synchronisé sur GitHub avec succès.";
-                } else {
-                    $gitStatus = "⚠️ Sauvegardé, mais erreur Git : " . $outputPush;
+                    shell_exec($cmdAdd);
+                    shell_exec($cmdCommit);
+                    $outputPush = shell_exec($cmdPush);
+
+                    if (strpos($outputPush, 'Everything up-to-date') !== false || strpos($outputPush, '->') !== false) {
+                        $gitStatus = "✅ Synchronisé sur GitHub avec succès.";
+                    } else {
+                        $gitStatus = "⚠️ Sauvegardé, mais erreur Git : " . $outputPush;
+                    }
+                } catch (Exception $e) {
+                    $gitStatus = "❌ Erreur Git critique : " . $e->getMessage();
                 }
-            } catch (Exception $e) { $gitStatus = "❌ Erreur Git critique : " . $e->getMessage(); }
+            }
 
             sendJSON(['success' => true, 'path' => $relativePath, 'filename' => $finalName, 'git_status' => $gitStatus]);
         } else {
@@ -158,5 +164,6 @@ try {
     sendJSON(['error' => 'Action inconnue'], 404);
 
 } catch (PDOException $e) {
-    sendJSON(['error' => 'Erreur DB : ' . $e->getMessage()], 500);
+    error_log('admin_actions: ' . $e->getMessage());
+    sendJSON(['error' => 'Erreur serveur'], 500);
 }

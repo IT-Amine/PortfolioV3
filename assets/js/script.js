@@ -860,7 +860,7 @@ async function handleLogin(e) {
     });
     const data = await res.json();
     if (data.success) {
-      window.location.href = '/admin.php';
+      window.location.href = '/admin';
     } else {
       if (error) error.style.display = 'block';
     }

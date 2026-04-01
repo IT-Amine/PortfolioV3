@@ -21,6 +21,7 @@ try {
         sendJSON($stmt->fetchAll());
     }
 } catch (PDOException $e) {
-    sendJSON(['error' => 'Erreur DB: ' . $e->getMessage()], 500);
+    error_log('content.php: ' . $e->getMessage());
+    sendJSON(['error' => 'Erreur serveur'], 500);
 }
 ?>

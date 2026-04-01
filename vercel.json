@@ -4,9 +4,6 @@
   "functions": {
     "api/*.php": {
       "runtime": "vercel-php@0.9.0"
-    },
-    "*.php": {
-      "runtime": "vercel-php@0.9.0"
     }
   },
   "headers": [
@@ -88,11 +85,11 @@
     },
     {
       "source": "/admin.php",
-      "destination": "/admin.php"
+      "destination": "/api/admin.php"
     },
     {
       "source": "/(.*)",
-      "destination": "/index.php"
+      "destination": "/api/index.php"
     }
   ]
 }

@@ -76,14 +76,64 @@ if (!$pdo) {
     }
 }
 
-// Sécurisation des sessions (SISR Sync Pro)
-ini_set('session.cookie_httponly', 1);
-ini_set('session.use_only_cookies', 1);
+/**
+ * 🔒 GESTIONNAIRE DE SESSIONS EN BASE DE DONNÉES (Pour Vercel)
+ */
+class DatabaseSessionHandler implements SessionHandlerInterface {
+    private $pdo;
 
-// Détection HTTPS pour le cookie secure
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
+    }
+
+    public function open($savePath, $sessionName): bool {
+        return true;
+    }
+
+    public function close(): bool {
+        return true;
+    }
+
+    public function read($id): string {
+        $stmt = $this->pdo->prepare("SELECT data FROM sessions WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetchColumn() ?: '';
+    }
+
+    public function write($id, $data): bool {
+        $stmt = $this->pdo->prepare("
+            INSERT INTO sessions (id, data, last_access) 
+            VALUES (?, ?, ?) 
+            ON CONFLICT (id) 
+            DO UPDATE SET data = EXCLUDED.data, last_access = EXCLUDED.last_access
+        ");
+        return $stmt->execute([$id, $data, time()]);
+    }
+
+    public function destroy($id): bool {
+        $stmt = $this->pdo->prepare("DELETE FROM sessions WHERE id = ?");
+        return $stmt->execute([$id]);
+    }
+
+    public function gc($maxlifetime): int|false {
+        $stmt = $this->pdo->prepare("DELETE FROM sessions WHERE last_access < ?");
+        $stmt->execute([time() - $maxlifetime]);
+        return $stmt->rowCount();
+    }
+}
+
+// Activer le handler si PDO est disponible
+if ($pdo) {
+    $handler = new DatabaseSessionHandler($pdo);
+    session_set_save_handler($handler, true);
+}
+
+// Configuration Globale des Cookies
 $isHttps = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https');
 ini_set('session.cookie_secure', $isHttps ? 1 : 0);
-ini_set('session.gc_maxlifetime', 3600); // 1 heure
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_samesite', 'Lax');
+ini_set('session.gc_maxlifetime', 3600 * 24); // 24 heures
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

@@ -86,7 +86,17 @@ try {
             display_order INTEGER DEFAULT 0
         )
     ");
-    echo "✅ Table 'certifications' créée.\n\n";
+    echo "✅ Table 'certifications' créée.\n";
+
+    // Table 'sessions' (Nécessaire pour la persistance sur Vercel)
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS sessions (
+            id VARCHAR(128) PRIMARY KEY,
+            data TEXT,
+            last_access INTEGER NOT NULL
+        )
+    ");
+    echo "✅ Table 'sessions' créée.\n\n";
 
     // 3. INSERTION ADMIN
     echo "3. Création du compte administrateur...\n";

@@ -1,6 +1,6 @@
 # ─────────────────────────────────────────────────────────────────
 # 📌 daily-sync.yml
-# Déclenche /api/sync-veille chaque matin à 7h (en plus du cron Vercel)
+# Déclenche /sync-veille chaque matin à 7h (en plus du cron Vercel)
 # et s'assure que le repo GitHub est toujours à jour.
 # ─────────────────────────────────────────────────────────────────
 name: Daily Veille Sync
@@ -22,7 +22,7 @@ jobs:
         run: |
           echo "📡 Appel de l'API sync-veille..."
           STATUS=$(curl -s -o /tmp/response.json -w "%{http_code}" \
-            -X GET "${{ secrets.VERCEL_URL }}/api/sync-veille" \
+            -X GET "${{ secrets.VERCEL_URL }}/sync-veille" \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}")
           
           echo "Réponse HTTP : $STATUS"

@@ -151,7 +151,7 @@ try {
     echo "================================================\n";
     echo "   RÉINITIALISATION TERMINÉE AVEC SUCCÈS !     \n";
     echo "================================================\n\n";
-    echo "Connectez-vous maintenant sur : /admin.php\n";
+    echo "Connectez-vous maintenant sur : /admin\n";
     echo "Identifiant : amine\n";
     echo "Mot de passe : Zzizou&370\n";
 

@@ -41,7 +41,7 @@ $isAuthorized = isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_
           <button class="btn-primary" onclick="goToSection('projets')">Consulter mes réalisations</button>
 
           <?php if ($isAuthorized): ?>
-            <a href="api/view.php?file=CV&token=<?php echo getSecureFileToken('CV'); ?>" target="_blank"
+            <a href="/view?file=CV&token=<?php echo getSecureFileToken('CV'); ?>" target="_blank"
               rel="noopener noreferrer" class="btn-outline is-unlocked" id="hero-cv-btn">Mon CV</a>
           <?php endif; ?>
         </div>

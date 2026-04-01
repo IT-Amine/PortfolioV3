@@ -1,5 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /auth
+Disallow: /admin_actions
+Disallow: /sync-veille
+Disallow: /view
+Disallow: /content
 Disallow: /api/
 Disallow: /includes/
 Disallow: /cron/

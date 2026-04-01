@@ -1,0 +1,3 @@
+# Évite que Vercel serve index.php à la racine comme fichier brut (téléchargement / page noire).
+# Le site est rendu uniquement via api/index.php + rewrites vercel.json.
+index.php

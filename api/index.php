@@ -1,6 +1,3 @@
 <?php
-/**
- * api/index.php
- * Pont Vercel vers la racine
- */
-include __DIR__ . '/../index.php';
+// Point d'entrée Vercel (runtime vercel-php sur api/**/*.php).
+require_once __DIR__ . '/../includes/main.php';

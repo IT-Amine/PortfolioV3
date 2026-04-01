@@ -31,9 +31,9 @@ if ($fileKey === 'CV') {
 $FILE_MAP = [
     // SISR : On s'assure d'avoir un lien valide même si Vercel est mal configuré
     'CV' => (getenv('CV_LINK') && strlen(getenv('CV_LINK')) > 5) ? getenv('CV_LINK') : 'https://cvdesignr.com/p/6808a706550eb?hl=fr_FR',
-    'PIX' => getenv('CERT_PIX_PATH') ?: '../public/certif/PIX_v7l2s3.jpg',
-    'MOOC' => getenv('CERT_MOOC_PATH') ?: '../public/certif/MOOC_x4n1m8.jpg',
-    'EBIOS' => getenv('CERT_EBIOS_PATH') ?: '../public/certif/EBIOS_k8v9z2.pdf',
+    'PIX' => getenv('CERT_PIX_PATH') ?: '../assets/img/certif/PIX_v7l2s3.jpg',
+    'MOOC' => getenv('CERT_MOOC_PATH') ?: '../assets/img/certif/MOOC_x4n1m8.jpg',
+    'EBIOS' => getenv('CERT_EBIOS_PATH') ?: '../assets/img/certif/EBIOS_k8v9z2.pdf',
 ];
 
 if (!isset($FILE_MAP[$fileKey])) {

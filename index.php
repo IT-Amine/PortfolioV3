@@ -332,7 +332,7 @@ $isAuthorized = isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="assets/js/script.js"></script>
 </body>
 
 </html>

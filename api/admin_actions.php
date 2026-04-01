@@ -20,7 +20,7 @@ try {
         if (!isset($_FILES['file'])) sendJSON(['error' => 'Aucun fichier reçu.'], 400);
 
         $file = $_FILES['file'];
-        $uploadDir = __DIR__ . '/../public/uploads/';
+        $uploadDir = __DIR__ . '/../assets/img/uploads/';
         $allowedExtensions = ['pdf', 'png', 'jpg', 'jpeg'];
 
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
@@ -31,7 +31,7 @@ try {
         $safeName = preg_replace('/[^a-zA-Z0-9.\-_]/', '_', pathinfo($file['name'], PATHINFO_FILENAME));
         $finalName = time() . '_' . $safeName . '.' . $ext;
         $targetPath = $uploadDir . $finalName;
-        $relativePath = '/public/uploads/' . $finalName;
+        $relativePath = '/assets/img/uploads/' . $finalName;
 
         if (move_uploaded_file($file['tmp_name'], $targetPath)) {
             $gitStatus = "Fichier sauvegardé localement.";

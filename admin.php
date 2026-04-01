@@ -134,7 +134,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                                 <span>📄 Glissez-déposez votre PDF ici</span>
                                 <input type="file" hidden accept=".pdf">
                             </div>
-                            <input type="text" id="f_pdf" class="admin-input" placeholder="/public/uploads/..." required>
+                            <input type="text" id="f_pdf" class="admin-input" placeholder="/assets/img/uploads/..." required>
                         </div>
                         <button type="submit" class="btn-submit">Ajouter la formation</button>
                     </form>
@@ -163,7 +163,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                                 <span>🖼️ Glissez-déposez le badge ou PDF</span>
                                 <input type="file" hidden accept=".pdf,.png,.jpg,.jpeg">
                             </div>
-                            <input type="text" id="c_file" class="admin-input" placeholder="/public/uploads/..." required>
+                            <input type="text" id="c_file" class="admin-input" placeholder="/assets/img/uploads/..." required>
                         </div>
                         <button type="submit" class="btn-submit">Ajouter la certification</button>
                     </form>

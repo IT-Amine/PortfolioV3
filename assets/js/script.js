@@ -65,12 +65,12 @@ const projectsData = [
     title: 'Groupe Millenuits — Infrastructure & Services',
     desc: 'Refonte de l\'infrastructure système et réseau. Déploiement des services critiques (AD DS, DHCP, DNS, GPO) et segmentation réseau via VLAN.',
     tech: ['Active Directory', 'Windows Server', 'VLAN', 'Systèmes'],
-    logo: '/public/MilleNuits.jpg',
+    logo: '/assets/img/MilleNuits.jpg',
     pdfs: [
-      { label: 'Situation SP1', href: '/public/Projet/millenuits/SP1.pdf' },
-      { label: 'Situation SP2', href: '/public/Projet/millenuits/SP2.pdf' },
-      { label: 'Situation SP3', href: '/public/Projet/millenuits/SP3.pdf' },
-      { label: 'Contexte Technique', href: '/public/Projet/millenuits/contexte.pdf' },
+      { label: 'Situation SP1', href: '/assets/img/Projet/millenuits/SP1.pdf' },
+      { label: 'Situation SP2', href: '/assets/img/Projet/millenuits/SP2.pdf' },
+      { label: 'Situation SP3', href: '/assets/img/Projet/millenuits/SP3.pdf' },
+      { label: 'Contexte Technique', href: '/assets/img/Projet/millenuits/contexte.pdf' },
     ]
   },
   {
@@ -80,9 +80,9 @@ const projectsData = [
     tech: ['Cybersécurité', 'Hardening', 'Analyse vulnérabilités'],
     icon: 'shield',
     pdfs: [
-      { label: 'TP1 — Sécurité', href: '/public/Projet/cyber/TP1.pdf' },
-      { label: 'TP2 — Commun', href: '/public/Projet/cyber/TP2.pdf' },
-      { label: 'Contexte Labo', href: '/public/Projet/cyber/Contexte.pdf' }
+      { label: 'TP1 — Sécurité', href: '/assets/img/Projet/cyber/TP1.pdf' },
+      { label: 'TP2 — Commun', href: '/assets/img/Projet/cyber/TP2.pdf' },
+      { label: 'Contexte Labo', href: '/assets/img/Projet/cyber/Contexte.pdf' }
     ]
   },
   {
@@ -90,11 +90,11 @@ const projectsData = [
     title: 'Architecture Réseau IMDEO',
     desc: 'Conception d\'une architecture logique pour l\'implantation IMDEO. Routage avancé et segmentation.',
     tech: ['Cisco', 'Architecture', 'Routage'],
-    logo: '/public/imdeo.jpeg',
+    logo: '/assets/img/imdeo.jpeg',
     pdfs: [
-      { label: 'Dossier Technique', href: '/public/Projet/imdeo/imdeo.pdf' },
-      { label: 'Contexte Projet', href: '/public/Projet/imdeo/Contexte.pdf' },
-      { label: 'Structure Réseau', href: '/public/Projet/imdeo/structure.pdf' }
+      { label: 'Dossier Technique', href: '/assets/img/Projet/imdeo/imdeo.pdf' },
+      { label: 'Contexte Projet', href: '/assets/img/Projet/imdeo/Contexte.pdf' },
+      { label: 'Structure Réseau', href: '/assets/img/Projet/imdeo/structure.pdf' }
     ]
   },
   {
@@ -104,7 +104,7 @@ const projectsData = [
     tech: ['Virtualisation', 'Infrastructure', 'Backup'],
     icon: 'server',
     pdfs: [
-      { label: 'Document AP1', href: '/public/Projet/AP.pdf' },
+      { label: 'Document AP1', href: '/assets/img/Projet/AP.pdf' },
     ]
   }
 ];

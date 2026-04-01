@@ -48,28 +48,8 @@
   ],
   "rewrites": [
     {
-      "source": "/(.*).css",
-      "destination": "/$1.css"
-    },
-    {
-      "source": "/(.*).js",
-      "destination": "/$1.js"
-    },
-    {
-      "source": "/(.*).png",
-      "destination": "/$1.png"
-    },
-    {
-      "source": "/(.*).jpg",
-      "destination": "/$1.jpg"
-    },
-    {
-      "source": "/(.*).svg",
-      "destination": "/$1.svg"
-    },
-    {
-      "source": "/(.*).ico",
-      "destination": "/$1.ico"
+      "source": "/assets/(.*)",
+      "destination": "/assets/$1"
     },
     {
       "source": "/sitemap.xml",

@@ -31,18 +31,18 @@ try {
     // 3. Certifications (OpenClassrooms Grid)
     echo "Migrating OpenClassrooms Grid...\n";
     $ocCerts = [
-        ['openclassrooms', 'Active Directory', 'OC', '2024', 'server', '/public/openclassroom/AD_z9v2l8.jpg', 'image', 1],
-        ['openclassrooms', 'Docker', 'OC', '2024', 'docker', '/public/openclassroom/Docker_m5n1x4.jpg', 'image', 2],
-        ['openclassrooms', 'TCP/IP', 'OC', '2024', 'globe', '/public/openclassroom/TCPIP_v8l2n3.png', 'image', 3],
-        ['openclassrooms', 'Windows Server', 'OC', '2024', 'windows', '/public/openclassroom/WinServer_k9v1m4.png', 'image', 4],
-        ['openclassrooms', 'Cisco Networking', 'OC', '2024', 'globe', '/public/openclassroom/Cisco_x2l9n3.jpg', 'image', 5],
-        ['openclassrooms', 'Déploiement Win10', 'OC', '2024', 'windows', '/public/openclassroom/Win10_v5n1m8.png', 'image', 6],
-        ['openclassrooms', 'Git & GitHub', 'OC', '2024', 'terminal', '/public/openclassroom/GitGithub_z9v3l8.jpg', 'image', 7],
-        ['openclassrooms', 'Git Fundamentals', 'OC', '2024', 'terminal', '/public/openclassroom/Git_k2n5m4.png', 'image', 8],
-        ['openclassrooms', 'Linux Administration', 'OC', '2024', 'terminal', '/public/openclassroom/Linux_v8l1n3.jpg', 'image', 9],
-        ['openclassrooms', 'Hardware PC', 'OC', '2024', 'server', '/public/openclassroom/PC_x5v9m4.png', 'image', 10],
-        ['openclassrooms', 'ChatGPT', 'OC', '2024', 'terminal', '/public/openclassroom/ChatGPT_k8v2l9.png', 'image', 11],
-        ['openclassrooms', 'Virtualisation Environnement', 'OC', '2024', 'proxmox', '/public/openclassroom/Virtualisation_m9n1x4.jpg', 'image', 12],
+        ['openclassrooms', 'Active Directory', 'OC', '2024', 'server', '/assets/img/openclassroom/AD_z9v2l8.jpg', 'image', 1],
+        ['openclassrooms', 'Docker', 'OC', '2024', 'docker', '/assets/img/openclassroom/Docker_m5n1x4.jpg', 'image', 2],
+        ['openclassrooms', 'TCP/IP', 'OC', '2024', 'globe', '/assets/img/openclassroom/TCPIP_v8l2n3.png', 'image', 3],
+        ['openclassrooms', 'Windows Server', 'OC', '2024', 'windows', '/assets/img/openclassroom/WinServer_k9v1m4.png', 'image', 4],
+        ['openclassrooms', 'Cisco Networking', 'OC', '2024', 'globe', '/assets/img/openclassroom/Cisco_x2l9n3.jpg', 'image', 5],
+        ['openclassrooms', 'Déploiement Win10', 'OC', '2024', 'windows', '/assets/img/openclassroom/Win10_v5n1m8.png', 'image', 6],
+        ['openclassrooms', 'Git & GitHub', 'OC', '2024', 'terminal', '/assets/img/openclassroom/GitGithub_z9v3l8.jpg', 'image', 7],
+        ['openclassrooms', 'Git Fundamentals', 'OC', '2024', 'terminal', '/assets/img/openclassroom/Git_k2n5m4.png', 'image', 8],
+        ['openclassrooms', 'Linux Administration', 'OC', '2024', 'terminal', '/assets/img/openclassroom/Linux_v8l1n3.jpg', 'image', 9],
+        ['openclassrooms', 'Hardware PC', 'OC', '2024', 'server', '/assets/img/openclassroom/PC_x5v9m4.png', 'image', 10],
+        ['openclassrooms', 'ChatGPT', 'OC', '2024', 'terminal', '/assets/img/openclassroom/ChatGPT_k8v2l9.png', 'image', 11],
+        ['openclassrooms', 'Virtualisation Environnement', 'OC', '2024', 'proxmox', '/assets/img/openclassroom/Virtualisation_m9n1x4.jpg', 'image', 12],
     ];
     $stmt = $pdo->prepare("INSERT INTO certifications (category, title, issuer, date_val, icon, file_path, type, display_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     foreach ($ocCerts as $c) {

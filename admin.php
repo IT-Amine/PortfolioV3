@@ -219,7 +219,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 
             showStatus(statusId, '📤 Upload & Sync GitHub en cours...');
             try {
-                const res = await fetch('/api/admin/upload_handler.php', { method: 'POST', body: formData });
+                const res = await fetch('/api/admin_actions.php?action=upload_file', { method: 'POST', body: formData });
                 const data = await res.json();
                 if (data.success) {
                     textInput.value = data.path;
@@ -234,7 +234,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 
         // --- VEILLE ---
         async function loadVeille() {
-            const data = await apiCall('/api/admin/veille_actions.php?action=list');
+            const data = await apiCall('/api/admin_actions.php?action=list_veille');
             document.getElementById('veilleList').innerHTML = data.map(v => `
                 <div class="list-item">
                     <div class="item-info">
@@ -251,14 +251,14 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
             body.append('title', document.getElementById('v_title').value);
             body.append('link', document.getElementById('v_link').value);
             body.append('source', document.getElementById('v_source').value);
-            const res = await apiCall('/api/admin/veille_actions.php', 'POST', body);
+            const res = await apiCall('/api/admin_actions.php?action=add_veille', 'POST', body);
             if(res.success) { showStatus('v_status', 'Article ajouté'); e.target.reset(); loadVeille(); }
         }
-        async function deleteVeille(id) { if(confirm('Sûr ?')) { await apiCall(`/api/admin/veille_actions.php?id=${id}`, 'DELETE'); loadVeille(); } }
+        async function deleteVeille(id) { if(confirm('Sûr ?')) { await apiCall(`/api/admin_actions.php?action=delete_veille&id=${id}`, 'DELETE'); loadVeille(); } }
 
         // --- USERS ---
         async function loadUsers() {
-            const data = await apiCall('/api/admin/access_actions.php');
+            const data = await apiCall('/api/admin_actions.php?action=list_users');
             document.getElementById('userList').innerHTML = data.map(u => `
                 <div class="list-item">
                     <div class="item-info">
@@ -274,14 +274,14 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
             const body = new URLSearchParams();
             body.append('username', document.getElementById('u_name').value);
             body.append('password', document.getElementById('u_pass').value);
-            const res = await apiCall('/api/admin/access_actions.php', 'POST', body);
+            const res = await apiCall('/api/admin_actions.php?action=add_user', 'POST', body);
             if(res.success) { showStatus('u_status', 'Accès créé'); e.target.reset(); loadUsers(); }
         }
-        async function deleteUser(id) { if(confirm('Sûr ?')) { await apiCall(`/api/admin/access_actions.php?id=${id}`, 'DELETE'); loadUsers(); } }
+        async function deleteUser(id) { if(confirm('Sûr ?')) { await apiCall(`/api/admin_actions.php?action=delete_user&id=${id}`, 'DELETE'); loadUsers(); } }
 
         // --- FORMATIONS ---
         async function loadFormations() {
-            const data = await apiCall('/api/admin/content_actions.php?action=list_formations');
+            const data = await apiCall('/api/admin_actions.php?action=list_formations');
             document.getElementById('formationList').innerHTML = data.map(f => `
                 <div class="list-item">
                     <div class="item-info">
@@ -299,14 +299,14 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
             body.append('subtitle', document.getElementById('f_subtitle').value);
             body.append('date', document.getElementById('f_date').value);
             body.append('pdf_path', document.getElementById('f_pdf').value);
-            const res = await apiCall('/api/admin/content_actions.php?action=add_formation', 'POST', body);
+            const res = await apiCall('/api/admin_actions.php?action=add_formation', 'POST', body);
             if(res.success) { showStatus('f_status', 'Formation ajoutée'); e.target.reset(); loadFormations(); }
         }
-        async function deleteFormation(id) { if(confirm('Sûr ?')) { await apiCall(`/api/admin/content_actions.php?action=delete_formation&id=${id}`, 'DELETE'); loadFormations(); } }
+        async function deleteFormation(id) { if(confirm('Sûr ?')) { await apiCall(`/api/admin_actions.php?action=delete_formation&id=${id}`, 'DELETE'); loadFormations(); } }
 
         // --- CERTIFICATIONS ---
         async function loadCerts() {
-            const data = await apiCall('/api/admin/content_actions.php?action=list_certifications');
+            const data = await apiCall('/api/admin_actions.php?action=list_certifications');
             document.getElementById('certList').innerHTML = data.map(c => `
                 <div class="list-item">
                     <div class="item-info">
@@ -326,10 +326,10 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
             body.append('type', document.getElementById('c_cat').value === 'tree' ? 'image' : 'image');
             body.append('icon', document.getElementById('c_cat').value === 'tree' ? 'shield' : 'globe');
             
-            const res = await apiCall('/api/admin/content_actions.php?action=add_certification', 'POST', body);
+            const res = await apiCall('/api/admin_actions.php?action=add_certification', 'POST', body);
             if(res.success) { showStatus('c_status', 'Certification ajoutée'); e.target.reset(); loadCerts(); }
         }
-        async function deleteCert(id) { if(confirm('Sûr ?')) { await apiCall(`/api/admin/content_actions.php?action=delete_certification&id=${id}`, 'DELETE'); loadCerts(); } }
+        async function deleteCert(id) { if(confirm('Sûr ?')) { await apiCall(`/api/admin_actions.php?action=delete_certification&id=${id}`, 'DELETE'); loadCerts(); } }
 
         // Init
         loadVeille();

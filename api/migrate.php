@@ -1,13 +1,5 @@
 <?php
-/**
- * migrate_data.php - Migration de script.js vers Néon
- */
-
-require_once __DIR__ . '/../../includes/config.php';
-
-if (php_sapi_name() !== 'cli') {
-    die("❌ CLI uniquement.\n");
-}
+require_once __DIR__ . '/../includes/config.php';
 
 echo "📦 Migration des données vers Néon...\n";
 

@@ -302,7 +302,7 @@ async function renderFormations() {
   let allFormations = [...formationsData];
 
   try {
-    const res = await fetch('/api/content.php?action=formations');
+    const res = await fetch('/content?action=formations');
     if (res.ok) {
       const dbFormations = await res.json();
       if (dbFormations && Array.isArray(dbFormations)) {
@@ -386,7 +386,7 @@ async function renderVeille() {
   container.innerHTML = '<div class="veille-loading">Chargement du flux de sécurité...</div>';
   try {
     // SISR : On utilise le point d'entrée unifié avec les permissions
-    const res = await fetch(`/api/content.php?action=veille&t=${Date.now()}`, { credentials: 'include' });
+    const res = await fetch(`/content?action=veille&t=${Date.now()}`, { credentials: 'include' });
     if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
     const articles = await res.json();
 
@@ -579,7 +579,7 @@ async function renderCertificationsTree() {
 
   try {
     // SISR : On force l'inclusion des credentials pour la session
-    const res = await fetch('/api/content.php?action=certifications', { credentials: 'include' });
+    const res = await fetch('/content?action=certifications', { credentials: 'include' });
     if (res.ok) {
       const dbCerts = await res.json();
       if (dbCerts && Array.isArray(dbCerts) && dbCerts.length > 0) {
@@ -745,7 +745,7 @@ async function handleRecruiterUnlock(e) {
   const error = document.getElementById('authError');
 
   try {
-    const response = await fetch('/api/auth.php', {
+    const response = await fetch('/auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ code: codeValue })
@@ -838,7 +838,7 @@ async function handleLogin(e) {
   const error = document.getElementById('loginError');
 
   try {
-    const res = await fetch('/api/auth.php', {
+    const res = await fetch('/auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),

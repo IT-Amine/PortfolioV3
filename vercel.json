@@ -27,14 +27,13 @@
     { "source": "/assets/(.*)", "destination": "/assets/$1" },
     { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
     { "source": "/robots.txt", "destination": "/robots.txt" },
-    { "source": "/api/sync-veille", "destination": "/api/sync-veille.php" },
-    { "source": "/api/veille", "destination": "/api/veille.php" },
-    { "source": "/api/content", "destination": "/api/content.php" },
-    { "source": "/api/auth", "destination": "/api/auth.php" },
-    { "source": "/api/admin_actions", "destination": "/api/admin_actions.php" },
-    { "source": "/api/view", "destination": "/api/view.php" },
+    { "source": "/sync-veille", "destination": "/api/sync-veille.php" },
+    { "source": "/veille", "destination": "/api/veille.php" },
+    { "source": "/content", "destination": "/api/content.php" },
+    { "source": "/auth", "destination": "/api/auth.php" },
+    { "source": "/admin_actions", "destination": "/api/admin_actions.php" },
+    { "source": "/view", "destination": "/api/view.php" },
     { "source": "/admin", "destination": "/api/admin.php" },
-    { "source": "/", "destination": "/api/index.php" },
     { "source": "/(.*)", "destination": "/api/index.php" }
   ]
 }

@@ -45,11 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 sendJSON([
                     'success' => true, 
                     'role' => $_SESSION['role'],
-                    'cvLink' => "/api/view.php?file=CV&token=" . $tokens['CV'],
+                    'cvLink' => "/view?file=CV&token=" . $tokens['CV'],
                     'certifications' => [
-                        ['id' => 'pix',   'file' => "/api/view.php?file=PIX&token=" . $tokens['PIX']],
-                        ['id' => 'mooc',  'file' => "/api/view.php?file=MOOC&token=" . $tokens['MOOC']],
-                        ['id' => 'ebios', 'file' => "/api/view.php?file=EBIOS&token=" . $tokens['EBIOS']]
+                        ['id' => 'pix',   'file' => "/view?file=PIX&token=" . $tokens['PIX']],
+                        ['id' => 'mooc',  'file' => "/view?file=MOOC&token=" . $tokens['MOOC']],
+                        ['id' => 'ebios', 'file' => "/view?file=EBIOS&token=" . $tokens['EBIOS']]
                     ]
                 ]);
             } else {
@@ -75,11 +75,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             sendJSON([
                 'success' => true,
-                'cvLink' => "/api/view.php?file=CV&token=" . $tokens['CV'],
+                'cvLink' => "/view?file=CV&token=" . $tokens['CV'],
                 'certifications' => [
-                    ['id' => 'pix',   'file' => "/api/view.php?file=PIX&token=" . $tokens['PIX']],
-                    ['id' => 'mooc',  'file' => "/api/view.php?file=MOOC&token=" . $tokens['MOOC']],
-                    ['id' => 'ebios', 'file' => "/api/view.php?file=EBIOS&token=" . $tokens['EBIOS']]
+                    ['id' => 'pix',   'file' => "/view?file=PIX&token=" . $tokens['PIX']],
+                    ['id' => 'mooc',  'file' => "/view?file=MOOC&token=" . $tokens['MOOC']],
+                    ['id' => 'ebios', 'file' => "/view?file=EBIOS&token=" . $tokens['EBIOS']]
                 ]
             ]);
         } else {

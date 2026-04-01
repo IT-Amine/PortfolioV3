@@ -130,6 +130,6 @@
     .login-error-msg { color: #ef4444; font-size: 0.85rem; text-align: center; margin-top: 0.5rem; }
   </style>
 
-  <script src="script.js"></script>
+  <script src="/assets/js/script.js"></script>
 </body>
 </html>

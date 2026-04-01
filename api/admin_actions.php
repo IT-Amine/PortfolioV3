@@ -4,7 +4,7 @@
  * Endpoint unifié pour toutes les actions d'administration
  * Permet d'éviter la limite de fonctions Serverless de Vercel.
  */
-require_once '../includes/config.php';
+require_once __DIR__ . '/../bootstrap/config.php';
 
 // Protection Admin
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
@@ -20,7 +20,10 @@ try {
         if (!isset($_FILES['file'])) sendJSON(['error' => 'Aucun fichier reçu.'], 400);
 
         $file = $_FILES['file'];
-        $uploadDir = __DIR__ . '/../assets/img/uploads/';
+        $uploadDir = BASE_PATH . '/assets/img/uploads/';
+        if (!is_dir($uploadDir)) {
+            @mkdir($uploadDir, 0755, true);
+        }
         $allowedExtensions = ['pdf', 'png', 'jpg', 'jpeg'];
 
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
@@ -39,7 +42,7 @@ try {
                 $gitStatus = "Fichier enregistré (Vercel : pas de git push depuis le serveur).";
             } else {
                 try {
-                    $rootPath = realpath(__DIR__ . '/../');
+                    $rootPath = realpath(BASE_PATH) ?: BASE_PATH;
                     $cmdAdd = "cd " . escapeshellarg($rootPath) . " && git add " . escapeshellarg($targetPath) . " 2>&1";
                     $cmdCommit = "cd " . escapeshellarg($rootPath) . " && git commit -m \"Admin: Upload " . escapeshellarg($finalName) . "\" 2>&1";
                     $cmdPush = "cd " . escapeshellarg($rootPath) . " && git push 2>&1";

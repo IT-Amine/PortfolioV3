@@ -1,3 +1,4 @@
-# Évite que Vercel serve index.php à la racine comme fichier brut (téléchargement / page noire).
-# Le site est rendu uniquement via api/index.php + rewrites vercel.json.
+# Évite que Vercel serve les PHP à la racine comme fichiers bruts (sans runtime vercel-php).
+# La home passe par api/index.php ; l'admin par api/admin.php (vercel.json).
 index.php
+admin.php

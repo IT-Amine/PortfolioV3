@@ -3,7 +3,7 @@
  * api/veille.php
  * Récupération des articles de veille technologique en PHP.
  */
-include_once '../includes/config.php';
+require_once __DIR__ . '/../bootstrap/config.php';
 
 // Autoriser les requêtes GET uniquement
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {

@@ -4,7 +4,7 @@
  * Proxy de sécurité pour lire les documents sensibles sans exposer leur chemin réel.
  * En prod, on peut même lier cela à une session !
  */
-include_once '../includes/config.php';
+require_once __DIR__ . '/../bootstrap/config.php';
 
 $fileKey = $_GET['file'] ?? '';
 $token = $_GET['token'] ?? '';
@@ -31,9 +31,9 @@ if ($fileKey === 'CV') {
 $FILE_MAP = [
     // SISR : On s'assure d'avoir un lien valide même si Vercel est mal configuré
     'CV' => (getenv('CV_LINK') && strlen(getenv('CV_LINK')) > 5) ? getenv('CV_LINK') : 'https://cvdesignr.com/p/6808a706550eb?hl=fr_FR',
-    'PIX' => getenv('CERT_PIX_PATH') ?: '../assets/img/certif/PIX_v7l2s3.jpg',
-    'MOOC' => getenv('CERT_MOOC_PATH') ?: '../assets/img/certif/MOOC_x4n1m8.jpg',
-    'EBIOS' => getenv('CERT_EBIOS_PATH') ?: '../assets/img/certif/EBIOS_k8v9z2.pdf',
+    'PIX' => getenv('CERT_PIX_PATH') ?: (BASE_PATH . '/assets/img/certif/PIX_v7l2s3.jpg'),
+    'MOOC' => getenv('CERT_MOOC_PATH') ?: (BASE_PATH . '/assets/img/certif/MOOC_x4n1m8.jpg'),
+    'EBIOS' => getenv('CERT_EBIOS_PATH') ?: (BASE_PATH . '/assets/img/certif/EBIOS_k8v9z2.pdf'),
 ];
 
 if (!isset($FILE_MAP[$fileKey])) {

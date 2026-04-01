@@ -8,7 +8,7 @@
  * 3. INSÈRE ton compte admin 'amine'.
  * 4. RESTAURE tes données (Formations & Certifications).
  */
-require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../bootstrap/config.php';
 
 header('Content-Type: text/plain; charset=utf-8');
 

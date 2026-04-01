@@ -302,7 +302,7 @@ async function renderFormations() {
   let allFormations = [...formationsData];
 
   try {
-    const res = await fetch('/content?action=formations');
+    const res = await fetch('/content?action=formations', { credentials: 'include' });
     if (res.ok) {
       const dbFormations = await res.json();
       if (dbFormations && Array.isArray(dbFormations)) {
@@ -748,7 +748,8 @@ async function handleRecruiterUnlock(e) {
     const response = await fetch('/auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code: codeValue })
+      body: JSON.stringify({ code: codeValue }),
+      credentials: 'include'
     });
 
     const data = await response.json();

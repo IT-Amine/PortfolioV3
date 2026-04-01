@@ -1,8 +1,9 @@
 <?php
 /**
- * Vue principale du portfolio (inclus depuis index.php local et api/index.php sur Vercel).
+ * Page d'accueil du portfolio.
+ * Inclus depuis index.php (local) et api/index.php (Vercel).
  */
-require_once __DIR__ . '/config.php';
+require_once dirname(__DIR__, 2) . '/bootstrap/config.php';
 
 $isAuthorized = isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_SESSION['role'] === 'recruiter');
 ?>
@@ -10,14 +11,14 @@ $isAuthorized = isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_
 <html lang="fr">
 
 <head>
-  <?php include __DIR__ . '/head.php'; ?>
+  <?php include __DIR__ . '/../partials/head.php'; ?>
   <script>
     window.SERVER_AUTH = <?php echo $isAuthorized ? 'true' : 'false'; ?>;
   </script>
 </head>
 
 <body>
-  <?php include __DIR__ . '/navbar.php'; ?>
+  <?php include __DIR__ . '/../partials/navbar.php'; ?>
 
   <!-- Arrière-plan animé -->
   <div class="animated-background"></div>
@@ -262,7 +263,7 @@ $isAuthorized = isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_
     </div>
   </section>
 
-  <?php include __DIR__ . '/footer.php'; ?>
+  <?php include __DIR__ . '/../partials/footer.php'; ?>
 
   <!-- MODALE D'AUTHENTIFICATION UNIFIÉE (ADMIN & RECRUTEUR) -->
   <div class="modal" id="loginModal">

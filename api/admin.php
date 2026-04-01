@@ -1,6 +1,3 @@
 <?php
-/**
- * api/admin.php
- * Pont Vercel vers la racine
- */
-include __DIR__ . '/../admin.php';
+// Point d'entrée Vercel pour le dashboard admin.
+require_once __DIR__ . '/../views/pages/admin.php';

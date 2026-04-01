@@ -3,7 +3,7 @@
  * api/auth.php (SISR Final Security Patch)
  * Endpoint consolidé pour le déverrouillage Recruteur ET le Login Admin avec fallbacks locaux.
  */
-require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../bootstrap/config.php';
 
 $action = $_GET['action'] ?? '';
 

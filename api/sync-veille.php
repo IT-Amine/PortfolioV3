@@ -3,7 +3,7 @@
  * cron/sync-veille.php
  * Tâche Cron pour synchroniser les articles de veille cybersécurité (Version Sélective)
  */
-require_once __DIR__ . '/../includes/config.php';
+require_once __DIR__ . '/../bootstrap/config.php';
 
 // Sécurité : Bearer CRON_SECRET (obligatoire en prod Vercel ; dev local peut définir CRON_SECRET)
 $SECRET = getenv('CRON_SECRET') ?: ($_ENV['CRON_SECRET'] ?? '');

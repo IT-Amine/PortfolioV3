@@ -45,6 +45,13 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/api/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/assets/(.*)",
@@ -57,10 +64,6 @@
     {
       "source": "/robots.txt",
       "destination": "/robots.txt"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/api/$1"
     }
   ]
 }

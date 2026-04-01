@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "cleanUrls": true,
   "functions": {
     "api/**/*.php": {
@@ -60,20 +59,8 @@
       "destination": "/robots.txt"
     },
     {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    },
-    {
-      "source": "/admin.php",
-      "destination": "/api/admin.php"
-    },
-    {
-      "source": "/",
-      "destination": "/api/index.php"
-    },
-    {
       "source": "/(.*)",
-      "destination": "/api/index.php"
+      "destination": "/api/$1"
     }
   ]
 }

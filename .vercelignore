@@ -1,4 +1,4 @@
-# Évite que Vercel serve les PHP à la racine comme fichiers bruts (sans runtime vercel-php).
-# La home passe par api/index.php ; l'admin par api/admin.php (vercel.json).
-index.php
-admin.php
+# Uniquement les entrées PHP à la RACINE du dépôt (évite le téléchargement brut en local statique).
+# IMPORTANT : utiliser un / au début — sinon "admin.php" exclut AUSSI api/admin.php et views/.../admin.php.
+/index.php
+/admin.php

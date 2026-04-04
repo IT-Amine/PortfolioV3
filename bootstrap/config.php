@@ -8,15 +8,19 @@ if (!defined('BASE_PATH')) {
 }
 
 // Simple chargeur de fichier .env (si existant)
-function loadEnv($path) {
-    if (!file_exists($path)) return false;
+function loadEnv($path)
+{
+    if (!file_exists($path))
+        return false;
     $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
         $trimmed = trim($line);
-        if ($trimmed === '' || strpos($trimmed, '#') === 0) continue;
+        if ($trimmed === '' || strpos($trimmed, '#') === 0)
+            continue;
 
         $parts = explode('=', $trimmed, 2);
-        if (count($parts) < 2) continue;
+        if (count($parts) < 2)
+            continue;
 
         $name = trim($parts[0]);
         $value = trim(trim($parts[1]), "\"'");
@@ -74,7 +78,8 @@ if (!$pdo) {
     }
 }
 
-function ensureSessionsTable(PDO $pdo): void {
+function ensureSessionsTable(PDO $pdo): void
+{
     $pdo->exec("
         CREATE TABLE IF NOT EXISTS sessions (
             id VARCHAR(128) PRIMARY KEY,
@@ -92,22 +97,27 @@ if ($pdo) {
     }
 }
 
-class DatabaseSessionHandler implements SessionHandlerInterface {
+class DatabaseSessionHandler implements SessionHandlerInterface
+{
     private $pdo;
 
-    public function __construct($pdo) {
+    public function __construct($pdo)
+    {
         $this->pdo = $pdo;
     }
 
-    public function open($savePath, $sessionName): bool {
+    public function open($savePath, $sessionName): bool
+    {
         return true;
     }
 
-    public function close(): bool {
+    public function close(): bool
+    {
         return true;
     }
 
-    public function read($id): string {
+    public function read($id): string
+    {
         try {
             $stmt = $this->pdo->prepare("SELECT data FROM sessions WHERE id = ?");
             $stmt->execute([$id]);
@@ -119,7 +129,8 @@ class DatabaseSessionHandler implements SessionHandlerInterface {
         }
     }
 
-    public function write($id, $data): bool {
+    public function write($id, $data): bool
+    {
         try {
             $stmt = $this->pdo->prepare("
                 INSERT INTO sessions (id, data, last_access)
@@ -134,7 +145,8 @@ class DatabaseSessionHandler implements SessionHandlerInterface {
         }
     }
 
-    public function destroy($id): bool {
+    public function destroy($id): bool
+    {
         try {
             $stmt = $this->pdo->prepare("DELETE FROM sessions WHERE id = ?");
             return $stmt->execute([$id]);
@@ -144,7 +156,8 @@ class DatabaseSessionHandler implements SessionHandlerInterface {
         }
     }
 
-    public function gc($maxlifetime): int|false {
+    public function gc($maxlifetime): int|false
+    {
         try {
             $stmt = $this->pdo->prepare("DELETE FROM sessions WHERE last_access < ?");
             $stmt->execute([time() - (int) $maxlifetime]);
@@ -180,50 +193,62 @@ if ($__appSecret === '') {
 }
 define('APP_SECRET', $__appSecret);
 
-function hashPassword($password) {
+function hashPassword($password)
+{
     return password_hash($password, PASSWORD_ARGON2ID);
 }
 
-function verifyPassword($password, $hash) {
+function verifyPassword($password, $hash)
+{
     return password_verify($password, $hash);
 }
 
-function getSecureFileToken($fileKey) {
+function getSecureFileToken($fileKey)
+{
     // Stateless : on génère un token stable sans dépendre de la session
     // (compatible serverless Vercel où chaque requête a un processus PHP différent)
     return hash_hmac('sha256', $fileKey . '|portfolio-view-token', APP_SECRET);
 }
 
-function validateFileToken($fileKey, $token) {
+function validateFileToken($fileKey, $token)
+{
     return hash_equals(getSecureFileToken($fileKey), $token);
 }
 
-function sendJSON($data, $status = 200) {
+function sendJSON($data, $status = 200)
+{
     http_response_code($status);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($data);
     exit;
 }
 
-function encryptPath($path) {
-    if (!$path || str_starts_with($path, '#') || !preg_match('/[\/\.]/', $path)) return $path;
+function encryptPath($path)
+{
+    if (!$path || str_starts_with($path, '#') || !preg_match('/[\/\.]/', $path))
+        return $path;
     $key = substr(hash('sha256', APP_SECRET . 'path-key'), 0, 32);
     $iv = substr(hash('sha256', APP_SECRET . 'iv-salt'), 0, 16);
-    $encrypted = openssl_encrypt($path, 'aes-256-cbc', $key, 0, $iv);
-    // Masquage propre
+    $encrypted = openssl_encrypt($path, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv);
     return str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($encrypted));
 }
 
-function decryptPath($hash) {
-    if (!$hash) return '';
+function decryptPath($hash)
+{
+    if (!$hash)
+        return '';
     $key = substr(hash('sha256', APP_SECRET . 'path-key'), 0, 32);
     $iv = substr(hash('sha256', APP_SECRET . 'iv-salt'), 0, 16);
-    
-    // Restaurer le padding base64
-    $padding = strlen($hash) % 4;
-    $hashToDecode = $hash;
-    if ($padding > 0) $hashToDecode .= str_repeat('=', 4 - $padding);
-    
-    $decoded = base64_decode(str_replace(['-', '_'], ['+', '/'], $hashToDecode));
-    return openssl_decrypt($decoded, 'aes-256-cbc', $key, 0, $iv) ?: $hash; 
+
+    // Restaurer les caractères base64 standards et le padding
+    $data = str_replace(['-', '_'], ['+', '/'], $hash);
+    $padding = strlen($data) % 4;
+    if ($padding > 0)
+        $data .= str_repeat('=', 4 - $padding);
+
+    $decoded = base64_decode($data);
+    if ($decoded === false)
+        return $hash;
+
+    return openssl_decrypt($decoded, 'aes-256-cbc', $key, OPENSSL_RAW_DATA, $iv) ?: $hash;
 }

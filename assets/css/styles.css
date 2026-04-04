@@ -1764,52 +1764,63 @@
     }
   }
   
+  .viewer-modal-card {
+    max-width: 900px !important;
+    padding: 0 !important;
+    overflow: hidden;
+    border-radius: 24px;
+  }
+
+  .viewer-modal-body {
+    padding: 2rem;
+    background: #f8fafc;
+  }
+
   .viewer-modal-image-container {
     margin-bottom: 1.5rem;
     border-radius: 16px;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.3);
-    max-height: 500px;
+    background: #ffffff;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    min-height: 300px;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
   }
-  
+
   .viewer-modal-image {
-    width: 100%;
+    max-width: 100%;
+    max-height: 75vh;
     height: auto;
-    object-fit: contain;
     display: block;
+    object-fit: contain;
   }
-  
-  .viewer-modal-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 0.75rem;
-  }
-  
-  .viewer-modal-description {
-    font-size: 1rem;
+
+  .viewer-error-container {
+    padding: 3rem;
+    text-align: center;
+    flex-direction: column;
+    gap: 1rem;
     color: var(--text-muted);
-    margin-bottom: 1rem;
-    line-height: 1.7;
   }
-  
-  .viewer-modal-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+
+  .viewer-error-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
   }
-  
-  .viewer-modal-tag {
-    padding: 0.4rem 0.85rem;
-    background: rgba(16, 185, 129, 0.15);
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--accent);
+
+  .viewer-modal-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .viewer-modal-description {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-weight: 600;
   }
   
   /* ============================================

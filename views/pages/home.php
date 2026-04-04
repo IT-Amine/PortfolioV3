@@ -290,6 +290,31 @@ $isAuthorized = isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_
 
   <?php include __DIR__ . '/../partials/footer.php'; ?>
 
+  <!-- Visionneuse Image Générique (Certificats, etc.) -->
+<div id="imageViewerModal" class="modal">
+  <div class="modal-content viewer-modal-card" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <h3 id="viewerModalTitle" class="viewer-modal-title"></h3>
+        <p id="viewerModalDescription" class="viewer-modal-description" style="margin-bottom: 0;"></p>
+      </div>
+      <button class="modal-close" onclick="closeImageViewerModal()">Fermer</button>
+    </div>
+    
+    <div class="viewer-modal-body">
+      <div class="viewer-modal-image-container">
+        <img id="viewerModalImage" src="" alt="Chargement du certificat..." class="viewer-modal-image" 
+             onerror="this.style.display='none'; document.getElementById('viewerModalError').style.display='flex';">
+        <div id="viewerModalError" class="viewer-error-container" style="display: none;">
+          <div class="viewer-error-icon">⚠️</div>
+          <p>Impossible de charger l'image. Le fichier est peut-être absent ou protégé.</p>
+        </div>
+      </div>
+      <div id="viewerModalTags" class="viewer-modal-tags"></div>
+    </div>
+  </div>
+</div>
+
   <!-- MODALE D'AUTHENTIFICATION UNIFIÉE (ADMIN & RECRUTEUR) -->
   <div class="modal" id="loginModal">
     <div class="modal-content auth-modal-card">

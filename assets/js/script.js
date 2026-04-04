@@ -588,15 +588,20 @@ function viewCertificateImage(src, title, tags = [], desc = '') {
   const titleEl = document.getElementById('viewerModalTitle');
   const descEl = document.getElementById('viewerModalDescription');
   const tagsEl = document.getElementById('viewerModalTags');
+  const errEl = document.getElementById('viewerModalError');
 
   if (!modal || !img) return;
 
+  // Reset state
+  img.style.display = 'block';
+  if (errEl) errEl.style.display = 'none';
+
   img.src = src;
-  titleEl.textContent = title;
-  descEl.textContent = desc || '';
+  if (titleEl) titleEl.textContent = title;
+  if (descEl) descEl.textContent = desc || '';
 
   if (tagsEl) {
-    tagsEl.innerHTML = tags.map(t => `<span class="viewer-modal-tag">${t}</span>`).join('');
+    tagsEl.innerHTML = (tags || []).map(t => `<span class="viewer-modal-tag">${t}</span>`).join('');
   }
 
   modal.classList.add('active');

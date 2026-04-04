@@ -856,6 +856,8 @@ function openAuthModal() {
   const modal = document.getElementById('loginModal');
   if (modal) modal.classList.add('active');
 }
+// Exposition immédiate (avant updateLockedElements qui l'appelle via onclick)
+window.openAuthModal = openAuthModal;
 
 function closeAuthModal() {
   const modal = document.getElementById('loginModal');

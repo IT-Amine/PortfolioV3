@@ -189,7 +189,9 @@ function verifyPassword($password, $hash) {
 }
 
 function getSecureFileToken($fileKey) {
-    return hash_hmac('sha256', $fileKey . session_id(), APP_SECRET);
+    // Stateless : on génère un token stable sans dépendre de la session
+    // (compatible serverless Vercel où chaque requête a un processus PHP différent)
+    return hash_hmac('sha256', $fileKey . '|portfolio-view-token', APP_SECRET);
 }
 
 function validateFileToken($fileKey, $token) {

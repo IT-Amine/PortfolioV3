@@ -13,11 +13,14 @@ require_once __DIR__ . '/../bootstrap/config.php';
 header('Content-Type: text/plain; charset=utf-8');
 
 try {
-    // Sécurité : ce script RESET la base. Interdit publiquement sur Vercel sans Bearer token.
+    // Sécurité : ce script RESET la base. Interdit publiquement sur Vercel sans Bearer token ou ?secret=.
     $SECRET = getenv('CRON_SECRET') ?: ($_ENV['CRON_SECRET'] ?? '');
     $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
+    $querySecret = $_GET['secret'] ?? '';
     if (php_sapi_name() !== 'cli' && getenv('VERCEL')) {
-        if ($SECRET === '' || $authHeader !== 'Bearer ' . $SECRET) {
+        $validHeader = ($SECRET !== '' && $authHeader === 'Bearer ' . $SECRET);
+        $validQuery  = ($SECRET !== '' && $querySecret === $SECRET);
+        if (!$validHeader && !$validQuery) {
             http_response_code(404);
             die("Not Found\n");
         }

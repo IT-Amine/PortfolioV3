@@ -17,6 +17,9 @@ const ICONS = {
   settings: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12.23 2h-.46c-.4 0-.79.2-1.01.53l-.35.53a8.3 8.3 0 0 1-.9.41l-.6.22c-.41.15-.65.57-.59 1l.07.63c.03.3-.01.6-.14.86a2 2 0 0 1-1.07 1.07c-.26.13-.56.17-.86.14l-.63-.07c-.44-.06-.86.18-1 .59l-.22.6c-.1.3-.23.6-.4.9l-.54.34c-.33.22-.53.61-.53 1.01v.46c0 .4.2.79.53 1.01l.53.35c.18.29.32.59.41.9l.22.6c.15.41.57.65 1 .59l.63-.07c.3-.03.6.01.86.14a2 2 0 0 1 1.07 1.07c.13.26.17.56.14.86l-.07.63c-.06.44.18.86.59 1l.6.22c.3.1.6.23.9.4l.35.53c.22.33.61.53 1.01.53h.46c.4 0 .79-.2 1.01-.53l.35-.53c.29-.18.59-.32.9-.41l.6-.22c.41-.15.65-.57.59-1l-.07-.63a2 2 0 0 1 1.21-1.93c.3-.13.6-.17.86-.14l.63.07c.44.06.86-.18 1-.59l.22-.6c.1-.3.23-.6.4-.9l.53-.35c.33-.22.53-.61.53-1.01v-.46c0-.4-.2-.79-.53-1.01l-.53-.35a8.3 8.3 0 0 1-.41-.9l-.22-.6c-.15-.41-.57-.65-1-.59l-.63.07a2 2 0 0 1-1.21-1.93c-.13-.3-.17-.6-.14-.86l.07-.63c.06-.44-.18-.86-.59-1l-.6-.22a8.3 8.3 0 0 1-.9-.41l-.35-.53A1.23 1.23 0 0 0 12.23 2z"/><circle cx="12" cy="12" r="3"/></svg>',
   search: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
   tool: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+  award: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>',
+  book: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>',
+
 
   // Logos Officiels Tech
   debian: 'https://cdn.simpleicons.org/debian/D70A53',
@@ -146,9 +149,9 @@ const skillsCategories = [
 ];
 
 const certificationsTreeData = [
-  { id: 'pix', title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: null, type: 'image' },
-  { id: 'mooc', title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: null, type: 'image' },
-  { id: 'ebios', title: 'EBIOS — Analyse de risque', date: '2025', icon: 'shield', file: null, type: 'pdf' },
+  { id: 'pix', title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: '/view?f=dE1YSnpoRzh4ZGlXTzNVTEpyRFFyTWdxSTdpTHgyaTlheTEzSGoweHpmd2thRkF4VUdBYWZaUG1jQ0ZlSElSeA', type: 'image' },
+  { id: 'mooc', title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: '/view?f=dE1YSnpoRzh4ZGlXTzNVTEpyRFFyRmhXK1R0ckFCRDArVFYxWFVZaUtwYWFIYjh1dnpsdFdWNEJOUHl0YzZsSg', type: 'image' },
+  { id: 'ebios', title: 'EBIOS — Analyse de risque', date: '2025', icon: 'document', file: '/view?f=dE1YSnpoRzh4ZGlXTzNVTEpyRFFySDg2c1JiWm9mbWpoQVQycllvbHVVd2lncFR2dElhRTc4cE9YNjIxTllUOA', type: 'pdf' },
   { id: 'oc', title: 'OpenClassrooms — Réseaux & Systèmes', date: '2024–2025', icon: 'globe', file: '#openclassrooms', type: 'section' },
 ];
 
@@ -174,18 +177,18 @@ const formationsData = [
 // Patrimoine data removed as requested.
 
 let openclassroomsCerts = [
-  { title: 'Active Directory', image: null },
-  { title: 'Docker', image: null },
-  { title: 'TCP/IP', image: null },
-  { title: 'Windows Server', image: null },
-  { title: 'Cisco Networking', image: null },
-  { title: 'Déploiement Win10', image: null },
-  { title: 'Git & GitHub', image: null },
-  { title: 'Git Fundamentals', image: null },
-  { title: 'Linux Administration', image: null },
-  { title: 'Hardware PC', image: null },
-  { title: 'ChatGPT', image: null },
-  { title: 'Virtualisation Environnement', image: null },
+  { title: 'Active Directory', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvM2d0SUFXeUxrVHlrdnhrblVqVzhQaVljWlNzdURzbDNSaWJOQko3a0c5eA' },
+  { title: 'Docker', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUveVY5bEZ3QmQ1UW5SNFlJUUExb1FNVTBoT2ZtSUcvNjE4bTgwYzdWVXUxRw' },
+  { title: 'TCP/IP', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvekkyVS9KM05TM08vQlhMZFJNYWdmSTNNTmJrQStld1ovQS9FMElVN3I3dQ' },
+  { title: 'Windows Server', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUveklRb25kODJjUndWOGlVak5YckV4dXc4Z05EZ1ZaTDNsWVFjNzRZblZFOQ' },
+  { title: 'Cisco Networking', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUveXNwb3hoUWRpME84Q3ZjclBZVjNFMTZrNjhLUVlaMUpQU0d1NWFuMnhuag' },
+  { title: 'Déploiement Win10', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvNmdHSFVVK003STI0dTZqK0hHTisxeDh4TVRLeElDUHRzS1pQSGZ0OGJlKw' },
+  { title: 'Git & GitHub', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvNnhEWENYdU9WR0FxTGp6NDR5cmVyOHBuaVdCZTQxMDBVckkvb1llZ0VCYg' },
+  { title: 'Git Fundamentals', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUveE1VUXV4eUZMOEF0S1NOVmdhT2hOUnM5bWdIZE80cWRCUkZBVHAwWU44MA' },
+  { title: 'Linux Administration', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvd1Bmb2NhYWZtemFzcG1jdzVYUk5MRHY2VUYweDY5WG8rQjIrMGxPdDUzYQ' },
+  { title: 'Hardware PC', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvLzdpZnlXZlhtZWIvOWhpd0NGOWtiMlJZd2h5c3FaNnRQV1ZPb3Roc2tQMg' },
+  { title: 'ChatGPT', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvMzhERW1uRVprazVsdHZ0cTZBRXQ3c3lqeHg4ZWt6aTlLTDVxUXMzYUtLcQ' },
+  { title: 'Virtualisation Environnement', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvM0NoUVJTdGpic3dNS2ZTNzhVQnc0Q3Uzb1R6RVFxZHNHTXRoenUxYnYyakxWZmZEcjVHbEwwaG9FaXdabWJwWXc9PQ' },
 ];
 
 const btsSioData = {
@@ -656,7 +659,7 @@ async function renderCertificationsTree() {
               <h4>${escapeHTML(c.title)}</h4>
               <span>${escapeHTML(c.date)}</span>
             </div>
-            ${!isLockedState ? '<div class="cert-btn-pro">Voir</div>' : '<div class="cert-btn-pro">🔒</div>'}
+            ${!isLockedState ? '<div class="cert-btn-pro">VOIR</div>' : '<div class="cert-btn-pro">🔒</div>'}
           </div>
         `;
   }).join('')}

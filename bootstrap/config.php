@@ -202,3 +202,26 @@ function sendJSON($data, $status = 200) {
     echo json_encode($data);
     exit;
 }
+
+function encryptPath($path) {
+    if (!$path || str_starts_with($path, '#') || !preg_match('/[\/\.]/', $path)) return $path;
+    $key = substr(hash('sha256', APP_SECRET . 'path-key'), 0, 32);
+    $iv = substr(hash('sha256', APP_SECRET . 'iv-salt'), 0, 16);
+    $encrypted = openssl_encrypt($path, 'aes-256-cbc', $key, 0, $iv);
+    // Masquage propre
+    return str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($encrypted));
+}
+
+function decryptPath($hash) {
+    if (!$hash) return '';
+    $key = substr(hash('sha256', APP_SECRET . 'path-key'), 0, 32);
+    $iv = substr(hash('sha256', APP_SECRET . 'iv-salt'), 0, 16);
+    
+    // Restaurer le padding base64
+    $padding = strlen($hash) % 4;
+    $hashToDecode = $hash;
+    if ($padding > 0) $hashToDecode .= str_repeat('=', 4 - $padding);
+    
+    $decoded = base64_decode(str_replace(['-', '_'], ['+', '/'], $hashToDecode));
+    return openssl_decrypt($decoded, 'aes-256-cbc', $key, 0, $iv) ?: $hash; 
+}

@@ -3345,6 +3345,13 @@
   border: 1px solid var(--border-accent);
 }
 
+.cert-icon-pro svg,
+.cert-icon-pro img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
 .cert-info-pro h4 {
   font-size: 1rem;
   font-weight: 700;

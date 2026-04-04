@@ -128,12 +128,24 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                             <input type="text" id="f_date" class="admin-input" placeholder="2025–2027" required>
                         </div>
                         <div class="admin-input-group">
-                            <label>Chemin PDF ( GitHub/Public )</label>
+                            <label>Description</label>
+                            <textarea id="f_desc" class="admin-input" placeholder="Description de la formation..." style="resize:vertical;"></textarea>
+                        </div>
+                        <div class="admin-input-group">
+                            <label>Image ou Icône</label>
+                            <div class="dropzone" id="f_icon_drop">
+                                <span>🖼️ Glissez l'image / logo ici</span>
+                                <input type="file" hidden accept=".png,.jpg,.jpeg">
+                            </div>
+                            <input type="text" id="f_icon" class="admin-input" placeholder="award ou /assets/img/... (Optionnel)">
+                        </div>
+                        <div class="admin-input-group">
+                            <label>Chemin PDF ( Optionnel )</label>
                             <div class="dropzone" id="f_drop">
                                 <span>📄 Glissez-déposez votre PDF ici</span>
                                 <input type="file" hidden accept=".pdf">
                             </div>
-                            <input type="text" id="f_pdf" class="admin-input" placeholder="/assets/img/uploads/..." required>
+                            <input type="text" id="f_pdf" class="admin-input" placeholder="/assets/img/uploads/... (Optionnel)">
                         </div>
                         <button type="submit" class="btn-submit">Ajouter la formation</button>
                     </form>
@@ -297,6 +309,9 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
             body.append('title', document.getElementById('f_title').value);
             body.append('subtitle', document.getElementById('f_subtitle').value);
             body.append('date', document.getElementById('f_date').value);
+            body.append('desc', document.getElementById('f_desc').value);
+            const iconVal = document.getElementById('f_icon').value.trim();
+            body.append('icon', iconVal ? iconVal : 'award');
             body.append('pdf_path', document.getElementById('f_pdf').value);
             const res = await apiCall('/admin_actions?action=add_formation', 'POST', body);
             if(res.success) { showStatus('f_status', 'Formation ajoutée'); e.target.reset(); loadFormations(); }
@@ -335,6 +350,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
         loadUsers();
         loadFormations();
         loadCerts();
+        setupDropZone('f_icon_drop', 'f_icon', 'f_status');
         setupDropZone('f_drop', 'f_pdf', 'f_status');
         setupDropZone('c_drop', 'c_file', 'c_status');
     </script>

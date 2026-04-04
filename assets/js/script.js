@@ -30,6 +30,12 @@ const ICONS = {
 };
 
 function getIcon(name) {
+  if (!name) return ICONS['terminal'];
+
+  if (typeof name === 'string' && (name.startsWith('/') || name.startsWith('http') || name.startsWith('./') || name.endsWith('.png') || name.endsWith('.jpg') || name.endsWith('.jpeg') || name.endsWith('.svg') || name.endsWith('.pdf'))) {
+    return `<img src="${name}" alt="icon" style="width: 100%; height: 100%; object-fit: contain;">`;
+  }
+
   const iconContent = ICONS[name];
   if (!iconContent) return ICONS['terminal'];
 
@@ -471,21 +477,21 @@ async function renderOpenClassrooms() {
 
   // SISR : On synchronise les données
   const ocData = (typeof openclassroomsCerts !== 'undefined') ? openclassroomsCerts : [];
-  
+
   container.innerHTML = ocData.map((c, i) => {
     // Si isUnlocked (via SERVER_AUTH), ce n'est PAS verrouillé
     const isLocked = !isUnlocked;
     const onClickAction = isLocked ? 'openAuthModal()' : `viewCertificateImageByIndex(${i})`;
-    
+
     return `
       <div class="oc-card ${isLocked ? 'is-locked' : ''}" onclick="${onClickAction}">
         <div class="oc-card-image-container">
-          ${isLocked 
-            ? `<div class="oc-card-locked-overlay"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Accès Verrouillé</span></div>`
-            : (c.image
-              ? `<img src="${c.image}" alt="${escapeHTML(c.title)}" class="oc-card-image" loading="lazy" decoding="async">`
-              : `<div class="oc-card-image oc-card-image-fallback" aria-hidden="true">${getIcon('globe')}</div>`)
-          }
+          ${isLocked
+        ? `<div class="oc-card-locked-overlay"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Accès Verrouillé</span></div>`
+        : (c.image
+          ? `<img src="${c.image}" alt="${escapeHTML(c.title)}" class="oc-card-image" loading="lazy" decoding="async">`
+          : `<div class="oc-card-image oc-card-image-fallback" aria-hidden="true">${getIcon('globe')}</div>`)
+      }
         </div>
         <div class="oc-card-content">
           <h4 class="oc-card-title">${escapeHTML(c.title)}</h4>
@@ -614,16 +620,16 @@ async function renderCertificationsTree() {
       const dbCerts = await res.json();
       if (dbCerts && Array.isArray(dbCerts) && dbCerts.length > 0) {
         dbCerts.forEach(dbc => {
-           if (dbc.category === 'tree' && !allCerts.find(c => c.title === dbc.title)) {
-             allCerts.unshift({
-               id: 'db-' + dbc.id,
-               title: dbc.title,
-               date: 'Certifié',
-               icon: dbc.icon || 'shield',
-               file: dbc.file_path,
-               type: dbc.type || 'image'
-             });
-           }
+          if (dbc.category === 'tree' && !allCerts.find(c => c.title === dbc.title)) {
+            allCerts.unshift({
+              id: 'db-' + dbc.id,
+              title: dbc.title,
+              date: 'Certifié',
+              icon: dbc.icon || 'shield',
+              file: dbc.file_path,
+              type: dbc.type || 'image'
+            });
+          }
         });
       }
     }
@@ -635,15 +641,15 @@ async function renderCertificationsTree() {
   container.innerHTML = `
     <div class="cert-grid-pro">
       ${allCerts.map((c, i) => {
-        const isDb = typeof c.id === 'string' && c.id.startsWith('db-');
-        // SISR SYNC : Pas de verrou si isUnlocked est vrai
-        const isLockedState = !isUnlocked && !isDb; 
-        
-        // On utilise l'index sur la variable globale window.lastCertData
-        let onClickAction = `viewCertInTreeByIndex(${i})`;
-        if (isDb) onClickAction = `window.open('${c.file}', '_blank')`;
+    const isDb = typeof c.id === 'string' && c.id.startsWith('db-');
+    // SISR SYNC : Pas de verrou si isUnlocked est vrai
+    const isLockedState = !isUnlocked && !isDb;
 
-        return `
+    // On utilise l'index sur la variable globale window.lastCertData
+    let onClickAction = `viewCertInTreeByIndex(${i})`;
+    if (isDb) onClickAction = `window.open('${c.file}', '_blank')`;
+
+    return `
           <div class="cert-card-pro ${isLockedState ? 'is-locked' : ''}" onclick="${onClickAction}">
             <div class="cert-icon-pro">${getIcon(c.icon)}</div>
             <div class="cert-info-pro">
@@ -653,7 +659,7 @@ async function renderCertificationsTree() {
             ${!isLockedState ? '<div class="cert-btn-pro">Voir</div>' : '<div class="cert-btn-pro">🔒</div>'}
           </div>
         `;
-      }).join('')}
+  }).join('')}
     </div>
   `;
 }
@@ -752,7 +758,7 @@ window.viewCertInTree = viewCertInTree;
 function switchAuthTab(tab) {
   const tabs = document.querySelectorAll('.auth-tab-btn');
   const contents = document.querySelectorAll('.auth-tab-content');
-  
+
   tabs.forEach(t => t.classList.remove('active'));
   contents.forEach(c => {
     c.classList.remove('active');
@@ -761,7 +767,7 @@ function switchAuthTab(tab) {
 
   const activeTab = document.getElementById(`tab-${tab}`);
   const activeContent = document.getElementById(`auth-${tab}-content`);
-  
+
   if (activeTab && activeContent) {
     activeTab.classList.add('active');
     activeContent.classList.add('active');
@@ -788,15 +794,15 @@ async function handleRecruiterUnlock(e) {
     if (data.success) {
       isUnlocked = true;
       sessionStorage.setItem('isUnlocked', 'true');
-      
+
       // PERSISTANCE SISR : Sauvegarde des liens sécurisés pour les boutons
       if (data.cvLink) sessionStorage.setItem('decryptedCvLink', data.cvLink);
       if (data.certifications) sessionStorage.setItem('decryptedCerts', JSON.stringify(data.certifications));
-      
+
       console.log("Accès déverrouillé via API Sécurisée 🛡️");
-      
+
       closeLoginModal();
-      
+
       // Rafraîchissement pour appliquer les changements PHP
       setTimeout(() => {
         window.location.reload();

@@ -13,14 +13,11 @@ require_once __DIR__ . '/../bootstrap/config.php';
 header('Content-Type: text/plain; charset=utf-8');
 
 try {
-    // Sécurité : ce script RESET la base. Interdit publiquement sur Vercel sans Bearer token ou ?secret=.
+    // Sécurité stricte : uniquement via Authorization header (pas de query param en clair dans les logs).
     $SECRET = getenv('CRON_SECRET') ?: ($_ENV['CRON_SECRET'] ?? '');
     $authHeader = $_SERVER['HTTP_AUTHORIZATION'] ?? '';
-    $querySecret = $_GET['secret'] ?? '';
     if (php_sapi_name() !== 'cli' && getenv('VERCEL')) {
-        $validHeader = ($SECRET !== '' && $authHeader === 'Bearer ' . $SECRET);
-        $validQuery  = ($SECRET !== '' && $querySecret === $SECRET);
-        if (!$validHeader && !$validQuery) {
+        if ($SECRET === '' || $authHeader !== 'Bearer ' . $SECRET) {
             http_response_code(404);
             die("Not Found\n");
         }
@@ -113,8 +110,13 @@ try {
 
     // 3. INSERTION ADMIN
     echo "3. Création du compte administrateur...\n";
-    $username = 'amine';
-    $password = 'Zzizou&370';
+    $username = getenv('ADMIN_USERNAME') ?: 'amine';
+    // SECURITE : Ne jamais hardcoder le mot de passe ici.
+    // Définissez la variable ADMIN_PASSWORD dans vos variables Vercel.
+    $password = getenv('ADMIN_PASSWORD') ?: '';
+    if (empty($password)) {
+        die("\n❌ ARRET : La variable ADMIN_PASSWORD n'est pas définie dans Vercel.\n→ Ajoutez-la dans Settings > Environment Variables puis relancez ce script.\n");
+    }
     $pwdHash = password_hash($password, PASSWORD_ARGON2ID);
     
     $stmtUser = $pdo->prepare("INSERT INTO users (username, password_hash, role) VALUES (?, ?, 'admin')");
@@ -178,12 +180,8 @@ try {
     echo "   RÉINITIALISATION TERMINÉE AVEC SUCCÈS !     \n";
     echo "================================================\n\n";
     echo "Connectez-vous maintenant sur : /admin\n";
-    echo "Identifiant : amine\n";
-    if (getenv('VERCEL')) {
-        echo "Mot de passe : (celui défini dans ce script — changez-le après la première connexion)\n";
-    } else {
-        echo "Mot de passe : Zzizou&370\n";
-    }
+    echo "Identifiant : $username\n";
+    echo "Mot de passe : (celui défini dans ADMIN_PASSWORD sur Vercel)\n";
 
 } catch (PDOException $e) {
     echo "❌ ERREUR SQL CRITIQUE :\n";

@@ -14,6 +14,31 @@ $isAuthorized = isset($_SESSION['role']) && ($_SESSION['role'] === 'admin' || $_
   <?php include __DIR__ . '/../partials/head.php'; ?>
   <script>
     window.SERVER_AUTH = <?php echo $isAuthorized ? 'true' : 'false'; ?>;
+
+    <?php
+    // Injection côté serveur des URLs chiffrées pour les médias.
+    // Cela garantit que les hashes correspondent à l'APP_SECRET du serveur Vercel.
+    $mediaPaths = [
+      // Certifications
+      'pix'   => encryptPath('/assets/img/certif/PIX_v7l2s3.jpg'),
+      'mooc'  => encryptPath('/assets/img/certif/MOOC_x4n1m8.jpg'),
+      'ebios' => encryptPath('/assets/img/certif/EBIOS_k8v9z2.pdf'),
+      // OpenClassrooms
+      'oc_ad'            => encryptPath('/assets/img/openclassroom/AD_z9v2l8.jpg'),
+      'oc_docker'        => encryptPath('/assets/img/openclassroom/Docker_m5n1x4.jpg'),
+      'oc_tcpip'         => encryptPath('/assets/img/openclassroom/TCPIP_v8l2n3.png'),
+      'oc_winserver'     => encryptPath('/assets/img/openclassroom/WinServer_k9v1m4.png'),
+      'oc_cisco'         => encryptPath('/assets/img/openclassroom/Cisco_x2l9n3.jpg'),
+      'oc_win10'         => encryptPath('/assets/img/openclassroom/Win10_v5n1m8.png'),
+      'oc_gitgithub'     => encryptPath('/assets/img/openclassroom/GitGithub_z9v3l8.jpg'),
+      'oc_git'           => encryptPath('/assets/img/openclassroom/Git_k2n5m4.png'),
+      'oc_linux'         => encryptPath('/assets/img/openclassroom/Linux_v8l1n3.jpg'),
+      'oc_pc'            => encryptPath('/assets/img/openclassroom/PC_x5v9m4.png'),
+      'oc_chatgpt'       => encryptPath('/assets/img/openclassroom/ChatGPT_k8v2l9.png'),
+      'oc_virtualisation'=> encryptPath('/assets/img/openclassroom/Virtualisation_m9n1x4.jpg'),
+    ];
+    ?>
+    window.MEDIA_PATHS = <?php echo json_encode(array_map(fn($h) => '/view?f=' . $h, $mediaPaths)); ?>;
   </script>
 </head>
 

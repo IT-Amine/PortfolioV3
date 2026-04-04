@@ -148,10 +148,12 @@ const skillsCategories = [
   }
 ];
 
+const MP = window.MEDIA_PATHS || {};
+
 const certificationsTreeData = [
-  { id: 'pix', title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: '/view?f=dE1YSnpoRzh4ZGlXTzNVTEpyRFFyTWdxSTdpTHgyaTlheTEzSGoweHpmd2thRkF4VUdBYWZaUG1jQ0ZlSElSeA', type: 'image' },
-  { id: 'mooc', title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: '/view?f=dE1YSnpoRzh4ZGlXTzNVTEpyRFFyRmhXK1R0ckFCRDArVFYxWFVZaUtwYWFIYjh1dnpsdFdWNEJOUHl0YzZsSg', type: 'image' },
-  { id: 'ebios', title: 'EBIOS — Analyse de risque', date: '2025', icon: 'document', file: '/view?f=dE1YSnpoRzh4ZGlXTzNVTEpyRFFySDg2c1JiWm9mbWpoQVQycllvbHVVd2lncFR2dElhRTc4cE9YNjIxTllUOA', type: 'pdf' },
+  { id: 'pix', title: 'PIX — Compétences Numériques', date: '2024', icon: 'shield', file: MP.pix || null, type: 'image' },
+  { id: 'mooc', title: 'SecNumAcadémie (ANSSI)', date: '2024', icon: 'shield', file: MP.mooc || null, type: 'image' },
+  { id: 'ebios', title: 'EBIOS — Analyse de risque', date: '2025', icon: 'document', file: MP.ebios || null, type: 'pdf' },
   { id: 'oc', title: 'OpenClassrooms — Réseaux & Systèmes', date: '2024–2025', icon: 'globe', file: '#openclassrooms', type: 'section' },
 ];
 
@@ -174,21 +176,19 @@ const formationsData = [
   }
 ];
 
-// Patrimoine data removed as requested.
-
 let openclassroomsCerts = [
-  { title: 'Active Directory', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvM2d0SUFXeUxrVHlrdnhrblVqVzhQaVljWlNzdURzbDNSaWJOQko3a0c5eA' },
-  { title: 'Docker', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUveVY5bEZ3QmQ1UW5SNFlJUUExb1FNVTBoT2ZtSUcvNjE4bTgwYzdWVXUxRw' },
-  { title: 'TCP/IP', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvekkyVS9KM05TM08vQlhMZFJNYWdmSTNNTmJrQStld1ovQS9FMElVN3I3dQ' },
-  { title: 'Windows Server', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUveklRb25kODJjUndWOGlVak5YckV4dXc4Z05EZ1ZaTDNsWVFjNzRZblZFOQ' },
-  { title: 'Cisco Networking', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUveXNwb3hoUWRpME84Q3ZjclBZVjNFMTZrNjhLUVlaMUpQU0d1NWFuMnhuag' },
-  { title: 'Déploiement Win10', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvNmdHSFVVK003STI0dTZqK0hHTisxeDh4TVRLeElDUHRzS1pQSGZ0OGJlKw' },
-  { title: 'Git & GitHub', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvNnhEWENYdU9WR0FxTGp6NDR5cmVyOHBuaVdCZTQxMDBVckkvb1llZ0VCYg' },
-  { title: 'Git Fundamentals', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUveE1VUXV4eUZMOEF0S1NOVmdhT2hOUnM5bWdIZE80cWRCUkZBVHAwWU44MA' },
-  { title: 'Linux Administration', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvd1Bmb2NhYWZtemFzcG1jdzVYUk5MRHY2VUYweDY5WG8rQjIrMGxPdDUzYQ' },
-  { title: 'Hardware PC', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvLzdpZnlXZlhtZWIvOWhpd0NGOWtiMlJZd2h5c3FaNnRQV1ZPb3Roc2tQMg' },
-  { title: 'ChatGPT', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvMzhERW1uRVprazVsdHZ0cTZBRXQ3c3lqeHg4ZWt6aTlLTDVxUXMzYUtLcQ' },
-  { title: 'Virtualisation Environnement', image: '/view?f=dWFiT1dTeXRZRExTMEFwQ0h4VWUvM0NoUVJTdGpic3dNS2ZTNzhVQnc0Q3Uzb1R6RVFxZHNHTXRoenUxYnYyakxWZmZEcjVHbEwwaG9FaXdabWJwWXc9PQ' },
+  { title: 'Active Directory', image: MP.oc_ad },
+  { title: 'Docker', image: MP.oc_docker },
+  { title: 'TCP/IP', image: MP.oc_tcpip },
+  { title: 'Windows Server', image: MP.oc_winserver },
+  { title: 'Cisco Networking', image: MP.oc_cisco },
+  { title: 'Déploiement Win10', image: MP.oc_win10 },
+  { title: 'Git & GitHub', image: MP.oc_gitgithub },
+  { title: 'Git Fundamentals', image: MP.oc_git },
+  { title: 'Linux Administration', image: MP.oc_linux },
+  { title: 'Hardware PC', image: MP.oc_pc },
+  { title: 'ChatGPT', image: MP.oc_chatgpt },
+  { title: 'Virtualisation Environnement', image: MP.oc_virtualisation },
 ];
 
 const btsSioData = {

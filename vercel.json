@@ -37,6 +37,7 @@
     { "source": "/admin_actions", "destination": "/api/admin_actions.php" },
     { "source": "/view", "destination": "/api/view.php" },
     { "source": "/admin", "destination": "/api/admin.php" },
+    { "source": "/init-db", "destination": "/api/init_db.php" },
     { "source": "/reset-admin", "destination": "/api/reset-admin.php" },
     { "source": "/(.*)", "destination": "/api/index.php" }
   ]
